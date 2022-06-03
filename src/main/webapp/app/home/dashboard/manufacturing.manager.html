@@ -1,0 +1,69 @@
+<style>
+    body{
+        background-image: url('/assets/img/bg_2.jpg');
+        background-size: cover;
+    }
+</style>
+<div id="page_content">
+    <div id="page_content_inner">
+        <h1  class="uk-text-primary">Hoạt động sản xuất</h1>
+        <div class="uk-grid">
+            <!--material-->
+            <div has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Procedure_Log_View" class="uk-width-medium-1-3 custom-box-padding-top">
+                <div class="md-card custom-cursor-pointer custom-panel" ng-click="goToMaterial()">
+                    <div class="md-card-content " >
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-6 ">
+                                <i class="material-icons md-48 uk-text-primary">settings_input_component</i>
+                            </div>
+                            <div class="uk-width-medium-5-6 "  style="padding-left: 0px">
+                                <div class="custom-panel-label-2">
+                                    <span ><b data-translate="admin.menu.procedureLog" class="custom-panel-label-2"></b></span><br>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--order-->
+            <div has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Order_View" class="uk-width-medium-1-3 custom-box-padding-top">
+                <div class="md-card custom-cursor-pointer custom-panel" ng-click="goToOrder()">
+                    <div class="md-card-content " >
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-6 ">
+                                <i class="material-icons md-48 uk-text-primary">assignment</i>
+                            </div>
+                            <div class="uk-width-medium-5-6 "  style="padding-left: 0px">
+                                <div class="custom-panel-label-2">
+                                    <span ><b data-translate="admin.menu.process" class="custom-panel-label-2"></b></span><br>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--transfer-->
+            <div has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Transfer_View" class="uk-width-medium-1-3 custom-box-padding-top">
+                <div class="md-card custom-cursor-pointer custom-panel" ng-click="goToTransfer()">
+                    <div class="md-card-content " >
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-6 ">
+                                <i class="material-icons md-48 uk-text-primary">compare_arrows</i>
+                            </div>
+                            <div class="uk-width-medium-5-6 "  style="padding-left: 0px">
+                                <div class="custom-panel-label-2">
+                                    <span ><b data-translate="admin.menu.season" class="custom-panel-label-2"></b></span><br>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,223 @@
+<div id="page_content">
+    <jhi-alert></jhi-alert><modal-alert></modal-alert>
+    <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }" class="header-fixed">
+        <span class="route-header">
+            <a class="uk-text-primary" ui-sref="report-devices" data-translate="admin.menu.report"></a>
+            <i class="uk-icon-arrow-circle-right"></i>
+            <a class="uk-text-primary"> Báo cáo số lượng thiết bị</a>
+        </span>
+        </br>
+        <div class="uk-margin-small-top">
+            <a has-any-authority="ROLE_SYSTEM_ADMIN, Device_Report_View" id="btnExportPdf" data-uk-modal="{target:'#modal_overflow'}"
+               class="md-btn md-btn-small md-btn-primary" ng-class="{ disabled : deviceReportInfo.totalDeviceImport == 0 }" ng-click="exportPdf()">
+                <span class="uk-text-bold" data-translate="global.button.exportPdf"></span>
+            </a>
+            <a has-any-authority="ROLE_SYSTEM_ADMIN, Device_Report_View" id="btnExportExcel" data-uk-modal="{target:'#modal_overflow'}"
+               class="md-btn md-btn-small md-btn-primary" ng-class="{ disabled : deviceReportInfo.totalDeviceImport == 0 }" ng-click="exportExcel()">
+                <span class="uk-text-bold" data-translate="global.button.exportExcel"></span>
+            </a>
+        </div>
+    </div>
+    <div id="page_content_inner">
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-grid" data-uk-grid-margin="">
+                    <div class="uk-width-small-1-4">
+                        <b>Khu vực</b>
+                        <input id="area" name="area"
+                               position="bottom"
+                               config="ComboBox['area'].config"
+                               options="ComboBox['area'].options"
+                               ng-model="searchInfo.areaCodes"
+                               table="ComboBox['area'].table"
+                               column="ComboBox['area'].column"
+                               scope-controller="ComboBox['area'].scope" selectize>
+                    </div>
+                    <div class="uk-width-small-1-4">
+                        <b>Loại thiết bị</b>
+                        <input id="deviceType" name="deviceType"
+                               position="bottom"
+                               config="ComboBox['deviceType'].config"
+                               options="ComboBox['deviceType'].options"
+                               ng-model="searchInfo.deviceTypeIds"
+                               table="ComboBox['deviceType'].table"
+                               column="ComboBox['deviceType'].column"
+                               scope-controller="ComboBox['deviceType'].scope" selectize>
+                    </div>
+                    <div  class="uk-width-small-1-4">
+                        <b ng-class="{'disabled-label': searchInfo.hasActive==0}">Ngày kích hoạt thiết bị từ</b>
+                        <div style="margin-top: 2px;">
+                            <input ng-class="{'custom-disabled': searchInfo.hasActive==0}" id="activeStartDatePicker" placeholder="nhập ngày kích hoạt từ..." style="width: 100%;"/>
+                        </div>
+                    </div>
+                    <div class="uk-width-small-1-4">
+                        <b ng-class="{'disabled-label': searchInfo.hasActive==0}">Đến</b>
+                        <div style="margin-top: 2px;">
+                            <input ng-class="{'custom-disabled': searchInfo.hasActive==0}" id="activeEndDatePicker" placeholder="đến..." style="width: 100%;"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-grid" data-uk-grid-margin="">
+                    <div class="uk-width-small-1-4">
+                        <b>Danh sách thiết bị</b>
+                        <div style="margin-top: -5px;">
+                            <selectize id="selec_adv_2"
+                                       config="selectize_roles_config"
+                                       options="selectize_roles_options"
+                                       position="bottom"
+                                       ng-change="changeRoles()"
+                                       ng-model="searchInfo.hasActive"
+                            ></selectize>
+                        </div>
+                    </div>
+                    <div class="uk-width-small-1-4">
+                        <b>Dòng thiết bị</b>
+                        <input id="deviceModel" name="deviceModel"
+                               position="bottom"
+                               config="ComboBox['deviceModel'].config"
+                               options="ComboBox['deviceModel'].options"
+                               ng-model="searchInfo.modelCodes"
+                               table="ComboBox['deviceModel'].table"
+                               column="ComboBox['deviceModel'].column"
+                               scope-controller="ComboBox['deviceModel'].scope" selectize>
+                    </div>
+                    <div class="uk-width-small-1-4">
+                        <b>Ngày import thiết bị từ</b>
+                        <div style="margin-top: 2px;">
+                            <input id="importStartDatePicker" placeholder="nhập ngày import từ..." style="width: 100%;"/>
+                        </div>
+                    </div>
+                    <div class="uk-width-small-1-4">
+                        <b>Đến</b>
+                        <div style="margin-top: 2px;">
+                            <input id="importEndDatePicker" placeholder="đến..." style="width: 100%;"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-grid" data-uk-grid-margin="">
+                    <div class="uk-width-small-1-2">
+                        <br/><button id="searchBtn" class="md-btn md-btn-small md-btn-primary" ng-class="{ disabled : isSearching }" ng-click="processSearch()">Tìm kiếm</button>
+                    </div>
+                    <div class="uk-width-small-1-4"></div>
+                    <div class="uk-width-small-1-4">
+                        <b>Tên hợp đồng</b>
+                        <input ng-model="searchInfo.contractName"
+                               class="md-input ng-isolate-scope md-input-processed"
+                               placeholder="tên hợp đồng" md-input="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-grid">
+                    <div class="uk-width-small-1-4">
+                        <span><b>Tổng số đã import: <span class="uk-text-primary">{{deviceReportInfo.totalDeviceImport}}</span></b></span>
+                    </div>
+                    <div class="uk-width-small-1-4">
+                        <span><b>Đã kích hoạt: <span class="uk-text-success">{{deviceReportInfo.totalHasDeviceActive}}</span></b></span>
+                    </div>
+                    <div class="uk-width-small-1-4">
+                        <span><b>Chưa kích hoạt: <span class="uk-text-warning">{{deviceReportInfo.totalHasNotDeviceActive}}</span></b></span>
+                    </div>
+                    <div class="uk-width-small-1-4">
+                        <span><b>Theo hợp đồng: <span class="uk-text-danger">{{deviceReportInfo.totalHasContract}}</span></b></span>
+                    </div>
+                </div>
+                <br>
+
+                <div class="uk-overflow-container uk-margin-bottom table-height-fixed">
+                    <table class="hoverTable uk-table uk-table-align-vertical  uk-table-nowrap tablesorter tablesorter-altair table-fixed" id="deviceImports">
+                        <thead>
+                        <tr>
+                            <th><b>STT</b></th>
+                            <th><th-content table="TABLES['deviceImports']" label="'Serial'"></th-content></th>
+                            <th><th-content table="TABLES['deviceImports']" label="'UID'"></th-content></th>
+                            <th><th-content table="TABLES['deviceImports']" label="'Tên thiết bị'"></th-content></th>
+                            <th><th-content table="TABLES['deviceImports']" label="'Loại thiết bị'"></th-content></th>
+                            <th><th-content table="TABLES['deviceImports']" label="'Dòng thiết bị'"></th-content></th>
+                            <th><th-content table="TABLES['deviceImports']" label="'Phiên bản firmware'"></th-content></th>
+                            <th><th-content table="TABLES['deviceImports']" label="'Ngày kích hoạt'"></th-content></th>
+                            <th><th-content table="TABLES['deviceImports']" label="'Ngày import'"></th-content></th>
+                            <th><th-content table="TABLES['deviceImports']" label="'Ngày hoàn công'"></th-content></th>
+                            <th><th-content table="TABLES['deviceImports']" label="'Khu vực thực tế'"></th-content></th>
+                            <th><th-content table="TABLES['deviceImports']" label="'Khu vực import'"></th-content></th>
+                            <th><th-content table="TABLES['deviceImports']" label="'Tên hợp đồng'"></th-content></th>
+                            <th><th-content table="TABLES['deviceImports']" label="'Mã đơn hàng'"></th-content></th>
+                            <th><th-content table="TABLES['deviceImports']" label="'Loại thanh toán'"></th-content></th>
+                            <th><th-content table="TABLES['deviceImports']" label="'Tên gói cước'"></th-content></th>
+                            <th><th-content table="TABLES['deviceImports']" label="'Phương thức thanh toán thực tế'"></th-content></th>
+                            <th><th-content table="TABLES['deviceImports']" label="'Mã khuyến mãi'"></th-content></th>
+                        </tr>
+
+                        </thead>
+                        <div ng-value="pageNum = TABLES['deviceImports'].selectize_pageNum"></div>
+                        <tbody ng-if="deviceImports != null && deviceImports.length > 0">
+                        <tr ng-repeat="deviceImport in deviceImports">
+                            <td>
+                                {{ $index + 1 + TABLES['deviceImports'].selectize_pageNum*TABLES['deviceImports'].param_current_page}}
+                            </td>
+                            <td>{{deviceImport.serialNumber}}</td>
+                            <td>{{deviceImport.uid}}</td>
+                            <td>{{deviceImport.deviceName}}</td>
+                            <td>{{deviceImport.deviceTypeName}}</td>
+                            <td>{{deviceImport.itemName}}</td>
+                            <td>{{deviceImport.firmwareVersion}}</td>
+                            <td>{{deviceImport.activeDate | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+                            <td>{{deviceImport.created | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+                            <td>{{deviceImport.completionDate | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+                            <td>{{deviceImport.realAreaName}}</td>
+                            <td>{{deviceImport.areaName}}</td>
+                            <td>{{deviceImport.contractName}}</td>
+                            <td>{{deviceImport.orderNumber}}</td>
+                            <td>{{deviceImport.contractType == null ? "" : deviceImport.contractType == 0 ? "Trả ngay" : "Trả chậm"}}</td>
+                            <td>{{deviceImport.subscriptionName}}</td>
+                            <td>{{deviceImport.realContractType}}</td>
+                            <td>{{deviceImport.coupon}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div ng-if="deviceImports == null" style="background: white!important;color: black;" class="uk-alert uk-text-center uk-alert-info" data-uk-alert="">
+                        <span translate="global.messages.noResult"></span>
+                    </div>
+                </div>
+                <div ng-if="deviceImports != null && deviceImports.length > 0" class="ts_pager" id="table_user_pager">
+                    <ul class="uk-pagination ts_pager">
+                        <li ng-click="selectPageClickHandle()" data-uk-tooltip title="{{selectPage}}">
+                            <input ng-change="selectPageHandle('deviceImports')" id="user_selectize_page" type="text"
+                                   config="TABLES['deviceImports'].selectize_page_config" options="TABLES['deviceImports'].selectize_page_options"
+                                   ng-model="TABLES['deviceImports'].selectize_page" name="TABLES['deviceImports'].selectize_page" selectize>
+                        </li>
+                        <li><a href="javascript:void(0)" class="firstPage" ng-click="handleFirstPage('deviceImports')"><i class="uk-icon-angle-double-left"></i></a></li>
+                        <li><a href="javascript:void(0)" class="prevPage" ng-click="handlePreviousPage('deviceImports')"><i class="uk-icon-angle-left"></i></a></li>
+                        <li><span class="pageDisplay"></span></li>
+                        <li><a href="javascript:void(0)" class="nextPage" ng-click="handleNextPage('deviceImports')"><i class="uk-icon-angle-right"></i></a></li>
+                        <li><a href="javascript:void(0)" class="lastPage" ng-click="handleLastPage('deviceImports')"><i class="uk-icon-angle-double-right"></i></a></li>
+                        <li data-uk-tooltip title="{{pageSize}}">
+                            <input ng-change="selectPageNumHandle('deviceImports')" id="user_selectize_pageNum" type="text"
+                                   config="TABLES['deviceImports'].selectize_pageNum_config" options="TABLES['deviceImports'].page_size_option"
+                                   ng-model="TABLES['deviceImports'].selectize_pageNum" name="TABLES['deviceImports'].selectize_pageNum" selectize>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--EXPORT Modal-->
+    <div class="uk-modal" id="download_modal">
+        <div class="uk-modal-dialog uk-modal-dialog-small">
+            <div class="uk-modal-header" style="margin: 0 -24px 0px">
+                <span><span class="uk-modal-title">Xuất dữ liệu báo cáo</span><a class="uk-modal-close" style="float: right;"><i class="material-icons">&#xE14C;</i></a></span>
+            </div>
+            <hr>
+            <a href={{downloadUrl}} >Bấm vào đây để tải xuống</a>
+
+            <div class="uk-modal-footer uk-text-right">
+                <button  class="uk-modal-close md-btn  md-btn-default md-btn-small"><span class="uk-text-bold" data-translate="global.button.cancel"></span></button>
+            </div>
+        </div>
+    </div>
+    <button data-uk-modal="{target:'#download_modal'}" id="exportReport" ng-show="false"></button>
+</div>
+
+

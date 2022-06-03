@@ -1,0 +1,178 @@
+<div class="md-card-content">
+    <div class="uk-grid">
+        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+            <div class="custom-label">
+                <label class="label-bold custom-label" >Mã khách hàng</label>
+            </div>
+        </div>
+        <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+            <input readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="user.code" input-long-text/>
+        </div>
+
+        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+            <div class="custom-label">
+                <label class="label-bold" >Trạng thái</label>
+            </div>
+        </div>
+        <!-- là camera thì fake-->
+        <div ng-if="device.type == 1" class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+            <input readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" value="Kết nối"/>
+        </div>
+        <!-- là Gareway và thiết bị con thì lấy theo trường status-->
+        <div ng-if="device.type != 1" class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+            <input ng-if="device.status == 2" readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" value="Kết nối"/>
+            <input ng-if="device.status != 2" readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" value="Không kết nối"/>
+        </div>
+    </div>
+    <div class="uk-grid">
+        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+            <div class="custom-label">
+                <label class="label-bold custom-label" >Tên nhà</label>
+            </div>
+        </div>
+        <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+            <input readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="device.homeName" input-long-text/>
+        </div>
+
+        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+            <div class="custom-label">
+                <label class="label-bold" >SĐT</label>
+            </div>
+        </div>
+        <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+            <input readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="user.username" input-long-text/>
+        </div>
+    </div>
+    <div class="uk-grid">
+        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+            <div class="custom-label">
+                <label class="label-bold custom-label" data-translate="device.field.name"></label>
+            </div>
+        </div>
+        <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+            <input readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="device.name" input-long-text/>
+        </div>
+
+        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+            <div class="custom-label">
+                <label class="label-bold" data-translate="device.field.code"></label>
+            </div>
+        </div>
+        <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+            <input readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="device.iotDeviceId" input-long-text/>
+        </div>
+    </div>
+
+    <div class="uk-grid">
+        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+            <div class="custom-label">
+                <label class="label-bold" data-translate="device.field.uid"></label>
+            </div>
+        </div>
+        <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row" >
+            <input readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="device.uid" input-long-text/>
+        </div>
+
+        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+            <div class="custom-label">
+                <label class="label-bold" >Ngày đăng ký</label>
+            </div>
+        </div>
+        <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row" >
+            <div class="custom-label custom-border-bottom " style="font-weight: normal !important;">
+                <label class="label-bold" >{{device.activeDate | date: 'dd-MM-yyyy'}}</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="uk-grid ">
+        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+            <div class="custom-label">
+                <label class="label-bold" data-translate="device.field.type"></label>
+            </div>
+        </div>
+        <div class=" uk-width-small-2-3  uk-width-medium-2-6 parsley-row">
+            <input readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="device.deviceTypeName" input-long-text/>
+        </div>
+
+        <!--k hien thi line nay neu la other-->
+        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+            <div class="custom-label">
+                <label class="label-bold" data-translate="device.field.parent"></label>
+            </div>
+        </div>
+        <div class=" uk-width-small-2-3  uk-width-medium-2-6 parsley-row">
+            <input readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="device.parentName" input-long-text/>
+        </div>
+    </div>
+
+    <div class="uk-grid">
+        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+            <div class="custom-label">
+                <label class="label-bold" data-translate="device.field.category"></label>
+            </div>
+        </div>
+        <div class=" uk-width-small-2-3  uk-width-medium-2-6 parsley-row">
+            <input readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="device.deviceModelName" input-long-text/>
+        </div>
+
+        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+            <div class="custom-label">
+                <label class="label-bold" >Cập nhật lần cuối</label>
+            </div>
+        </div>
+        <div class=" uk-width-small-2-3  uk-width-medium-2-6 parsley-row">
+            <div class="custom-label custom-border-bottom " style="font-weight: normal !important;">
+                <label class="label-bold" >{{device.updated | date: 'dd-MM-yyyy'}}</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="uk-grid">
+        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+            <div class="custom-label">
+                <label class="label-bold" data-translate="device.field.firmware"></label>
+            </div>
+        </div>
+        <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+            <input readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="device.firmwareVersion" input-long-text/>
+        </div>
+
+        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+            <div class="custom-label">
+                <label class="label-bold" data-translate="device.field.location"></label>
+            </div>
+        </div>
+        <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+            <input readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="device.areaName" input-long-text/>
+        </div>
+    </div>
+</div>

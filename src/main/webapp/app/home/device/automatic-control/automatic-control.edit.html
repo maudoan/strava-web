@@ -1,0 +1,179 @@
+<div id="page_content">
+    <form name="group_device_form" id="group_device_form" class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+        <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <span class="route-header">
+                <a class="uk-text-primary" ui-sref="device-manager" data-translate="device.menu"></a>&nbsp;<i
+                    class="uk-icon-arrow-circle-right"></i>
+                <a class="uk-text-primary" ui-sref="automatic-controls" data-translate="device.autoControl.name"></a>&nbsp;<i
+                    class="uk-icon-arrow-circle-right"></i>
+                <a class="uk-text-primary" ui-sref="automatic-control-detail({automaticControlId: autoControl.id})">
+                    <span class="overflowLongText" value="autoControl.name" is-input="false"></span>
+                </a><i class="uk-icon-arrow-circle-right"></i>
+                <span data-translate="global.button.edit"></span>
+            </span>
+            <br/>
+            <div class="uk-margin-small-top">
+                <button ng-click="submit(false)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+                        class="uk-text-bold" data-translate="global.button.save"></span></button>
+                <button ng-click="submit(true)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+                        class="uk-text-bold" data-translate="global.button.saveAndClose"></span></button>
+                <a ui-sref="automatic-control-detail({automaticControlId:autoControl.id})" class="md-btn md-btn-small"><span class="uk-text-bold"
+                                                                       data-translate="global.button.cancel"></span></a>
+            </div>
+        </div>
+        <div id="page_content_inner">
+            <jhi-alert></jhi-alert>
+            <modal-alert></modal-alert>
+            <div class="md-card">
+                <div class="md-card-content">
+                    <div class="uk-grid">
+                        <!-- tene nhom-->
+                        <div class="uk-width-small-1-6">
+                            <div class="custom-label">
+                                <label class="label-bold custom-label ng-scope" data-translate="device.autoControl.field.group"></label>
+                                <span class="req"> *</span>
+                            </div>
+                        </div>
+                        <div class=" uk-width-small-2-6">
+                            <div class="parsley-row">
+                                <input ng-model="autoControl.name"
+                                       data-parsley-maxlength="255"
+                                       data-parsley-maxlength-message="{{messages.maxLength255}}"
+                                       data-parsley-whitespace="trim"
+                                       id="deviceName" type="text"
+                                       name="deviceName"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       required=""
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                                <span class="md-input-bar "></span>
+                            </div>
+                        </div>
+
+                        <!--dot-->
+                        <div class="uk-width-small-1-6">
+                            <div class="custom-label">
+                                <label class="label-bold custom-label ng-scope" data-translate="admin.menu.season"></label>
+                                <span class="req"> *</span>
+                            </div>
+                        </div>
+                        <div class="uk-width-small-2-6">
+                            <div class="parsley-row">
+                                <input id="seasonCbb" name="seasonCbb"
+                                       ng-required="true"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-trigger="input"
+                                       position="bottom"
+                                       config="ComboBox['seasonCbb'].config"
+                                       options="ComboBox['seasonCbb'].options"
+                                       ng-model="autoControl.seasonId"
+                                       table="ComboBox['seasonCbb'].table"
+                                       column="ComboBox['seasonCbb'].column"
+                                       ng-change="seasonChange()"
+                                       ng-model-object="cbbSelected.season"
+                                       scope-controller="ComboBox['seasonCbb'].scope" selectize>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-grid">
+                        <div class="uk-width-small-1-6">
+                            <div class="custom-label">
+                                <label class="label-bold custom-label ng-scope" data-translate="admin.menu.area"></label>
+                                <span class="req"> *</span>
+                            </div>
+                        </div>
+                        <div class="uk-width-small-2-6">
+                            <div class="parsley-row">
+                                <input id="areaCbb" name="areaCbb"
+                                       ng-required="true"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-trigger="input"
+                                       position="bottom"
+                                       config="ComboBox['areaCbb'].config"
+                                       options="ComboBox['areaCbb'].options"
+                                       ng-model="autoControl.areaId"
+                                       table="ComboBox['areaCbb'].table"
+                                       column="ComboBox['areaCbb'].column"
+                                       ng-change="areaChange()"
+                                       ng-model-object="cbbSelected.area"
+                                       scope-controller="ComboBox['areaCbb'].scope" selectize>
+                            </div>
+                        </div>
+
+                        <!--san pham-->
+                        <div class="uk-width-small-1-6">
+                            <div class="custom-label">
+                                <label class="label-bold custom-label ng-scope" data-translate="device.autoControl.field.product"></label>
+                                <span class="req"> *</span>
+                            </div>
+                        </div>
+                        <div class="uk-width-small-2-6">
+                            <div class="parsley-row">
+                                <input
+                                        readonly
+                                        ng-model="autoControl.productName" id="productCbb" type="text"
+                                        class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-grid">
+                        <div class="uk-width-small-1-6">
+                            <div class="custom-label">
+                                <label class="label-bold custom-label ng-scope" data-translate="device.autoControl.field.type"></label>
+                                <span class="req"> *</span>
+                            </div>
+                        </div>
+                        <div class="uk-width-small-2-6">
+                            <div class="parsley-row">
+                                <input id="typeCbb" name="typeCbb"
+                                       ng-required="true"
+                                       data-parsley-trigger="input"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       position="bottom"
+                                       config="ComboBox['typeCbb'].config"
+                                       options="ComboBox['typeCbb'].options"
+                                       ng-model="autoControl.type"
+                                       table="ComboBox['typeCbb'].table"
+                                       column="ComboBox['typeCbb'].column"
+                                       ng-change="onChangeType()"
+                                       scope-controller="ComboBox['typeCbb'].scope" selectize>
+                            </div>
+                        </div>
+
+                        <!--giai doan-->
+                        <div class="uk-width-small-1-6">
+                            <div class="custom-label">
+                                <label class="label-bold custom-label ng-scope" data-translate="device.autoControl.field.phase"></label>
+                                <span class="req"> *</span>
+                            </div>
+                        </div>
+                        <div class="uk-width-small-2-6">
+                            <div class="parsley-row">
+                                <input id="phaseCbb" name="phaseCbb"
+                                       ng-required="true"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-trigger="input"
+                                       position="bottom"
+                                       config="ComboBox['phaseCbb'].config"
+                                       options="ComboBox['phaseCbb'].options"
+                                       ng-model="autoControl.phaseId"
+                                       table="ComboBox['phaseCbb'].table"
+                                       column="ComboBox['phaseCbb'].column"
+                                       ng-change="phaseChange()"
+                                       scope-controller="ComboBox['phaseCbb'].scope" selectize>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ngay bat dau-->
+                    <div class="uk-grid" ng-show="autoControl.type && autoControl.type > 0">
+                        <div class="uk-width-medium-1-1">
+                            <div ng-include="'app/home/device/automatic-control/common/automatic-nutrition-edit.html'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

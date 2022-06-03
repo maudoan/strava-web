@@ -1,0 +1,91 @@
+<div id="page_content">
+    <form name="area_model_form" id="area_model_form" class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+        <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <span class="route-header">
+                <a class="uk-text-primary">Quản lý tài khoản quản trị và phân quyền</a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+                <a class="uk-text-primary" ui-sref="areas">Khu vực</a> &nbsp;<i class="uk-icon-arrow-circle-right"></i> <span>{{area.name}}</span>
+            </span>
+            <br/>
+            <div class="uk-margin-small-top">
+                <a ng-if="isAdmin || userAreaIds.includes(1) || userAreaIds.includes(area.id)" has-any-authority ="ROLE_SYSTEM_ADMIN, Area_Update" ui-sref="areas-edit({areaId: area.id})" class="md-btn md-btn-primary md-btn-small"><span class="uk-text-bold" data-translate="global.button.edit"></span></a>
+                <a has-any-authority ="ROLE_SYSTEM_ADMIN, Area_Create" ui-sref="areas-create" class="md-btn md-btn-primary md-btn-small"><span class="uk-text-bold" data-translate="global.button.create"></span></a>
+            </div>
+        </div>
+        <div id="page_content_inner">
+            <div class="uk-grid">
+                <div class="uk-width-medium-1-1">
+                    <jhi-alert></jhi-alert><modal-alert></modal-alert>
+                    <div class="md-card">
+                        <div class="md-card-content">
+                            <div class="uk-grid" data-uk-grid-margin="">
+                                <div class="uk-width-medium-1-5">
+                                    <div class="custom-label">
+                                        <label class="label-bold">Tên</label> *
+                                    </div>
+                                </div>
+                                <div class="uk-width-medium-1-2">
+                                    <div class="parsley-row">
+                                        <input
+                                                readonly="true"
+                                                ng-model="area.name"
+                                                class="md-input ng-isolate-scope md-input-processed" md-input="">
+                                        <span class="md-input-bar "></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="area.id != 0" class="uk-grid" data-uk-grid-margin="">
+                                <div class="uk-width-medium-1-5">
+                                    <div class="custom-label">
+                                        <label class="label-bold" >Khu vực cha</label> *
+                                    </div>
+                                </div>
+                                <div class="parsley-row uk-width-medium-1-2">
+                                    <input
+                                            readonly="true"
+                                            ng-model="area.parentArea.name"
+                                            class="md-input ng-isolate-scope md-input-processed" md-input="">
+                                    <span class="md-input-bar "></span>
+                                    <span class="md-input-bar "></span>
+                                </div>
+                            </div>
+                            <div class="uk-grid" data-uk-grid-margin="">
+                                <div class="uk-width-medium-1-5">
+                                    <div class="custom-label">
+                                        <label class="label-bold">Mã khu vực</label> *
+                                    </div>
+                                </div>
+                                <div class="uk-width-medium-1-2">
+                                    <div class="parsley-row">
+                                        <input
+                                                readonly="true"
+                                                ng-model="area.areaCode"
+                                                class="md-input ng-isolate-scope md-input-processed" md-input="">
+                                        <span class="md-input-bar "></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-grid">
+                                <div class="uk-width-medium-1-5">
+                                    <div class="custom-label">
+                                        <label class="label-bold ng-scope">Mô tả</label>
+                                    </div>
+                                </div>
+                                <div class="uk-width-medium-1-2">
+                                    <div class="parsley-row">
+                                        <textarea ng-model="area.description"
+                                                  readonly="true"
+                                                  type="text" name="description" id="description"
+                                                  style="border-width: 1px 1px 1px;"
+                                                  class="md-input ng-isolate-scope md-input-processed" md-input="">
+                                        </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

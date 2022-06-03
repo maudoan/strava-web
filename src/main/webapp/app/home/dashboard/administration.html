@@ -1,0 +1,125 @@
+<style>
+   body{
+      background-image: url('/assets/img/bg_2.jpg');
+      background-size: cover;
+   }
+</style>
+<div id="page_content">
+
+   <div id="page_content_inner">
+      <h1  class="uk-text-primary" data-translate="admin.menu.administration">Quản Lý Và Cài Đặt</h1>
+      <div class="uk-grid">
+         <!--User-->
+         <div has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_SYSTEM_USER,ROLE_FARM_ADMIN, User_View" class="uk-width-medium-1-3 custom-box-padding-top">
+            <div class="md-card custom-cursor-pointer custom-panel" ng-click="goToUser()">
+               <div class="md-card-content " >
+                  <div class="uk-grid">
+                     <div class="uk-width-medium-1-6 ">
+                        <i class="material-icons md-48 uk-text-primary">people</i>
+                     </div>
+                     <div class="uk-width-medium-5-6 "  style="padding-left: 0px">
+                        <div class="custom-panel-label-2">
+                           <span ><b data-translate="admin.menu.users" class="custom-panel-label-2"></b></span><br>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+
+         <!--Organization-->
+         <div has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_SYSTEM_USER,ROLE_FARM_ADMIN, Organization_View" class="uk-width-medium-1-3 custom-box-padding-top">
+            <div class="md-card custom-cursor-pointer custom-panel" ng-click="goToOrganization()">
+               <div class="md-card-content " >
+                  <div class="uk-grid">
+                     <div class="uk-width-medium-1-6 ">
+                        <i class="material-icons md-48 uk-text-primary">work</i>
+                     </div>
+                     <div class="uk-width-medium-5-6 "  style="padding-left: 0px">
+                        <div class="custom-panel-label-2">
+                           <span ><b data-translate="admin.menu.organizations" class="custom-panel-label-2"></b></span><br>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+
+         <!--Role-->
+         <div has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_SYSTEM_USER,ROLE_FARM_ADMIN, Role_View" class="uk-width-medium-1-3 custom-box-padding-top">
+            <div class="md-card custom-cursor-pointer custom-panel" ng-click="goToRole()">
+               <div class="md-card-content " >
+                  <div class="uk-grid">
+                     <div class="uk-width-medium-1-6 ">
+                        <i class="material-icons md-48 uk-text-primary">person_add_disabled</i>
+                     </div>
+                     <div class="uk-width-medium-5-6 "  style="padding-left: 0px">
+                        <div class="custom-panel-label-2">
+                           <span ><b data-translate="admin.menu.roles" class="custom-panel-label-2"></b></span><br>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+
+         <!--privilege-->
+         <div has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_SYSTEM_USER,ROLE_FARM_ADMIN, Privilege_View" class="uk-width-medium-1-3 custom-box-padding-top">
+            <div class="md-card custom-cursor-pointer custom-panel" ng-click="goToPrivilege()">
+               <div class="md-card-content " >
+                  <div class="uk-grid">
+                     <div class="uk-width-medium-1-6 ">
+                        <i class="material-icons md-48 uk-text-primary">contacts</i>
+                     </div>
+                     <div class="uk-width-medium-5-6 "  style="padding-left: 0px">
+                        <div class="custom-panel-label-2">
+                           <span ><b data-translate="admin.menu.privileges" class="custom-panel-label-2"></b></span><br>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+         <!--Notification -->
+         <div has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_SYSTEM_USER,ROLE_FARM_ADMIN, Notification_Setting_View" class="uk-width-medium-1-3 custom-box-padding-top">
+            <div class="md-card custom-cursor-pointer custom-panel" ng-click="goToNotification()">
+               <div class="md-card-content " >
+                  <div class="uk-grid">
+                     <div class="uk-width-medium-1-6 ">
+                        <i class="material-icons md-48 uk-text-primary">notifications_active</i>
+                     </div>
+                     <div class="uk-width-medium-5-6 "  style="padding-left: 0px">
+                        <div class="custom-panel-label-2" >
+                           <span ><b data-translate="admin.menu.notification" ></b></span><br>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+         <!--Log-->
+         <div has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_SYSTEM_USER,ROLE_FARM_ADMIN, AuditLog_View" class="uk-width-medium-1-3 custom-box-padding-top">
+            <div class="md-card custom-cursor-pointer custom-panel" ng-click="goToLog()">
+               <div class="md-card-content " >
+                  <div class="uk-grid">
+                     <div class="uk-width-medium-1-6 ">
+                        <i class="material-icons md-48 uk-text-primary">watch_later</i>
+                     </div>
+                     <div class="uk-width-medium-5-6 "  style="padding-left: 0px">
+                        <div class="custom-panel-label-2">
+                           <span ><b  class="custom-panel-label-2">Log</b></span><br>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

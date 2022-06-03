@@ -1,0 +1,28 @@
+{
+    "alarm": {
+        "name": "Alarm",
+        "config": "Configuration",
+        "history": "History",
+        "fieldHis": {
+            "name": "Alarm Name",
+            "raised": "Raised",
+            "content": "Content",
+            "value": "Value",
+            "farm": "Farm",
+            "area": "Area",
+            "areaShortName": "Short name",
+            "belongGW": "Gateway",
+            "device": "Device",
+            "method": "Method",
+            "value": "Value",
+            "action": "Action",
+            "activated": "Activated",
+            "deactivate": "Deactivate",
+            "status": "Status"
+        },
+        "operator": {
+            "null": "Null",
+            "OutOfRange" : "Out Of Range"
+        }
+    }
+}

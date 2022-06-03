@@ -1,0 +1,584 @@
+<div class="uk-grid">
+    <div class="uk-width-medium-1-1">
+        <hr>
+    </div>
+</div>
+<!--line 1-->
+<div class="uk-grid">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Ngày bắt đầu</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input ng-model="autoControl.startTime"
+                   ng-value="autoControl.startTime | date : 'dd/MM/yyyy'"
+                   name="startTime"
+                   ng-readonly="true"
+                   class="md-input ng-isolate-scope md-input-processed" md-input="">
+        </div>
+    </div>
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Ngày kết thúc</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input ng-model="autoControl.endTime"
+                   ng-value="autoControl.endTime | date : 'dd/MM/yyyy'"
+                   name="startTime"
+                   ng-readonly="true"
+                   class="md-input ng-isolate-scope md-input-processed" md-input="">
+        </div>
+    </div>
+</div>
+
+<!--line 2-->
+<div class="uk-grid" ng-show="autoControl.type == 1 || autoControl.type == 2 || autoControl.type == 3 || autoControl.type == 4">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Lịch trộn</label>
+        </div>
+    </div>
+
+    <div class="uk-width-small-5-6">
+        <div ng-show="showCalendar">
+            <div ng-model="calendar" id="calendar" style="float: left; margin-right: 20px"></div>
+        </div>
+        <div style="float: left" class="custom-cursor-pointer" ng-click="displayCalendar()">
+            <i class="uk-icon-calendar uk-text-success" style="font-size: 28px"></i>
+        </div>
+    </div>
+</div>
+
+<!--line 3-->
+<div class="uk-grid">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Thiết bị điều khiển</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input ng-model="autoControl.groupDeviceId"
+                   ng-value="autoControl.groupDevice.name"
+                   name="groupDevice"
+                   ng-readonly="true"
+                   class="md-input ng-isolate-scope md-input-processed" md-input="">
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Gateway</label>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input ng-model="autoControl.gatewayId"
+                   ng-value="autoControl.gateway.name"
+                   name="gateway"
+                   ng-readonly="true"
+                   class="md-input ng-isolate-scope md-input-processed" md-input="">
+        </div>
+    </div>
+</div>
+
+<!--line 4-->
+<div class="uk-grid" ng-show="autoControl.type == 1 || autoControl.type == 2">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">EC bồn từ (ds)</label>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                   ng-model="autoControl.ecFrom"
+                   name="ecFrom"
+                   ng-readonly="true"
+                   class="md-input ng-isolate-scope md-input-processed" md-input="">
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">EC bồn đến (ds)</label>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-model="autoControl.ecTo"
+                    name="ecTo"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+        </div>
+    </div>
+</div>
+
+<!--line 5-->
+<div class="uk-grid" ng-show="autoControl.type == 1 || autoControl.type == 4">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">pH từ</label>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-model="autoControl.phFrom"
+                    name="phFrom"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">pH đến</label>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-model="autoControl.phTo"
+                    name="phTo"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+        </div>
+    </div>
+</div>
+
+<!--line 6-->
+<div class="uk-grid" ng-show="autoControl.type == 1 || autoControl.type == 2">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Kiểm tra và trộn trước (phút)</label>
+            <span> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-model="autoControl.checkAndMixBefore"
+                    name="phTo"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Lịch bơm</label>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-model="autoControl.pumpScheduleId"
+                    ng-value="autoControl.pumpSchedule.name"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+        </div>
+    </div>
+</div>
+
+<!--line 7-->
+<div class="uk-grid" ng-show="autoControl.type == 1 || autoControl.type == 2">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Mực nước trong bồn</label>
+            <span ng-if="autoControl.type == 1 || autoControl.type == 2"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-model="autoControl.waterLevel"
+                    ng-value="autoControl.waterLevel"
+                    name="waterLevel"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+        </div>
+    </div>
+</div>
+
+<!--line 8 suc khi-->
+<div class="uk-grid" ng-show="autoControl.type == 5">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Thời gian sục khí chạy trước bơm (phút)</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-model="autoControl.timeAeration"
+                    name="phTo"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+        </div>
+    </div>
+</div>
+
+<!--line 9 loai bom - bơm dinh dưỡng thuỷ canh-->
+<div class="uk-grid" ng-show="autoControl.type == 6">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Loại bơm</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input id="typePump1" type="radio" name="typePump" icheck ng-model="autoControl.typePump" value="false">
+            <label for="typePump1" class="custom-label"> 1 bơm chạy</label>
+            <br><br>
+            <input id="typePump2" type="radio" name="typePump" icheck ng-model="autoControl.typePump" value="true">
+            <label for="typePump2" class="custom-label"> Tuần hoàn</label>
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Thời gian bắt đầu bơm</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-value="autoControl.timeTurnOn | date: 'HH:mm'"
+                    ng-model="autoControl.timeTurnOn"
+                    name="timeTurnOn"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+        </div>
+    </div>
+</div>
+
+<!--line 10 - bơm dinh dưỡng thuỷ canh -->
+<div class="uk-grid" ng-show="autoControl.type == 6">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope" ng-class="{'uk-disabled': autoControl.typePump }" for="timePumpExecute">Thời gian bơm chạy (phút)</label>
+            <span class="req" ng-if="!autoControl.typePump"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    id="timePumpExecute"
+                    ng-model="autoControl.timePumpExecute"
+                    ng-disabled="autoControl.typePump"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed" type="number"
+                    md-input/>
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Thời gian kết thúc bơm</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-value="autoControl.timeTurnOff | date: 'HH:mm'"
+                    ng-model="autoControl.timeTurnOff"
+                    name="timeTurnOff"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+        </div>
+    </div>
+</div>
+
+<!--line 11 - bơm dinh dưỡng thuỷ canh - thời gian bơm dừng-->
+<div class="uk-grid" ng-show="autoControl.type == 6">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope" ng-class="{'uk-disabled': autoControl.typePump }" for="timePumpStop">Thời gian bơm dừng (phút)</label>
+            <span class="req" ng-if="!autoControl.typePump"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    id="timePumpStop"
+                    ng-disabled="autoControl.typePump"
+                    ng-model="autoControl.timePumpStop"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed" type="number"
+                    md-input/>
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Tắt khi nhiệt độ > (độ C)</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-model="autoControl.turnOffWhen"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed" type="number"
+                    md-input/>
+        </div>
+    </div>
+</div>
+
+<!--line 12 - bơm dinh dưỡng thuỷ canh - thời gian đảo bơm-->
+<div class="uk-grid" ng-show="autoControl.type == 6">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope" ng-class="{'uk-disabled': !autoControl.typePump }" for="timeInverter">Thời gian đảo bơm</label>
+            <span class="req" ng-if="autoControl.typePump"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    id="timeInverter"
+                    ng-disabled="!autoControl.typePump"
+                    ng-model="autoControl.timeInverter"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed" type="number"
+                    md-input/>
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Thời gian sục khí chạy (phút)</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-model="autoControl.timeAerationExecute"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed" type="number"
+                    md-input/>
+        </div>
+    </div>
+</div>
+
+<!--line 13 - bơm dinh dưỡng thuỷ canh  - thời gian sục khí nghỉ-->
+<div class="uk-grid" ng-show="autoControl.type == 6">
+    <div class="uk-width-small-1-2"></div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Thời gian sục khí nghỉ (phút)</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-model="autoControl.timeAerationStop"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed" type="number"
+                    md-input/>
+        </div>
+    </div>
+</div>
+
+<!--line 14- giờ kiểm tra cắt nắng - hoặc chiếu sáng-->
+<div class="uk-grid" ng-show="autoControl.type == 8 || autoControl.type == 9">
+    <div class="uk-width-small-1-1">
+        <h3><b>Giờ kiểm tra</b></h3>
+    </div>
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Từ</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-model="autoControl.timeTurnOn"
+                    ng-value="autoControl.timeTurnOn | date : 'HH:mm'"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed"
+                    md-input/>
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Đến</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-model="autoControl.timeTurnOff"
+                    ng-value="autoControl.timeTurnOff | date : 'HH:mm'"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed"
+                    md-input/>
+        </div>
+    </div>
+</div>
+
+<!--line 15- giờ kiểm tra nhiệt độ cắt nắng-->
+<div class="uk-grid" ng-show="autoControl.type == 8 || autoControl.type == 9">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">
+                <span ng-if="autoControl.type == 8">Mở khi nhiệt độ <= (độ C)</span>
+                <span ng-if="autoControl.type == 9">Bật khi cường độ < (lux)</span>
+            </label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    id="turnOnWhen"
+                    ng-model="autoControl.turnOnWhen"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed" type="text"
+                    md-input/>
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">
+                <span ng-if="autoControl.type == 8">Đóng khi nhiệt độ >= (độ C)</span>
+                <span ng-if="autoControl.type == 9">Tắt khi cường độ > (lux)</span>
+            </label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-model="autoControl.turnOffWhen"
+                    ng-readonly="true"
+                    class="md-input ng-isolate-scope md-input-processed" type="text"
+                    md-input/>
+        </div>
+    </div>
+</div>
+
+<!-- châm phân table -->
+
+<!--giờ bơm table-->
+<div class="uk-grid" ng-show="autoControl.type == 3 || autoControl.type == 4 || autoControl.type == 5 || autoControl.type == 7">
+    <div class="uk-width-medium-1-1">
+        <div ng-if="autoControl.type == 3 || autoControl.type == 4">
+            <h3><b>Cài đặt thời gian châm phân</b></h3>
+            <p>(Châm phân A,B và sục khí được bật đồng thời)</p>
+        </div>
+        <div ng-if="autoControl.type == 5">
+            <h3><strong>Giờ bơm</strong></h3>
+        </div>
+        <div ng-if="autoControl.type == 7">
+            <h3><strong>Giờ bật</strong></h3>
+        </div>
+    </div>
+    <div class="uk-width-medium-1-1">
+        <div class="uk-overflow-container uk-margin-bottom table-height-fixed">
+            <table class="hoverTable uk-table uk-table-align-vertical uk-table-striped tablesorter tablesorter-altair table-fixed" id="automaticSchedules">
+                <thead >
+                <tr class="uk-table-nowrap">
+                    <th><b>Giờ</b></th>
+                    <th>
+                        <strong ng-if="autoControl.type == 3 || autoControl.type == 4">Thời gian bật bơm châm phân A (phút)</strong>
+                        <strong ng-if="autoControl.type == 5">Giờ bơm (phút)</strong>
+                        <strong ng-if="autoControl.type == 7">Giờ bật (phút)</strong>
+                    </th>
+                    <th ng-if="autoControl.type != 7">
+                        <strong ng-if="autoControl.type == 3 || autoControl.type == 4">Thời gian bật bơm châm phân B (phút)</strong>
+                        <strong ng-if="autoControl.type == 5">Thể tích (lít)</strong>
+                    </th>
+                    <th class="center custom-cl-header-tiny" style="width: 15%"><b data-translate="device.field.action"></b></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in automaticSchedules">
+                    <td>
+                        <span>{{ item.timeSchedule | date : 'HH:mm' }}</span>
+                    </td>
+                    <td>
+                        <span>{{ item.timeExecute }}</span>
+                    </td>
+                    <td ng-if="autoControl.type != 7">
+                        <span ng-if="autoControl.type == 3 || autoControl.type == 4">{{ item.timeExecute2 }}</span>
+                        <span ng-if="autoControl.type == 5">{{ item.volume }}</span>
+                    </td>
+                    <!--dc bat tat khi DKTD dc kich hoat/chua kich hoat-->
+                    <td ng-if="!autoControl.state" class="uk-text-center">
+                        <i ng-if="!item.state" class="uk-icon-toggle-off uk-icon-medium"></i>
+                        <i ng-if="item.state" class="uk-icon-toggle-on uk-icon-medium uk-text-success"></i>
+                    </td>
+                    <td ng-if="autoControl.state" class="uk-text-center">
+                        <i ng-if="!item.state" ng-click="scheduleActivate(item.id, $index)" title="Bật" class="uk-icon-toggle-off uk-icon-medium custom-cursor-pointer"></i>
+                        <i ng-if="item.state" ng-click="scheduleDeactivate(item.id, $index)" title="Tắt" class="uk-icon-toggle-on uk-icon-medium custom-cursor-pointer uk-text-success"></i>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ts_pager" id="table_device_pager">
+            <ul class="uk-pagination ts_pager">
+                <li ng-click="selectPageClickHandle()" data-uk-tooltip title="{{selectPage}}">
+                    <input ng-change="selectPageHandle('automaticSchedules')" id="device_selectize_page" type="text"
+                           config="TABLES['automaticSchedules'].selectize_page_config" options="TABLES['automaticSchedules'].selectize_page_options"
+                           ng-model="TABLES['automaticSchedules'].selectize_page" name="TABLES['automaticSchedules'].selectize_page" selectize>
+                </li>
+                <li><a href="javascript:void(0)" class="firstPage" ng-click="handleFirstPage('automaticSchedules')"><i class="uk-icon-angle-double-left"></i></a></li>
+                <li><a href="javascript:void(0)" class="prevPage" ng-click="handlePreviousPage('automaticSchedules')"><i class="uk-icon-angle-left"></i></a></li>
+                <li><span class="pageDisplay"></span></li>
+                <li><a href="javascript:void(0)" class="nextPage" ng-click="handleNextPage('automaticSchedules')"><i class="uk-icon-angle-right"></i></a></li>
+                <li><a href="javascript:void(0)" class="lastPage" ng-click="handleLastPage('automaticSchedules')"><i class="uk-icon-angle-double-right"></i></a></li>
+                <li data-uk-tooltip title="{{pageSize}}">
+                    <input ng-change="selectPageNumHandle('automaticSchedules')" id="device_selectize_pageNum" type="text"
+                           config="TABLES['automaticSchedules'].selectize_pageNum_config" options="TABLES['automaticSchedules'].page_size_option"
+                           ng-model="TABLES['automaticSchedules'].selectize_pageNum" name="TABLES['automaticSchedules'].selectize_pageNum" selectize>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

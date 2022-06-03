@@ -1,0 +1,173 @@
+<!-- header -->
+<header id="header_main">
+    <div class="header_main_content">
+        <div id="menu_top_dropdown" class="uk-float-left uk-hidden-small">
+            <div class="uk-button-dropdown">
+                <a ui-sref="login" class="top_menu_toggle"><i class="material-icons md-24">&#xE8F0;</i></a>
+            </div>
+        </div>
+        <div class="header-title-padding-top">
+            <a ui-sref="login" class="heading_a uk-text-upper uk-text-contrast">
+                AgriTech
+            </a>
+        </div>
+    </div>
+</header>
+
+<div id="page_content">
+    <form
+            name="form_create_account"
+            id="form_create_account"
+            class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required"
+            novalidate="">
+        <div id="page_heading" data-uk-sticky="{ top: 25, media: 960 }" class="custom-heading">
+            <div class="" style="display: flex; position: relative;margin-top: 10px;">
+	            <div class="" style="margin-left: 0px; margin-right: 0px; flex-wrap: wrap;display: flex;align-items: center;">
+	            	<div class="btn-custom-action-group">
+		                <button ng-if="!successfully" ng-click="submit()"  class="md-btn md-btn-primary" type="submit"><span class="uk-text-bold" class="ng-scope" data-translate="global.common.register">Đăng Ký</span></button>
+		                <a ui-sref="login" class="md-btn"><span class="uk-text-bold" class="ng-scope" data-translate="global.common.signIn"></span></a>
+		                
+		            </div>
+	            </div>
+	            <div class="" style="margin-left: auto;margin-right: 0px; flex-wrap: wrap;display: flex;align-items: center;">
+	            	<div id="select-language">
+		                <selectize id="lang_switcher" name="lang_switcher" config='langSwitcherConfig' options='langSwitcherOptions' ng-model="langSwitcherModel"></selectize>
+		            </div>
+	            </div>
+            </div>
+        </div>
+
+        <div id="page_content_inner" ng-if="!successfully">
+            <jhi-alert></jhi-alert><modal-alert></modal-alert>
+            <div class="uk-grid" data-uk-grid-margin="">
+                <div class="uk-width-medium-1">
+                    <div class="md-card">
+                        <div class="md-card-content md-card-register">
+                            <!--line 1-->
+                            <div class="uk-grid" data-uk-grid-margin="">
+                                <div class="uk-width-small-1-1">
+                                    <h2 class="heading_a uk-text-upper" class="ng-scope" data-translate="global.registerPage.registerTitle"></h2>
+                                </div>
+                                
+                                <div class="uk-width-small-1-6">
+                                    <label class="label-bold title-organization">Email* :</label>
+                                </div>
+                                <div class="uk-width-medium-2-6">
+                                    <div class="parsley-row">
+                                        <input id="email" name="email"
+                                                ng-model="user.email"
+                                                data-parsley-whitespace="trim"
+                                                data-parsley-trigger="change"
+                                                data-parsley-maxlength="255"
+                                                data-parsley-maxlength-message="{{'global.messages.maxLength256' | translate}}"
+                                                data-parsley-type="email"
+                                                data-parsley-type-message="{{'global.messages.email' | translate}}"
+                                                required=""
+                                                data-parsley-required-message="{{'global.messages.required' | translate}}"
+                                                class="md-input ng-isolate-scope md-input-processed" md-input="">
+                                        <span class="md-input-bar "></span>
+                                    </div>
+                                </div>
+
+                                <div class="uk-width-small-1-6">
+                                    <label class="label-bold title-organization"><span class="ng-scope" data-translate="global.registerPage.fullName"></span>* :</label>
+                                </div>
+                                <div  class="uk-width-small-2-6">
+                                    <!--code-->
+                                    <div class="parsley-row">
+                                        <input id="fullName"
+                                               data-parsley-maxlength="255"
+                                               data-parsley-maxlength-message="{{'global.messages.maxLength256' | translate}}"
+                                               data-parsley-required-message="{{'global.messages.required' | translate}}"
+                                               data-parsley-whitespace="trim"
+                                               required=""
+                                               type="text"
+                                               class="md-input ng-isolate-scope md-input-processed"
+                                               ng-model="user.fullName"
+                                               md-input>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="uk-grid" data-uk-grid-margin="">
+                                <div class="uk-width-small-1-6">
+                                    <label class="label-bold title-organization"><span class="ng-scope" data-translate="global.registerPage.phone"></span>*: </label>
+                                </div>
+                                <div class="uk-width-small-2-6">
+                                    <!--code-->
+                                    <div class="parsley-row">
+                                        <input id="phone"
+                                               data-parsley-maxlength-message="{{'global.messages.maxLength20' | translate}}"
+                                               data-parsley-required-message="{{'global.messages.required' | translate}}"
+                                               data-parsley-pattern="/^[\+\d][0-9]*$/g"
+                                               data-parsley-pattern-message="{{'global.messages.phone' | translate}}"
+                                               data-parsley-maxlength="20"
+                                               data-parsley-whitespace="trim"
+                                               type="text"
+                                               class="md-input ng-isolate-scope md-input-processed"
+                                               ng-model="user.phone"
+                                               required=""
+                                               md-input>
+                                    </div>
+                                </div>
+
+                                <div class="uk-width-small-1-6">
+                                    <label class="label-bold title-organization"><span class="ng-scope" data-translate="global.registerPage.address"></span>: </label>
+                                </div>
+                                <div class="uk-width-small-2-6">
+                                    <!--code-->
+                                    <div class="parsley-row">
+                                        <input id="address"
+                                               data-parsley-maxlength-message="{{'global.messages.maxLength256' | translate}}"
+                                               data-parsley-maxlength="255"
+                                               data-parsley-whitespace="trim"
+                                               type="text"
+                                               class="md-input ng-isolate-scope md-input-processed"
+                                               ng-model="user.address"
+                                               md-input>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="uk-grid" data-uk-grid-margin="">
+                                <div class="uk-width-small-1-6">
+                                    <label class="label-bold title-organization"><span class="ng-scope" data-translate="global.registerPage.company"></span>: </label>
+                                </div>
+                                <div class="uk-width-small-2-6">
+                                    <!--code-->
+                                    <div class="parsley-row">
+                                        <input id="name"
+                                               data-parsley-maxlength-message="{{'global.messages.maxLength256' | translate}}"
+                                               data-parsley-maxlength="255"
+                                               data-parsley-whitespace="trim"
+                                               type="text"
+                                               class="md-input ng-isolate-scope md-input-processed"
+                                               ng-model="user.organizationName"
+                                               md-input>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div ng-if="successfully" style="padding:24px 24px 100px">
+        <div class="uk-grid" data-uk-grid-margin="">
+            <div class="uk-width-medium-1 uk-push-0-10">
+                <div class="md-card">
+                    <div class="md-card-content md-card-register" style="font-size: 16px" class="ng-scope" data-translate="global.registerPage.registerSuccess">
+                        <!-- <span>Chúc mừng!</span></br>
+                        <span>Bạn đã đăng ký tài khoản thành công trên hệ thống AgriTech.</span></br>
+                        <span>Kiểm tra email để nhận thông tin tài khoản sử dụng hệ thống </span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

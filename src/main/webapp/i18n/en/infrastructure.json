@@ -1,0 +1,150 @@
+{
+  "infrastructure": {
+    "farm": {
+      "name": "Farm",
+      "column": {
+        "code": "Code",
+        "owner": "Owner",
+        "name": "Name",
+        "acreage": "Acreage",
+        "phone": "Phone",
+        "typeFarm": "Type of production",
+        "lat": "Lat",
+        "lng": "Lng",
+        "location": "Location",
+        "note": "Note",
+        "action": "Action"
+      },
+      "typeFarm": {
+        "grow": "Grow",
+        "feed": "Feed",
+        "growAndFeed": "Both"
+      },
+      "createFarm": {
+        "farmCode": "Farm code",
+        "farmName": "Farm name",
+        "owner": "Owner",
+        "email": "Email",
+        "area": "Area",
+        "phoneNumber": "Phone Number",
+        "production": "Type of production",
+        "longitude": "Longitude",
+        "address": "Address",
+        "latitude": "Latitude",
+        "note": "Note"
+      },
+      "deleteFarm": "Are you sure want to delete this farm?"
+    },
+    "categoryProduct":{
+    	"name":"Category product",
+    	"noData":"No data",
+    	"create":"Create category",
+    	"createProduct":"Create product",
+    	"edit":"Edit category",
+    	"delete":"Delete category",
+    	"messConfirmEdit": "Confirm update category product",
+    	"messConfirmDelete": "Confirm delete category product"
+    },
+    "product": {
+      "name": "Product",
+      "column": {
+        "code": "Product code",
+        "category": "Danh mục sản phẩm",
+        "productName": "Product name",
+        "unit": "Unit",
+        "farm": "Trang trại",
+        "name": "Product name",
+        "typeProduct": "Category product",
+        "createdDate": "Created date",
+        "createdUser": "Created by"
+      },
+      "createProduct":{
+        "general": {
+          "title": "GENERAL",
+          "column": {
+            "code": "Code",
+            "category": "Category",
+            "productName": "Product name",
+            "unit": "Unit",
+            "farm": "Farm"
+          }
+        },
+        "detail": {
+          "title": "PRODUCT DETAIL",
+          "column": {
+            "description": "Description",
+            "package": "Package"
+          }
+
+        }
+      }
+    },
+    "area": {
+      "name": "Area",
+      "typeArea": {
+        "hydroponic": "Hydroponic",
+        "growingMedia": "Growing media",
+        "husbandry": "Animal husbandry",
+        "land":"Land planting",
+        "other": "Other"
+      },
+      "column": {
+        "name": "Area",
+        "parent": "Area Parent",
+        "typeArea": "Type of production",
+        "farm": "Farm",
+        "code": "Code",
+        "typeProduct": "Type",
+        "createdDate": "Created Date",
+        "createdUser": "Created User",
+        "description": "Description",
+        "unitCalculate": "Unit",
+        "product": "Name",
+        "package": "Package",
+        "shortName": "Short name"
+      },
+      "tab": {
+        "monitoring": "Monitoring",
+        "device": "Device status",
+        "product": "Product"
+      },
+      "monitoring": {
+        "title": "Environment",
+        "temperature": "Temperature",
+        "co2": "CO2",
+        "humidity": "Humidity",
+        "brightness": "Brightness",
+        "windSpeed": "Wind speed"
+      },
+      "nourishment": "Nourishment",
+      "device": {
+        "name": "Thiết bị",
+        "status": "Trạng thái"
+      },
+      "product": {
+        "name": "Tên",
+        "method": "Phương thức canh tác",
+        "characteristic": "Đặc điểm",
+        "type": "Loại",
+        "phase": "Giai đoạn"
+      },
+      "createArea": {
+        "areaName": "Area Name",
+        "space": "Area space",
+        "parentArea": "Parent Area",
+        "farm": "Farm",
+        "typeArea": "Type of production"
+      },
+      "deleteArea": "Are you sure want to delete this area?"
+    },
+    "uom": {
+      "deleteUom": "Are you sure want to delete this Unit?"
+    },
+    "uomType": {
+      "deleteUomType": "Are you sure want to delete this Unit type?"
+    },
+    "qrCode": {
+      "deleteQRCode": "Are you sure want to delete this QRCode?"
+    }
+  }
+}

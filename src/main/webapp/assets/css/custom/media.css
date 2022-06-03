@@ -1,0 +1,39 @@
+@media screen and (max-width: 1366px) {
+    .table-height-fixed{
+        max-height: 375px;
+    }
+}
+
+@media screen and (max-width: 1366px){
+    .user_heading_avatar .custom-upload-icon{
+        right: 0;
+        left: 0;
+    }
+    .user_heading_avatar .btn-file.fileinput-exists{
+        right: 0;
+        left: 0;
+        z-index: 9;
+    }
+}
+
+@media screen and (max-width: 978px) {
+    .md-card .md-card-content.md-card-register{
+        padding: 32px 24px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .uk-grid-margin, .uk-grid+.uk-grid {
+        margin-top: 10px;
+    }
+    .md-card .md-card-content.md-card-register{
+        padding: 32px 24px;
+    }
+    .marginTopMinus10{
+        margin-top: 5px;
+    }
+}
+
+@media print {
+    .page-break  { display:block; page-break-before:always; }
+}

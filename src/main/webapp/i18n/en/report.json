@@ -1,0 +1,18 @@
+{
+  "report": {
+    "device": {
+      "field": {
+        "stt": "index",
+        "area": "Area",
+        "numberOfCustomer": "Number of customer",
+        "deviceType": "Device type",
+        "provider": "Provider",
+        "deviceModel": "Device model",
+        "numberOfDevice": "Number of device"
+      }
+    },
+    "error": {
+      "exportEmptyData": "Data is empty"
+    }
+  }
+}

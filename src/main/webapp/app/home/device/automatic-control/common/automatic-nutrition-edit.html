@@ -1,0 +1,876 @@
+<style>
+    #noResultautomaticSchedules{
+        display: none;
+    }
+</style>
+
+<div class="uk-grid">
+    <div class="uk-width-medium-1-1">
+        <hr>
+    </div>
+</div>
+<!--line 1-->
+<div class="uk-grid">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Ngày bắt đầu</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input id="startTime"
+                   name="startTime"
+                   class="md-input"
+                   required="required"
+                   data-parsley-required-message="{{ messages.required}}"
+            />
+        </div>
+    </div>
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Ngày kết thúc</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input id="endTime"
+                   name="endTime"
+                   required="required"
+                   class="md-input"
+                   data-parsley-required-message="{{messages.required}}"
+            />
+            <div class="parsley-errors-list filled" ng-show="invalidDayEnd">
+                <span class="parsley-mess">Ngày kết lúc luôn lớn hơn hoặc bằng ngày bắt đầu</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--line 2-->
+<div class="uk-grid" ng-show="autoControl.type == 1 || autoControl.type == 2 || autoControl.type == 3 || autoControl.type == 4">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Lịch trộn</label>
+        </div>
+    </div>
+
+    <div class="uk-width-small-5-6">
+        <div ng-model="calendar" id="calendar" style="float: left; margin-right: 20px"></div>
+        <div style="float: left">(Tích chọn vào ngày chỉ tưới nước, không trộn phân)</div>
+    </div>
+</div>
+
+<!--line 3-->
+<div class="uk-grid">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Thiết bị điều khiển</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input id="groupDeviceCbb" name="groupDeviceCbb"
+                   ng-required="true"
+                   data-parsley-required-message="{{messages.required}}"
+                   data-parsley-trigger="input"
+                   position="bottom"
+                   config="ComboBox['groupDeviceCbb'].config"
+                   options="ComboBox['groupDeviceCbb'].options"
+                   ng-model="autoControl.groupDeviceId"
+                   table="ComboBox['groupDeviceCbb'].table"
+                   column="ComboBox['groupDeviceCbb'].column"
+                   ng-change="groupDeviceChange()"
+                   ng-model-object="cbbSelected.groupDevice"
+                   scope-controller="ComboBox['groupDeviceCbb'].scope" selectize>
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Gateway</label>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input readonly
+                   ng-value="cbbSelected.gateway.name"
+                   ng-model="autoControl.gatewayId"
+                   class="md-input ng-isolate-scope md-input-processed" type="text"
+                   md-input/>
+        </div>
+    </div>
+</div>
+
+<!--line 4-->
+<div class="uk-grid" ng-show="autoControl.type == 1 || autoControl.type == 2">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">EC bồn từ (ds)</label>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <!--ng-required="autoControl.type == 1 || autoControl.type == 2"-->
+            <input
+                    id="ecFrom"
+                    data-parsley-required-message="{{messages.required}}"
+                    ng-model="autoControl.ecFrom"
+                    data-parsley-pattern="^-?\d{1,2}(\.\d{0,1})?$"
+                    min="0"
+                    data-parsley-type="number"
+                    data-parsley-pattern-message="{{messages.float2_1}}"
+                    data-parsley-type-message="{{messages.number_msg}}"
+                    data-parsley-min-message="{{messages.min_msg}}"
+                    class="md-input ng-isolate-scope md-input-processed" type="number" step="any"
+                    md-input/>
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">EC bồn đến (ds)</label>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <!--ng-required="autoControl.type == 1 || autoControl.type == 2"-->
+            <input
+                    id="ecTo"
+                    data-parsley-required-message="{{messages.required}}"
+                    data-parsley-pattern="^-?\d{1,2}(\.\d{0,1})?$"
+                    min="0"
+                    data-parsley-type="number"
+                    data-parsley-pattern-message="{{messages.float2_1}}"
+                    data-parsley-type-message="{{messages.number_msg}}"
+                    data-parsley-min-message="{{messages.min_msg}}"
+                    data-parsley-gte="#ecFrom"
+                    data-parsley-gte-message="EC bồn đến luôn lớn hoặc bằng EC bồn từ"
+                    ng-model="autoControl.ecTo"
+                    class="md-input ng-isolate-scope md-input-processed" type="number" step="any"
+                    md-input/>
+        </div>
+    </div>
+</div>
+
+<!--line 5-->
+<div class="uk-grid" ng-show="autoControl.type == 1 || autoControl.type == 4">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">pH từ</label>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <!--ng-required="autoControl.type == 1 || autoControl.type == 4"-->
+            <input
+                    id="phFrom"
+                    data-parsley-required-message="{{messages.required}}"
+                    data-parsley-pattern="^-?\d{1,2}(\.\d{0,1})?$"
+                    min="0"
+                    data-parsley-type="number"
+                    data-parsley-pattern-message="{{messages.float2_1}}"
+                    data-parsley-type-message="{{messages.number_msg}}"
+                    data-parsley-min-message="{{messages.min_msg}}"
+                    ng-model="autoControl.phFrom"
+                    class="md-input ng-isolate-scope md-input-processed" type="number" step="any"
+                    md-input/>
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">pH đến</label>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <!--ng-required="autoControl.type == 1 || autoControl.type == 4"-->
+            <input
+                    id="phTo"
+                    data-parsley-required-message="{{messages.required}}"
+                    data-parsley-pattern="^-?\d{1,2}(\.\d{0,1})?$"
+                    min="0"
+                    data-parsley-type="number"
+                    data-parsley-pattern-message="{{messages.float2_1}}"
+                    data-parsley-type-message="{{messages.number_msg}}"
+                    data-parsley-min-message="{{messages.min_msg}}"
+                    data-parsley-gte="#phFrom"
+                    data-parsley-gte-message="pH đến luôn lớn hoặc bằng pH từ"
+                    ng-model="autoControl.phTo"
+                    class="md-input ng-isolate-scope md-input-processed" type="number" step="any"
+                    md-input/>
+        </div>
+    </div>
+</div>
+
+<!--line 6-->
+<div class="uk-grid" ng-show="autoControl.type == 1 || autoControl.type == 2">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Kiểm tra và trộn trước (phút)</label>
+            <span> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-model="autoControl.checkAndMixBefore"
+                    ng-required="autoControl.type == 1 || autoControl.type == 2"
+                    data-parsley-required-message="{{messages.required}}"
+                    data-parsley-min="0"
+                    data-parsley-min-message="{{ messages.min_msg}}"
+                    class="md-input ng-isolate-scope md-input-processed" type="number"
+                    md-input/>
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Lịch bơm</label>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input id="pumpCbb" name="pumpCbb"
+                   position="bottom"
+                   data-parsley-required-message="{{messages.required}}"
+                   ng-required="(autoControl.checkAndMixBefore && autoControl.checkAndMixBefore > 0) && (autoControl.type == 1 || autoControl.type == 2)"
+                   config="ComboBox['pumpCbb'].config"
+                   options="ComboBox['pumpCbb'].options"
+                   ng-model="autoControl.pumpScheduleId"
+                   table="ComboBox['pumpCbb'].table"
+                   column="ComboBox['pumpCbb'].column"
+                   scope-controller="ComboBox['pumpCbb'].scope" selectize>
+        </div>
+    </div>
+</div>
+
+<!--line 7-->
+<div class="uk-grid" ng-show="autoControl.type == 1 || autoControl.type == 2">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Mực nước trong bồn</label>
+            <span ng-if="autoControl.type == 1 || autoControl.type == 2"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input id="waterLevelCbb" name="waterLevelCbb"
+                   data-parsley-required-message="{{messages.required}}"
+                   ng-required="autoControl.type == 1 || autoControl.type == 2"
+                   position="bottom"
+                   config="ComboBox['waterLevelCbb'].config"
+                   options="ComboBox['waterLevelCbb'].options"
+                   ng-model="autoControl.waterLevel"
+                   table="ComboBox['waterLevelCbb'].table"
+                   column="ComboBox['waterLevelCbb'].column"
+                   scope-controller="ComboBox['waterLevelCbb'].scope" selectize>
+        </div>
+    </div>
+</div>
+
+<!--line 8 suc khi-->
+<div class="uk-grid" ng-show="autoControl.type == 5">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Thời gian sục khí chạy trước bơm (phút)</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-required="autoControl.type == 5"
+                    data-parsley-required-message="{{messages.required}}"
+                    data-parsley-pattern="^\d{0,4}?$"
+                    data-parsley-pattern-message="Nhập số nguyên tối đa 4 chữ số"
+                    min="0"
+                    max="9999"
+                    data-parsley-range="[0,9999]"
+                    data-parsley-range-message="Nhập số nguyên tối đa 4 chữ số"
+                    type="number"
+                    step="any"
+                    ng-model="autoControl.timeAeration"
+                    class="md-input ng-isolate-scope md-input-processed"
+                    md-input/>
+        </div>
+    </div>
+</div>
+
+<!--line 9 loai bom - bơm dinh dưỡng thuỷ canh-->
+<div class="uk-grid" ng-show="autoControl.type == 6">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Loại bơm</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input id="typePump1" type="radio" name="typePump" icheck ng-model="autoControl.typePump" ng-value="false"><label for="typePump1" class="custom-label"> 1 bơm chạy</label>
+            <br><br>
+            <input id="typePump2" type="radio" name="typePump" icheck ng-model="autoControl.typePump" ng-value="true"><label for="typePump2" class="custom-label"> Tuần hoàn</label>
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Thời gian bắt đầu bơm</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input id="timeTurnOn"
+                   name="timeTurnOn"
+                   class="md-input"
+                   ng-required="autoControl.type == 6"
+                   data-parsley-required-message="{{ messages.required }}"
+            />
+        </div>
+    </div>
+</div>
+
+<!--line 10 - bơm dinh dưỡng thuỷ canh -->
+<div class="uk-grid" ng-show="autoControl.type == 6">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope" ng-class="{'uk-disabled': autoControl.typePump }" for="timePumpExecute">Thời gian bơm chạy (phút)</label>
+            <span class="req" ng-if="!autoControl.typePump"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    id="timePumpExecute"
+                    ng-model="autoControl.timePumpExecute"
+                    ng-disabled="autoControl.typePump"
+                    ng-required="autoControl.type == 6 && !autoControl.typePump"
+                    data-parsley-required-message="{{messages.required}}"
+                    data-parsley-pattern="^\d{0,4}?$"
+                    data-parsley-pattern-message="Nhập số nguyên tối đa 4 chữ số"
+                    min="0"
+                    max="9999"
+                    data-parsley-range="[0,9999]"
+                    data-parsley-range-message="Nhập số nguyên tối đa 4 chữ số"
+                    class="md-input ng-isolate-scope md-input-processed" type="number" step="any"
+                    md-input/>
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Thời gian kết thúc bơm</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input id="timeTurnOff"
+                   class="md-input"
+                   ng-required="autoControl.type == 6"
+                   data-parsley-required-message="{{messages.required}}"
+                   name="timeTurnOff"
+            />
+            <div class="parsley-errors-list filled" ng-show="invalidTimeEnd">
+                <span class="parsley-mess">Thời gian kết thúc lớn hơn thời gian bắt đầu</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--line 11 - bơm dinh dưỡng thuỷ canh - thời gian bơm dừng-->
+<div class="uk-grid" ng-show="autoControl.type == 6">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope" ng-class="{'uk-disabled': autoControl.typePump }" for="timePumpStop">Thời gian bơm dừng (phút)</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    id="timePumpStop"
+                    ng-required="autoControl.type == 6 && !autoControl.typePump"
+                    ng-disabled="autoControl.typePump"
+                    data-parsley-required-message="{{ messages.required }}"
+                    ng-model="autoControl.timePumpStop"
+                    data-parsley-pattern="^\d{0,4}?$"
+                    data-parsley-pattern-message="Nhập số nguyên tối đa 4 chữ số"
+                    min="0"
+                    max="9999"
+                    data-parsley-range="[0,9999]"
+                    data-parsley-range-message="Nhập số nguyên tối đa 4 chữ số"
+                    class="md-input ng-isolate-scope md-input-processed" type="number" step="any"
+                    md-input/>
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Tắt khi nhiệt độ > (độ C)</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-model="autoControl.turnOffWhen"
+                    ng-required="autoControl.type == 6"
+                    data-parsley-required-message="{{messages.required}}"
+                    data-parsley-pattern="^\d{0,2}(\.\d{0,1})?$"
+                    data-parsley-pattern-message="Nhập số thập phân tối đa 2 chữ số phần nguyên, 1 chữ số phần thập phân"
+                    min="0"
+                    max="99.9"
+                    data-parsley-range="[0,99.9]"
+                    data-parsley-range-message="Nhập số thập phân tối đa 2 chữ số phần nguyên, 1 chữ số phần thập phân"
+                    data-parsley-type-message="Nhập số thập phân tối đa 2 chữ số phần nguyên, 1 chữ số phần thập phân"
+                    class="md-input ng-isolate-scope md-input-processed" type="number" step="0.1"
+                    md-input/>
+        </div>
+    </div>
+</div>
+
+<!--line 12 - bơm dinh dưỡng thuỷ canh - thời gian đảo bơm-->
+<div class="uk-grid" ng-show="autoControl.type == 6">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope" ng-class="{'uk-disabled': !autoControl.typePump }" for="timeInverter">Thời gian đảo bơm</label>
+            <span class="req" ng-if="autoControl.typePump"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    id="timeInverter"
+                    ng-required="autoControl.type == 6 && autoControl.typePump"
+                    ng-disabled="!autoControl.typePump"
+                    ng-model="autoControl.timeInverter"
+                    data-parsley-required-message="{{messages.required}}"
+                    data-parsley-pattern="^\d{0,4}?$"
+                    data-parsley-pattern-message="Nhập số nguyên tối đa 4 chữ số"
+                    min="0"
+                    max="9999"
+                    data-parsley-range="[0,9999]"
+                    data-parsley-range-message="Nhập số nguyên tối đa 4 chữ số"
+                    class="md-input ng-isolate-scope md-input-processed" type="number" step="any"
+                    md-input/>
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Thời gian sục khí chạy (phút)</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-required="autoControl.type == 6"
+                    ng-model="autoControl.timeAerationExecute"
+                    data-parsley-required-message="{{messages.required}}"
+                    data-parsley-pattern="^\d{0,4}?$"
+                    data-parsley-pattern-message="Nhập số nguyên tối đa 4 chữ số"
+                    min="0"
+                    max="9999"
+                    data-parsley-range="[0,9999]"
+                    data-parsley-range-message="Nhập số nguyên tối đa 4 chữ số"
+                    class="md-input ng-isolate-scope md-input-processed" type="number" step="any"
+                    md-input/>
+        </div>
+    </div>
+</div>
+
+<!--line 13 - bơm dinh dưỡng thuỷ canh  - thời gian sục khí nghỉ-->
+<div class="uk-grid" ng-show="autoControl.type == 6">
+    <div class="uk-width-small-1-2"></div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Thời gian sục khí nghỉ (phút)</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-required="autoControl.type == 6"
+                    ng-model="autoControl.timeAerationStop"
+                    data-parsley-required-message="{{messages.required}}"
+                    data-parsley-pattern="^\d{0,4}?$"
+                    data-parsley-pattern-message="Nhập số nguyên tối đa 4 chữ số"
+                    min="0"
+                    max="9999"
+                    data-parsley-range="[0,9999]"
+                    data-parsley-range-message="Nhập số nguyên tối đa 4 chữ số"
+                    class="md-input ng-isolate-scope md-input-processed" type="number" step="any"
+                    md-input/>
+        </div>
+    </div>
+</div>
+
+<!--line 14- giờ kiểm tra cắt nắng - hoặc chiếu sáng-->
+<div class="uk-grid" ng-show="autoControl.type == 8 || autoControl.type == 9">
+    <div class="uk-width-small-1-1">
+        <h3><b>Giờ kiểm tra</b></h3>
+    </div>
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Từ</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input id="startTimeCutSun"
+                   ng-required="autoControl.type == 8 || autoControl.type == 9"
+                   data-parsley-required-message="{{ messages.required }}"
+                   name="startTimeCutSun"
+                   class="md-input"
+            />
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">Đến</label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input id="endTimeCutSun"
+                   ng-required="autoControl.type == 8 || autoControl.type == 9"
+                   data-parsley-required-message="{{ messages.required }}"
+                   name="endTimeCutSun"
+                   class="md-input"
+            />
+            <div class="parsley-errors-list filled" ng-show="invalidTimeEnd">
+                <span class="parsley-mess">Thời gian kết thúc lớn hơn thời gian bắt đầu</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--line 15- giờ kiểm tra nhiệt độ cắt nắng-->
+<div class="uk-grid" ng-if="autoControl.type == 8 || autoControl.type == 9">
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">
+                <span ng-if="autoControl.type == 8">Mở khi nhiệt độ <= (độ C)</span>
+                <span ng-if="autoControl.type == 9">Bật khi cường độ < (lux)</span>
+            </label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    id="turnOnWhen"
+                    ng-required="autoControl.type == 8 || autoControl.type == 9"
+                    ng-model="autoControl.turnOnWhen"
+                    data-parsley-required-message="{{messages.required}}"
+                    data-parsley-pattern="^\d{0,2}(\.\d{0,1})?$"
+                    data-parsley-pattern-message="Nhập số thập phân tối đa 2 chữ số phần nguyên, 1 chữ số phần thập phân"
+                    min="0"
+                    max="99.9"
+                    data-parsley-range="[0,99.9]"
+                    data-parsley-range-message="Nhập số thập phân tối đa 2 chữ số phần nguyên, 1 chữ số phần thập phân"
+                    data-parsley-type-message="Nhập số thập phân tối đa 2 chữ số phần nguyên, 1 chữ số phần thập phân"
+                    class="md-input ng-isolate-scope md-input-processed" type="number" step="0.1"
+                    md-input/>
+        </div>
+    </div>
+
+    <div class="uk-width-small-1-6">
+        <div class="custom-label">
+            <label class="label-bold custom-label ng-scope">
+                <span ng-if="autoControl.type == 8">Đóng khi nhiệt độ >= (độ C)</span>
+                <span ng-if="autoControl.type == 9">Tắt khi cường độ > (lux)</span>
+            </label>
+            <span class="req"> *</span>
+        </div>
+    </div>
+
+    <div class="uk-width-small-2-6">
+        <div class="parsley-row">
+            <input
+                    ng-required="autoControl.type == 8 || autoControl.type == 9"
+                    ng-model="autoControl.turnOffWhen"
+                    data-parsley-required-message="{{messages.required}}"
+                    data-parsley-pattern="^\d{0,2}(\.\d{0,1})?$"
+                    data-parsley-pattern-message="Nhập số thập phân tối đa 2 chữ số phần nguyên, 1 chữ số phần thập phân"
+                    min="0"
+                    max="99.9"
+                    data-parsley-range="[0,99.9]"
+                    data-parsley-range-message="Nhập số thập phân tối đa 2 chữ số phần nguyên, 1 chữ số phần thập phân"
+                    data-parsley-type-message="Nhập số thập phân tối đa 2 chữ số phần nguyên, 1 chữ số phần thập phân"
+                    data-parsley-gte="#turnOnWhen"
+                    data-parsley-gte-message="Nhiệt độ đóng phải lớn hơn nhiệt độ mở"
+                    class="md-input ng-isolate-scope md-input-processed" type="number" step="0.1"
+                    md-input/>
+        </div>
+    </div>
+</div>
+
+<!--giờ bơm - châm phân - mở quạt gió table-->
+<div class="uk-grid" ng-show="autoControl.type == 3 || autoControl.type == 4 || autoControl.type == 5 || autoControl.type == 7">
+    <div class="uk-width-medium-1-1">
+        <div ng-if="autoControl.type == 3 || autoControl.type == 4">
+            <h3><b>Cài đặt thời gian châm phân</b></h3>
+            <p>(Châm phân A,B và sục khí được bật đồng thời)</p>
+        </div>
+        <div ng-if="autoControl.type == 5">
+            <h3><strong>Giờ bơm</strong></h3>
+        </div>
+        <div ng-if="autoControl.type == 7">
+            <h3><strong>Giờ bật</strong></h3>
+        </div>
+    </div>
+
+    <div class="uk-width-medium-1-1">
+        <div class="uk-overflow-container uk-margin-bottom">
+            <table class="hoverTable uk-table uk-table-align-vertical uk-table-striped tablesorter tablesorter-altair table-fixed" id="automaticSchedules" style="width: 99%">
+                <thead >
+                <tr class="uk-table-nowrap">
+                    <th><b>Giờ</b></th>
+                    <th>
+                        <strong ng-if="autoControl.type == 3 || autoControl.type == 4">Thời gian bật bơm châm phân A (phút)</strong>
+                        <strong ng-if="autoControl.type == 5">Giờ bơm (phút)</strong>
+                        <strong ng-if="autoControl.type == 7">Giờ bật (phút)</strong>
+                    </th>
+                    <!-- bật quạt gió thì k cần field này-->
+                    <th ng-if="autoControl.type != 7">
+                        <strong ng-if="autoControl.type == 3 || autoControl.type == 4">Thời gian bật bơm châm phân B (phút)</strong>
+                        <strong ng-if="autoControl.type == 5">Thể tích (lít)</strong>
+                    </th>
+                    <th><b data-translate="device.field.action"></b></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in automaticSchedules">
+                    <td>
+                            <span ng-if="editAutomaticSchedulePos != $index">
+                                {{ item.timeSchedule | date : 'HH:mm' }}
+                            </span>
+                        <div class="parsley-row" ng-if="editAutomaticSchedulePos == $index">
+                            <input id="editTimeSchedule"
+                                   class="md-input"
+                                   name="editTimeSchedule"
+                                   ng-required="editAutomaticSchedule"
+                                   data-parsley-required-message="{{ messages.required }}" />
+                        </div>
+                    </td>
+                    <td>
+                        <span ng-if="editAutomaticSchedulePos != $index">{{ item.timeExecute }}</span>
+                        <div class="parsley-row" ng-if="editAutomaticSchedulePos == $index">
+                            <input
+                                    id="editTimeExecuteSchedule"
+                                    ng-if="autoControl.type == 3 || autoControl.type == 4 || autoControl.type == 5"
+                                    ng-model="newSchedule.timeExecute"
+                                    ng-required="editAutomaticSchedule"
+                                    data-parsley-required-message="{{messages.required}}"
+                                    data-parsley-pattern="^\d{0,2}?$"
+                                    data-parsley-pattern-message="{{messages.maxInteger2}}"
+                                    min="1"
+                                    max="60"
+                                    data-parsley-range="[1,60]"
+                                    data-parsley-range-message="Trường này có giá trị từ 1 đến 60"
+                                    class="md-input ng-isolate-scope md-input-processed" type="number" step="any"
+                                    md-input/>
+                            <input
+                                    id="editTimeExecuteSchedule2"
+                                    ng-if="autoControl.type == 7"
+                                    ng-model="newSchedule.timeExecute"
+                                    ng-required="editAutomaticSchedule"
+                                    data-parsley-required-message="{{messages.required}}"
+                                    data-parsley-pattern="^\d{0,4}?$"
+                                    data-parsley-pattern-message="Nhập số nguyên dương tối đa 4 chữ số"
+                                    min="1"
+                                    max="9999"
+                                    data-parsley-range="[1,9999]"
+                                    data-parsley-range-message="Nhập số nguyên dương tối đa 4 chữ số"
+                                    class="md-input ng-isolate-scope md-input-processed" type="number" step="any"
+                                    md-input/>
+                        </div>
+                    </td>
+                    <td ng-if="autoControl.type != 7">
+                        <div ng-if="autoControl.type == 3 || autoControl.type == 4">
+                            <span ng-if="editAutomaticSchedulePos != $index">{{ item.timeExecute2 }}</span>
+                            <div class="parsley-row" ng-if="editAutomaticSchedulePos == $index">
+                                <input
+                                        id="editTimeExecute2"
+                                        ng-model="newSchedule.timeExecute2"
+                                        ng-required="editAutomaticSchedule"
+                                        data-parsley-required-message="{{messages.required}}"
+                                        data-parsley-pattern="^\d{0,2}?$"
+                                        data-parsley-pattern-message="{{messages.maxInteger2}}"
+                                        min="1"
+                                        max="60"
+                                        data-parsley-range="[1,60]"
+                                        data-parsley-range-message="Trường này có giá trị từ 1 đến 60"
+                                        class="md-input ng-isolate-scope md-input-processed" type="number" step="any"
+                                        md-input/>
+                            </div>
+                        </div>
+                        <div ng-if="autoControl.type == 5">
+                            <span ng-if="editAutomaticSchedulePos != $index">{{ item.volume }}</span>
+                            <div class="parsley-row" ng-if="editAutomaticSchedulePos == $index">
+                                <input
+                                        id="editTimeExecute"
+                                        ng-model="newSchedule.volume"
+                                        ng-required="editAutomaticSchedule"
+                                        data-parsley-required-message="{{ messages.required }}"
+                                        data-parsley-pattern="^\d{0,10}?$"
+                                        data-parsley-pattern-message="Nhập số nguyên dương tối đa 10 chữ số"
+                                        data-parsley-min-message="{{ messages.greaterThanZero }}"
+                                        class="md-input ng-isolate-scope md-input-processed" type="number" step="any" min="1"
+                                        md-input/>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="text-align: center">
+                        <button ng-show="editAutomaticSchedulePos != $index"
+                                class="md-btn md-btn-primary md-btn-small"
+                                title="Bấm vào đây để sửa lịch bơm"
+                                ng-click="onEditSchedule($event, $index)"><i class="uk-icon-pencil uk-icon-small"></i>
+                        </button>
+                        <button ng-show="editAutomaticSchedulePos == $index" class="md-btn md-btn-primary md-btn-small custom-no-left-right"
+                                ng-click="saveSchedule($event, $index)" title="Bấm vào đây để Lưu">
+                            <i class="uk-icon-save uk-icon-small "></i>
+                        </button>
+                        <button ng-show="editAutomaticSchedulePos != $index"
+                                class="md-btn md-btn-small"
+                                title="Bấm vào đây để Xóa lịch bơm"
+                                ng-click="deleteSchedule($index)"><i class="uk-icon-trash uk-icon-small"></i>
+                        </button>
+                        <button ng-show="editAutomaticSchedulePos == $index"
+                                class="md-btn md-btn-small custom-no-left-right"
+                                ng-click="cancelSchedule($event, false)" title="Bấm vào đây để Hủy">
+                            <span data-translate="global.button.cancel"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr ng-show="addAutomaticSchedule">
+                    <td>
+                        <div class="parsley-row">
+                            <input id="timeSchedule"
+                                   class="md-input"
+                                   name="timeSchedule"
+                                   ng-required="addAutomaticSchedule"
+                                   data-parsley-required-message="{{ messages.required }}"
+                            />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="parsley-row">
+                            <input
+                                    id="addTimeExecuteSchedule"
+                                    ng-if="autoControl.type == 3 || autoControl.type == 4 || autoControl.type == 5"
+                                    ng-model="newSchedule.timeExecute"
+                                    ng-required="addAutomaticSchedule"
+                                    data-parsley-required-message="{{messages.required}}"
+                                    data-parsley-pattern="^\d{0,2}?$"
+                                    data-parsley-pattern-message="{{messages.maxInteger2}}"
+                                    min="1"
+                                    max="60"
+                                    data-parsley-range="[1,60]"
+                                    data-parsley-range-message="Trường này có giá trị từ 1 đến 60"
+                                    class="md-input ng-isolate-scope md-input-processed" type="number" step="any"
+                                    md-input/>
+                            <input
+                                    id="addTimeExecuteSchedule2"
+                                    ng-if="autoControl.type == 7"
+                                    ng-model="newSchedule.timeExecute"
+                                    ng-required="addAutomaticSchedule"
+                                    data-parsley-required-message="{{messages.required}}"
+                                    data-parsley-pattern="^\d{0,4}?$"
+                                    data-parsley-pattern-message="Nhập số nguyên dương tối đa 4 chữ số"
+                                    min="1"
+                                    max="9999"
+                                    data-parsley-range="[1,9999]"
+                                    data-parsley-range-message="Nhập số nguyên dương tối đa 4 chữ số"
+                                    class="md-input ng-isolate-scope md-input-processed" type="number" step="any"
+                                    md-input/>
+                        </div>
+                    </td>
+                    <td ng-if="autoControl.type != 7">
+                        <div class="parsley-row" ng-if="autoControl.type == 3 || autoControl.type == 4">
+                            <input
+                                    id="addtimeExecute2"
+                                    ng-model="newSchedule.timeExecute2"
+                                    ng-required="addAutomaticSchedule"
+                                    data-parsley-required-message="{{messages.required}}"
+                                    data-parsley-pattern="^\d{0,2}?$"
+                                    data-parsley-pattern-message="{{messages.maxInteger2}}"
+                                    min="1"
+                                    max="60"
+                                    data-parsley-range="[1,60]"
+                                    data-parsley-range-message="Trường này có giá trị từ 1 đến 60"
+                                    class="md-input ng-isolate-scope md-input-processed" type="number" step="any"
+                                    md-input/>
+                        </div>
+                        <div class="parsley-row" ng-if="autoControl.type == 5">
+                            <input
+                                    id="volume"
+                                    ng-model="newSchedule.volume"
+                                    ng-required="addAutomaticSchedule"
+                                    data-parsley-required-message="{{ messages.required }}"
+                                    data-parsley-pattern="^\d{0,10}?$"
+                                    data-parsley-pattern-message="Nhập số nguyên dương tối đa 10 chữ số"
+                                    data-parsley-min-message="{{ messages.greaterThanZero }}"
+                                    class="md-input ng-isolate-scope md-input-processed" type="number" min="1" step="any"
+                                    md-input/>
+                        </div>
+                    </td>
+                    <td style="text-align: center">
+                        <button class="md-btn md-btn-primary md-btn-small custom-no-left-right"
+                                ng-click="saveSchedule($event)" title="Bấm vào đây để Lưu">
+                            <i class="uk-icon-save uk-icon-small "></i>
+                        </button>
+                        <button type="button"
+                                class="md-btn md-btn-small custom-no-left-right" ng-click="cancelSchedule($event, true)"
+                                title="Bấm vào đây để Hủy"><span data-translate="global.button.cancel"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5" ng-if="!editAutomaticSchedule">
+                        <a ng-click="onAddSchedule()">
+                            <span ng-if="autoControl.type == 3 || autoControl.type == 4">Thêm giờ</span>
+                            <span ng-if="autoControl.type == 5">Thêm giờ bơm</span>
+                            <span ng-if="autoControl.type == 7">Thêm giờ bật</span>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

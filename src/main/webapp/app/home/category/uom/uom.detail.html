@@ -1,0 +1,162 @@
+<div id="page_content">
+    <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+        <div class="heading_actions action-padding-top">
+        </div>
+        <span class="route-header">
+            <a class="uk-text-primary" ui-sref="category" data-translate="admin.menu.master"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+            <a class="uk-text-primary" ui-sref="uoms" data-translate="admin.uom.list"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+            <span title="{{uom.name}}">{{uom.subName}}</span>
+        </span>
+        <br/>
+        <div class="uk-margin-small-top">
+            <!--<button ng-click="submit()" type="submit" class="md-btn md-btn-primary md-btn-small"><span class="uk-text-bold" data-translate="global.button.save"></span></button>-->
+            <a has-any-authority="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Uom_Update" ui-sref="uoms-edit({uomId: uom.id })"
+                class="md-btn md-btn-small md-btn-primary" ng-if="!uom.isDefault">
+                <span class="uk-text-bold" data-translate="global.button.edit"></span>
+            </a>
+            <a has-any-authority="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Uom_Create" ui-sref="uoms-create"
+               class="md-btn md-btn-small md-btn-primary"><span class="uk-text-bold" data-translate="global.button.create"></span></a>
+        </div>
+    </div>
+    <div id="page_content_inner">
+        <jhi-alert></jhi-alert><modal-alert></modal-alert>
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-grid" data-uk-grid-margin="">
+
+                    <!-- loai don vi-->
+                    <div class="uk-width-medium-1-1 uk-row-first">
+                        <div class="uk-grid">
+                            <div class="uk-width-small-2-10">
+                                <label class="label-bold title-organization" for="name" data-translate="admin.uomType.column.type"></label>
+                                <span class="req"> (*)</span>
+                            </div>
+
+                                <div class="uk-width-small-6-10">
+                                    <input
+                                            ng-readonly="true"
+                                            ng-model="uom.uomType.name" type="text" name="name" id="uomType" required=""
+                                            class="md-input ng-isolate-scope md-input-processed" md-input="">
+                                    <span class="md-input-bar "></span>
+                                </div>
+
+                        </div>
+
+                    </div>
+
+                    <!--ten-->
+                    <div class="uk-width-medium-1-1 uk-row-first">
+                        <div class="uk-grid">
+                            <div class="uk-width-small-2-10">
+                                <label class="label-bold title-organization" for="name" data-translate="admin.uomType.column.name"></label>
+                                <span class="req"> (*)</span>
+                            </div>
+                            <div class="uk-width-small-6-10">
+                                <input
+                                       ng-model="uom.subName" title="{{uom.name}}" type="text" name="name" id="name" required=""
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="" ng-readonly="true">
+                                <span class="md-input-bar "></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- pronunciation -->
+                    <div class="uk-width-medium-1-1 uk-row-first">
+                        <div class="uk-grid">
+                            <div class="uk-width-small-2-10">
+                                <label class="label-bold title-organization" for="description" data-translate="admin.uom.column.pronunciation"><span
+                                        class="req"> *</span></label>
+                            </div>
+                            <div class="uk-width-small-6-10">
+                                <input
+                                       ng-model="uom.pronunciation"
+                                       type="text" name="pronunciation"
+                                       id="pronunciation" required=""
+                                       class="md-input ng-isolate-scope md-input-processed"
+                                       md-input=""
+                                       ng-readonly="true">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- unit bacis-->
+                    <div class="uk-width-medium-1-1 uk-row-first">
+                        <div class="uk-grid">
+                            <div class="uk-width-small-2-10">
+                                <label class="label-bold title-organization" for="description" data-translate="admin.uom.column.isBasis"></label>
+                            </div>
+                            <div class="uk-width-small-6-10"  style="margin-top: 15px">
+                                <input
+                                        id="type"
+                                        type="checkbox"
+                                        class="ts_checkbox"
+                                        data-md-icheck icheck ng-model="uom.type"
+                                        ng-disabled="true">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- hệ số chuyển đổi -->
+                    <div class="uk-width-medium-1-1 uk-row-first">
+                        <div class="uk-grid">
+                            <div class="uk-width-small-2-10">
+                                <label class="label-bold title-organization" for="description" data-translate="admin.uom.column.conversionFactor"></label>
+                                <span class="req"> (*)</span>
+                            </div>
+                            <div class="uk-width-small-3-10">
+                                <input
+                                       ng-model="uom.conversionFactor"
+                                       type="text" name="conversionFactor"
+                                       id="conversionFactor" required=""
+                                       class="md-input ng-isolate-scope md-input-processed"
+                                       md-input=""
+                                       ng-readonly="true">
+                            </div>
+
+                            <div class="uk-width-small-2-10" ng-if="!uom.type">
+                                <label class="label-bold title-organization" for="description" data-translate="admin.uom.column.basis"></label>
+                                <span class="req"> (*)</span>
+                            </div>
+                            <div class="uk-width-small-3-10" ng-if="!uom.type">
+                                <input
+                                        ng-if="!uom.baseUnit"
+                                        ng-model="uom.baseUnit" type="text" name="name"
+                                        class="md-input ng-isolate-scope md-input-processed" md-input=""
+                                        ng-disabled="true">
+                                <input
+                                        ng-if="uom.baseUnit"
+                                        ng-model="uom.baseUnit.name" type="text" id="base"
+                                        class="md-input ng-isolate-scope md-input-processed" md-input=""
+                                        ng-readonly="true">
+                                <span class="md-input-bar "></span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- description -->
+                    <div class="uk-width-medium-1-1 uk-row-first">
+                        <div class="uk-grid">
+                            <div class="uk-width-small-2-10">
+                                <label class="label-bold title-organization" for="description" data-translate="admin.uom.column.description"><span
+                                        class="req"> *</span></label>
+                            </div>
+                            <div class="uk-width-small-6-10">
+                                <textarea
+                                        style="border-width: 1px 1px 1px;"
+                                        ng-model="uom.description"
+                                        type="text" name="description"
+                                        id="description"
+                                        class="md-input ng-isolate-scope md-input-processed"
+                                        md-input=""
+                                        readonly=""></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

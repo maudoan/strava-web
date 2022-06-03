@@ -1,0 +1,24 @@
+{
+  "sscc": {
+    "button": {
+      "generate" : "Sinh mã"
+    },
+    "table": {
+      "product": "Sản phẩm",
+      "ssccNumber":"Số SSCC"
+    },
+    "label": {
+      "sscc": "SSCC",
+      "pageTitle": "Danh sách SSCC",
+      "detailTitle": "Chi tiết SSCC",
+      "createPage": "Tạo mới",
+      "list": "Danh sách SSCC",
+      "ssccNumber": "Số SSCC",
+      "gsin": "GSIN",
+      "gtin": "GTIN",
+      "gln": "GLN",
+      "status": "Trạng thái",
+      "quantity": "Số lượng SP/Bao gói"
+    }
+  }
+}

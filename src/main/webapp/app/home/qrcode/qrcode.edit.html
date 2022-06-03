@@ -1,0 +1,137 @@
+<div id="page_content">
+	<form name="form_qrcode_update" id="form_qrcode_update" class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+		<div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <span class="route-header">
+                <a class="uk-text-primary" ui-sref="qrCode" data-translate="admin.menu.qrCode"></a>&nbsp;<i
+				class="uk-icon-arrow-circle-right"></i>
+                <a class="uk-text-primary" ui-sref="qrCode" data-translate="qrCode.list"></a>&nbsp;<i
+				class="uk-icon-arrow-circle-right"></i>
+                <span data-translate="global.button.edit"></span>
+            </span>
+			<br/>
+			<div class="uk-margin-small-top">
+				<button ng-click="submit(false)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+					class="uk-text-bold" data-translate="global.button.save"></span></button>
+				<button ng-click="submit(true)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+					class="uk-text-bold" data-translate="global.button.saveAndClose"></span></button>
+				<a ui-sref="qrCode" class="md-btn md-btn-small"><span class="uk-text-bold"
+																	  data-translate="global.button.cancel"></span></a>
+			</div>
+		</div>
+		<div id="page_content_inner">
+			<jhi-alert></jhi-alert>
+			<modal-alert></modal-alert>
+			<div class="md-card">
+				<div class="md-card-content">
+					<div class="uk-grid "data-uk-grid-margin="">
+						<div class="uk-width-medium-8-10">
+							<div class="uk-grid ">
+								<div class="uk-width-small-1-3 uk-width-medium-1-6">
+									<div class="custom-label">
+										<label class="label-bold custom-label ng-scope" data-translate="qrCode.field.area"></label>
+										<span class="req">*</span>
+									</div>
+								</div>
+								<div class=" uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+									<input id="area_combobox" name="area_combobox"
+										   ng-required="true"
+										   data-parsley-required-message="{{'admin.messages.required' | translate}}"
+										   data-parsley-trigger="focusin focusout"
+										   position="bottom"
+										   config="ComboBox['area_combobox'].config"
+										   options="ComboBox['area_combobox'].options"
+										   ng-model="qrCode.areaId"
+										   table="ComboBox['area_combobox'].table"
+										   column="ComboBox['area_combobox'].column"
+										   ng-change="onChangeArea(isFirstLoad)"
+										   ng-model-object="selectedCbb.area"
+										   scope-controller="ComboBox['area_combobox'].scope" selectize>
+								</div>
+								<div class="uk-width-small-3-3 uk-width-medium-3-6"></div>
+							</div>
+							
+							<div class="uk-grid ">
+								<div class="uk-width-small-1-3 uk-width-medium-1-6">
+									<div class="custom-label">
+										<label class="label-bold custom-label ng-scope" data-translate="qrCode.field.season"></label>
+										<span class="req">*</span>
+									</div>
+								</div>
+								
+								<div class="uk-width-small-2-3  uk-width-medium-2-6 parsley-row" ng-if="!qrCode.areaId">
+									<input readonly
+										   ng-model="qrCode.seasonId"
+										   ng-required="true"
+										   data-parsley-required-message="{{'admin.messages.required' | translate}}"
+										   class="md-input ng-isolate-scope md-input-processed" type="text"
+										   md-input/>
+								</div>
+								
+								<div class="uk-width-small-2-3  uk-width-medium-2-6 parsley-row" ng-if="qrCode.areaId">
+									<input
+										id="season_combobox" name="season_combobox"
+										ng-required="true"
+										data-parsley-required-message="{{'admin.messages.required' | translate}}"
+										data-parsley-trigger="focusin focusout"
+										position="bottom"
+										config="ComboBox['season_combobox'].config"
+										options="ComboBox['season_combobox'].options"
+										ng-model="qrCode.seasonId"
+										table="ComboBox['season_combobox'].table"
+										column="ComboBox['season_combobox'].column"
+										ng-model-object="cbbSelected.season"
+										ng-change="onChangeSeason()"
+										scope-controller="ComboBox['season_combobox'].scope" selectize>
+								</div>
+								
+								<div class="uk-width-small-1-3 uk-width-medium-1-6">
+									<div class="custom-label">
+										<label class="label-bold custom-label ng-scope" data-translate="qrCode.field.season_code"></label>
+									</div>
+								</div>
+								<div class="uk-width-small-2-3 uk-width-medium-2-6">
+									<input readonly
+										   ng-model="seasonCode"
+										   class="md-input ng-isolate-scope md-input-processed" type="text"
+										   md-input/>
+								</div>
+							</div>
+							
+							<div class="uk-grid ">
+								<div class="uk-width-small-1-3 uk-width-medium-1-6">
+									<div class="custom-label">
+										<label class="label-bold custom-label ng-scope" data-translate="qrCode.field.product"></label>
+									</div>
+								
+								</div>
+								<div class=" uk-width-small-2-3  uk-width-medium-2-6 parsley-row">
+									<input readonly
+										   ng-model="productName"
+										   class="md-input ng-isolate-scope md-input-processed" type="text"
+										   md-input/>
+								</div>
+								
+								<div class="uk-width-small-1-3 uk-width-medium-1-6">
+									<div class="custom-label">
+										<label class="label-bold custom-label ng-scope" data-translate="qrCode.field.packaging_date"></label>
+										<span class="req">*</span>
+									</div>
+								</div>
+								<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+									<input id="packagingDate"
+										   name="packagingDate"
+										   class="md-input"
+										   ng-required="true"
+										   data-parsley-required-message="{{'admin.messages.required' | translate}}"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		</div>
+	</form>
+
+</div>

@@ -1,0 +1,125 @@
+<div id="page_content" class="pageDetail">
+    <form name="form_create_area" id="form_create_area"
+          class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+        <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <span class="route-header">
+                <a class="uk-text-primary" ui-sref="alarm-history" data-translate="admin.menu.alarm.name"></a>&nbsp;<i
+                    class="uk-icon-arrow-circle-right"></i>
+                <a class="uk-text-primary" ui-sref="alarm-history" data-translate="alarm.history"></a>&nbsp;<i
+                    class="uk-icon-arrow-circle-right"></i>
+                <span>{{alarm.alarmName}}</span>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+                <span data-translate="global.button.detail"></span>
+            </span>
+
+            <br/>
+        </div>
+
+        <div id="page_content_inner">
+            <jhi-alert></jhi-alert>
+            <modal-alert></modal-alert>
+            <div class="md-card">
+                <div class="md-card-content">
+                    <div class="uk-grid ">
+                        <div class="uk-width-medium-1-6 text-padding-top">
+                            <label class="uk-text-bold" data-translate="alarm.fieldHis.farm"></label>
+                        </div>
+                        <div class="uk-width-medium-3-6 parsley-row">
+                            <input
+                                    readonly
+                                    ng-model="alarm.farmName"  type="text"
+                                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+                        </div> 
+                    </div>
+                    
+                    <div class="uk-grid ">
+                        <div class="uk-width-medium-1-6 text-padding-top">
+                            <label class="uk-text-bold" data-translate="alarm.fieldHis.area"></label>
+                        </div>
+                        <div class="uk-width-medium-3-6 parsley-row">
+                            <input
+                                    readonly
+                                    ng-model="alarm.areaName"  type="text"
+                                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+                        </div> 
+                    </div>
+                    
+                    <div class="uk-grid ">
+                        <div class="uk-width-medium-1-6 text-padding-top">
+                            <label class="uk-text-bold" data-translate="alarm.fieldHis.name"></label>
+                        </div>
+                        <div class="uk-width-medium-3-6 parsley-row">
+                            <input
+                                    readonly
+                                    ng-model="alarm.alarmName"  type="text"
+                                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+                        </div> 
+                    </div>
+                    
+                    <div class="uk-grid ">
+                        <div class="uk-width-medium-1-6 text-padding-top">
+                            <label class="uk-text-bold" data-translate="alarm.fieldHis.belongGW"></label>
+                        </div>
+                        <div class="uk-width-medium-3-6 parsley-row">
+                            <input
+                                    readonly
+                                    ng-model="alarm.gatewayName"  type="text"
+                                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+                        </div> 
+                    </div>
+                    
+                    <div class="uk-grid ">
+                        <div class="uk-width-medium-1-6 text-padding-top">
+                            <label class="uk-text-bold" data-translate="alarm.fieldHis.device"></label>
+                        </div>
+                        <div class="uk-width-medium-3-6 parsley-row">
+                            <input
+                                    readonly
+                                    ng-model="alarm.deviceName"  type="text"
+                                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+                        </div> 
+                    </div>
+                    
+                    <div class="uk-grid ">
+                        <div class="uk-width-medium-1-6 text-padding-top">
+                            <label class="uk-text-bold" data-translate="alarm.fieldHis.value"></label>
+                        </div>
+                        <div class="uk-width-medium-3-6 parsley-row">
+                            <input
+                                    readonly
+                                    ng-model="alarm.currentValue"  type="text"
+                                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+                        </div> 
+                    </div>
+                    
+                    <div class="uk-grid ">
+                        <div class="uk-width-medium-1-6 text-padding-top">
+                            <label class="uk-text-bold" data-translate="alarm.fieldHis.content"></label>
+                        </div>
+                        <div class="uk-width-medium-4-6 parsley-row">
+                            <textarea
+                                        style="border-width: 1px 1px 1px;"
+                                        ng-model="alarm.content"
+                                        type="text" name="description"
+                                        id="content"
+                                        class="md-input ng-isolate-scope md-input-processed"
+                                        md-input=""
+                                        readonly=""></textarea>
+                        </div> 
+                    </div>
+                    
+                    <div class="uk-grid ">
+                        <div class="uk-width-medium-1-6 text-padding-top">
+                            <label class="uk-text-bold" data-translate="alarm.fieldHis.method"></label>
+                        </div>
+                        <div class="uk-width-medium-3-6 text-padding-top">
+                            <span ng-if="alarm.emailUsed">EMAIL</span>
+                            <span ng-if="alarm.onsiteUsed"> <span ng-if="alarm.emailUsed">, </span>ONSITE</span>
+                            <span ng-if="alarm.smsUsed"> <span ng-if="alarm.emailUsed || alarm.onsiteUsed">, </span>SMS</span>
+                        </div> 
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

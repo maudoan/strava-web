@@ -1,0 +1,34 @@
+<div class="uk-grid">
+    <div class="uk-width-medium-1-1">
+        <ul class="uk-tab" data-uk-tab="{connect:'#tabs_anim1', swiping:false}" id="js-control">
+            <li ng-click="clickTab(1)" class="uk-active">
+                <a href="#"><h4 class="heading_a" data-translate="">Danh sách thiết bị trong gói cước</h4></a>
+            </li>
+        </ul>
+        <ul id="tabs_anim1" class="uk-switcher uk-margin" style="overflow: visible !important;">
+            <!--Danh sách thiết bị-->
+            <li class="uk-active">
+                <div class="uk-overflow-container uk-margin-bottom table-height-fixed">
+                    <table class="hoverTable uk-table uk-table-align-vertical uk-table-striped uk-table-nowrap tablesorter tablesorter-altair " id="serviceDevices">
+                        <thead>
+                        <tr>
+                            <th><b>STT</b></th>
+                            <th><b>UID</b></th>
+                            <th><b>Dòng thiết bị</b></th>
+                            <th><b>Model</b></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in serviceDevices track by $index" on-last-repeat ng-class="{'hoverRow': !user.unRemove, 'custom-un-remove': user.unRemove}" title="{{user.unRemove}}">
+                            <td>{{$index + 1}}</td>
+                            <td>{{obj.device.uid}}</td>
+                            <td>{{obj.deviceModel.name}}</td>
+                            <td>{{obj.device.modelCode}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

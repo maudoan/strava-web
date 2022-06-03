@@ -1,0 +1,283 @@
+<div id="page_content">
+    <form name="form_createuser" id="form_createuser" class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+        <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }" class="header-fixed">
+        <span class="route-header">
+            <a class="uk-text-primary" >Quản lý thiết bị</a> <i class="uk-icon-arrow-circle-right"></i>
+            <span ng-if="page==0">Thiết bị</span>
+            <span ng-if="page==1">
+                <a class="uk-text-primary" ng-click="back()">Thiết bị</a>
+                <i class="uk-icon-arrow-circle-right"></i> <span> {{user.code}}</span>
+            </span>
+            <span ng-if="page==2">
+                <a class="uk-text-primary" ng-click="back()">Thiết bị</a>
+                <i class="uk-icon-arrow-circle-right"></i><span> {{user.code}}</span>
+                 <i class="uk-icon-arrow-circle-right"></i><span> Sửa</span>
+            </span>
+            <span ng-if="page==3">
+                <a class="uk-text-primary" ng-click="back()">Thiết bị</a>
+                <i class="uk-icon-arrow-circle-right"></i><span> {{device.name}}</span>
+            </span>
+
+        </span>
+            </br>
+            <div class="uk-margin-small-top">
+                <button ng-show="page==0" class="md-btn md-btn-small" ng-click="refresh()">Làm mới</button>
+                <button ng-show="page==1 || page==3" class="md-btn md-btn-small" ng-click="back()">Quay lại</button>
+                <button ng-show="page==1" has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_SYSTEM_USER,Customer_Edit" class="md-btn md-btn-small md-btn-primary" ng-click="edit()">Sửa</button>
+                <button ng-show="page==2 && !btnDisable" has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_SYSTEM_USER,Customer_Edit" class="md-btn md-btn-small md-btn-primary" ng-click="submit(false)">Lưu</button>
+                <button ng-show="page==2 && !btnDisable" has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_SYSTEM_USER,Customer_Edit" class="md-btn md-btn-small md-btn-primary" ng-click="submit(true)">Lưu & Đóng</button>
+                <button ng-show="page==2" class="md-btn md-btn-small" ng-click="back()">Hủy</button>
+                <user-active ng-if="page==1" has-any-authority="ROLE_SYSTEM_ADMIN,ROLE_SYSTEM_USER,ROLE_FARM_ADMIN, Customer_Change_Status" style="float: right"
+                             model="user"
+                             is-current-user="isCurrentUser"
+                             activate-service="CbxActivate.activateService"
+                             deactivate-service="CbxActivate.deactivateService">
+                </user-active>
+            </div>
+        </div>
+        <div id="page_content_inner">
+            <jhi-alert></jhi-alert><modal-alert></modal-alert>
+            <div ng-show="page==0" class="md-card">
+                <div class="md-card-content">
+                    <div class="uk-grid" data-uk-grid-margin="">
+                        <div class="uk-width-small-1-5">
+                            <b>Khu vực</b>
+                            <input id="areaId" name="area"
+                                   position="bottom"
+                                   config="ComboBox['area'].config"
+                                   options="ComboBox['area'].options"
+                                   ng-model="input.areaIds"
+                                   table="ComboBox['area'].table"
+                                   column="ComboBox['area'].column"
+                                   scope-controller="ComboBox['area'].scope" selectize>
+
+                        </div>
+                        <div class="uk-width-small-1-5">
+                            <b>SĐT</b>
+                            <input id="phonex" name="phonex"
+                                   position="bottom"
+                                   config="ComboBox['phone'].config"
+                                   options="ComboBox['code'].options"
+                                   ng-model="input.userId"
+                                   table="ComboBox['phone'].table"
+                                   column="ComboBox['phone'].column"
+                                   scope-controller="ComboBox['phone'].scope" selectize>
+                        </div>
+                        <div class="uk-width-small-1-5">
+                            <b>Tên thiết bị</b>
+                            <input
+                                    ng-model="input.deviceName"
+                                    id="deviceName"
+                                    name="deviceName"
+                                    placeholder="nhập tên thiết bị..."
+                                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+                        </div>
+                        <div class="uk-width-small-1-5">
+                            <b>Dòng thiết bị</b>
+                            <input id="model" name="model"
+                                   position="bottom"
+                                   config="ComboBox['model'].config"
+                                   options="ComboBox['model'].options"
+                                   ng-model="input.deviceModelIds"
+                                   table="ComboBox['model'].table"
+                                   column="ComboBox['model'].column"
+                                   scope-controller="ComboBox['model'].scope" selectize>
+                        </div>
+                        <div class="uk-width-small-1-5">
+                            <b>Danh sách</b>
+                            <input id="selec_adv_2"
+                                   config="selectize_roles_config"
+                                   options="selectize_roles_options"
+                                   position="bottom"
+                                   ng-model="input.hasDevice"
+                                   selectize="">
+                        </div>
+                    </div>
+                    <div class="uk-grid" data-uk-grid-margin="">
+                        <div class="uk-width-small-1-5">
+                            <b>Mã khách hàng</b>
+                            <input id="code" name="code"
+                                   position="bottom"
+                                   config="ComboBox['code'].config"
+                                   options="ComboBox['code'].options"
+                                   ng-model="input.userId"
+                                   table="ComboBox['code'].table"
+                                   column="ComboBox['code'].column"
+                                   scope-controller="ComboBox['code'].scope" selectize>
+
+                        </div>
+                        <div class="uk-width-small-1-5">
+                            <b>Email</b>
+                            <input id="e3" name="e3"
+                                   position="bottom"
+                                   config="ComboBox['email'].config"
+                                   options="ComboBox['code'].options"
+                                   ng-model="input.userId"
+                                   table="ComboBox['email'].table"
+                                   column="ComboBox['email'].column"
+                                   scope-controller="ComboBox['email'].scope" selectize>
+                        </div>
+                        <div class="uk-width-small-1-5">
+                            <b>UID</b>
+                            <input
+                                    ng-model="input.uid"
+                                    id="uid"
+                                    name="uid"
+                                    placeholder="nhập uid..."
+                                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+                        </div>
+                        <div class="uk-width-small-1-5">
+                            <b>Trạng thái</b>
+                            <input id="selec_adv_3"
+                                   config="selectize_active_config"
+                                   options="selectize_active_options"
+                                   position="bottom"
+                                   placeholder="nhập trạng thái..."
+                                   ng-model="input.actives"
+                                   selectize="">
+                        </div>
+                        <div class="uk-width-small-1-5">
+                            <b>Ngày kích hoạt</b>
+                            <input id="activeDatePicker"
+                                   placeholder="nhập ngày kích hoạt..."
+                                   style="width: 100%;"/>
+                        </div>
+
+                    </div>
+                    <div class="uk-grid" data-uk-grid-margin="">
+                        <div class="uk-width-small-1-5">
+                            <button id="searchBtn" class="md-btn md-btn-small md-btn-primary" ng-click="search()" type="submit">Tìm kiếm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="page==0" class="md-card">
+                <div class="md-card-content">
+
+                    <div class="uk-overflow-container uk-margin-bottom table-height-fixed">
+                        <table class="hoverTable uk-table uk-table-align-vertical  uk-table-nowrap tablesorter tablesorter-altair table-fixed" id="users">
+                            <thead>
+                            <tr>
+<!--                                <th data-name="Select"><input type="checkbox" class="ts_checkbox_all"></th>-->
+                                <th><b>STT</b></th>
+                                <th><th-content table="TABLES['users']" label="'Mã KH'"         column="'code'"></th-content></th>
+                                <th><th-content table="TABLES['users']" label="'Số ĐT'"         column="'fullName'"></th-content></th>
+                                <th><th-content table="TABLES['users']" label="'Email'"         column="'email'"></th-content></th>
+                                <th><th-content table="TABLES['users']" label="'Khu vực'"       column="'areaId'"></th-content></th>
+                                <th><th-content table="TABLES['users']" label="'Ngày đăng ký'"  column="'created'"></th-content></th>
+                                <th><th-content table="TABLES['users']" label="'Trạng thái'"    column="'active'"></th-content></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat-start="user in users" on-last-repeat ng-class="{'hoverRow': !user.unRemove, 'custom-un-remove': user.unRemove}" title="{{user.unRemove}}">
+<!--                                <td><input ng-disabled="user.active == 1" id="{{user.id}}" type="checkbox" class="ts_checkbox" data-md-icheck icheck ng-model="row_select"></td>-->
+                                <td>
+                                    {{ $index + 1 + TABLES['users'].selectize_pageNum*TABLES['users'].param_current_page}}
+                                </td>
+                                <td>
+                                    <span  do-not-have-authority="ROLE_SYSTEM_ADMIN, ROLE_SYSTEM_USER, Customer_View_Detail">{{user.code}}</span>
+                                    <a  has-any-authority="ROLE_SYSTEM_ADMIN, ROLE_SYSTEM_USER, Customer_View_Detail" ng-click="selectCustomer($index,user)">{{user.code}}</a>
+                                    <span ng-if="!user.expand" class="material-icons md-icon float-right" ng-click="expand($index)">keyboard_arrow_right</span>
+                                    <span ng-if="user.expand" class="material-icons md-icon float-right" ng-click="collapse($index)">keyboard_arrow_down</span>
+                                </td>
+                                <td>{{user.username}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.area}}</td>
+                                <td>{{user.created | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+                                <td>
+                                    <span ng-if="user.active == 0" class="uk-badge uk-badge-danger" data-translate="global.common.archived"></span>
+                                    <span ng-if="user.active == 1" class="uk-badge uk-badge-success" data-translate="global.common.active"></span>
+                                    <span ng-if="user.active == 2" class="uk-badge uk-badge-warning" data-translate="global.common.register"></span>
+                                    <span ng-if="user.active == 3" class="uk-badge uk-badge-muted" data-translate="global.common.deleted"></span>
+                                </td>
+
+                            </tr>
+                            <tr ng-if="user.expand && user.devices" class="hoverRow" style="background: lightgrey">
+                                <td style="border: none !important; background: white !important;"></td>
+                                <td><b>Tên thiết bị</b></td>
+                                <td><b>UID</b></td>
+                                <td><b>Dòng thiết bị</b></td>
+                                <td><b>Ngày kích hoạt</b></td>
+                                <td><b>Vị trí lắp đặt</b></td>
+                                <td><b>Trạng thái kết nối</b></td>
+                            </tr>
+                            <tr ng-if="user.expand && !user.devices">
+                                <td colspan="7" style="text-align: center"><i style="color: #303030">Chưa có thiết bị</i></td>
+                            </tr>
+                            <tr ng-repeat-start="device in user.devices" ng-if="user.expand" class="hoverRow" style="background: rgba(211,211,211,0.33)">
+                                <td style="border: none !important; background: white !important;"></td>
+
+                                <td>
+                                    <a has-any-authority="ROLE_SYSTEM_ADMIN, ROLE_SYSTEM_USER, Device_View_Detail" ng-click="selectDevice($index,device,user)">{{device.name}}</a>
+                                    <span do-not-have-authority="ROLE_SYSTEM_ADMIN, ROLE_SYSTEM_USER, Device_View_Detail" >{{device.name}}</span>
+                                </td>
+                                <td>{{device.uid}}</td>
+                                <td>{{device.deviceModelName}}</td>
+                                <td>{{device.activeDate | date: 'dd-MM-yyyy'}}</td>
+                                <td>{{device.areaName}}</td>
+                                <!-- là camera thì fake-->
+                                <td ng-if="device.type == 1">
+                                    <span class="uk-badge uk-badge-success">Kết nối</span>
+                                </td>
+<!--                                 là Gareway và thiết bị con thì lấy theo trường status-->
+                                <td ng-if="device.type != 1">
+                                    <span ng-if="device.status == 2" class="uk-badge uk-badge-success">Kết nối</span>
+                                    <span ng-if="device.status != 2" class="uk-badge uk-badge-danger">Không kết nối</span>
+                                </td>
+                            </tr>
+
+                            <tr ng-repeat-end></tr>
+                            <tr ng-repeat-end></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="ts_pager" id="table_user_pager">
+                        <ul class="uk-pagination ts_pager">
+                            <li ng-click="selectPageClickHandle()" data-uk-tooltip title="{{selectPage}}">
+                                <input ng-change="selectPageHandle('users')" id="user_selectize_page" type="text"
+                                       config="TABLES['users'].selectize_page_config" options="TABLES['users'].selectize_page_options"
+                                       ng-model="TABLES['users'].selectize_page" name="TABLES['users'].selectize_page" selectize>
+                            </li>
+                            <li><a href="javascript:void(0)" class="firstPage" ng-click="handleFirstPage('users')"><i class="uk-icon-angle-double-left"></i></a></li>
+                            <li><a href="javascript:void(0)" class="prevPage" ng-click="handlePreviousPage('users')"><i class="uk-icon-angle-left"></i></a></li>
+                            <li><span class="pageDisplay"></span></li>
+                            <li><a href="javascript:void(0)" class="nextPage" ng-click="handleNextPage('users')"><i class="uk-icon-angle-right"></i></a></li>
+                            <li><a href="javascript:void(0)" class="lastPage" ng-click="handleLastPage('users')"><i class="uk-icon-angle-double-right"></i></a></li>
+                            <li data-uk-tooltip title="{{pageSize}}">
+                                <input ng-change="selectPageNumHandle('users')" id="user_selectize_pageNum" type="text"
+                                       config="TABLES['users'].selectize_pageNum_config" options="TABLES['users'].page_size_option"
+                                       ng-model="TABLES['users'].selectize_pageNum" name="TABLES['users'].selectize_pageNum" selectize>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-show="page==1 || page==2" class="md-card">
+                <div   ng-include src="'app/home/manager/customer/customer.detail.html'"></div>
+            </div>
+
+            <div ng-show="page==3" class="md-card">
+                <div   ng-include src="'app/home/device/device/device.detail.html'"></div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<!-- Modal active -->
+<div class="uk-modal" id="active_modal">
+    <div class="uk-modal-dialog uk-modal-dialog-small">
+        <div class="uk-modal-header" style="margin: 0 -24px 0px">
+            <span><span class="uk-modal-title">Quản trị người dùng</span><a class="uk-modal-close" style="float: right;"><i class="material-icons">&#xE14C;</i></a></span>
+        </div>
+        <hr>
+        <span>{{activeMsg}}</span>&nbsp;<b>{{userEmail}}</b>?
+
+        <div class="uk-modal-footer uk-text-right">
+            <button  class="uk-modal-close md-btn  md-btn-primary md-btn-small" ng-click="activeOne()"><span class="uk-text-bold" data-translate="global.button.ok"></span></button>
+            <button  class="uk-modal-close md-btn  md-btn-default md-btn-small"><span class="uk-text-bold" data-translate="global.button.cancel"></span></button>
+        </div>
+    </div>
+</div>
+<button id="activeBtn" ng-show="false" data-uk-modal="{target:'#active_modal'}">active</button>

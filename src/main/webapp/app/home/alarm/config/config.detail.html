@@ -1,0 +1,239 @@
+<div id="page_content" class="pageDetail">
+    <form name="form_edit_alarm_config" id="form_edit_alarm_config" class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+        <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <span class="route-header">
+                <a class="uk-text-primary" ui-sref="alarm-config" data-translate="admin.menu.alarm.name"></a>&nbsp;
+                <i class="uk-icon-arrow-circle-right"></i>
+                <a class="uk-text-primary" ui-sref="alarm-config"
+                   data-translate="global.button.list"></a>&nbsp;<i
+                   class="uk-icon-arrow-circle-right"></i>
+                <span class="overflowLongText" value="alarmConfig.name" is-input="false"></span>
+            </span>
+            <br/>
+            <div class="uk-margin-small-top">
+                <button has-any-authority="ROLE_SYSTEM_ADMIN, ROLE_SYSTEM_USER, ROLE_FARM_ADMIN, Alarm_Controller_Update"  ui-sref="alarm-config-edit({configId: alarmConfig.id})" type="button" class="md-btn md-btn-primary md-btn-small"><span
+                        class="uk-text-bold" data-translate="global.button.edit"></span></button>
+                <button has-any-authority="ROLE_SYSTEM_ADMIN, ROLE_SYSTEM_USER, ROLE_FARM_ADMIN, Alarm_Controller_Create"  ui-sref="alarm-config-create" type="button" class="md-btn md-btn-primary md-btn-small"><span
+                        class="uk-text-bold" data-translate="global.button.create"></span></button>
+            </div>
+        </div>
+
+        <div id="page_content_inner">
+            <jhi-alert></jhi-alert>
+            <modal-alert></modal-alert>
+            <div class="md-card">
+                <div class="md-card-content">
+                    <div class="uk-grid">
+                        <!--Khu vuc san xuat-->
+                        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                            <label class="label-bold title-organization ng-scope"
+                                   data-translate="alarm.fieldHis.area"></label>
+                        </div>
+                        <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+                            <div class="parsley-row">
+                                <input data-parsley-whitespace="trim"
+                                       ng-model="alarmConfig.areaName" 
+                                       ng-disabled="true"
+                                       id="areaName" type="text"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+
+                        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                            <label class="label-bold title-organization ng-scope"
+                                   data-translate="alarm.fieldHis.areaShortName"></label>
+                        </div>
+
+                        <div class="uk-width-small-1-3 uk-width-medium-1-3 parsley-row">
+                            <div class="parsley-row">
+                                <input data-parsley-whitespace="trim"
+                                       ng-model="alarmConfig.areaShortName" 
+                                       ng-disabled="true"
+                                       id="areaShortName" type="text"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+                    </div> 
+
+                    <div class="uk-grid">
+                        <!--Gateway-->
+                        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                            <label class="label-bold title-organization ng-scope"
+                                   data-translate="alarm.fieldHis.belongGW"></label>
+                        </div>
+                        <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+                            <div class="parsley-row">
+                                <input data-parsley-whitespace="trim"
+                                       ng-model="alarmConfig.gatewayName" 
+                                       ng-disabled="true"
+                                       id="gatewayName" type="text"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-grid">
+                        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                            <label class="label-bold title-organization ng-scope"
+                                   data-translate="alarm.fieldHis.activated"></label>
+                        </div>
+
+                        <div class="uk-width-small-1-3 uk-width-medium-1-3 parsley-row">
+                            <div class="parsley-row">
+                                <i ng-if="alarmConfig.active == 1" class="uk-icon-toggle-on uk-icon-medium uk-text-success custom-cursor-pointer"></i>
+                                <i ng-if="alarmConfig.active == 0" class="uk-icon-toggle-off uk-icon-medium uk-text-danger custom-cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-grid">
+                        <!--Ten bao cao-->
+                        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                            <label class="label-bold title-organization ng-scope"
+                                   data-translate="alarm.fieldHis.name"></label>
+                            
+                        </div>
+
+                        <div class=" uk-width-small-2-3 uk-width-medium-2-6">
+                            <div class="parsley-row">
+                                <div class="parsley-row">
+                                    <span class="overflowLongText" value="alarmConfig.name" is-input="true"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-grid">
+                        <!--Gia tri canh bao-->
+                        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                            <label class="label-bold title-organization ng-scope"
+                                   data-translate="alarm.fieldHis.value"></label>
+                            <span class="req">*</span>
+                        </div>
+                        <div class=" uk-width-small-1-3 uk-width-medium-1-6 parsley-row">
+                            <input id="alarmValueCbb" name="alarmUnitCbb"
+                                   data-parsley-trigger="keyup focusout change"
+                                   ng-required="true"
+                                   data-parsley-required-message="{{messages.required}}"
+                                   position="bottom"
+                                   config="ComboBox['alarmUnitCbb'].config"
+                                   options="ComboBox['alarmUnitCbb'].options"
+                                   ng-model="alarmConfig.unit"
+                                   ng-change="changeUnit(alarmConfig.unit)"
+                                   ng-disabled="true"
+                                   table="ComboBox['alarmUnitCbb'].table"
+                                   column="ComboBox['alarmUnitCbb'].column"
+                                   scope-controller="ComboBox['alarmUnitCbb'].scope" selectize>
+                        </div>
+                        <div class="uk-width-small-1-3 uk-width-medium-1-6 parsley-row" ng-hide="hideOperator">
+                            <input id="alarmOperatorCbb" name="alarmOperatorCbb"
+                                   data-parsley-trigger="keyup focusout change"
+                                   ng-required="true"
+                                   data-parsley-required-message="{{messages.required}}"
+                                   position="bottom"
+                                   config="ComboBox['alarmOperatorCbb'].config"
+                                   options="ComboBox['alarmOperatorCbb'].options"
+                                   ng-model="alarmConfig.operator"
+                                   ng-change="changeOperator(alarmConfig.operator)"
+                                   ng-disabled="true"
+                                   table="ComboBox['alarmOperatorCbb'].table"
+                                   column="ComboBox['alarmOperatorCbb'].column"
+                                   scope-controller="ComboBox['alarmOperatorCbb'].scope" selectize>
+                        </div>
+                        <div class="uk-width-small-1-3 uk-width-medium-1-6 parsley-row" ng-hide="hideValue">
+                            <div class="parsley-row">
+                                <input data-parsley-trigger="keyup focusout change"
+                                       ng-required="true"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-whitespace="trim"
+                                       ng-model="alarmConfig.value" 
+                                       ng-disabled="true"
+                                       id="value" type="text"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+                        
+                        <div class="uk-width-small-1-3 uk-width-medium-1-6 parsley-row" ng-hide="hideMinMax">
+                            <div class="parsley-row">
+                                <input data-parsley-trigger="keyup focusout change"
+                                       ng-required="requiedMinMax"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-whitespace="trim"
+                                       ng-model="alarmConfig.min" 
+                                       ng-disabled="true"
+                                       id="min" type="text"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+                        
+                        <div class="uk-width-small-1-3 uk-width-medium-1-6 parsley-row" ng-hide="hideMinMax">
+                            <div class="parsley-row">
+                                <input data-parsley-trigger="keyup focusout change"
+                                       ng-required="requiedMinMax"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-whitespace="trim"
+                                       ng-model="alarmConfig.max" 
+                                       ng-disabled="true"
+                                       id="max" type="text"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+                        
+                        <div class="uk-width-small-1-3 uk-width-medium-1-3 parsley-row" ng-hide="hideEnable">
+                            <div class="parsley-row">
+                                <input data-parsley-whitespace="trim"
+                                       ng-model="alarmConfig.enable"
+                                       ng-disabled="true"
+                                       id="enable" type="text"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    
+
+
+                    <!--Noi dung canh bao-->
+                    <div class="uk-grid">
+                        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                            <label class="label-bold title-organization ng-scope"
+                                   data-translate="alarm.fieldHis.content"></label>
+                            
+                        </div>
+
+                        <div class=" uk-width-small-2-3 uk-width-medium-2-6">
+                            <div class="parsley-row">
+                                <div class="parsley-row">
+                                    
+                                    <textarea rows="5" cols="90" 
+                                              ng-model="alarmConfig.content" 
+                                              class="ng-isolate-scope md-input-processed"> </textarea>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Phương thức cảnh báo-->
+                    <div class="uk-grid">
+                        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                            <label class="label-bold title-organization ng-scope"
+                                   data-translate="alarm.fieldHis.method"></label>
+                        </div>
+
+                        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                            <input id="alarm_sms" type="checkbox" class="ts_checkbox" data-md-icheck icheck ng-model="alarmConfig.methodSms">
+                            <label class="title-organization ng-scope" data-translate="Email"></label>
+                        </div>
+
+                        <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                            <input id="alarm_onsite" type="checkbox" class="ts_checkbox" data-md-icheck icheck ng-model="alarmConfig.methodOnsite">
+                            <label class="title-organization ng-scope" data-translate="Onsite"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

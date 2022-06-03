@@ -1,0 +1,50 @@
+<div id="page_content">
+    <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+        <div class="heading_actions action-padding-top">
+
+        </div>
+        <span class="route-header">
+            <a class="uk-text-success" data-translate="admin.menu.administration"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+            <a class="uk-text-success" ui-sref="privileges" data-translate="admin.privilege.list"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+            <span>{{privilege.name}}</span>
+        </span>
+        <br/>
+    </div>
+
+    <div id="page_content_inner">
+        <jhi-alert></jhi-alert><modal-alert></modal-alert>
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-grid" data-uk-grid-margin>
+                    <div class="uk-width-medium-1-2">
+                        <label class="label-bold" data-translate="admin.role.column.Name"></label>
+                        <input class="md-input ng-isolate-scope md-input-processed" readonly type="text" ng-model="privilege.name" md-input />
+                    </div>
+                    <div class="uk-width-medium-1-2">
+                        <label class="label-bold" data-translate="admin.role.column.Description"></label>
+                        <input class="md-input ng-isolate-scope md-input-processed" readonly type="text" ng-model="privilege.description" md-input />
+                    </div>
+                    <div class="uk-width-medium-1-2">
+                        <label class="label-bold" data-translate="admin.user.column.created"></label>
+                        <input class="md-input ng-isolate-scope md-input-processed" readonly type="text" id="uk_dp_1" md-input value="{{privilege.created | date: 'dd-MM-yyyy HH:mm:ss'}}">
+                    </div>
+                    <div class="uk-width-medium-1-2">
+                        <label class="label-bold" data-translate="admin.user.column.updated"></label>
+                        <input class="md-input ng-isolate-scope md-input-processed" readonly type="text" id="uk_dp_2" md-input value="{{privilege.updated | date: 'dd-MM-yyyy HH:mm:ss'}}">
+                    </div>
+                    <div class="uk-width-medium-1-2">
+                        <label class="label-bold" data-translate="admin.user.column.createdBy"></label>
+                        <input ng-model="privilege.createdBy" readonly type="text" class="md-input ng-isolate-scope md-input-processed" md-input="">
+                        <span class="md-input-bar "></span>
+                    </div>
+                    <div class="uk-width-medium-1-2">
+                        <label class="label-bold" data-translate="admin.user.column.updatedBy"></label>
+                        <input ng-model="privilege.updatedBy" readonly type="text" class="md-input ng-isolate-scope md-input-processed" md-input="">
+                        <span class="md-input-bar "></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,136 @@
+<div id="page_content">
+    <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }" class="header-fixed">
+        <span class="route-header">
+            <a class="uk-text-primary" ui-sref="manufacturing-manager" data-translate="admin.menu.manufacturing"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+            <span data-translate="manufacturing.diary.name"></span>
+        </span>
+        </br>
+        <div class="uk-margin-small-top">
+            <a has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Procedure_Log_Create" ui-sref="procedureLogs-create" class="md-btn md-btn-primary md-btn-small"><span class="uk-text-bold" data-translate="global.button.create"></span></a>
+            <button has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Procedure_Log_Delete" id="deleteBtn" class="md-btn md-btn-small hideElement" ng-click="defaultDelete()"><span class="uk-text-bold" data-translate="global.button.delete"></span></button>
+        </div>
+    </div>
+    <div id="page_content_inner">
+        <jhi-alert></jhi-alert><modal-alert></modal-alert>
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-overflow-container uk-margin-bottom table-height-fixed">
+                    <table class="hoverTable uk-table uk-table-align-vertical uk-table-striped uk-table-nowrap tablesorter tablesorter-altair table-fixed" id="procedureLogs">
+                        <thead>
+                        <tr>
+                            <th data-name="Select"><input type="checkbox" class="ts_checkbox_all"></th>
+                            <th><th-content table="TABLES['procedureLogs']" label="'manufacturing.diary.column.date'" column="'executeDate'"></th-content></th>
+                            <th><th-content table="TABLES['procedureLogs']" label="'manufacturing.diary.column.area'"  column="'areaId'"></th-content></th>
+                            <th><th-content table="TABLES['procedureLogs']" label="'manufacturing.diary.column.season'" column="'seasonId'"></th-content></th>
+                            <!--<th><th-content table="TABLES['procedureLogs']" label="'manufacturing.diary.column.farm'" column="'tenantId'"></th-content></th>-->
+                            <th><th-content table="TABLES['procedureLogs']" label="'manufacturing.diary.column.product'" column="'productId'"></th-content></th>
+                            <th><th-content table="TABLES['procedureLogs']" label="'manufacturing.diary.column.code'" column="'seasonCode'"></th-content></th>
+                            <th><th-content table="TABLES['procedureLogs']" label="'manufacturing.diary.column.owner'" column="'userId'"></th-content></th>
+                            <th><th-content table="TABLES['procedureLogs']" label="'manufacturing.diary.column.description'" column="'description'"></th-content></th>
+                            <th class="center custom-cl-header-tiny"><b data-translate="infrastructure.farm.column.action"></b></th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><date-picker-filter table="TABLES['procedureLogs']" column="'executeDate'"></td>
+                            <td>
+                                <selectize id="areaCbb" name="areaCbb"
+                                           position="bottom"
+                                           config="ComboBox['areaCbb'].config"
+                                           options="ComboBox['areaCbb'].options"
+                                           table="ComboBox['areaCbb'].table"
+                                           column="ComboBox['areaCbb'].column"
+                                           ng-model="ComboBox['areaCbb'].ngModel"
+                                           scope-controller="ComboBox['areaCbb'].scope"></selectize>
+                            </td>
+                            <td>
+                                <selectize id="seasonCbb" name="seasonCbb"
+                                           position="bottom"
+                                           config="ComboBox['seasonCbb'].config"
+                                           options="ComboBox['seasonCbb'].options"
+                                           table="ComboBox['seasonCbb'].table"
+                                           column="ComboBox['seasonCbb'].column"
+                                           ng-model="ComboBox['seasonCbb'].ngModel"
+                                           scope-controller="ComboBox['seasonCbb'].scope"></selectize>
+                            </td>
+                            <!--<td>
+                                <selectize id="farmCbb" name="farmCbb"
+                                           position="bottom"
+                                           config="ComboBox['farmCbb'].config"
+                                           options="ComboBox['farmCbb'].options"
+                                           table="ComboBox['farmCbb'].table"
+                                           column="ComboBox['farmCbb'].column"
+                                           ng-model="ComboBox['farmCbb'].ngModel"
+                                           scope-controller="ComboBox['farmCbb'].scope"></selectize>
+                            </td>-->
+                            <td>
+                                <selectize id="productCbb" name="productCbb"
+                                           position="bottom"
+                                           config="ComboBox['productCbb'].config"
+                                           options="ComboBox['productCbb'].options"
+                                           table="ComboBox['productCbb'].table"
+                                           column="ComboBox['productCbb'].column"
+                                           ng-model="ComboBox['productCbb'].ngModel"
+                                           scope-controller="ComboBox['productCbb'].scope"></selectize>
+                            </td>
+                            <td><default-filter table="TABLES['procedureLogs']" column="'seasonCode'"></td>
+                            <td>
+                                <selectize id="ownerCbb" name="ownerCbb"
+                                           position="bottom"
+                                           config="ComboBox['ownerCbb'].config"
+                                           options="ComboBox['ownerCbb'].options"
+                                           table="ComboBox['ownerCbb'].table"
+                                           column="ComboBox['ownerCbb'].column"
+                                           ng-model="ComboBox['ownerCbb'].ngModel"
+                                           scope-controller="ComboBox['ownerCbb'].scope"></selectize>
+                            </td>
+                            <td><default-filter table="TABLES['procedureLogs']" column="'description'"></td>
+                            <td></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in procedureLogs" on-last-repeat ng-class="{'hoverRow': !item.unRemove, 'custom-un-remove': item.unRemove}" title="{{item.unRemove}}">
+                            <td><input id="{{item.id}}" type="checkbox" class="ts_checkbox" data-md-icheck icheck ng-model="row_select"></td>
+                            <td>
+                                <a ui-sref="procedureLogs-detail({procedureLogId: item.id})">{{item.executeDate | date : 'yyyy-MM-dd'}}</a>
+                            </td>
+                            <td>{{item.area.name}}</td>
+                            <td>{{item.season.name}}</td>
+                            <!--<td>{{item.tenant.name}}</td>-->
+                            <td>{{item.product.name}}</td>
+                            <td>{{item.seasonCode}}</td>
+                            <td>{{item.user.fullName}}</td>
+                            <td>{{item.description}}</td>
+                            <td style="text-align: center">
+                                <a ng-if="item.season.state != 2" has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Procedure_Log_Update"
+                                    ui-sref="procedureLogs-edit({ procedureLogId: item.id })" title="{{'global.tooltip.edit' | translate}}">
+                                    <i class="uk-icon-small uk-icon-edit" style="font-size: 17px"></i></a>&nbsp;
+                                <a ng-if="item.season.state != 2" has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Procedure_Log_Delete"
+                                    ng-click="deleteOne(item.id)" title="{{'global.tooltip.delete' | translate}}" class="material-icons">delete</a>&nbsp;
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ts_pager" id="table_procedureLog_pager">
+                    <ul class="uk-pagination ts_pager">
+                        <li ng-click="selectPageClickHandle()" data-uk-tooltip title="{{selectPage}}">
+                            <input ng-change="selectPageHandle('procedureLogs')" id="procedureLog_selectize_page" type="text"
+                                   config="TABLES['procedureLogs'].selectize_page_config" options="TABLES['procedureLogs'].selectize_page_options"
+                                   ng-model="TABLES['procedureLogs'].selectize_page" name="TABLES['procedureLogs'].selectize_page" selectize>
+                        </li>
+                        <li><a href="javascript:void(0)" class="firstPage" ng-click="handleFirstPage('procedureLogs')"><i class="uk-icon-angle-double-left"></i></a></li>
+                        <li><a href="javascript:void(0)" class="prevPage" ng-click="handlePreviousPage('procedureLogs')"><i class="uk-icon-angle-left"></i></a></li>
+                        <li><span class="pageDisplay">1-20/50</span></li>
+                        <li><a href="javascript:void(0)" class="nextPage" ng-click="handleNextPage('procedureLogs')"><i class="uk-icon-angle-right"></i></a></li>
+                        <li><a href="javascript:void(0)" class="lastPage" ng-click="handleLastPage('procedureLogs')"><i class="uk-icon-angle-double-right"></i></a></li>
+                        <li data-uk-tooltip title="{{pageSize}}">
+                            <input ng-change="selectPageNumHandle('procedureLogs')" id="procedureLog_selectize_pageNum" type="text"
+                                   config="TABLES['procedureLogs'].selectize_pageNum_config" options="TABLES['procedureLogs'].page_size_option"
+                                   ng-model="TABLES['procedureLogs'].selectize_pageNum" name="TABLES['procedureLogs'].selectize_pageNum" selectize>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

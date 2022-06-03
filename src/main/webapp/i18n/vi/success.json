@@ -1,0 +1,21 @@
+{
+  "success": {
+    "msg": {
+      "delete": "Xóa thành công.",
+      "active": "Active thành công.",
+      "inactive": "Archive thành công.",
+      "create":"Tạo mới thành công.",
+      "update":"Cập nhật thành công.",
+      "validate":"Xác nhận thành công.",
+      "import":"Import thành công",
+      "restore":"Khôi phục thành công",
+      "print_stamp": "In tem thành công",
+      "upload": "Tải dữ liệu thành công",
+      "change": "Đổi thành công",
+      "deactivate": "Hủy thành công"
+    },
+    "servicePackageMsg":{
+    	"batchDeactive":"Tạm dừng hoạt động gói cước thành công."
+    }
+  }
+}

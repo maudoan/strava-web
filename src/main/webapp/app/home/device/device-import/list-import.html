@@ -1,0 +1,70 @@
+<div class="md-card">
+    <div class="md-card-content">
+        <div class="uk-overflow-container uk-margin-bottom table-height-fixed">
+            <table class="hoverTable uk-table uk-table-align-vertical  uk-table-nowrap tablesorter tablesorter-altair table-fixed" id="fileImports">
+                <thead>
+                <tr>
+                    <th><b>STT</b></th>
+                    <th><th-content table="TABLES['fileImports']" label="'Tên file'"         column="'originalFileName'"></th-content></th>
+                    <th><strong>Khu vực</strong></th>
+                    <th><th-content table="TABLES['fileImports']" label="'Số lượng thiết bị'"         column="'total'"></th-content></th>
+                    <th><th-content table="TABLES['fileImports']" label="'Thời gian tải lên'"  column="'created'"></th-content></th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><default-filter table="TABLES['fileImports']" column="'originalFileName'"></td>
+                    <td>
+                        <selectize id="areaCbb" name="areaIds"
+                                   position="bottom"
+                                   config="ComboBox['areaCbb'].config"
+                                   options="ComboBox['areaCbb'].options"
+                                   table="ComboBox['areaCbb'].table"
+                                   column="ComboBox['areaCbb'].column"
+                                   ng-model="ComboBox['areaCbb'].ngModel"
+                                   scope-controller="ComboBox['areaCbb'].scope"></selectize>
+                    </td>
+                    <td><default-filter table="TABLES['fileImports']" column="'total'"></td>
+                    <td><date-picker-filter table="TABLES['fileImports']" column="'created'"></date-picker-filter></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="fileImport in fileImports">
+                    <td>
+                        {{ $index + 1 + TABLES['fileImports'].selectize_pageNum*TABLES['fileImports'].param_current_page}}
+                    </td>
+                    <td class="custom-column-slarge">
+                        <a href="javascript:void(0)" ng-click="showListFileImport(3, fileImport)">{{fileImport.originalFileName}}</a>
+                    </td>
+                    <td style="text-overflow: clip; max-width: none; overflow: auto">
+                        <span ng-repeat="area in fileImport.areas" class="md-btn md-btn-small custom-item">
+                            {{area.name}}
+                        </span>
+                    </td>
+                    <td>{{fileImport.total}}</td>
+                    <td>{{fileImport.created | date: 'dd-MM-yyyy'}}</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="ts_pager" id="table_file_import_pager">
+            <ul class="uk-pagination ts_pager">
+                <li ng-click="selectPageClickHandle()" data-uk-tooltip title="{{selectPage}}">
+                    <input ng-change="selectPageHandle('fileImports')" id="file_import_selectize_page" type="text"
+                           config="TABLES['fileImports'].selectize_page_config" options="TABLES['fileImports'].selectize_page_options"
+                           ng-model="TABLES['fileImports'].selectize_page" name="TABLES['fileImports'].selectize_page" selectize>
+                </li>
+                <li><a href="javascript:void(0)" class="firstPage" ng-click="handleFirstPage('fileImports')"><i class="uk-icon-angle-double-left"></i></a></li>
+                <li><a href="javascript:void(0)" class="prevPage" ng-click="handlePreviousPage('fileImports')"><i class="uk-icon-angle-left"></i></a></li>
+                <li><span class="pageDisplay"></span></li>
+                <li><a href="javascript:void(0)" class="nextPage" ng-click="handleNextPage('fileImports')"><i class="uk-icon-angle-right"></i></a></li>
+                <li><a href="javascript:void(0)" class="lastPage" ng-click="handleLastPage('fileImports')"><i class="uk-icon-angle-double-right"></i></a></li>
+                <li data-uk-tooltip title="{{pageSize}}">
+                    <input ng-change="selectPageNumHandle('fileImports')" id="file_import_selectize_pageNum" type="text"
+                           config="TABLES['fileImports'].selectize_pageNum_config" options="TABLES['fileImports'].page_size_option"
+                           ng-model="TABLES['fileImports'].selectize_pageNum" name="TABLES['fileImports'].selectize_pageNum" selectize>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

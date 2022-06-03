@@ -1,0 +1,176 @@
+<div id="page_content">
+	<form name="policy_form" id="policy_form" class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+		<div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <span class="route-header">
+                <a class="uk-text-primary" ui-sref="policy"> <span data-translate="admin.menu.policyManagement"></span> </a>&nbsp;<i
+				class="uk-icon-arrow-circle-right"></i>
+				<a class="uk-text-primary" ui-sref="policy-detail({id: policy.id})"> <span class="overflowLongText" value="policy.namePolicy" is-input="false"></span></a>&nbsp;<i
+				class="uk-icon-arrow-circle-right"></i>
+                <span data-translate="device.policy.field.history"></span>
+            </span>
+		</div>
+		<div id="page_content_inner">
+			<jhi-alert></jhi-alert>
+			<modal-alert></modal-alert>
+			<div class="md-card">
+				<div class="md-card-content">
+					<div class="md-card-content" style="border: 1px solid #ddd; margin-bottom: 20px">
+						<div class="uk-grid" data-uk-grid-margin="">
+							<div class="uk-width-small-1-3">
+								<b data-translate="device.policy.field.userId"></b>
+								<input
+										ng-model="input.userId"
+										id="userId"
+										name="userId"
+										placeholder="Nhập mã khách hàng..."
+										class="md-input ng-isolate-scope md-input-processed" md-input="">
+							</div>
+							<div class="uk-width-small-1-3">
+								<b data-translate="device.field.name"></b>
+								<input
+										ng-model="input.deviceName"
+										id="deviceName"
+										name="deviceName"
+										placeholder="nhập tên thiết bị..."
+										class="md-input ng-isolate-scope md-input-processed" md-input="">
+							</div>
+							<div class="uk-width-small-1-3">
+								<b>UID</b>
+								<input
+										ng-model="input.uid"
+										id="uid"
+										name="uid"
+										placeholder="Nhập uid..."
+										class="md-input ng-isolate-scope md-input-processed" md-input="">
+							</div>
+						</div>
+						<div class="uk-grid" data-uk-grid-margin="">
+							<div class="uk-width-small-1-4">
+								<b data-translate="device.policy.field.updatedFrom"></b>
+								<input id="updatedFromPicker"
+									   placeholder="Nhập ngày ..."
+									   style="width: 100%;"/>
+							</div>
+							<div class="uk-width-small-1-4">
+								<b data-translate="device.policy.field.updatedTo"></b>
+								<input id="updatedToPicker"
+									   placeholder="Nhập ngày ..."
+									   style="width: 100%;"/>
+							</div>
+							<div class="uk-width-small-1-4">
+								<b data-translate="device.policy.field.status"></b>
+								<input id="selec_adv_2"
+									   config="selectize_active_config"
+									   options="selectize_active_options"
+									   position="bottom"
+									   ng-model="input.active"
+									   selectize="">
+							</div>
+							<div class="uk-width-small-1-4 uk-text-center">
+								<button id="searchBtn" class="md-btn md-btn-small md-btn-primary" ng-click="search()"
+									type="submit" data-translate="device.policy.field.search" style="margin-top: 30px;"></button>
+							</div>
+						</div>
+					</div>
+
+					<div class="uk-grid" data-uk-grid-margin="">
+	                    <div class="uk-width-medium-10-10">
+							<div class="uk-grid">
+								<div class="uk-width-small-1-3">
+									<div class="custom-label">
+										<label class="label-bold ng-scope" data-translate="device.policy.field.totalUpgradedDevice"></label>: <span>{{policy.totalUpgradedDevice}}</span>
+									</div>
+								</div>
+								<div class="uk-width-small-1-5"></div>
+								<div class="uk-width-medium-1-4">
+									<div class="custom-label">
+										<label class="label-bold ng-scope" data-translate="device.policy.field.numberDevicesUpgradedFail"></label>: <span>{{policy.numberDevicesUpgradedFail}}</span>
+									</div>
+								</div>
+
+								<div class="uk-width-small-1-3">
+									<div class="custom-label">
+										<label class="label-bold ng-scope" data-translate="device.policy.field.numberDevicesUpgradedSuccess"></label>: <span>{{policy.numberDevicesUpgradedSuccess}}</span>
+									</div>
+								</div>
+								<div class="uk-width-small-1-5"></div>
+								<div class="uk-width-medium-1-4">
+									<div class="custom-label">
+										<label class="label-bold ng-scope" data-translate="device.policy.field.numberDevicesNotUpgraded"></label>: <span>{{policy.numberDevicesNotUpgraded}}</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="uk-grid">
+								
+							</div>
+						</div>
+					</div>
+
+					<div class="uk-overflow-container uk-margin-bottom table-height-fixed">
+	                    <table class="hoverTable uk-table uk-table-align-vertical uk-table-striped uk-table-nowrap tablesorter tablesorter-altair table-fixed" id="policyHistories">
+	                        <thead>
+	                        <tr>
+	                            <th>STT</th>
+	                            <th><th-content table="TABLES['policyHistories']" label="'device.policy.field.userId'"></th-content></th>
+	                            <th><th-content table="TABLES['policyHistories']" label="'device.field.name'"></th-content></th>
+	                            <th><th-content table="TABLES['policyHistories']" label="'UID'" ></th-content></th>
+	                            <th><th-content table="TABLES['policyHistories']" label="'device.policy.field.updated'"></th-content></th>
+	                            <th><th-content table="TABLES['policyHistories']" label="'device.policy.field.status'"></th-content></th>
+	                        </tr>
+	                        </thead>
+	                        <tbody>
+	                        <tr ng-repeat-start="ph in policyHistories" on-last-repeat ng-class="{'hoverRow': !ph.unRemove, 'custom-un-remove': ph.unRemove}" title="{{ph.unRemove}}">
+	                            <td>{{ $index + 1 + TABLES['policyHistories'].selectize_pageNum*TABLES['policyHistories'].param_current_page}}</td>
+	                            <td>
+	                            	<span>{{ph.userId}}</span>
+	                            	<span ng-if="!ph.expand" class="material-icons md-icon float-right" ng-click="expand($index)">keyboard_arrow_right</span>
+                                    <span ng-if="ph.expand" class="material-icons md-icon float-right" ng-click="collapse($index)">keyboard_arrow_down</span>
+	                            </td>
+	                            <td></td>
+	                            <td></td>
+	                            <td></td>
+	                            <td></td>
+	                        </tr>
+                            <tr ng-repeat-start="policyHistory in ph.policyHistories" ng-if="ph.expand" class="hoverRow" style="background: rgba(211,211,211,0.33)">
+                                <td style="border-right: none !important; background: white !important;"></td>
+                                <td style="border-left: none !important;background: white !important;"></td>
+                                <td>{{policyHistory.deviceName}}</td>
+                                <td>{{policyHistory.uid}}</td>
+	                            <td>{{policyHistory.created | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+	                            <td style="text-align: center">
+	                                <span  ng-if="policyHistory.active == 1" class="uk-badge uk-badge-success" data-translate="device.policy.stateUpgradeFW.success"></span>
+	                                <span  ng-if="policyHistory.active == 0" class="uk-badge uk-badge-danger" data-translate="device.policy.stateUpgradeFW.fail"></span>
+	                                <span  ng-if="policyHistory.active == -1" class="uk-badge uk-badge-info" data-translate="device.policy.stateUpgradeFW.notUpgrade"></span>
+	                            </td>
+                            </tr>
+
+                            <tr ng-repeat-end></tr>
+                            <tr ng-repeat-end></tr>
+	                        </tbody>
+	                    </table>
+	                </div>
+	                <div class="ts_pager" id="table_policyHistory_pager">
+	                    <ul class="uk-pagination ts_pager">
+	                        <li ng-click="selectPageClickHandle()" data-uk-tooltip title="{{selectPage}}">
+	                            <input ng-change="selectPageHandle('policyHistories')" id="policyHistory_selectize_page" type="text"
+	                                   config="TABLES['policyHistories'].selectize_page_config" options="TABLES['policyHistories'].selectize_page_options"
+	                                   ng-model="TABLES['policyHistories'].selectize_page" name="TABLES['policyHistories'].selectize_page" selectize>
+	                        </li>
+	                        <li><a href="javascript:void(0)" class="firstPage" ng-click="handleFirstPage('policyHistories')"><i class="uk-icon-angle-double-left"></i></a></li>
+	                        <li><a href="javascript:void(0)" class="prevPage" ng-click="handlePreviousPage('policyHistories')"><i class="uk-icon-angle-left"></i></a></li>
+	                        <li><span class="pageDisplay">1-20/50</span></li>
+	                        <li><a href="javascript:void(0)" class="nextPage" ng-click="handleNextPage('policyHistories')"><i class="uk-icon-angle-right"></i></a></li>
+	                        <li><a href="javascript:void(0)" class="lastPage" ng-click="handleLastPage('policyHistories')"><i class="uk-icon-angle-double-right"></i></a></li>
+	                        <li data-uk-tooltip title="{{pageSize}}">
+	                            <input ng-change="selectPageNumHandle('policyHistories')" id="policyHistory_selectize_pageNum" type="text"
+	                                   config="TABLES['policyHistories'].selectize_pageNum_config" options="TABLES['policyHistories'].page_size_option"
+	                                   ng-model="TABLES['policyHistories'].selectize_pageNum" name="TABLES['policyHistories'].selectize_pageNum" selectize>
+	                        </li>
+	                    </ul>
+	                </div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

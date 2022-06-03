@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>vn.vnpt.stc.enterprise</groupId>
+	<artifactId>web-app</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<name>stc-enterprise-web-app</name>
+	<description>ONE Home Web App</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.8.RELEASE</version>
+		<relativePath/>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+<!--			<plugin>-->
+<!--				<groupId>com.samaxes.maven</groupId>-->
+<!--				<artifactId>minify-maven-plugin</artifactId>-->
+<!--				<version>1.7.6</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>default-minify</id>-->
+<!--						<phase>package</phase>&lt;!&ndash; When omitted defaults to 'process-resources' &ndash;&gt;-->
+<!--						<configuration>-->
+<!--							<charset>UTF-8</charset>-->
+<!--							<nosuffix>true</nosuffix>-->
+<!--							<cssSourceDir>assets/css</cssSourceDir>-->
+<!--							<cssSourceIncludes>-->
+<!--								<cssSourceInclude>**</cssSourceInclude>-->
+<!--							</cssSourceIncludes>-->
+<!--							<cssSourceExcludes>-->
+<!--								<cssSourceExclude>**/*.min.css</cssSourceExclude>-->
+<!--							</cssSourceExcludes>-->
+<!--							<cssFinalFile>bundle-css.css</cssFinalFile>-->
+<!--							<jsSourceDir>/</jsSourceDir>-->
+<!--&lt;!&ndash;							<skipMerge>true</skipMerge>&ndash;&gt;-->
+<!--							<skipMinify>true</skipMinify>-->
+<!--&lt;!&ndash;							<yuiNoMunge>true</yuiNoMunge>&ndash;&gt;-->
+<!--							<jsSourceIncludes>-->
+<!--								<jsSourceInclude>**</jsSourceInclude>-->
+<!--							</jsSourceIncludes>-->
+<!--							<jsSourceExcludes>-->
+<!--								<jsSourceExclude>**/*.min.js</jsSourceExclude>-->
+<!--							</jsSourceExcludes>-->
+<!--							<jsFinalFile>bundle-js.js</jsFinalFile>-->
+<!--							<jsEngine>CLOSURE</jsEngine>-->
+<!--							<closureLanguageIn>ECMASCRIPT5_STRICT</closureLanguageIn>-->
+<!--							<closureWarningLevels>-->
+<!--								<nonStandardJsDocs>OFF</nonStandardJsDocs>-->
+<!--							</closureWarningLevels>-->
+<!--						</configuration>-->
+<!--						<goals>-->
+<!--							<goal>minify</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
+		</plugins>
+	</build>
+
+
+</project>

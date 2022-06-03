@@ -1,0 +1,94 @@
+<div id="page_content">
+    <form name="form_createuomType" id="form_createuomType"
+          class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+        <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <div class="heading_actions action-padding-top">
+            </div>
+            <span class="route-header">
+                <a class="uk-text-primary" ui-sref="category" data-translate="admin.menu.master"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+                <a class="uk-text-primary" ui-sref="uomTypes" data-translate="admin.uomType.list"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+                <a class="uk-text-primary" ui-sref="uomTypes-detail({uomTypeId: uomType.id })" >{{uomType.name}}</a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+                <span data-translate="global.button.edit"></span>
+            </span>
+            <br/>
+            <div class="uk-margin-small-top">
+                <button has-any-authority="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Uom_Type_Update" ng-click="submit(false)" type="submit" class="md-btn md-btn-primary md-btn-small"><span class="uk-text-bold" data-translate="global.button.save"></span></button>
+                <button has-any-authority="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Uom_Type_Update" ng-click="submit(true)" type="submit" class="md-btn md-btn-primary md-btn-small"><span class="uk-text-bold" data-translate="global.button.saveAndClose"></span></button>
+                <a ui-sref="uomTypes" class="md-btn md-btn-small"><span class="uk-text-bold" data-translate="global.button.cancel"></span></a>
+            </div>
+        </div>
+        <div id="page_content_inner">
+            <jhi-alert></jhi-alert><modal-alert></modal-alert>
+            <div class="md-card">
+                <div class="md-card-content">
+                    <div class="uk-grid" data-uk-grid-margin="">
+                        <!--ten-->
+                        <div class="uk-width-medium-1-1 uk-row-first">
+                            <div class="parsley-row">
+                                <label class="label-bold" for="name" data-translate="admin.uomType.column.name"></label>
+                                <span class="req"> (*)</span>
+                                <input data-parsley-required-message={{required_msg}}
+                                       data-parsley-whitespace="trim"
+                                       data-parsley-maxlength-message="{{maxLength255}}"
+                                       data-parsley-maxlength="255"
+                                       ng-model="uomType.name" type="text" name="name" id="name" required=""
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                                <span class="md-input-bar "></span>
+                            </div>
+                        </div>
+
+                        <!--type-->
+                        <div class="uk-width-medium-1-1 uk-row-first">
+                            <div class="parsley-row">
+                                <label class="label-bold" for="description" data-translate="admin.uomType.column.type"></label>
+                                <selectize
+                                        id="uomType-type"
+                                        config="selectize_types_config"
+                                        options="typeOptions"
+                                        position="bottom"
+                                        ngRequired="true"
+                                        ng-model="uomType.type">
+                                </selectize>
+                            </div>
+                        </div>
+                        <!-- description -->
+                        <div class="uk-width-medium-1-1 uk-row-first">
+                            <div class="parsley-row">
+                                <label class="label-bold" for="description" data-translate="admin.uomType.column.description"><span
+                                        class="req"> *</span></label>
+                                <textarea
+                                        style="border-width: 1px 1px 1px;"
+                                        data-parsley-required-message={{required_msg}}
+                                       data-parsley-whitespace="trim"
+                                       data-parsley-maxlength-message="{{maxLength1000}}"
+                                       data-parsley-maxlength="1000"
+                                       ng-model="uomType.description"
+                                       type="text" name="description"
+                                       id="description"
+                                       class="md-input ng-isolate-scope md-input-processed"
+                                          md-input=""></textarea>
+                            </div>
+                        </div>
+
+                        <!--organization-->
+                        <!--<div class="uk-width-medium-1-1 uk-row-first" id="select_organization">-->
+                            <!--<div class="parsley-row">-->
+                                <!--<label class="label-bold" for="uomType-organizationId" data-translate="admin.uomType.column.organization"></label>-->
+                                <!--<selectize id="uomType-organizationId"-->
+                                           <!--position="bottom"-->
+                                           <!--config="ComboBox['uomType-organizationId'].config"-->
+                                           <!--options="ComboBox['uomType-organizationId'].options"-->
+                                           <!--ng-model="uomType.tenantId"-->
+                                           <!--table="ComboBox['uomType-organizationId'].table"-->
+                                           <!--column="ComboBox['uomType-organizationId'].column"-->
+                                           <!--scope-controller="ComboBox['uomType-organizationId'].scope">-->
+                                <!--</selectize>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

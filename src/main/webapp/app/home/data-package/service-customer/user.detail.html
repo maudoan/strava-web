@@ -1,0 +1,312 @@
+<div id="page_content">
+    <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+        <span class="route-header">
+            <a class="uk-text-primary" ui-sref="administration" data-translate="admin.menu.servicePackageManagement"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+            <a class="uk-text-primary" ui-sref="service-customers" data-translate="admin.menu.serviceCustomer"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+            <span class="overflowLongText" value="user.username" is-input="false"></span>
+        </span>
+        <br/>
+    </div>
+
+    <div id="page_content_inner">
+        <jhi-alert></jhi-alert><modal-alert></modal-alert>
+        <div class="uk-grid data-uk-grid-margin">
+            <div class="uk-width-medium-1-1">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <a ng-if="user.state"
+                           title="Hoạt động"
+                           class="md-btn md-btn-small md-btn-wave-light md-btn-icon md-bg-grey-100 custom-btn-active btn-absolute-right" href="javascript:void(0)">
+                            <i class="uk-icon-check-circle uk-icon-medium custom-cursor-pointer uk-text-success"></i>
+                            <span class="uk-text-success uk-text-bold">Hoạt động</span>
+                        </a>
+                        <a ng-if="!user.state"
+                           title="Ngừng hoạt động"
+                           class="md-btn md-btn-small md-btn-wave-light md-btn-icon md-bg-grey-100 custom-btn-active btn-absolute-right" href="javascript:void(0)">
+                            <i class="uk-icon-check-circle uk-icon-medium custom-cursor-pointer uk-text-danger"></i>
+                            <span class="uk-text-danger uk-text-bold">Ngừng hoạt động</span>
+                        </a>
+
+                        <!--detail customer-->
+                        <div class="uk-grid" data-uk-grid-margin="">
+                            <div class="uk-width-medium-2-10">
+                                <div class="user_heading_avatar" data-provides="fileinput"
+                                     ng-mouseenter="user.mouseEnter = true"
+                                     ng-mouseleave="user.mouseEnter = false" >
+
+                                    <img ng-if="user.userAvatar" class="uk-border-circle" ng-src="{{HOST_GW + user.userAvatar}}" alt="user avatar" width="200" height="200"/>
+                                    <img ng-if="!user.userAvatar" class="uk-border-circle" ng-src="assets/img/avatars/avatar.jpg" alt="user avatar" width="200" height="200"/>
+                                </div>
+                            </div>
+                            <div class="uk-width-medium-8-10">
+                                <!--Line 1-->
+                                <div class="uk-grid">
+									<!--<div class="uk-width-medium-1-2">
+                                        <label class="label-bold" data-translate="admin.user.column.email"></label>
+                                        <input ng-if="user.email" readonly
+                                               ng-model="user.email" id="email"
+                                               type="email" name="email"
+                                               input-long-text
+                                               class="md-input ng-isolate-scope md-input-processed">
+                                    </div>-->
+                                    <div class="uk-width-medium-1-2">
+                                        <div class="parsley-row">
+                                            <label class="label-bold" for="phone" data-translate="admin.user.column.phone"></label>
+                                            <input id="phone" ng-model="user.phone" readonly name="phone" type="text"
+                                                   class="md-input ng-isolate-scope md-input-processed" input-long-text>
+                                            <span class="md-input-bar "></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Line 2-->
+								<div class="uk-grid">
+									<div class="uk-width-medium-1-2">
+                                        <label class="label-bold">Tên khách hàng</label>
+                                        <input readonly
+                                               class="md-input ng-isolate-scope md-input-processed"
+                                               type="text" ng-model="user.fullName" input-long-text/>
+                                    </div>
+                                </div>
+
+                                <!--line 3-->
+                                <div class="uk-grid">
+                                    <div class="uk-width-medium-1-2">
+                                        <label class="label-bold">Ngày đăng ký lần đầu</label>
+                                        <input readonly
+                                               class="md-input ng-isolate-scope md-input-processed"
+                                               type="text" ng-model="user.firstRegister" ng-value="user.firstRegister | date : 'dd/MM/yyyy'"/>
+                                    </div>
+                                </div>
+	                        </div>
+                        </div>
+
+                        <!--table service payments-->
+                        <div class="uk-overflow-container uk-margin-bottom table-height-fixed" style="margin-top: 20px">
+                            <table class="hoverTable uk-table uk-table-align-vertical uk-table-striped uk-table-nowrap tablesorter tablesorter-altair table-fixed" id="servicePayments">
+                                <thead>
+                                <tr>
+                                    <th><th-content table="TABLES['servicePayments']" label="'serviceCustomer.field.name'"   column="'name'"></th-content></th>
+                                    <th><th-content table="TABLES['servicePayments']" label="'serviceCustomer.field.startTime'"   column="'startTime'"></th-content></th>
+                                    <th><th-content table="TABLES['servicePayments']" label="'serviceCustomer.field.autoExtend'"   column="'autoExtend'"></th-content></th>
+                                    <th><th-content table="TABLES['servicePayments']" label="'serviceCustomer.field.endTime'"   column="'endTime'"></th-content></th>
+                                    <th><th-content table="TABLES['servicePayments']" label="'admin.user.column.status'"    column="'state'"></th-content></th>
+                                    <th><strong>Thiết bị đăng ký</strong></th>
+                                    <th><strong>Thông tin giao dịch</strong></th>
+                                </tr>
+                                <tr>
+                                    <td><default-filter table="TABLES['servicePayments']" column="'name'"></td>
+                                    <td><date-picker-filter table="TABLES['servicePayments']" column="'startTime'"></date-picker-filter></td>
+                                    <td>
+                                        <common-search values="autoExtendFields" field="'autoExtend'" label="'global.placeholder.search' | translate" table="TABLES['servicePayments']"></common-search>
+                                    </td>
+                                    <td><date-picker-filter table="TABLES['servicePayments']" column="'endTime'"></date-picker-filter></td>
+                                    <td>
+                                        <common-search values="stateFields" field="'active'" label="'global.placeholder.search' | translate" table="TABLES['servicePayments']"></common-search>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="payment in servicePayments" on-last-repeat>
+                                    <td>{{payment.name}}</td>
+                                    <td>{{payment.startTime | date: 'dd-MM-yyyy HH:mm'}}</td>
+                                    <td>{{!payment.autoExtend ? 'Không' : 'Có'}}</td>
+                                    <td>{{payment.endTime | date: 'dd-MM-yyyy HH:mm'}}</td>
+                                    <td style="text-align: center">
+                                        <span ng-if="payment.active != 1 && payment.active != 4" class="uk-badge uk-badge-danger" data-translate="global.common.archived"></span>
+                                        <span ng-if="payment.active == 4" class="uk-badge uk-badge-danger" data-translate="global.common.notRegister"></span>
+                                        <span ng-if="payment.active == 1" class="uk-badge uk-badge-success" data-translate="global.common.active"></span>
+                                    </td>
+                                    <td class="uk-text-center">
+                                        <a href="javascript:void(0)"><i ng-click="onShowDevices(payment.id)"
+                                                       class="uk-icon-eye uk-text-warning"
+                                                       style="font-size: 18px"></i></a>
+                                    </td>
+                                    <td class="uk-text-center">
+                                        <a href="javascript:void(0)"><i ng-click="onShowBills(payment.id)"
+                                                                  class="uk-icon-eye uk-text-warning custom-cursor-pointer"
+                                                       style="font-size: 18px"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="ts_pager" id="table_payment_pager">
+                            <ul class="uk-pagination ts_pager">
+                                <li ng-click="selectPageClickHandle()" data-uk-tooltip title="{{selectPage}}">
+                                    <input ng-change="selectPageHandle('servicePayments')" id="payment_selectize_page" type="text"
+                                           config="TABLES['servicePayments'].selectize_page_config" options="TABLES['servicePayments'].selectize_page_options"
+                                           ng-model="TABLES['servicePayments'].selectize_page" name="TABLES['servicePayments'].selectize_page" selectize>
+                                </li>
+                                <li><a href="javascript:void(0)" class="firstPage" ng-click="handleFirstPage('servicePayments')"><i class="uk-icon-angle-double-left"></i></a></li>
+                                <li><a href="javascript:void(0)" class="prevPage" ng-click="handlePreviousPage('servicePayments')"><i class="uk-icon-angle-left"></i></a></li>
+                                <li><span class="pageDisplay">1-20/50</span></li>
+                                <li><a href="javascript:void(0)" class="nextPage" ng-click="handleNextPage('servicePayments')"><i class="uk-icon-angle-right"></i></a></li>
+                                <li><a href="javascript:void(0)" class="lastPage" ng-click="handleLastPage('servicePayments')"><i class="uk-icon-angle-double-right"></i></a></li>
+                                <li data-uk-tooltip title="{{pageSize}}">
+                                    <input ng-change="selectPageNumHandle('servicePayments')" id="payment_selectize_pageNum" type="text"
+                                           config="TABLES['servicePayments'].selectize_pageNum_config" options="TABLES['servicePayments'].page_size_option"
+                                           ng-model="TABLES['servicePayments'].selectize_pageNum" name="TABLES['servicePayments'].selectize_pageNum" selectize>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal change password -->
+<div class="uk-modal" id="device_modal">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <div class="uk-modal-header" style="margin: 0 -24px 0px">
+            <span><span class="uk-modal-title" data-translate="serviceDevice.field.list"></span>
+                <a class="uk-modal-close" style="float: right;"><i class="material-icons" style="cursor: pointer!important;">&#xE14C;</i></a>
+            </span>
+        </div>
+        <hr>
+
+        <div class="uk-grid">
+            <div class="uk-width-medium-1-1">
+                <!--table service payments-->
+                <div class="uk-overflow-container uk-margin-bottom table-height-fixed" style="margin-top: 20px">
+                    <table class="hoverTable uk-table uk-table-align-vertical uk-table-striped uk-table-nowrap tablesorter tablesorter-altair table-fixed" id="serviceDevices">
+                        <thead>
+                        <tr>
+                            <th><th-content table="TABLES['serviceDevices']" label="'serviceDevice.field.uid'"   column="'deviceUid'"></th-content></th>
+                            <th><th-content table="TABLES['serviceDevices']" label="'serviceDevice.field.code'"   column="'deviceCode'"></th-content></th>
+                            <th><th-content table="TABLES['serviceDevices']" label="'serviceDevice.field.name'"   column="'name'"></th-content></th>
+                            <th><th-content table="TABLES['serviceDevices']" label="'serviceDevice.field.modelName'"   column="'deviceModelName'"></th-content></th>
+                            <th><th-content table="TABLES['serviceDevices']" label="'serviceDevice.field.modelCode'"   column="'deviceModelCode'"></th-content></th>
+                        </tr>
+                        <tr>
+                            <td><default-filter table="TABLES['serviceDevices']" column="'deviceUid'"></td>
+                            <td><default-filter table="TABLES['serviceDevices']" column="'deviceCode'"></td>
+                            <td><default-filter table="TABLES['serviceDevices']" column="'name'"></td>
+                            <td><default-filter table="TABLES['serviceDevices']" column="'deviceModelName'"></td>
+                            <td><default-filter table="TABLES['serviceDevices']" column="'deviceModelCode'"></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="serviceDevice in serviceDevices" on-last-repeat>
+                            <td>{{serviceDevice.device.uid}}</td>
+                            <td>{{serviceDevice.device.code}}</td>
+                            <td>{{serviceDevice.device.name}}</td>
+                            <td>{{serviceDevice.deviceModel.name}}</td>
+                            <td>{{serviceDevice.deviceModel.code}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ts_pager" id="table_device_pager">
+                    <ul class="uk-pagination ts_pager">
+                        <li ng-click="selectPageClickHandle()" data-uk-tooltip title="{{selectPage}}">
+                            <input ng-change="selectPageHandle('serviceDevices')" id="device_selectize_page" type="text"
+                                   config="TABLES['serviceDevices'].selectize_page_config" options="TABLES['serviceDevices'].selectize_page_options"
+                                   ng-model="TABLES['serviceDevices'].selectize_page" name="TABLES['serviceDevices'].selectize_page" selectize>
+                        </li>
+                        <li><a href="javascript:void(0)" class="firstPage" ng-click="handleFirstPage('serviceDevices')"><i class="uk-icon-angle-double-left"></i></a></li>
+                        <li><a href="javascript:void(0)" class="prevPage" ng-click="handlePreviousPage('serviceDevices')"><i class="uk-icon-angle-left"></i></a></li>
+                        <li><span class="pageDisplay">1-20/50</span></li>
+                        <li><a href="javascript:void(0)" class="nextPage" ng-click="handleNextPage('serviceDevices')"><i class="uk-icon-angle-right"></i></a></li>
+                        <li><a href="javascript:void(0)" class="lastPage" ng-click="handleLastPage('serviceDevices')"><i class="uk-icon-angle-double-right"></i></a></li>
+                        <li data-uk-tooltip title="{{pageSize}}">
+                            <input ng-change="selectPageNumHandle('serviceDevices')" id="device_selectize_pageNum" type="text"
+                                   config="TABLES['serviceDevices'].selectize_pageNum_config" options="TABLES['servicePayments'].page_size_option"
+                                   ng-model="TABLES['serviceDevices'].selectize_pageNum" name="TABLES['servicePayments'].selectize_pageNum" selectize>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="uk-modal" id="bill_modal">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <div class="uk-modal-header" style="margin: 0 -24px 0px">
+            <span><span class="uk-modal-title" data-translate="serviceBill.field.list"></span><a class="uk-modal-close" style="float: right;"><i class="material-icons">&#xE14C;</i></a></span>
+        </div>
+        <hr>
+
+        <div class="uk-grid">
+            <div class="uk-width-medium-1-1">
+                <!--table service payments-->
+                <div class="uk-overflow-container uk-margin-bottom table-height-fixed" style="margin-top: 20px">
+                    <table class="hoverTable uk-table uk-table-align-vertical uk-table-striped uk-table-nowrap tablesorter tablesorter-altair table-fixed" id="serviceBills">
+                        <thead>
+                        <tr>
+                            <th><th-content table="TABLES['serviceBills']" label="'serviceBill.field.billNumber'"   column="'billNumber'"></th-content></th>
+                            <th><th-content table="TABLES['serviceBills']" label="'serviceBill.field.datePayment'"   column="'datePayment'"></th-content></th>
+                            <th><th-content table="TABLES['serviceBills']" label="'serviceBill.field.price'"   column="'price'"></th-content></th>
+                            <th><th-content table="TABLES['serviceBills']" label="'serviceBill.field.paymentMethod'"   column="'paymentMethod'"></th-content></th>
+                            <th><th-content table="TABLES['serviceBills']" label="'serviceBill.field.action'"   column="'action'"></th-content></th>
+                            <th><th-content table="TABLES['serviceBills']" label="'serviceBill.field.status'"   column="'active'"></th-content></th>
+
+                        </tr>
+                        <tr>
+                            <td><default-filter table="TABLES['serviceBills']" column="'billNumber'"></td>
+                            <td><date-picker-filter table="TABLES['serviceBills']" column="'datePayment'"></date-picker-filter></td>
+                            <td><default-filter table="TABLES['serviceBills']" column="'price'"></td>
+                            <td>
+                                <common-search
+                                        values="methodValues"
+                                        field="'paymentMethod'"
+                                        label="'global.placeholder.search' | translate"
+                                        table="TABLES['serviceBills']">
+                                </common-search>
+                            </td>
+                            <td>
+                                <common-search values="statusValues"
+                                               field="'active'"
+                                               label="'global.placeholder.search' | translate"
+                                               table="TABLES['serviceBills']">
+                                </common-search>
+                            </td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="device in serviceBills" on-last-repeat>
+                            <td>{{device.billNumber}}</td>
+                            <td>{{device.datePayment | date : 'dd/MM/yyyy'}}</td>
+                            <td>{{device.price | moneyCommas }}</td>
+                            <td>VNPT PAY</td>
+                            <td class="uk-text-center">
+                                <span ng-if="!device.action" class="uk-badge uk-badge-danger">{{"serviceBill." + device.action | translate}}</span>
+                                <span ng-if="device.action" class="uk-badge uk-badge-success">{{"serviceBill." + device.action | translate}}</span>
+                            </td>
+                            <td class="uk-text-center">
+                                <span ng-if="!device.active" class="uk-badge uk-badge-danger" data-translate="global.messages.failed"></span>
+                                <span ng-if="device.active" class="uk-badge uk-badge-success" data-translate="global.messages.success"></span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ts_pager" id="table_bill_pager">
+                    <ul class="uk-pagination ts_pager">
+                        <li ng-click="selectPageClickHandle()" data-uk-tooltip title="{{selectPage}}">
+                            <input ng-change="selectPageHandle('serviceBills')" id="bill_selectize_page" type="text"
+                                   config="TABLES['serviceBills'].selectize_page_config" options="TABLES['serviceBills'].selectize_page_options"
+                                   ng-model="TABLES['serviceBills'].selectize_page" name="TABLES['serviceBills'].selectize_page" selectize>
+                        </li>
+                        <li><a href="javascript:void(0)" class="firstPage" ng-click="handleFirstPage('serviceBills')"><i class="uk-icon-angle-double-left"></i></a></li>
+                        <li><a href="javascript:void(0)" class="prevPage" ng-click="handlePreviousPage('serviceBills')"><i class="uk-icon-angle-left"></i></a></li>
+                        <li><span class="pageDisplay">1-20/50</span></li>
+                        <li><a href="javascript:void(0)" class="nextPage" ng-click="handleNextPage('serviceBills')"><i class="uk-icon-angle-right"></i></a></li>
+                        <li><a href="javascript:void(0)" class="lastPage" ng-click="handleLastPage('serviceBills')"><i class="uk-icon-angle-double-right"></i></a></li>
+                        <li data-uk-tooltip title="{{pageSize}}">
+                            <input ng-change="selectPageNumHandle('serviceBills')" id="bill_selectize_pageNum" type="text"
+                                   config="TABLES['serviceBills'].selectize_pageNum_config" options="TABLES['servicePayments'].page_size_option"
+                                   ng-model="TABLES['serviceBills'].selectize_pageNum" name="TABLES['servicePayments'].selectize_pageNum" selectize>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

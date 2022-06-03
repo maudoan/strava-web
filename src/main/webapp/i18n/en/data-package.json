@@ -1,0 +1,73 @@
+{
+	"package":{
+		"field":{
+			"name":"Name pack",
+			"type":"Type",
+			"price":"Price pack (VND)",
+			"period":"Period",
+			"numberDevice":"Number of device",
+			"storageTime":"Storage time",
+			"storageCapacity":"Storage capacity",
+			"autoExtend":"Auto extend",
+			"description":"Description",
+			"state":"State"
+		},
+		"state":{
+			"new":"New",
+			"active":"Operation",
+			"deactive":"Suspend operation",
+			"cacelled":"Cancelled"
+		},
+		"autoExtend":{
+			"yes":"Yes",
+			"no":"No"
+		},
+		"type":{
+			"1":"Single",
+			"2":"Bundle"
+		},
+		"kindOfTime":{
+			"day":"Day(s)",
+			"month":"Month(s)",
+			"year":"Year(s)"
+		},
+		"message":{
+			"activate": "Do you want to activate this package?",
+			"reactivate":"Do you want to reactivate this package?",
+			"deactivate": "Do you want to pause activity of this package?",
+			"batchDeactivate":"Are you sure want to pause activity of the packages?"
+		}
+	},
+	"serviceCustomer": {
+		"field": {
+			"name": "Tên gói cước",
+			"startTime": "Ngày đăng ký",
+			"autoExtend":"Tự động gia hạn",
+			"endTime": "Thời gian hết hạn",
+			"state":"Trạng thái"
+		}
+	},
+	"serviceDevice": {
+		"field": {
+			"list": "Danh sách thiết bị",
+			"code": "Mã thiết bị",
+			"name": "Tên thiết bị",
+			"modelName": "Dòng thiết bị",
+			"modelCode": "Model",
+			"uid": "UID"
+		}
+	},
+	"serviceBill": {
+		"field": {
+			"list": "Danh sách giao dịch",
+			"billNumber": "Số hoá đơn",
+			"datePayment": "Ngày thanh toán",
+			"price": "Số tiền",
+			"paymentMethod": "Phương thức thanh toán",
+			"status": "Trạng thái",
+			"action": "Hành đọng"
+		},
+		"1": "Đăng ký",
+		"0": "Hủy gói"
+	}
+}

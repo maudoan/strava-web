@@ -1,0 +1,31 @@
+{
+  "manufacturing": {
+    "name": "Hoạt động sản xuất",
+    "season": {
+      "status": {
+        "new": "Mới",
+        "inProgress": "Đang thực hiện",
+        "finish": "Hoàn thành"
+      },
+      "column": {
+        "procedure": "Quy trình sản xuất"
+      }
+    },
+    "diary": {
+      "name": "Nhật ký sản xuất",
+      "column": {
+        "farm": "Trang trại",
+        "area": "Khu vực sản xuất",
+        "season": "Đợt",
+        "owner": "Người ghi nhật ký",
+        "code": "Mã đợt",
+        "date": "Ngày ghi nhật ký",
+        "product": "Sản phẩm",
+        "period": "Giai đoạn",
+        "description": "Mô tả",
+        "link": "Đính kèm",
+        "action": "Thao tác"
+      }
+    }
+  }
+}

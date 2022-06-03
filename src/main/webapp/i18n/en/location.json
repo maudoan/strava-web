@@ -1,0 +1,66 @@
+{
+  "location": {
+
+    "titlePage":{
+      "Home":"Home",
+      "Configuration":"Configuration",
+      "WarehouseMan":"Warehouse Management",
+      "Warehouse":"Warehouse",
+      "Location":"Location"
+    },
+    "column": {
+      "Active":"Active",
+      "Created":"Created",
+      "Created_by":"Created By",
+      "Updated":"Updated",
+      "Updated_by":"Updated By",
+      "image": "Image",
+      "gln": "GLN",
+      "name": "Name",
+      "shortName": "Short Name",
+      "organizationName": "Organization Name",
+      "address": "Address"
+    },
+    "label" : {
+      "info": "Information",
+      "organizationCode": "Organization Code",
+      "acreage": "Acreage",
+      "phoneNumber": "Phone Number",
+      "email": "Email",
+      "exportInfo": "Export Information",
+      "shareInfo": "Setup for share Information",
+      "exportPolicy": "Export Policy",
+      "shareInfoForPartner": "Share Information for Partner",
+      "noShareInfo": "Don't share",
+      "fifo": "Export by FIFO (First In First Out)",
+      "fefo": "Export by FEFO (First Expired First Out)",
+      "viewProduct": "View Product",
+      "stock": "Stock Quantity",
+      "production": "Processing Production"
+    },
+    "common": {
+      "vendor":"Vendor location",
+      "view":"View",
+      "internal":"Internal location",
+      "customer":"Customer location",
+      "inventory_loss":"Inventory loss",
+      "production":"Production",
+      "transit":"Transit location"
+
+    },
+    "headerPage":{
+      "Import":"Import",
+      "Export":"Export",
+      "Active":"Active",
+      "Inactive":"Archive",
+      "CurrentStock":"Current Stock",
+      "Product":"Product"
+    },
+    "messages": {
+      "errorCreate":"Unable to create new Location. Please check your data and try again.",
+      "errorUpdate":"Unable to update Location. Please check your data and try again.",
+      "errorDelete":"Unable to remove.",
+      "wrongPatternRule":"This field should not have special characters."
+    }
+  }
+}

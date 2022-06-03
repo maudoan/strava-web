@@ -1,0 +1,267 @@
+<div id="page_content">
+	<div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }" class="header-fixed">
+        <span class="route-header">
+            <a class="uk-text-primary" ui-sref="qrCode" data-translate="admin.menu.logs"></a>
+        </span>
+		</br>
+		<div class="uk-margin-small-top">
+			<button  class="md-btn md-btn-small" ng-click="refresh()">Làm mới</button>
+			<a has-any-authority="ROLE_SYSTEM_ADMIN, ROLE_FARM_ADMIN,Log_Export" ng-click="onDownload()"
+			   class="md-btn md-btn-primary md-btn-small"><span class="uk-text-bold"
+																data-translate="global.button.download"></span></a>
+			<a has-any-authority="ROLE_SYSTEM_ADMIN, ROLE_FARM_ADMIN,Log_Setting"
+			   class="md-btn md-btn-default md-btn-small"
+			   data-uk-modal="{target:'#config_delete_log'}" id="configDeleteLog">
+				<span class="uk-text-bold">Cài đặt xoá</span>
+			</a>
+		</div>
+	</div>
+	<div id="page_content_inner">
+		<jhi-alert></jhi-alert>
+		<modal-alert></modal-alert>
+
+		<div class="md-card">
+			<div class="md-card-content">
+				<div class="uk-grid">
+					<div class="uk-width-small-1-2 uk-width-medium-1-4">
+						<label class="label-bold custom-label text-padding-top" data-translate="log.column.email"></label>
+						<input id="fullName" name="fullName"
+							   position="bottom"
+							   config="ComboBox['fullName'].config"
+							   options="ComboBox['fullName'].options"
+							   ng-model="log.userId"
+							   table="ComboBox['fullName'].table"
+							   column="ComboBox['fullName'].column"
+							   scope-controller="ComboBox['fullName'].scope" selectize>
+					</div>
+
+					<div class="uk-width-small-1-2 uk-width-medium-1-4">
+						<label class="label-bold custom-label" data-translate="log.column.phone"></label>
+						<input id="phone" name="phone"
+							   position="bottom"
+							   config="ComboBox['phone'].config"
+							   options="ComboBox['fullName'].options"
+							   ng-model="log.userId"
+							   table="ComboBox['phone'].table"
+							   column="ComboBox['phone'].column"
+							   scope-controller="ComboBox['fullName'].scope" selectize>
+					</div>
+
+					<div class="uk-width-small-1-2 uk-width-medium-1-4">
+						<label class="label-bold custom-label" data-translate="log.column.type"></label>
+						<input id="type" name="type"
+							   position="bottom"
+							   config="ComboBox['type'].config"
+							   options="ComboBox['type'].options"
+							   ng-model="log.type"
+							   table="ComboBox['type'].table"
+							   column="ComboBox['type'].column"
+							   scope-controller="ComboBox['type'].scope" selectize>
+					</div>
+
+					<div class="uk-width-small-1-2 uk-width-medium-1-4">
+					</div>
+				</div>
+
+				<div class="uk-grid">
+					<!--line 2; noi dung-->
+					<div class="uk-width-small-1-2 uk-width-medium-1-4">
+						<label class="label-bold custom-label" data-translate="log.column.errorKey"></label>
+						<input id="errorKey"
+							   config="selectize_keys_config"
+							   options="selectize_keys_options"
+							   position="bottom"
+							   ng-model="log.errorKey"
+							   selectize="">
+					</div>
+
+					<!--device uid-->
+<!--					<div class="uk-width-small-1-2 uk-width-medium-1-4">-->
+<!--						<label class="label-bold custom-label" data-translate="log.column.uid"></label>-->
+<!--						<input name="uid" id="uid"-->
+<!--							   class="md-input ng-isolate-scope md-input-processed"-->
+<!--							   type="text" ng-model="log.uid"/>-->
+<!--					</div>-->
+
+					<!-- date-->
+					<div class="uk-width-small-1-2 uk-width-medium-1-4">
+						<label class="label-bold custom-label" data-translate="log.column.created"></label>
+						<date-picker-search value="log" column="'createdTmp'"></date-picker-search>
+					</div>
+
+					<div class="uk-width-small-1-2 uk-width-medium-1-4">
+						<label class="label-bold custom-label" data-translate="log.column.active"></label>
+						<input id="status"
+							   config="selectize_status_config"
+							   options="selectize_status_options"
+							   position="bottom"
+							   ng-model="log.active"
+							   selectize="">
+					</div>
+
+					<!--device uid-->
+					<div class="uk-width-small-1-2 uk-width-medium-1-4 text-padding-top uk-text-center">
+						<a has-any-authority="ROLE_SYSTEM_ADMIN, ROLE_FARM_ADMIN, Log_View" ng-click="onSearch()"
+						   class="md-btn md-btn-primary md-btn-small"><span class="uk-text-bold"
+																			data-translate="global.button.search"></span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="md-card">
+			<div class="md-card-content">
+				<div class="uk-overflow-container uk-margin-bottom table-height-fixed">
+					<table class="hoverTable uk-table uk-table-align-vertical uk-table-striped  tablesorter tablesorter-altair table-fixed"
+						   id="logs">
+						<thead >
+						<tr class="uk-table-nowrap">
+							<th>
+								<label data-translate="log.column.email" class="boldHeader"></label>
+							</th>
+							<th>
+								<label data-translate="log.column.phone" class="boldHeader"></label>
+							</th>
+							<th>
+								<label data-translate="log.column.created" class="boldHeader"></label>
+							</th>
+							<th>
+								<label data-translate="log.column.type" class="boldHeader"></label>
+							</th>
+<!--							<th style="width: 40%">-->
+<!--								<label data-translate="log.column.note" class="boldHeader"></label>-->
+<!--							</th>-->
+							<th style="width: 40%">
+								<label data-translate="log.column.errorKey" class="boldHeader"></label>
+							</th>
+<!--							<th>-->
+<!--								<label data-translate="log.column.uid" class="boldHeader"></label>-->
+<!--							</th>-->
+
+							<th>
+								<label data-translate="log.column.active" class="boldHeader"></label>
+							</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="log in logs" on-last-repeat
+							ng-class="{'hoverRow': !qrCode.unRemove, 'custom-un-remove': qrCode.unRemove}">
+							<td>{{log.user.email}}</td>
+							<td>{{log.user.phone}}</td>
+							<td>{{log.created | date : 'yyyy-MM-dd HH:mm:ss'}}</td>
+							<td>{{log.logTypeAction}}</td>
+<!--							<td>-->
+<!--								<pre style="max-height: 200px">{{ convertJsonToHtml(log.note) | json: 4 }}</pre>-->
+<!--							</td>-->
+							<td><span data-translate="{{log.errorKey}}"></span></td>
+							<td>
+								<span ng-if="log.active == 0" class="uk-badge uk-badge-danger" data-translate="log.status.failed"></span>
+								<span ng-if="log.active == 1" class="uk-badge uk-badge-success" data-translate="log.status.success"></span>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="ts_pager" id="table_log_pager">
+					<ul class="uk-pagination ts_pager">
+						<li ng-click="selectPageClickHandle()" data-uk-tooltip title="{{selectPage}}">
+							<input ng-change="selectPageHandle('logs')" id="log_selectize_page" type="text"
+								   config="TABLES['logs'].selectize_page_config"
+								   options="TABLES['logs'].selectize_page_options"
+								   ng-model="TABLES['logs'].selectize_page" name="TABLES['logs'].selectize_page"
+								   selectize>
+						</li>
+						<li><a href="javascript:void(0)" class="firstPage" ng-click="handleFirstPage('logs')"><i
+							class="uk-icon-angle-double-left"></i></a></li>
+						<li><a href="javascript:void(0)" class="prevPage" ng-click="handlePreviousPage('logs')"><i
+							class="uk-icon-angle-left"></i></a></li>
+						<li><span class="pageDisplay">1-20/50</span></li>
+						<li><a href="javascript:void(0)" class="nextPage" ng-click="handleNextPage('logs')"><i
+							class="uk-icon-angle-right"></i></a></li>
+						<li><a href="javascript:void(0)" class="lastPage" ng-click="handleLastPage('logs')"><i
+							class="uk-icon-angle-double-right"></i></a></li>
+						<li data-uk-tooltip title="{{pageSize}}">
+							<input ng-change="selectPageNumHandle('logs')" id="log_selectize_pageNum" type="text"
+								   config="TABLES['logs'].selectize_pageNum_config"
+								   options="TABLES['logs'].page_size_option"
+								   ng-model="TABLES['logs'].selectize_pageNum" name="TABLES['logs'].selectize_pageNum"
+								   selectize>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--EXPORT Modal-->
+<div class="uk-modal" id="download_modal">
+	<div class="uk-modal-dialog uk-modal-dialog-small">
+		<div class="uk-modal-header" style="margin: 0 -24px 0px">
+			<span><span class="uk-modal-title">Xuất dữ liệu logs</span><a class="uk-modal-close" style="float: right;"><i class="material-icons">&#xE14C;</i></a></span>
+		</div>
+		<hr>
+		<a href={{downloadUrl}} >Bấm vào đây để tải xuống</a>
+
+		<div class="uk-modal-footer uk-text-right">
+			<button  class="uk-modal-close md-btn  md-btn-default md-btn-small"><span class="uk-text-bold" data-translate="global.button.cancel"></span></button>
+		</div>
+	</div>
+</div>
+<button  data-uk-modal="{target:'#download_modal'}" id="exportLog"   ng-show="false"></button>
+
+<div class="uk-modal" id="config_delete_log">
+	<form name="config_delete_form" id="config_delete_form" class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+		<div class="uk-modal-dialog uk-modal-dialog-small">
+			<div class="uk-modal-header" style="margin: 0 -24px 0px">
+				<span><span class="uk-modal-title">Cài đặt thời gian xoá logs</span><a class="uk-modal-close" style="float: right;"><i class="material-icons">&#xE14C;</i></a></span>
+			</div>
+			<hr>
+			<div class="uk-modal-content">
+					<p>Cài đặt thời gian dưới để tự động xoá logs cũ hơn thời gian đã được cấu hình</p>
+
+					<div class="uk-grid">
+						<div class="uk-width-medium-1-3 text-padding-top">
+							Xoá logs cũ hơn
+						</div>
+						<div class="uk-width-medium-1-3 parsley-row">
+							<input name="timeToDeleteLog" id="timeToDeleteLog"
+								   class="md-input ng-isolate-scope md-input-processed"
+								   type="number" ng-model="config.timeDeleteLog"
+								   ng-required="false"
+								   data-parsley-required-message="{{messages.required}}"
+								   min="1"
+								   max="12"
+								   data-parsley-range="[1,12]"
+								   data-parsley-range-message="Giá trị được nhập trong khoảng từ 1 đến 12"
+							/>
+						</div>
+						<div class="uk-width-medium-1-3 parsley-row">
+							<input id="typeDeleteLogInput"
+								   ng-required="true"
+								   data-parsley-required-message="{{messages.required}}"
+								   data-parsley-trigger="input"
+								   config="selectize_type_delete_config"
+								   options="selectize_type_delete_options"
+								   position="bottom"
+								   ng-model="config.typeDeleteLog"
+								   selectize="">
+						</div>
+					</div>
+			</div>
+
+			<div class="uk-modal-footer uk-text-center">
+				<button
+						class="md-btn md-btn-primary md-btn-small" ng-click="onSaveConfig()">
+					<span class="uk-text-bold" data-translate="global.button.save"></span>
+				</button>
+
+				<button
+						class="uk-modal-close md-btn md-btn-default md-btn-small">
+					<span class="uk-text-bold" data-translate="global.button.cancel"></span>
+				</button>
+			</div>
+		</div>
+	</form>
+</div>
+<!--END EXPORT-->

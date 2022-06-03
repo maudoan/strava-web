@@ -1,0 +1,318 @@
+<div id="page_content">
+	<form name="policy_form" id="policy_form" class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+		<div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <span class="route-header">
+                <a class="uk-text-primary" ui-sref="policy" data-translate="admin.menu.policyManagement"></a>&nbsp;<i
+				class="uk-icon-arrow-circle-right"></i>
+                <span data-translate="global.button.create"></span>
+            </span>
+			<br/>
+			<div class="uk-margin-small-top">
+				<button has-any-authority ="ROLE_SYSTEM_ADMIN, ROLE_HOME_ADMIN, Policy_Create" ng-click="submit(false)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+					class="uk-text-bold" data-translate="global.button.save"></span></button>
+				<button has-any-authority ="ROLE_SYSTEM_ADMIN, ROLE_HOME_ADMIN, Policy_Create" ng-click="submit(true)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+					class="uk-text-bold" data-translate="global.button.saveAndClose"></span></button>
+				<a ui-sref="policy" class="md-btn md-btn-small"><span class="uk-text-bold" data-translate="global.button.cancel"></span></a>
+			</div>
+		</div>
+		<div id="page_content_inner">
+			<jhi-alert></jhi-alert>
+			<modal-alert></modal-alert>
+			<div class="md-card">
+				<div class="md-card-content">
+					<div class="uk-grid">
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.policy.field.name"></label> <span class="req"> *</span>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input
+								ng-required="true"
+								data-parsley-required-message="{{'global.messages.required' | translate}}"
+								data-parsley-maxlength="255"
+								data-parsley-maxlength-message="{{'global.messages.maxLength255' | translate}}"
+								data-parsley-whitespace="trim"
+								ng-model="policy.namePolicy"
+								class="md-input ng-isolate-scope md-input-processed" md-input="">
+						</div>
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.policy.field.deviceType"></label> <span class="req"> *</span>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input id="deviceTypeCbb" name="deviceTypeCbb"
+								   ng-required="true"
+								   data-parsley-required-message="{{'admin.messages.required' | translate}}"
+								   data-parsley-trigger="focusin focusout"
+								   position="bottom"
+								   config="ComboBox['deviceTypeCbb'].config"
+								   options="ComboBox['deviceTypeCbb'].options"
+								   ng-model="policy.deviceTypeId"
+								   table="ComboBox['deviceTypeCbb'].table"
+								   column="ComboBox['deviceTypeCbb'].column"
+								   ng-model-object="selectedCbb.deviceType"
+								   ng-change="updateDeviceModelCbb()"
+								   scope-controller="ComboBox['deviceTypeCbb'].scope" selectize>
+						</div>
+					</div>
+					
+					<!-- <div class="uk-grid">
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.policy.field.deviceType"></label> <span class="req"> *</span>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input id="deviceTypeCbb" name="deviceTypeCbb"
+								   ng-required="true"
+								   data-parsley-required-message="{{'admin.messages.required' | translate}}"
+								   data-parsley-trigger="focusin focusout"
+								   position="bottom"
+								   config="ComboBox['deviceTypeCbb'].config"
+								   options="ComboBox['deviceTypeCbb'].options"
+								   ng-model="policy.deviceTypeId"
+								   table="ComboBox['deviceTypeCbb'].table"
+								   column="ComboBox['deviceTypeCbb'].column"
+								   ng-model-object="selectedCbb.deviceType"
+								   ng-change="updateDeviceModelCbb()"
+								   scope-controller="ComboBox['deviceTypeCbb'].scope" selectize>
+						</div>
+						
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold" data-translate="device.policy.field.provider"></label><span class="req"> *</span>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input id="providerCbb" name="providerCbb"
+									ng-required="true"
+									data-parsley-required-message="{{'admin.messages.required' | translate}}"
+									data-parsley-trigger="focusin focusout"
+									position="bottom"
+									config="ComboBox['providerCbb'].config"
+									options="ComboBox['providerCbb'].options"
+									ng-model="policy.providerId"
+									table="ComboBox['providerCbb'].table"
+									column="ComboBox['providerCbb'].column"
+									ng-model-object="selectedCbb.provider"
+									ng-change="updateDeviceModelCbb()"
+									scope-controller="ComboBox['providerCbb'].scope" selectize>
+						</div>
+					</div> -->
+					
+					<div class="uk-grid">
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.policy.field.deviceModel"></label> <span class="req"> *</span>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input id="deviceModelCbb" name="deviceModelCbb"
+									ng-disabled="policy.deviceTypeId == null || policy.providerId == null ? true : false"
+									ng-required="true"
+									data-parsley-required-message="{{'admin.messages.required' | translate}}"
+									data-parsley-trigger="focusin focusout"
+									position="bottom"
+									config="ComboBox['deviceModelCbb'].config"
+									options="ComboBox['deviceModelCbb'].options"
+									ng-model="policy.deviceModelId"
+									table="ComboBox['deviceModelCbb'].table"
+									column="ComboBox['deviceModelCbb'].column"
+									ng-model-object="selectedCbb.deviceModel"
+									ng-change="changeDeviceModelCbb()"
+									scope-controller="ComboBox['deviceModelCbb'].scope" selectize>
+						</div>
+						
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold" data-translate="device.policy.field.modelCode"></label>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input
+								readonly
+								ng-model="policy.modelCode"
+								class="md-input ng-isolate-scope md-input-processed" md-input="">
+						</div>
+					</div>
+
+					<div class="uk-grid">
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold ng-scope"></label>Khu vực<span class="req"> *</span>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input id="area"
+								   ng-required="true"
+								   data-parsley-required-message="{{'global.messages.required' | translate}}"
+								   position="bottom"
+								   config="ComboBox['area'].config"
+								   options="ComboBox['area'].options"
+								   ng-model="policy.areaIds"
+								   ng-change="changeArea()"
+								   ng-model-object="selectedCbb.area"
+								   table="ComboBox['area'].table"
+								   column="ComboBox['area'].column"
+								   scope-controller="ComboBox['area'].scope" selectize="">
+							<span class="md-input-bar "></span>
+						</div>
+					</div>
+					
+					<div class="uk-grid">
+						<div class="uk-width-small-3-3 uk-width-medium-6-6 parsley-row">
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.policy.field.chooseFirmwareVersion"></label>
+							</div>
+							<br>
+						</div>
+						<div class="uk-width-small-3-3 uk-width-medium-6-6 parsley-row">
+							<input	name="versionUpgrade"
+									type="radio"
+									checked="checked"
+									ng-click="chooseLastestVersionUpgrade()"
+									class="md-input ng-isolate-scope md-input-processed" md-input="">
+							<label class="label-bold ng-scope" translate="device.policy.field.upgradeLatestVersion"></label>
+							<div class="uk-grid" style="margin-left: -5px">
+								<div class="uk-width-small-5-10 uk-width-medium-3-10">
+									<div class="custom-label">
+										<label ng-show="versioningLastest.firmwareVersion != null" class="label-bold ng-scope">{{versioningLastest.firmwareVersion}}</label>
+										<span ng-show="listFirmwareLength < 1" class="comment ng-scope" translate="device.policy.field.notFirmwareVersion"></span>
+									</div>
+									<br>
+								</div>
+							</div>
+						</div>
+						<div class="uk-width-small-3-3 uk-width-medium-6-6 parsley-row">
+							<input	name="versionUpgrade"
+									type="radio"
+									ng-click="chooseVersionUpgrade()"
+									class="md-input ng-isolate-scope md-input-processed" md-input="">
+							<label class="label-bold ng-scope" translate="device.policy.field.upgradeToVersion"></label>
+							<div class="uk-grid" style="margin-left: -5px">
+								<div class="uk-width-small-5-10 uk-width-medium-3-10">
+									<div class="custom-label">
+										<label class="label-bold ng-scope" translate="device.policy.field.firmwareVersionName"></label>
+									</div>
+								</div>
+								<div class="uk-width-small-5-10 uk-width-medium-5-10 parsley-row">
+									<input id="toVersionCbb" name="toVersionCbb"
+									   ng-disabled="policy.deviceModelId == null || isLastestVersion"
+									   ng-required="!isLastestVersion"
+									   data-parsley-required-message="{{'admin.messages.required' | translate}}"
+									   data-parsley-trigger="focusin focusout"
+									   position="bottom"
+									   config="ComboBox['firmwareVersionCbb'].config"
+									   options="ComboBox['firmwareVersionCbb'].options"
+									   ng-model="policy.versioning"
+									   table="ComboBox['firmwareVersionCbb'].table"
+									   column="ComboBox['firmwareVersionCbb'].column"
+									   ng-model-object="selectedCbb.firmwares"
+									   ng-change="changeVersionging()"
+									   scope-controller="ComboBox['firmwareVersionCbb'].scope" selectize>
+									<span ng-show="listFirmwareLength < 1" class="comment ng-scope" translate="device.policy.field.notFirmwareVersion"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="uk-grid">
+						<div class="custom-label">
+							<label class="label-bold ng-scope" data-translate="device.policy.field.upgradeConditions"></label>
+						</div>
+						<div class="uk-width-small-3-3 uk-width-medium-6-6 parsley-row">
+							<div class="uk-grid">
+								<div class="uk-width-small-5-10 uk-width-medium-3-10">
+									<div class="custom-label">
+										<input	name="fromVersion"
+											type="radio"
+											checked="checked"
+											ng-click="chooseFromCondition()"
+											class="md-input ng-isolate-scope md-input-processed" md-input="">
+										<label class="label-bold ng-scope" translate="device.policy.field.upgradeFromVersion"></label>
+										
+									</div>
+								</div>
+								
+								<div class="uk-width-small-5-10 uk-width-medium-5-10 parsley-row">
+									<input id="fromVersionCbb" name="fromVersionCbb"
+									   ng-disabled="policy.deviceModelId == null || !isFromVersion"
+									   data-parsley-trigger="focusin focusout"
+									   position="bottom"
+									   config="ComboBox['fromVersionCbb'].config"
+									   options="ComboBox['fromVersionCbb'].options"
+									   ng-model="policy.fromVersions"
+									   table="ComboBox['fromVersionCbb'].table"
+									   column="ComboBox['fromVersionCbb'].column"
+									   ng-model-object="selectedCbb.firmwares"
+									   ng-change="changeFromVersion()"
+									   scope-controller="ComboBox['fromVersionCbb'].scope" selectize>
+								<span ng-show="listFirmwareLength <= 1" class="comment ng-scope" translate="device.policy.field.notFirmwareVersion"></span>
+							   </div>
+							</div>
+						</div>
+						<div class="uk-width-small-3-3 uk-width-medium-6-6 parsley-row">
+							<div class="custom-label">
+							<span class="comment ng-scope" translate="device.policy.field.noteUpgradeFromVersion" style="margin-left: 15px;"></span>
+							</div>
+						</div>
+						<div class="uk-width-small-3-3 uk-width-medium-6-6 parsley-row">
+							<div class="uk-grid">
+								<div class="uk-width-small-5-10 uk-width-medium-3-10">
+									<div class="custom-label">
+										<input	name="fromVersion"
+											type="radio"
+											ng-click="chooseExceptVersionCondition()"
+											class="md-input ng-isolate-scope md-input-processed" md-input="">
+										<label class="label-bold ng-scope" translate="device.policy.field.exceptVersions"></label>
+									</div>
+								</div>
+								<div class="uk-width-small-5-10 uk-width-medium-5-10 parsley-row">
+									<input id="exceptVersionsCbb" name="exceptVersionsCbb"
+									   ng-disabled="policy.deviceModelId == null || isFromVersion"
+									   data-parsley-trigger="focusin focusout"
+									   position="bottom"
+									   config="ComboBox['exceptVersionCbb'].config"
+									   options="ComboBox['exceptVersionCbb'].options"
+									   ng-model="policy.exceptVersions"
+									   table="ComboBox['exceptVersionCbb'].table"
+									   column="ComboBox['exceptVersionCbb'].column"
+									   ng-model-object="selectedCbb.firmwares"
+									   ng-change="changeExceptVersion()"
+									   scope-controller="ComboBox['exceptVersionCbb'].scope" selectize>
+									<span ng-show="listFirmwareLength < 1" class="comment ng-scope" translate="device.policy.field.notFirmwareVersion"></span>
+								</div>
+							</div>
+						</div>
+						<div class="uk-width-small-3-3 uk-width-medium-6-6 parsley-row">
+							<div class="custom-label">
+							<span class="comment ng-scope" translate="device.policy.field.noteExceptVersions" style="margin-left: 15px;"></span>
+							</div>
+						</div>
+					</div>
+					<div class="uk-grid">
+						<div class="uk-width-medium-3-10">
+							<div class="custom-label">
+								<label class="label-bold ng-scope"></label>Nội dung thông báo<span class="req"> *</span>
+							</div>
+						</div>
+						<div class="uk-width-medium-6-10 parsley-row">
+							<input
+							ng-required="true"
+							data-parsley-required-message="{{'global.messages.required' | translate}}"
+							data-parsley-maxlength="255"
+							data-parsley-maxlength-message="{{'global.messages.maxLength255' | translate}}"
+							data-parsley-whitespace="trim"
+							ng-model="policy.notificationContent"
+							class="md-input ng-isolate-scope md-input-processed" md-input="">
+							<span class="md-input-bar "></span>
+						</div>
+					</div>
+					<br>
+				</div>
+			</div>
+		
+		</div>
+	</form>
+</div>

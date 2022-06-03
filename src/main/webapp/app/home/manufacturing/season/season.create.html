@@ -1,0 +1,379 @@
+<div id="page_content">
+    <form name="form_createSeason" id="form_createSeason"
+          class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+        <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <span class="route-header">
+                <a class="uk-text-primary" ui-sref="manufacturing-manager" data-translate="admin.menu.manufacturing"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+                <a class="uk-text-primary" ui-sref="seasons" data-translate="manufacturing.diary.column.season"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+                <span data-translate="global.button.create"></span>
+            </span>
+            <br/>
+            <div class="uk-margin-small-top">
+                <button has-any-authority="ROLE_SYSTEM_ADMIN,ROLE_SYSTEM_USER,ROLE_FARM_ADMIN, Season_Update" ng-click="submit()" type="submit" class="md-btn md-btn-primary md-btn-small"><span class="uk-text-bold" data-translate="global.button.save"></span></button>
+                <button has-any-authority="ROLE_SYSTEM_ADMIN,ROLE_SYSTEM_USER,ROLE_FARM_ADMIN, Season_Update" ng-click="submit(true)" type="submit" class="md-btn md-btn-primary md-btn-small"><span class="uk-text-bold" data-translate="global.button.saveClose"></span></button>
+                <a ui-sref="seasons" class="md-btn md-btn-small"><span class="uk-text-bold" data-translate="global.button.cancel"></span></a>
+            </div>
+        </div>
+        <div id="page_content_inner">
+            <jhi-alert></jhi-alert><modal-alert></modal-alert>
+            <div class="md-card">
+                <div class="md-card-content">
+                    <div class="uk-grid" data-uk-grid-margin="">
+
+                        <!-- trang trại -->
+                       <!-- <div class="uk-width-medium-1-1 uk-row-first">
+                            <div class="uk-grid">
+                                <div class="uk-width-small-5-10" />
+
+                            </div>
+                        </div>-->
+
+                        <!--tên đợt + trạng thái-->
+                        <div class="uk-width-medium-1-1 uk-row-first">
+                            <div class="uk-grid">
+                                <div class="uk-width-small-2-10">
+                                    <label class="label-bold title-organization" for="name" data-translate="admin.season.name"></label>
+                                    <span class="req"> *</span>
+                                </div>
+                                <div class="uk-width-small-3-10">
+                                    <input data-parsley-required-message={{messages.required}}
+                                           data-parsley-whitespace="trim"
+                                           data-parsley-maxlength-message="{{messages.maxLength255}}"
+                                           data-parsley-maxlength="255"
+                                           data-parsley-group="block1"
+                                           title="{{season.name}}"
+                                           ng-model="season.name" type="text" name="name" id="name" required=""
+                                           class="md-input ng-isolate-scope md-input-processed" md-input="">
+                                    <span class="md-input-bar "></span>
+                                </div>
+
+                                <div class="uk-width-medium-1-2">
+                                    <div class="wizard" style="text-align: right;padding-top: 4px;">
+                                        <a ng-class="{'current' : !season.state}">
+                                            <span class="badge"></span>
+                                            <span data-translate="manufacturing.season.status.new" ng-class="{'uk-text-success' : season.state != 0}"></span>
+                                        </a>
+
+                                        <a ng-class="{'current' : season.state == 1}">
+                                            <span class="badge badge-inverse"></span>
+                                            <span data-translate="manufacturing.season.status.inProgress" ng-class="{'uk-text-success' : season.state != 1}"></span>
+                                        </a>
+
+                                        <a ng-class="{'current' : season.state == 2}"><span class="badge badge-inverse"></span>
+                                            <span data-translate="manufacturing.season.status.finish" ng-class="{'uk-text-success' : season.state != 2}"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--tên đợt + trạng thái-->
+                        <div class="uk-width-medium-1-1 uk-row-first">
+                            <div class="uk-grid">
+                                <div class="uk-width-small-2-10">
+                                    <label class="label-bold title-organization" for="code" data-translate="admin.season.code"></label>
+                                </div>
+                                <div class="uk-width-small-3-10">
+                                    <input
+                                            ng-model="season.code" type="text" name="code" id="code"
+                                            ng-readonly="true"
+                                            placeholder="Hệ thống tự sinh"
+                                            class="md-input ng-isolate-scope md-input-processed" md-input="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- kv sx -->
+                        <div class="uk-width-medium-1-1 uk-row-first">
+                            <div class="uk-grid">
+                                <div class="uk-width-small-2-10">
+                                    <label class="label-bold title-organization" for="areaIds" data-translate="admin.season.areaName"></label>
+                                    <span class="req"> *</span>
+                                </div>
+                                <div class="uk-width-small-3-10">
+                                    <div class="parsley-row">
+                                        <input id="areaIds"
+                                               data-parsley-required-message="{{messages.required}}"
+                                               data-parsley-trigger="input"
+                                               data-parsley-group="block1"
+                                               ng-required="true"
+                                               position="bottom"
+                                               config="ComboBox['areaCbb'].config"
+                                               options="ComboBox['areaCbb'].options"
+                                               ng-model="season.areaId"
+                                               table="ComboBox['areaCbb'].table"
+                                               column="ComboBox['areaCbb'].column"
+                                               scope-controller="ComboBox['areaCbb'].scope" selectize="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ngày bắt đầu DK -->
+                        <div class="uk-width-medium-1-1 uk-row-first">
+                            <div class="uk-grid">
+                                <div class="uk-width-small-2-10">
+                                    <label class="label-bold title-organization" for="expectedBeginDate" data-translate="admin.season.expectedBeginDate"></label>
+                                </div>
+                                <div class="uk-width-small-3-10">
+                                    <input id="expectedBeginDate"
+                                           name="expectedBeginDate"
+                                           class="md-input"
+                                           data-parsley-required-message="{{ messages.required}}"
+                                    />
+                                </div>
+
+                                <div class="uk-width-small-2-10">
+                                    <label class="label-bold title-organization" data-translate="admin.season.realityBeginDate"></label>
+                                </div>
+                                <div class="uk-width-small-3-10">
+                                    <div class="parsley-row">
+                                        <input id="realityBeginDate"
+                                               ng-required="season.realityFinishDate != null"
+                                               name="realityBeginDate"
+                                               class="md-input"
+                                               data-parsley-required-message="{{messages.required}}"
+                                        />
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ngày bắt đầu DK -->
+                        <div class="uk-width-medium-1-1 uk-row-first">
+                            <div class="uk-grid">
+                                <div class="uk-width-small-2-10">
+                                    <label class="label-bold title-organization" for="expectedFinishDate" data-translate="admin.season.expectedFinishDate"></label>
+                                </div>
+                                <div class="uk-width-small-3-10">
+                                    <input id="expectedFinishDate"
+                                           name="expectedFinishDate"
+                                           class="md-input"
+                                           data-parsley-required-message="{{ messages.required}}"
+                                    />
+                                </div>
+
+                                <div class="uk-width-small-2-10">
+                                    <label class="label-bold title-organization" for="realityFinishDate" data-translate="admin.season.realityFinishDate"></label>
+                                </div>
+                                <div class="uk-width-small-3-10">
+                                    <input id="realityFinishDate"
+                                           name="realityFinishDate"
+                                           class="md-input"
+                                           data-parsley-required-message="{{ messages.required}}"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="uk-width-medium-1-1 uk-row-first">
+                            <div class="uk-grid">
+                                <div class="uk-width-small-2-10">
+                                    <label class="label-bold title-organization" for="productId" data-translate="infrastructure.product.name"></label>
+                                    <span class="req"> *</span>
+                                </div>
+                                <div class="uk-width-small-3-10">
+                                    <div class="parsley-row">
+                                        <input id="productId"
+                                               data-parsley-required-message="{{messages.required}}"
+                                               data-parsley-trigger="input"
+                                               data-parsley-group="block1"
+                                               ng-required="true"
+                                               position="bottom"
+                                               config="ComboBox['productCbb'].config"
+                                               options="ComboBox['productCbb'].options"
+                                               ng-model="season.productId"
+                                               table="ComboBox['productCbb'].table"
+                                               column="ComboBox['productCbb'].column"
+                                               ng-change="onChangeProduct()"
+                                               scope-controller="ComboBox['productCbb'].scope" selectize="">
+                                    </div>
+                                </div>
+
+                                <div class="uk-width-small-2-10">
+                                    <label class="label-bold title-organization" for="qtr" data-translate="manufacturing.season.column.procedure"></label>
+                                </div>
+                                <div class="uk-width-small-3-10">
+                                    <input
+                                            ng-model="season.productionProcess" type="text" name="code" id="qtr"
+                                            data-parsley-whitespace="trim"
+                                            data-parsley-maxlength-message="{{messages.maxLength255}}"
+                                            data-parsley-maxlength="255"
+                                            data-parsley-group="block1"
+                                            title="{{season.productionProcess}}"
+                                            placeholder="Nhập quy trình sản xuất"
+                                            class="md-input ng-isolate-scope md-input-processed" md-input="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- description -->
+                        <div class="uk-width-medium-1-1 uk-row-first">
+                            <div class="uk-grid">
+                                <div class="uk-width-small-2-10">
+                                    <label class="label-bold title-organization" for="description" data-translate="admin.season.description"></label>
+                                </div>
+                                <div class="uk-width-small-8-10">
+                                    <textarea
+                                            style="border: 1px solid #ddd"
+                                            data-parsley-whitespace="trim"
+                                            data-parsley-maxlength-message="{{messages.maxLength1000}}"
+                                            data-parsley-maxlength="1000"
+                                            data-parsley-group="block1"
+                                            title="{{season.description}}"
+                                            placeholder="Nhập mô tả"
+                                            ng-model="season.description"
+                                            type="text" name="description"
+                                            id="description"
+                                            class="md-input ng-isolate-scope md-input-processed"
+                                            md-input=""></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Giai đoạn thực hiện-->
+                    <div class="uk-grid" data-uk-grid-margin="">
+                        <div class="uk-width-small-1-1">
+                            <p class="title-bold">Giai đoạn thực hiện</p>
+
+                            <table class="hoverTable uk-table uk-table-align-vertical uk-table-striped tablesorter tablesorter-altair table-fixed">
+                                <thead>
+                                <tr>
+                                    <th width="100px">GĐ hoàn thành</th>
+                                    <th data-translate="admin.stage.name"></th>
+                                    <th data-translate="admin.stage.description"></th>
+                                    <th style="width: 15%"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in season.phases">
+                                    <td>
+                                        <div ng-if="editPhasePosition != $index">
+                                            <input
+                                                    id="state{{$index}}"
+                                                    name="state"
+                                                    type="checkbox" class="ts_checkbox"
+                                                    data-md-icheck
+                                                    ng-model="item.state"
+                                                    icheck
+                                                    ng-disabled="true"
+                                                    ng-checked="item.state">
+                                        </div>
+                                        <div  ng-if="editPhasePosition == $index">
+                                            <input
+                                                    id="newState{{$index}}"
+                                                    type="checkbox" class="ts_checkbox"
+                                                    name="newItemCheckbox"
+                                                    data-md-icheck
+                                                    icheck
+                                                    ng-model="newItemPhase.state"
+                                                    ng-disabled="season.state == 0"
+                                                    ng-checked="newItemPhase.state">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span ng-if="editPhasePosition != $index">{{item.name}}</span>
+                                        <input
+                                                ng-required="showEditPhase"
+                                                data-parsley-required-message="{{messages.required}}"
+                                                ng-if="editPhasePosition == $index"
+                                                data-parsley-maxlength-message="{{messages.maxLength255}}"
+                                                data-parsley-maxlength="255"
+                                                data-parsley-group="block2"
+                                                class="md-input ng-isolate-scope md-input-processed" type="text"
+                                                id="editPhaseName"
+                                                ng-model="newItemPhase.name" md-input />
+                                    </td>
+                                    <td>
+                                        <span ng-if="editPhasePosition != $index">{{item.description}}</span>
+                                        <input
+                                                ng-if="editPhasePosition == $index"
+                                                data-parsley-maxlength-message="{{messages.maxLength1000}}"
+                                                data-parsley-maxlength="1000"
+                                                data-parsley-group="block2"
+                                                class="md-input ng-isolate-scope md-input-processed" type="text"
+                                                id="editPhaseDes"
+                                                ng-model="newItemPhase.description" md-input />
+                                    </td>
+                                    <td>
+                                        <button ng-show="editPhasePosition != $index"
+                                                class="md-btn md-btn-primary md-btn-small"
+                                                title="Bấm vào đây để sửa vật tư"
+                                                ng-click="editPhase($index)"><i class="uk-icon-pencil uk-icon-small"></i>
+                                        </button>
+                                        <button ng-show="editPhasePosition == $index"
+                                                class="md-btn md-btn-primary md-btn-small"
+                                                title="Bấm vào đây để Lưu Hoạt Động"
+                                                type="button"
+                                                ng-click="savePhaseEdit($index)"><i class="uk-icon-save uk-icon-small"></i>
+                                        </button>
+                                        <button ng-show="editPhasePosition != $index"
+                                                class="md-btn md-btn-small"
+                                                title="Bấm vào đây để Xóa Hoạt Động"
+                                                ng-click="deletePhase($index)"><i class="uk-icon-trash uk-icon-small"></i>
+                                        </button>
+                                        <button ng-show="editPhasePosition == $index"
+                                                class="md-btn md-btn-small custom-no-left-right"
+                                                ng-click="cancelHandlePhase()" title="Bấm vào đây để Hủy">
+                                            <span data-translate="global.button.cancel"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr ng-show="showAddPhase">
+                                    <td>
+                                        <div class="parsley-row">
+                                            <input
+                                                    name="newItemState"
+                                                    type="checkbox" class="ts_checkbox"
+                                                    data-md-icheck
+                                                    icheck
+                                                    ng-model="newItemPhase.state"
+                                                    ng-disabled="season.state == 0">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input
+                                                ng-required="showAddPhase"
+                                                data-parsley-required-message="{{messages.required}}"
+                                                data-parsley-maxlength-message="{{messages.maxLength255}}"
+                                                data-parsley-maxlength="255"
+                                                data-parsley-group="block2"
+                                                id="stageName"
+                                                class="md-input ng-isolate-scope md-input-processed" type="text"
+                                                ng-model="newItemPhase.name" md-input />
+                                    </td>
+                                    <td>
+                                        <input
+                                                data-parsley-required-message="{{messages.required}}"
+                                                data-parsley-maxlength-message="{{messages.maxLength1000}}"
+                                                data-parsley-maxlength="1000"
+                                                data-parsley-group="block2"
+                                                id="stageDes"
+                                                class="md-input ng-isolate-scope md-input-processed" type="text"
+                                                ng-model="newItemPhase.description" md-input />
+                                    </td>
+                                    <td>
+                                        <a class="md-btn md-btn-primary md-btn-small custom-no-left-right" ng-click="saveItemPhase()" title="Bấm vào đây để Lưu"><i class="uk-icon-save uk-icon-small "></i></a>
+                                        <button type="button" ng-show="showAddPhase" class="md-btn md-btn-small custom-no-left-right" ng-click="cancelHandlePhase()" title="Bấm vào đây để Hủy"><span data-translate="global.button.cancel"></span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">
+                                        <button
+                                                type="button"
+                                                class="custom-fake-button" ng-click="addNewPhase()"
+                                                data-translate="admin.stage.add"></button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

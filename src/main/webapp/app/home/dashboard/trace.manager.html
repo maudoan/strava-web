@@ -1,0 +1,51 @@
+<style>
+    body{
+        background-image: url('/assets/img/bg_2.jpg');
+        background-size: cover;
+    }
+</style>
+<div id="page_content">
+
+    <div id="page_content_inner">
+        <h1  class="uk-text-primary">Truy Xuất</h1>
+        <div class="uk-grid">
+
+            <!--request-->
+            <div has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_SYSTEM_USER,ROLE_FARM_ADMIN, Trace_System_View" class="uk-width-medium-1-3 custom-box-padding-top">
+                <div class="md-card custom-cursor-pointer custom-panel" ng-click="goToTraceRequest()">
+                    <div class="md-card-content " >
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-6 ">
+                                <i class="material-icons md-48 uk-text-primary">find_replace</i>
+                            </div>
+                            <div class="uk-width-medium-5-6 "  style="padding-left: 0px">
+                                <div class="custom-panel-label-2">
+                                    <span ><b data-translate="admin.menu.traceRequest" class="custom-panel-label-2"></b></span><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--info -->
+            <div has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_SYSTEM_USER,ROLE_FARM_ADMIN, Trace_System_View" class="uk-width-medium-1-3 custom-box-padding-top">
+                <div class="md-card custom-cursor-pointer custom-panel" ng-click="goToTraceInfo()">
+                    <div class="md-card-content " >
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-6 ">
+                                <i class="material-icons md-48 uk-text-primary">art_track</i>
+                            </div>
+                            <div class="uk-width-medium-5-6 "  style="padding-left: 0px">
+                                <div class="custom-panel-label-2">
+                                    <span ><b data-translate="admin.menu.traceInfo" class="custom-panel-label-2"></b></span><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

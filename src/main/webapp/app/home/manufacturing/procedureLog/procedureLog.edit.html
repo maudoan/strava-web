@@ -1,0 +1,217 @@
+<style>
+    .inputfile-box {
+        position: relative;
+    }
+    #file-input {
+        display: none;
+    }
+    .file-box {
+        display: block;
+        width: 100%;
+        padding: 5px 0px 5px 5px;
+    }
+    .file-button {
+        padding: 5px;
+    }
+</style>
+
+<div id="page_content" class="pageDetail">
+    <form name="form_create_procedureLog" id="form_create_procedureLog"
+          class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+        <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <span class="route-header">
+                <a class="uk-text-primary" data-translate="admin.menu.manufacturing"></a>&nbsp;<i
+                    class="uk-icon-arrow-circle-right"></i>
+                <a class="uk-text-primary" ui-sref="procedureLogs" data-translate="manufacturing.diary.name"></a>&nbsp;<i
+                    class="uk-icon-arrow-circle-right"></i>
+                <span data-translate="global.button.edit"></span>
+            </span>
+            <br/>
+            <div class="uk-margin-small-top">
+                <button ng-if="season.state != 2" ng-click="submit(false)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+                        class="uk-text-bold" data-translate="global.button.save"></span></button>
+                <button ng-if="season.state != 2" ng-click="submit(true)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+                        class="uk-text-bold" data-translate="global.button.saveAndClose"></span></button>
+                <a ui-sref="procedureLogs-detail({ procedureLogId: procedureLog.id })" class="md-btn md-btn-small"><span class="uk-text-bold" data-translate="global.button.cancel"></span></a>
+            </div>
+        </div>
+
+        <div id="page_content_inner">
+            <jhi-alert></jhi-alert>
+            <modal-alert></modal-alert>
+            <div class="md-card">
+                <div class="md-card-content">
+
+                    <div class="uk-grid">
+                        <div class=" text-padding-top uk-width-small-1-3 uk-width-medium-1-6">
+                            <label class="label-bold  ng-scope"
+                                   data-translate="manufacturing.diary.column.season"></label>
+                            <span class="req">*</span>
+                        </div>
+                        <div class="uk-width-small-2-3 uk-width-medium-2-6">
+                            <div class="parsley-row">
+                                <input readonly
+                                       ng-model="procedureLog.season.name"
+                                       class="md-input ng-isolate-scope md-input-processed" type="text"
+                                       md-input/>
+                            </div>
+                        </div>
+                        <div class="text-padding-top uk-width-small-1-3 uk-width-medium-1-6">
+                            <label class="label-bold  ng-scope"
+                                   data-translate="manufacturing.diary.column.owner"></label>
+                            <span class="req">*</span>
+                        </div>
+                        <div class="uk-width-small-2-3 uk-width-medium-2-6">
+                            <div class="parsley-row">
+                                <input
+                                        id="ownerCbb" name="areaCbb"
+                                        ng-required="true"
+                                        data-parsley-required-message="{{messages.required}}"
+                                        data-parsley-trigger="focusin focusout"
+                                        position="bottom"
+                                        config="ComboBox['ownerCbb'].config"
+                                        options="ComboBox['ownerCbb'].options"
+                                        ng-model="procedureLog.userId"
+                                        table="ComboBox['ownerCbb'].table"
+                                        column="ComboBox['ownerCbb'].column"
+                                        scope-controller="ComboBox['ownerCbb'].scope" selectize>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-grid">
+                        <div class="text-padding-top uk-width-small-1-3 uk-width-medium-1-6 ">
+                            <label class="label-bold  ng-scope"
+                                   data-translate="manufacturing.diary.column.code"></label>
+                        </div>
+                        <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+                            <input readonly
+                                   ng-model="procedureLog.seasonCode"
+                                   class="md-input ng-isolate-scope md-input-processed" type="text"
+                                   md-input/>
+                        </div>
+                        <div class="text-padding-top uk-width-small-1-3 uk-width-medium-1-6 ">
+                            <label class="label-bold  ng-scope"
+                                   data-translate="manufacturing.diary.column.date"></label>
+                            <span class="req">*</span>
+                        </div>
+                        <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+                            <input id="executeDate"
+                                   name="date"
+                                   required="required"
+                                   class="custom-date-picker"
+                                   md-input=""
+                                   data-parsley-required-message="Trường này là bắt buộc"
+                            />
+                        </div>
+                    </div>
+                    <div class="uk-grid">
+                        <div class="text-padding-top uk-width-small-1-3 uk-width-medium-1-6 ">
+                            <label class="label-bold  ng-scope"
+                                   data-translate="manufacturing.diary.column.product"></label>
+                            <span class="req"> *</span>
+                        </div>
+                        <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+                            <input readonly
+                                   ng-value="cbbSelected.product.name"
+                                   class="md-input ng-isolate-scope md-input-processed" type="text"
+                                   md-input/>
+                        </div>
+                        <div class="text-padding-top uk-width-small-1-3 uk-width-medium-1-6 ">
+                            <label class="label-bold  ng-scope"
+                                   data-translate="manufacturing.diary.column.period"></label>
+                            <span class="req"> *</span>
+                        </div>
+                        <div class="uk-width-small-2-3 uk-width-medium-2-6">
+                            <div class="parsley-row">
+                                <input
+                                        id="phaseCbb" name="phaseCbb"
+                                        ng-required="true"
+                                        data-parsley-required-message="{{messages.required}}"
+                                        data-parsley-trigger="focusin focusout"
+                                        position="bottom"
+                                        config="ComboBox['phaseCbb'].config"
+                                        options="ComboBox['phaseCbb'].options"
+                                        ng-model="procedureLog.phaseId"
+                                        table="ComboBox['phaseCbb'].table"
+                                        column="ComboBox['phaseCbb'].column"
+                                        scope-controller="ComboBox['phaseCbb'].scope" selectize>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-grid">
+                        <div class="text-padding-top uk-width-small-1-3 uk-width-medium-1-6">
+                            <label class="label-bold  ng-scope"
+                                   data-translate="manufacturing.diary.column.area"></label>
+                            <span class="req">*</span>
+                        </div>
+                        <div class="uk-width-small-2-3 uk-width-medium-2-6">
+                            <div class="parsley-row">
+                                <input
+                                        id="areaCbb" name="areaCbb"
+                                        ng-required="true"
+                                        data-parsley-required-message="{{messages.required}}"
+                                        data-parsley-trigger="focusin focusout"
+                                        position="bottom"
+                                        config="ComboBox['areaCbb'].config"
+                                        options="ComboBox['areaCbb'].options"
+                                        ng-model="procedureLog.areaId"
+                                        table="ComboBox['areaCbb'].table"
+                                        column="ComboBox['areaCbb'].column"
+                                        scope-controller="ComboBox['areaCbb'].scope" selectize>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-grid">
+                        <div class="text-padding-top uk-width-small-1-3 uk-width-medium-1-6">
+                            <label class="label-bold  ng-scope"
+                                   data-translate="manufacturing.diary.column.description"></label>
+                            <span class="req"> *</span>
+                        </div>
+                        <div class="uk-width-small-2-3 uk-width-medium-5-6 parsley-row">
+                            <textarea ng-model="procedureLog.description" style="border: 1px solid #ddd"
+                                      ng-required="true"
+                                      data-parsley-required-message="{{messages.required}}"
+                                      data-parsley-maxlength="1000"
+                                      data-parsley-maxlength-message="{{messages.maxLength1000}}"
+                                      class="md-input ng-isolate-scope md-input-processed" type="text"
+                                      md-input>
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="uk-grid">
+                        <div class="text-padding-top uk-width-small-1-3 uk-width-medium-1-6 ">
+                            <label class="label-bold  ng-scope"
+                                   data-translate="manufacturing.diary.column.link"></label>
+                        </div>
+                        <div class="uk-width-small-2-3 uk-width-medium-1-6 parsley-row">
+                            <div class="inputfile-box">
+                                <input type="file" id="file-input" multiple>
+                                <label for="file-input">
+                                    <div class="file-button">
+                                        <i style="font-size:35px;" class="uk-icon-cloud-upload"></i>
+                                    </div>
+                                    <div id="file-name" class="file-box"></div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="uk-width-small-1-1 uk-width-medium-1-2">
+                            <span ng-repeat="attachment in procedureLog.attachments">{{attachment.name}}
+                                    <span class="custom-cursor-pointer" ng-click="removeAttachment($index)">
+                                        [<span class="uk-text-danger">x</span>]
+                                    </span>
+                                </br>
+                                </span>
+                            <!--<p ng-repeat="attachment in procedureLog.attachments">
+                                <a href="/api/file/download?filePath=/attachment/uploads/{{attachment.name}}">{{attachment.name}}</a>
+                            </p>-->
+                            <!--<span ng-repeat="attachment in procedureLog.attachment">{{attachment}}</br></span>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>

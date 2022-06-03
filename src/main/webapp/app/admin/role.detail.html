@@ -1,0 +1,127 @@
+<div id="page_content">
+    <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+        <span class="route-header">
+            <!--<a class="uk-text-success" ui-sref="administration" data-translate="admin.menu.administration"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>-->
+            <a class="uk-text-primary" data-translate="admin.menu.administration"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+            <a class="uk-text-primary" ui-sref="roles" data-translate="admin.role.list"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+            <!--<span>{{role.name}}</span>-->
+            <span class="overflowLongText" value="role.name" is-input="false"></span>
+        </span>
+        <div class="uk-margin-small-top">
+            <a has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Role_Update" ng-show="role.type==0" ui-sref="roles-edit({roleId: role.id })" class="md-btn md-btn-primary md-btn-small"><span class="uk-text-bold" data-translate="global.button.edit"></span></a>
+            <a has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Role_Create" ui-sref="roles-create" class="md-btn md-btn-primary md-btn-small"><span class="uk-text-bold" data-translate="global.button.create"></span></a>
+        </div>
+    </div>
+
+    <div id="page_content_inner">
+        <div class="md-card">
+                    <div class="md-card-content">
+                        <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-width-medium-1-1">
+                                <label class="label-bold" data-translate="admin.role.column.Name"></label>
+                                <textarea ng-if="role.name.length > 80" cols="80" class="md-input ng-isolate-scope md-input-processed" readonly ng-model="role.name" md-input textarea-autosize></textarea>
+                                <input ng-if="role.name.length <= 80" class="md-input ng-isolate-scope md-input-processed" readonly type="text" ng-model="role.name" md-input />
+                            </div>
+                            <div class="uk-width-medium-1-1">
+                                <label class="label-bold" data-translate="admin.role.column.Description"></label>
+                                <textarea ng-if="role.description.length > 80" cols="80" class="md-input ng-isolate-scope md-input-processed" readonly ng-model="role.description" md-input textarea-autosize></textarea>
+                                <input ng-if="role.description.length <= 80" class="md-input ng-isolate-scope md-input-processed" readonly type="text" ng-model="role.description" md-input />
+                            </div>
+                            <!--<div class="uk-width-medium-1-1">
+                                <label class="label-bold title-organization" data-translate="admin.menu.location"></label>
+
+                                <div class="custom-info" style="padding-top:0!important;">
+                                    <a ui-sref="organizations-detail({organizationId: role.organization.id })">
+                                        {{role.organization.name}}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="uk-width-medium-1-2">
+                                <label class="label-bold" data-translate="admin.user.column.created"></label>
+                                <input class="md-input ng-isolate-scope md-input-processed" readonly type="text" value="{{role.created | date: 'dd-MM-yyyy HH:mm:ss'}}" md-input />
+                            </div>
+                            <div class="uk-width-medium-1-2">
+                                <label class="label-bold" data-translate="admin.user.column.updated"></label>
+                                <input class="md-input ng-isolate-scope md-input-processed" readonly type="text" value="{{role.updated | date: 'dd-MM-yyyy HH:mm:ss'}}" md-input />
+                            </div>
+                            <div class="uk-width-medium-1-2">
+                                <label class="label-bold" data-translate="admin.user.column.createdBy"></label>
+                                <input ng-model="role.createdBy" readonly type="text" class="md-input ng-isolate-scope md-input-processed" md-input="">
+                                <span class="md-input-bar "></span>
+                            </div>
+                            <div class="uk-width-medium-1-2">
+                                <label class="label-bold" data-translate="admin.user.column.updatedBy"></label>
+                                <input ng-model="role.updatedBy" readonly type="text" class="md-input ng-isolate-scope md-input-processed" md-input="">
+                                <span class="md-input-bar "></span>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+
+        <div class="uk-grid data-uk-grid-margin">
+            <div class="uk-width-medium-2-5">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <h3 class="heading_a uk-margin-bottom" data-translate="admin.role.column.AvailablePrivileges"></h3>
+                        <div class="uk-grid uk-margin-small-bottom">
+                            <div class="uk-width-medium-1-1" id="filter_switches">
+                                <div class="uk-margin-bottom">
+                                    <div class="uk-input-group">
+                                        <input type="text" class="md-input" placeholder="{{'admin.role.column.FilterTree' | translate}}" id="filter_input" ng-model="tree.filterInput">
+                                        <span class="uk-input-group-addon"><button class="md-btn md-btn-small" href="#" id="tree_filter_reset" ng-click="resetFilters($event)" ng-disabled="tree.filterInput == ''" data-translate="global.button.clear"></button></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-medium-1-1">
+                                <div id="tFilter" class="fixedFancyTree"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-medium-1-5">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <div class="uk-width-medium-2-3 uk-align-center uk-margin-medium-top">
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-1-1 uk-margin-bottom">
+                            <a class="md-btn md-btn-wave md-btn-primary md-btn-block disabled" href="javascript:void(0)" ng-click="addPrivilege()">></a>
+                        </div>
+                        <div class="uk-width-medium-1-1 uk-margin-bottom">
+                            <a class="md-btn md-btn-wave md-btn-primary md-btn-block disabled" href="javascript:void(0)" ng-click="addAllPrivilege()">>></a>
+                        </div>
+                        <div class="uk-width-medium-1-1 uk-margin-bottom">
+                            <a class="md-btn md-btn-wave md-btn-danger md-btn-block disabled" href="javascript:void(0)" ng-click="removePrivilege()"><</a>
+                        </div>
+                        <div class="uk-width-medium-1-1 uk-margin-bottom">
+                            <a class="md-btn md-btn-wave md-btn-danger md-btn-block disabled" href="javascript:void(0)" ng-click="removeAllPrivilege()"><<</a>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-medium-2-5">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <h3 class="heading_a uk-margin-bottom" data-translate="admin.role.column.SelectPrivileges"></h3>
+                        <div class="uk-grid uk-margin-small-bottom">
+                            <div class="uk-width-medium-1-1" id="filter_switches_selected">
+                                <div class="uk-margin-bottom">
+                                    <div class="uk-input-group">
+                                        <input type="text" class="md-input" placeholder="{{'admin.role.column.FilterTree' | translate}}" id="filter_input_selected" ng-model="tree_selected.filterInput">
+                                        <span class="uk-input-group-addon"><button class="md-btn md-btn-small" href="#" id="tree_selected_filter_reset" ng-click="resetFilters_selected($event)" ng-disabled="tree_selected.filterInput == ''" data-translate="global.button.clear"></button></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-medium-1-1">
+                                <div id="tFilter_selected" class="fixedFancyTree"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

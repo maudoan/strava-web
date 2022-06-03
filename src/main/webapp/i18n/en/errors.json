@@ -1,0 +1,407 @@
+{
+  "error": {
+    "authentication":"Failed to sign in!",
+    "register":"Failed to register!",
+    "emailIncorect":"User does not exist in the system. Please enter again.",
+    "passwordIncorect":"Incorrect password, please enter it again",
+    "accountInactive": "Inactive account",
+    "passwordInvalid":"Password should have 8 to 256 characters and contain at least one alphabetic character",
+    "usernameIncorrect": "Incorrect account, please enter again",
+    "otpCodeInvalid": "OTP code invalid",
+    "invalidResetPasswordToken": "OTP code invalid",
+    "phoneNumberInvalid": "Phone number is wrong format",
+    "typeInvalid": "Account have not permission to access this system",
+    "accountInvalid": "Tài khoản không hợp lệ",
+    "login":{
+      "invalidcredentials":"Current password is incorrect"
+    },
+    "userAndPermission":{
+      "emailExists":"This email is in used, please use another email",
+      "roleHasNoPrivilege":"Please select at least one privilege for creating role.",
+      "userHasRole":"This user have role already. Can not delete.",
+      "roleHasPrivilege":"This role have privilege already. Can not delete.",
+      "existsUserUseRole": "Role have user already. Can not delete.",
+      "roleExist": "This role name is in used, please use another name",
+      "imageIsTooLarge": "Image size is too large!",
+      "duplicateEmail": "This email is in used, please use another email",
+      "duplicateCode": "Organization code already exists in the system, please try again",
+      "currentPasswordInvalid":"Invalid current password",
+      "deactiveFail": "Can not deactive this account, please try again",
+      "deleteActiveUser": " Không được xóa người dùng có trạng thái Hoạt động",
+      "emailExistsInFile": "The email is duplicate. Please check your file again",
+      "userIsEmpty": "User is empty, Please check your file again",
+      "deleteActiveEndUser": " Do not delete customers with active status",
+      "emailInvalid": "Email invalid format",
+      "confirmPassword": "Invalid authentication password",
+      "phoneNumberExists": "Registed account",
+      "canNotDeleteYourSelf": "Can not delete yourself",
+      "registeredButNotSetPassword":"Phone number not set password yet. Please click \"Fogot password\" to setting the password",
+      "registeredButNotYetActivated": "Invalid Account, please try again"
+    },
+    "userManagement":{
+      "emailExists":"This email is in used, please use another email",
+      "roleHasNoPrivilege":"Please select at least one privilege for creating role.",
+      "userHasRole":"This user have role already. Can not delete.",
+      "roleHasPrivilege":"This role have privilege already. Can not delete.",
+      "roleExist": "This role name is in used, please use another name",
+      "imageIsTooLarge": "Image size is too large!"
+    },
+    "permission":{
+      "canNotDeleteSystemObject":"Can not delete system object.",
+      "canNotEditSystemObject":"Can not edit system object.",
+      "canNotPerform":"You don't have permission to perform this action.",
+      "noPermission":"You don't have permission to perform this action."
+    },
+    "common":{
+      "deleteError": "Can not delete records with id: ",
+      "maxLengthRule":"This field is too long. It should have maximum 255 characters.",
+      "referenceError":"Can not delete this record. It has been referenced by another.",
+      "existsName": "This name already exists, please try again",
+      "failed": "Failed",
+      "timeout":"Time out error",
+      "accessDenied": "Access is denied",
+      "notFoundId": "ID not found"
+    },
+    "deviceType":{
+    	"nameExists":"Device type name already exists, please try again.",
+    	"alreadyUsed":"Device type has been used, could not be delete",
+    	"cannotDeleteCamera":"Cannot delete camera device type"
+    },
+    "deviceModel": {
+      "nameIsNotEmpty":  "Name is not empty",
+      "nameIsDuplicate": "Device model already exists",
+      "codeIsNotEmpty": "Code is not empty",
+      "firmwareIsNotEmpty": "Firmware is not empty",
+      "alreadyUsed": "DeviceModel already used. Cannot delete.",
+      "errorEdit":"The device model is already attached to the firmware. You can only edit the device model's description and avatar."
+    },
+    "firmware": {
+      "upload": {
+        "maxSize":"Import file should not be larger than 1GB",
+        "invalidFormat": "Type of file is invalid",
+        "nameExists":"Firmware name already exists, please try again."
+      },
+      "alreadyUsedInPolicyCannotEdit":"This firmware is already used for policy. Cannot edit",
+      "alreadyUsed":"Firmware(s) is already used for policy. Cannot delete.",
+      "alreadyUsedInPolicy":"This firmware is already used for policy. Cannot delete."
+    },
+    "file":{
+    	"nameExists":"Firmware file already exists in the system, Please select another upload file."
+    },
+    "warehouse":{
+      "nameExist":"Warehouse name is already exist.",
+      "codeExist":"Warehouse code is already exist.",
+      "referenced": "Can not delete this warehouse. It has been referenced by route."
+    },
+    "uom":{
+      "nameExist":"This unit is already exist, please try again",
+      "defaultUom": "Can not edit default Unit or has been used",
+      "duplicateUom": "Unit has been existed, please try again",
+      "uomAlreadyUsed": "Can not delete default Unit or has been used"
+    },
+    "operation-type":{
+      "nameExist":"Operation type name is already exist.",
+      "codeExist":"Operation type code is already exist.",
+      "transfer":"Operation type existed in a transfer.",
+      "valuation":"Operation type existed in a valuation report template.",
+      "valuationOrTransfer":"Operation type existed in transfer or valuation report template."
+    },
+    "sequence": {
+      "nameExist": "Sequence name is already exist.",
+      "codeExist": "Sequence code is already exist.",
+      "referenced": "Can not delete this sequence. It has been referenced by operation type.",
+      "hasOperationTypeActive": "Can not archive this sequence. It has been referenced by an active operation type."
+    },
+    "uomCategory":{
+      "nameExist":"UOM Category name is already exist."
+    },
+    "locaion": {
+      "delete": "Cannot delete Location which is applied on transfer!",
+      "canNotDeleteUsedLocation": "Can not delete! This location is in used!",
+      "canNotArchiveUsedLocation": "Can not archive! This location is in used!",
+      "canNotUpdateLocationType": "Can not change type of location already used in product move!"
+    },
+    "transfer": {
+      "dateCondition":"The End Date must be greater/equals than the Begin Date",
+      "canNotCreateDuplicateItem":"You have duplicate items. Please check before create.",
+      "canNotDeleteDoneTransfer":"Can not delete this transfer because it contains a stock move that has been set to 'Done'.",
+      "canNotDeleteTransferHavingOrigin":"Can not delete this transfer because they are related to another one.",
+      "somethingWrong":"Something wrong, please check log for more information or contact administrator.",
+      "errorDeleteNotExist":"You cannot delete the selected transfer(s) that do not exist",
+      "errorDeleteDone":"You cannot delete the selected transfer(s) contains a stock move that has been set to 'Done'",
+      "errorDeleteHavingOrigin":"You cannot delete the selected transfer(s) because they are related to another one",
+      "constant_select_transfer":"the selected transfer(s)",
+      "transfer_is_delete":"This transfer was deleted!",
+      "done_not_equal_reserved": "Done quantity must equal reserved quantity or zero",
+      "duplicateUID":"Duplicate UID/Serial Number or Package in Detailed Operations",
+      "invalidState":"Giao dịch đã hoàn thành hoặc đang đợi giao dịch khác",
+      "transferCantChange":"Transfer has been done or cancelled",
+      "transferInProcessing":"Transfer is processing by another",
+      "validateFailed": "Something wrong in validating.",
+      "bigFile":"This file is too big, can not export",
+      "initialDemandNegative": "The initial demand can not be negative number!",
+      "invalidStateCheckAvailability":"Invalid State",
+      "existNotPackage":"Transfer has product not package yet",
+      "duplicateLot":"Transfer has duplicate lot",
+      "lotExistedInStock":"Lot existed in stock",
+      "lotInvalidLocation":"Lot is not exist in source location",
+      "removeFinishTransfer":"Do not remove finish transfer",
+      "updateFinishTransfer":"Do not modify finish transfer",
+      "invalidUpdateOperation":"Do not update operation when reserved",
+      "invalidUpdateLocation":"Do not update location when reserved",
+      "nullDestLocation":"Source Location is empty",
+      "nullSrcLocation":"Destination Location is empty",
+      "nullGln":"Source location do not has GLN",
+      "nullTransferItem":"Transfer item is empty",
+      "orderFinished":"Order was finished",
+      "srcEqualDest":"Source location do not equal Dest location",
+      "transferWaitingAnother": "Không thể xác nhận giao dịch này do nó liên kết tới một giao dịch khác chưa được xác nhận",
+      "nullStockLocation": "Location do not has stock location",
+      "nullExportOperation": "Location do not has export operation",
+      "nullExportLocation": "Location do not has export location",
+      "stockNotFound": "Không tồn tại các sản phẩm này trong kho để hoàn trả",
+      "stockHasBeenReserved": "Sản phẩm/vật tư đang bị giữ hàng, hoặc không còn trong kho, xin thử lại",
+      "stockHadGone": "Sản phẩm/vật tư không còn trong kho, xin thử lại",
+      "transferCantDelete" : "Không được xóa giao dịch vì đã có dịch chuyển sản phẩm",
+      "lotNotInStock" : "Lô này chưa được xác nhận, bạn có thể xóa lô",
+      "ssccNotInStock" : "SSCC này chưa được xác nhận, bạn có thể xóa SSCC",
+      "lotWasDeleted": "Lô đã được xóa bởi người dùng khác",
+      "lotWasCancelled": "Lô đã được huỷ bởi người dùng khác",
+      "lotHaventDone": "Lô chưa có số lượng hoàn thành, không thể huỷ",
+      "isNotValidQuantity": "Số lượng vượt quá số lượng cho phép",
+      "existsTransferDetail": "Giao dịch đã có thông tin trong tab chi tiết hoạt động không được phép xóa",
+      "transferCantCancel" : "Không thể huỷ đơn hàng vì đã có dịch chuyển sản phẩm",
+      "nullImportLocation": "Không tồn tại địa điểm nhập hàng"
+    },
+    "adjustment": {
+      "adjustment_is_delete":"This inventory adjustment was deleted!"
+    },
+    "inventory": {
+      "inventoryNotFound": "Could not find this entity",
+      "duplicateProduct": "Have an Inventory adjustment inprogress!",
+      "startInventoryOfAllFailed":"Can not start Inventory Of All Products when exist other processing/validating inventory adjustment in this location.",
+      "startFailedByInventoryOfAll":"Can not start because exist processing/validating Inventory Of All Products in this location.",
+      "notFinish":"Exist another inventory adjustment for your products in this location.",
+      "importFileInvalid":"Import file template invalid.",
+      "deleteFinishAdjustment":"Can not delete finish inventory adjustment.",
+      "deleteValidateAdjustment":"Can not delete validate inventory adjustment.",
+      "deleteInprogressAdjustment":"Can not delete inprogress inventory adjustment.",
+      "importTemplateError":"Import file template is invalid.",
+      "importFileTooBig":"Import file too big. Can not preview. It can be import directly in transfer detail page.",
+      "usingOldTemplate":"Please download new template. And upload again.",
+      "isReserved": "This already exist in another reserved list",
+      "reservedPartAdjustment": "Can not start inventory. Have some item(s) be reserved. Please validated transfer reserved before start inventory",
+      "notDraft": "This Inventory Adjustment not in DRAFT status anymore. Please reload page and check log.",
+      "inDraft": "This Inventory Adjustment in DRAFT status. Please reload page and check log.",
+      "notInProgress": "This Inventory Adjustment not in IN PROGRESS status anymore. Please reload page and check log.",
+      "notValidate": "This Inventory Adjustment not in VALIDATE status anymore. Please reload page and check log",
+      "importFileTooBig":"Import file too large"
+    },
+    "stock": {
+      "exportEmptyData":"Export empty data"
+    },
+    "package" :{
+      "existedInStock":"Can't delete because quantity on hand more than 0.",
+      "existedInAdjustment":"Can't delete because this package in processing/validate adjustment.",
+      "packageNotFound":"Package not exist in system."
+    },
+    "lot" : {
+      "existedInStock":"Can't delete because quantity on hand more than 0",
+      "existedInAdjustment":"Can't delete because this package in processing/validate adjustment.",
+      "lotNotFound":"Unit Id/Serial not exist in system."
+    },
+    "location": {
+      "barcodeExist": "This barcode is existed in system."
+    },
+    "synchronize-report": {
+      "batchDeleteError": "Can't delete because report(s) are belong to another users. Please check again."
+    },
+    "scrap": {
+      "onlyScrapped":"You must select only scrapped",
+      "scrapReserved":"Please un-reserved before restore",
+      "scrapAdjustment":"Package is reserved in inventory adjustment"
+    },
+    "organization":{
+      "hasBeenUsed":"Cannot delete organization had been used ",
+      "duplicateCode": "This value already exists in the system, please try again",
+      "genGtin":"This Organization can not gen GTIN",
+      "invalidGtin":"Invalid GTIN sequence",
+      "duplicateGln":"GLN đã tồn tại",
+      "alreadyUsed":"Cannot delete organization had been used "
+    },
+    "role":{
+      "defaultRole":" Cannot delete default role",
+      "invalid": "Role is invalid, Please check your file again"
+    },
+    "gpc":{
+      "existedFamily":"Family has been existed.",
+      "existedClass":"Class has been existed.",
+      "existedBrick":"Brick has been existed.",
+      "existedAttribute":"Attribute has been existed.",
+      "existedValue":"Value has been existed.",
+      "deleteDefault": "Không thể xoá danh mục mặc định của hệ thống",
+      "editDefault": "Không thể sửa danh mục mặc định của hệ thống",
+      "familyExists": "Family đã tồn tại. Vui lòng nhập lại",
+      "classExists": "Class đã tồn tại. Vui lòng nhập lại",
+      "brickExists": "Brick đã tồn tại. Vui lòng nhập lại",
+      "attributeExists": "Attribute đã tồn tại. Vui lòng nhập lại",
+      "hasChildren": "Danh mục sản phẩm đã được sử dụng nên không được xóa",
+      "valueExists": "Value đã tồn tại. Vui lòng nhập lại"
+    },
+    "product": {
+      "duplicateName": "Product name has been existed",
+      "nameExists":"Product has been existed.",
+      "duplicateGtin": "GTIN has been existed",
+      "gtinHasBeenUsed": "Gtin has been used for another organization, please try again.",
+      "alreadyUsed": "Product has been used, could not be delete, please try again.",
+      "gtinFormatWrong": "GTIN format is not correctly",
+      "deleteFault":"Delete failed!",
+      "productInUse":"Delete failed, product is in use."
+    },
+    "uomType":{
+      "noPermission":"You don't have permission to perform this action",
+      "existsTypeName": "This unit of measure's name already exists, please try again",
+      "existsName": "This unit's name already exists, please try again",
+      "alreadyUsed": "This unit's name already used, please try again",
+      "incorrectFile": "This file is in the wrong format",
+      "defaultUomType": "Can not edit default Unit type or has been used",
+      "duplicateUomType": "Unit type has been existed, please try again",
+      "uomTypeAlreadyUsed": "Can not delete default Unit type or has been used"
+    },
+    "area":{
+      "noPermission":"You don't have permission to perform this action",
+      "areaExists": "This area already exists, please try again",
+      "areaExistsInParent": "This area already exists in {{parentAreaName}}, please try again",
+      "areaAlreadyUsed": "This area has been used, can not delete",
+      "areaCodeIsWrongFormat": "Area's code can not contain any special characters"
+    },
+    "season": {
+      "nameExists": "This season's name already exists, please try again",
+      "cannotRenderCode": "An error has occurred, please try again",
+      "invalidAccount":"Invalid Account",
+      "alreadyFinished": "Can not delete, season had already finished",
+      "alreadyUsed": "Season has been used, can not delete",
+      "existMaterial":"Không được xóa Nhật Ký đã sử dụng vật tư",
+      "canNotBeFound": "Season can not be found",
+      "alreadyUsedOrFinished": "Đợt đã hoàn thành hoặc đang được sử dụng nên không được xóa"
+    },
+    "material": {
+      "noPermission": "You don't have permission to modify this record",
+      "alreadyUsed": "This item already used in the system, please try again",
+      "usedWithMaterial": "This item already used with material, please try again",
+      "usedWithObject": "Can not delete! This item already used with season, area, product or transaction.",
+      "noPermissionOrRelateObject": "You don't have permission to delete this record or this item already used with season, area, product or transaction."
+    },
+    "categoryProduct": {
+       "hasChildren": "This category already has subcategories, can't edit this category!",
+       "nameExists": "This category already exists, please try again!",
+       "notEditCategory": "This category can not edit.",
+       "notDeleteCategory":"This category cannot delete.",
+       "usedCategory":"Product category is in use, cannot delete.",
+       "notPermissionDelele":"You don't have permission to delete this product category.",
+       "notPermissionEdit":"You don't have permission to edit this product category.",
+       "notCreateProduct":"Không được phép tạo sản phẩm trên thư mục này",
+       "nameExistsInParent": "Category name already exists in category parent "
+     },
+    "procedureLog": {
+      "alreadyFinished": "Không được xóa nhật ký vì đợt đã hoàn thành",
+      "seasonFinished" : "Không được xóa Nhật ký sản xuất của Đợt đã hoàn thành",
+      "exists": "Tạo nhật ký trùng lặp",
+      "alreadyUsedOrFinished": "Không được xóa Nhật ký sản xuất của Đợt đã hoàn thành hoặc Nhật ký đã được sử dụng"
+    },
+    "order": {
+      "orderCantDelete": "Đơn đặt hàng đã được sử dụng không được phép xóa"
+    },
+    "messages": {
+      "errorMaximum": "Import file should not be larger than 20MB",
+      "errorMaximumFirmware": "Import file should not be larger than 1GB",
+      "chooseFile": "Please choose your file to import data",
+      "uploadFail": "Upload fail",
+      "errorMaximum2MB": "Import file should not be larger than 2MB"
+    },
+    "gsin": {
+      "Generate_GSIN": "Partner organization can not generate GSIN"
+    },
+    "sscc": {
+      "Generate_SSCC": "Partner organization can not generate SSCC"
+    },
+    "trace": {
+      "notFound": "Can not found data"
+    },
+    "phase": {
+      "alreadyUsed": "Giai đoạn sản xuất đã được sử dụng",
+      "hasNotBeenCompleted": "Giai đoạn trước đó chưa được hoàn thành, xin thử lại",
+      "hasBeenCompleted": "Giai đoạn hoàn thành phải liên tiếp nhau, xin thử lại",
+      "seasonAlreadyFinished" : "Không được xóa Nhật ký sản xuất của Đợt đã hoàn thành"
+    },
+    "device": {
+      "duplicateSerial": "Serial này đã tồn tại",
+      "registerFailed": "Đăng ký thiết bị không thành công",
+      "deleteFailed": "Xóa thiết bị không thành công",
+      "deviceInGroup": "Thiết bị đã được sử dụng không thể xoá",
+      "managerByGateway": "Không được xóa thiết bị quản lý bởi gateway",
+      "ModelCodeIsNotFound": "Model code is not found"
+    },
+    "groupDevice": {
+      "existsName": "Nhóm điều khiển này đã tồn tại, xin thử lại"
+    },
+    "automaticControl": {
+      "existsName": "Tên khiền khiển này đã tồn tại, xin thử lại",
+      "existsTime": "Lịch điều khiển bị trùng thời gian với lịch {{exitsName}}",
+      "canNotDeleteActiveRecord": "Lịch điều khiển tự động đang ở trạng thái kích hoạt không được xóa",
+      "canNotActiveRecord": "Không thể kích hoạt nhóm thiết bị đang ở chế độ điều khiển khác chế độ Tự động"
+    },
+    "farm": {
+      "usedFarm": "Farms have been used, can not delete"
+    },
+    "tenant": {
+      "tenantExists": "Trang trại này đã tồn tại, xin thử lại",
+      "tenantIdIsEmpty": "Farm is empty, please try again"
+    },
+    "qrCode": {
+      "exceedPrintOfDay": "Exceeded 9999 printing times in one day"
+    },
+    "servicePackage":{
+      "cannotUpdate":"Can only be updated with package status is new",
+      "nameExists":"This package name already exists, please try again.",
+      "batchDeactiveFail":"You can only pause the activity with the active package",
+      "cannotDeactive": "This package is not active, You cannot pause it.",
+      "batchDeleteFail":"Cannot delete packages with the Canceled status.",
+      "cannotDelete": "Cannot delete packages with the Active or Canceled status.",
+      "servicePackageInactive": "Service Package is inactive"
+    },
+    "servicePayment": {
+      "servicePaymentInactive": "This subscription is inactive",
+      "usingThisServicePackage": "This subscription is using",
+      "servicePackageIdIsEmpty": "Service Package is not found"
+    },
+    "logType": {
+      "duplicateType": "Log type này đã tồn tại"
+    },
+
+    "policy": {
+      "nameIsDuplicate": "Policy name is in use, please try again",
+      "cannotEdit": "Cannot edit policy with execute or stop status.",
+      "alreadyUsed": "Policy is already execute status. Cannot delete."
+    },
+    "home": {
+      "nameInvalid": "Home name is required",
+      "accessPermission": "No access to Home",
+      "roomInvalid": "Room invalid",
+      "roomIsNotFound": "Room id not found",
+      "deviceIdsAreNotFound": "Không tìm thấy ID device"
+    },
+    "room": {
+      "nameInvalid": "Room name is required",
+      "accessPermission": "No access to Room",
+      "roomIsNotFound": "Room id not found",
+      "requiredHomeId": "HomeId is not empty",
+      "deviceIdsAreNotFound": "Device ids are not found",
+      "homeIsNotFound": "No existed HomeId"
+    },
+    "userAttempt": {
+      "exceededAttemptLogin": "Tài khoản đã thử quá số lần đăng nhập",
+      "exceededAttemptSendOtp": "Tài khoản thử quá số lần gửi OTP"
+    }
+  }
+}

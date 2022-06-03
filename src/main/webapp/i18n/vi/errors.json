@@ -1,0 +1,427 @@
+{
+  "error": {
+    "authentication":"Đăng nhập không thành công!",
+    "register":"Đăng ký không thành công",
+    "emailIncorect":"Người dùng không tồn tại trong hệ thống. Vui lòng nhập lại.",
+    "passwordIncorect":"Mật khẩu không đúng vui lòng nhập lại",
+    "accountInactive": "Tài khoản không hoạt động",
+    "passwordInvalid":"Mật khẩu phải có 8 đến 256 ký tự và chứa ít nhất một ký tự chữ cái",
+    "usernameIncorrect":"Tài khoản nhập không đúng vui lòng nhập lại",
+    "otpCodeInvalid": "Mã OTP không đúng",
+    "invalidResetPasswordToken": "Mã OTP không đúng",
+    "phoneNumberInvalid": "Số điện thoại không đúng",
+    "typeInvalid": "Tài khoản không có quyền đăng nhập hệ thống",
+    "accountInvalid": "Tài khoản không hợp lệ",
+    "login":{
+      "invalidcredentials":"Mật khẩu hiện tại không chính xác"
+    },
+    "userAndPermission":{
+      "emailExists":"Email này đã được sử dụng. Vui lòng chọn email khác.",
+      "roleHasNoPrivilege":"Vui lòng chọn ít nhất một quyền để tạo vai trò.",
+      "userHasRole":"Người dùng này đã được gán vai trò. Không được xóa.",
+      "roleHasPrivilege":"Vai trò này đã được gán quyền. Không được xóa.",
+      "existsUserUseRole": "Vai trò đã được sử dụng. Không được xóa",
+      "roleExist": "Tên vai trò này đã được sử dụng. Vui lòng chọn tên khác",
+      "imageIsTooLarge": "Kích thước ảnh quá lớn!",
+      "duplicateEmail": "Email này đã được sử dụng. Vui lòng chọn email khác.",
+      "duplicateCode": "Mã doanh nghiệp này đã được sử dụng cho doanh nghiệp khác",
+      "currentPasswordInvalid":"Mật khẩu hiện tại không hợp lệ",
+      "deactiveFail": "Chuyển trạng thái không thành công",
+      "deleteActiveUser": " Không được xóa người dùng có trạng thái Hoạt động",
+      "emailExistsInFile": "Email không được trùng nhau. Vui lòng kiểm tra lại trong file",
+      "userIsEmpty": "Không tồn tại user nào. Vui lòng kiểm tra lại trong file",
+      "deleteActiveEndUser": " Không được xóa khách hàng có trạng thái Hoạt động",
+      "emailInvalid": "Email nhập vào không đúng định dạng",
+      "confirmPassword":"Mật khẩu xác thực không hợp lệ",
+      "phoneNumberExists": "Tài khoản đã được đăng ký",
+      "canNotDeleteYourSelf": "Không thể tự xoá chính mình",
+      "registeredButNotSetPassword":"Số điện thoại đã được đăng ký nhưng chưa thiết lập mật khẩu. Vui lòng nhấn quên mật khẩu để thiết lập mật khẩu",
+      "registeredButNotYetActivated": "Tài khoản không đúng vui lòng nhập lại"
+    },
+    "userManagement":{
+      "emailExists":"Email này đã được sử dụng. Vui lòng chọn email khác.",
+      "roleHasNoPrivilege":"Vui lòng chọn ít nhất một quyền để tạo vai trò.",
+      "userHasRole":"Người dùng này đã được gán vai trò. Không được xóa.",
+      "roleHasPrivilege":"Vai trò này đã được gán quyền. Không được xóa.",
+      "roleExist": "Tên vai trò này đã được sử dụng. Vui lòng chọn tên khác",
+      "imageIsTooLarge": "Kích thước ảnh quá lớn!"
+    },
+    "permission":{
+      "canNotDeleteSystemObject":"Không được xóa bản ghi của hệ thống.",
+      "canNotEditSystemObject":"Không thể sửa đổi bản ghi của hệ thống.",
+      "canNotPerform":"Bạn không có quyền thực hiện tác vụ này.",
+      "noPermission":"Bạn không có quyền thực hiện tác vụ này."
+    },
+    "common":{
+      "deleteError": "Không được xóa các bản ghi có id: ",
+      "maxLengthRule":"Độ dài tối đa cho trường này là 255.",
+      "referenceError":"Không được xóa đối tượng này. Nó đã được tham chiếu bởi một đối tượng khác.",
+      "existsName": "Tên đối tượng này đã tồn tại, xin thử lại",
+      "failed": "Thất bại",
+      "timeout":"Lỗi timeout",
+      "accessDenied": "Bạn không có quyền truy cập",
+      "notFoundId": "Không tồn tại ID"
+    },
+    "deviceType":{
+    	"nameExists":"Tên loại thiết bị đã tồn tại, vui lòng thử lại.",
+        "codeExists":"Mã loại thiết bị đã tồn tại, vui lòng thử lại.",
+    	"alreadyUsed":"Loại thiết bị đã được sử dụng, không thể xóa",
+    	"cannotDeleteCamera":"Không thể xóa loại thiết bị camera"
+    },
+    "deviceModel": {
+      "nameIsNotEmpty":  "Tên không được bỏ trống",
+      "nameIsDuplicate": "Dòng thiết bị đã tồn tại",
+      "codeIsNotEmpty": "Mã không được bỏ trống",
+      "firmwareIsNotEmpty": "Firmware không được bỏ trống",
+      "alreadyUsed": "Dòng thiết bị đã được sử dụng nên không được xóa",
+      "errorEdit":"Dòng thiết bị đã được gắn với firmware. Bạn chỉ có thể sửa mô tả và avatar của dòng thiết bị."
+    },
+    "firmware": {
+      "upload": {
+        "maxSize":"Tệp tải lên có dung lượng lớn hơn 1GB, vui lòng nhập lại",
+        "invalidFormat": "File tải lên không đúng định dạng",
+        "nameExists":"Tên Firmware name đã tồn tại, vui lòng thử lại."
+      },
+      "alreadyUsedInPolicyCannotEdit":"Phiên bản phần mềm này đã được sử dụng cho Chính sách. Không thể sửa.",
+      "alreadyUsed":"Phiên bản phần mềm đã được sử dụng cho Chính sách. Không thể xóa.",
+      "alreadyUsedInPolicy":"Phiên bản phần mềm này đã được sử dụng cho Chính sách. Không thể xóa.",
+      "nameExists":"Tên phiên bản firmware đã tồn tại, vui lòng thử lại."
+    },
+    "file":{
+    	"nameExists":"File firmware đã tồn tại trong hệ thống, Vui lòng lựa chọn file upload khác."
+    },
+    "warehouse":{
+      "nameExist":"Tên kho đã tồn tại.",
+      "codeExist":"Mã kho đã tồn tại.",
+      "referenced": "Không được xóa kho này. Nó đã được tham chiếu bới route."
+    },
+    "uom":{
+      "nameExist":"Đơn vị đã tồn tại trong hệ thống. Vui lòng nhập lại",
+      "defaultUom": "Không được sửa đơn vị mặc định hoặc đã sử dụng",
+      "duplicateUom": "Đơn vị đã tồn tại, vui lòng thử lại",
+      "uomAlreadyUsed": "Không được xóa Đơn vị của hệ thống hoặc Đơn vị đã được sử dụng"
+    },
+    "operation-type":{
+      "nameExist":"Tên loại hoạt động đã tồn tại.",
+      "codeExist":"Mã loại hoạt động đã tồn tại.",
+      "transfer":"Loại hoạt động đã tồn tại trong một giao dịch.",
+      "valuation":"Loại hoạt động đã tồn tại trong một mẫu báo cáo nhập xuất tồn.",
+      "valuationOrTransfer":"Loại hoạt động đã tồn tại trong một giao dịch hoặc một mẫu báo cáo nhập xuất tồn."
+    },
+    "sequence": {
+      "nameExist": "Tên sequence đã tồn tại.",
+      "codeExist": "Mã sequence động đã tồn tại.",
+      "referenced": "Không được xóa sequence này. Nó đã được tham chiếu bởi một loại hoạt động.",
+      "hasOperationTypeActive": "Can not archive this sequence. It has been referenced by an active operation type."
+    },
+    "uomCategory":{
+      "nameExist":"Tên danh mục UOM đã tồn tại."
+    },
+    "locaion": {
+      "delete": "Không được xóa Location này!",
+      "canNotDeleteUsedLocation": "Không được xóa Vị Trí đang được sử dụng!",
+      "canNotArchiveUsedLocation": "Không thể lưu trữ Vị Trí đang được sử dụng!",
+      "canNotUpdateLocationType": "Không thể đổi kiểu của vị trí đã được dùng trong Dịch chuyển của sản phẩm!"
+    },
+    "transfer": {
+      "dateCondition":"Ngày Kết Thúc phải lớn hơn hoặc bằng Ngày Bắt Đầu",
+      "canNotCreateDuplicateItem":"Bạn đang có 2 phần tử giống nhau. Vui lòng kiểm tra lại trước khi tạo.",
+      "canNotDeleteDoneTransfer":"Không được xóa giao dịch mà có chứa một stock move đã được đặt về trạng thái 'Done'.",
+      "canNotDeleteTransferHavingOrigin":"Không được xóa giao dịch này do nó liên kết tới một giao dịch khác.",
+      "somethingWrong":"Có lỗi xảy ra. Kiểm tra log để biết thêm chi tiết hoặc liên hệ tới quản trị viên để được hỗ trợ.",
+      "errorDeleteNotExist":"Bạn không được xóa: các giao dịch mà do chúng không tồn tại",
+      "errorDeleteDone":"Bạn không được xóa: các giao dịch mà chứa một stock move đã được đặt về trạng thái 'Done'",
+      "errorDeleteHavingOrigin":"Bạn không được xóa: các giao dịch mà chúng được liên kết tới các giao dịch khác",
+      "constant_select_transfer":"các giao dịch mà",
+      "transfer_is_delete":"Transfer đã bị xóa!",
+      "done_not_equal_reserved": "Số lượng Done phải bằng số lượng Reserved hoặc bằng 0",
+      "duplicateUID":"Bị trùng UID/Serial Number hoặc Package trong tab Detailed Operations",
+      "invalidState":"Transfer is done or waiting for others",
+      "transferCantChange":"Giao dịch đã hoàn thành hoặc bị hủy",
+      "transferInProcessing":"Giao dịch này đang được sử dụng bởi người khác",
+      "validateFailed": "Đã có lỗi xảy ra trong khi xác nhận. Liên hệ với admin để xử lý.",
+      "bigFile":"Tệp tin quá lớn không thể xuất",
+      "initialDemandNegative": "Số lượng yêu cầu không được là số âm!",
+      "invalidStateCheckAvailability":"Không xuất hàng tự động khi giao dịch đang chờ giao dịch khác",
+      "existNotPackage":"Giao dịch tồn tại sản phẩm chưa được bao gói.",
+      "duplicateLot":"Danh sách chi tiết hoạt động có lô bị trùng",
+      "lotExistedInStock":"Có Lô đã tồn tại trong kho",
+      "lotInvalidLocation":"Có Lô không tồn tại ở vị trí nguồn",
+      "removeFinishTransfer":"Không được xóa giao dịch đã hoàn thành",
+      "updateFinishTransfer":"Không được sửa đổi giao dịch đã hoàn thành hoặc bị hủy",
+      "invalidUpdateOperation":"Không được sửa đổi Kiểu Hoạt Động khi giao dịch đã có hàng",
+      "invalidUpdateLocation":"Không được sửa đổi Địa điểm khi giao dịch đã có hàng",
+      "nullDestLocation":"Điểm đầu bị trống",
+      "nullSrcLocation":"Điểm đến bị trống",
+      "nullGln":"Điểm đầu không có GLN",
+      "nullTransferItem":"Danh sách sản phẩm trống",
+      "orderFinished":"Đơn đặt hàng đã hoàn thành hoặc bị hủy, vui lòng làm mới dữ liệu",
+      "srcEqualDest":"Điểm Đến phải khác Điểm Đầu",
+      "transferWaitingAnother": "Không thể xác nhận giao dịch này do nó liên kết tới một giao dịch khác chưa được xác nhận",
+      "nullStockLocation": "Không tồn tại địa điểm kho hàng",
+      "nullExportOperation": "Không tồn tại địa điểm xuất hàng",
+      "nullExportLocation": "Không tồn tại địa điểm xuất hàng",
+      "stockNotFound": "Không tồn tại các sản phẩm này trong kho để hoàn trả",
+      "stockHasBeenReserved": "Sản phẩm/vật tư đang bị giữ hàng, xin thử lại",
+      "stockHadGone": "Sản phẩm/vật tư đang còn trong kho, xin thử lại",
+      "transferCantDelete" : "Không được xóa giao dịch vì đã có dịch chuyển sản phẩm",
+      "lotNotInStock" : "Lô này chưa được xác nhận, bạn có thể xóa lô",
+      "ssccNotInStock" : "SSCC này chưa được xác nhận, bạn có thể xóa SSCC",
+      "lotWasDeleted": "Lô đã được xóa bởi người dùng khác",
+      "lotWasCancelled": "Lô đã được huỷ bởi người dùng khác",
+      "lotHaventDone": "Lô chưa có số lượng hoàn thành, không thể huỷ",
+      "isNotValidQuantity": "Số lượng vượt quá số lượng cho phép",
+      "existsTransferDetail": "Giao dịch đã có thông tin trong tab chi tiết hoạt động không được phép xóa",
+      "transferCantCancel" : "Không thể huỷ đơn hàng vì đã có dịch chuyển sản phẩm",
+      "nullImportLocation": "Không tồn tại địa điểm nhập hàng"
+    },
+    "adjustment": {
+      "adjustment_is_delete":"Phiếu kiểm kê đã bị xóa!"
+    },
+    "inventory": {
+      "inventoryNotFound": "Không thể tìm thấy bản ghi này",
+      "duplicateProduct": "Tồn tại phiếu kiểm kê khác đang trong tiến trình.",
+      "startInventoryOfAllFailed":"Không thể bắt đầu phiếu điều chỉnh Tất Cả Sản Phẩm vì tồn tại một phiếu điều chỉnh khác ở vị chí này chưa hoàn thành.",
+      "startFailedByInventoryOfAll":"Không thể bắt đầu phiếu điều chỉnh này vì đang có phiếu điều chỉnh Tất Cả Sản Phẩm ở vị trí này chưa hoàn thành.",
+      "notFinish":"Tồn tại phiếu kiểm kê khác cùng sản phậm, cùng vị trí.",
+      "importFileInvalid":"Tệp không đúng định dạng",
+      "deleteFinishAdjustment":"Không được xóa điều chỉnh kho đã hoàn thành.",
+      "deleteValidateAdjustment":"Không được xóa điều chỉnh kho đã được xác nhận.",
+      "deleteInprogressAdjustment":"Không được xóa điều chỉnh kho đang được thực thi.",
+      "importTemplateError":"Mẫu không hợp lệ.",
+      "importFileTooBig":"Không thể xem trước tệp với dung lượng lớn. Hãy nhập tệp này ở màn hình Chi tiết giao dịch.",
+      "usingOldTemplate":"Hãy tải Mẫu mới, sau đó nhập lại",
+      "reservedPartAdjustment": "Không thể bắt đầu phiếu kiểm kê. Tồn tại thùng/ UID/Serial bị giữ hàng.",
+      "isReserved": "Linh kiện này đã được reserved trong giao dịch khác.",
+      "notDraft": "Phiếu kiểm kê này không còn ở trạng thái NHÁP. Hãy tải lại trang và kiểm tra lịch sử.",
+      "inDraft": "Phiếu kiểm kê này đã ở trạng thái NHÁP. Hãy tải lại trang và kiểm tra lịch sử.",
+      "notInProgress": "Phiếu kiểm kê này không còn ở trạng thái TRONG TIẾN TRÌNH. Hãy tải lại trang và kiểm tra lịch sử.",
+      "notValidate": "Phiếu kiểm kê này không còn ở trạng thái XÁC NHẬN. Hãy tải lại trang và kiểm tra lịch sử.",
+      "importFileTooBig":"Tệp tải lên quá lớn"
+    },
+    "stock": {
+      "exportEmptyData":"Không có dữ liệu"
+    },
+    "package" :{
+      "existedInStock":"Thùng này có tồn kho lớn hơn 0.",
+      "existedInAdjustment":"Thùng này đang được kiểm kê.",
+      "packageNotFound":"Thùng không tồn tại trong hệ thống."
+    },
+    "lot" : {
+      "existedInStock":"Unit Id/Serial này có tồn kho lớn hơn 0.",
+      "existedInAdjustment":"Unit Id/Serial này đang được kiểm kê.",
+      "lotNotFound":"Unit Id/Serial không tồn tại trong hệ thống."
+    },
+    "location": {
+      "barcodeExist": "Barcode này đã tồn tại trong hệ thống."
+    },
+    "synchronize-report": {
+      "batchDeleteError": "Không được xóa vì một (một vài) báo cáo thuộc về người dùng khác. Vui lòng kiểm tra lại."
+    },
+    "scrap": {
+      "onlyScrapped":"Bạn chỉ được chọn vật tư có trạng thái scrapped để khôi phục",
+      "scrapReserved":"Vật tư đã được giữ trong giao dịch. Làm ơn bỏ giữ trước khi khôi phục",
+      "scrapAdjustment":"Vật tư đã được giữ trong kiểm kê. Làm ơn bỏ giữ trước khi khôi phục"
+    },
+    "organization":{
+      "hasBeenUsed":"Không được xóa doanh nghiệp đã được sử dụng trong hệ thống.",
+      "duplicateCode": "Mã doanh nghiệp này đã được sử dụng cho doanh nghiệp khác",
+      "genGtin":"Doanh Nghiệp này không đủ điều kiện tạo GTIN",
+      "invalidGtin":"Chuỗi GTIN không hợp lệ",
+      "duplicateGln":"GLN đã tồn tại",
+      "alreadyUsed": "Doanh nghiệp đã có dữ liệu liên kết, không thể xoá"
+    },
+    "role":{
+      "defaultRole":" Không được xóa vai trò mặc định của hệ thống",
+      "invalid": "Vai trò không hợp lệ. Vui lòng kiểm tra lại trong file"
+    },
+    "gpc":{
+      "existedFamily":"Family này đã tồn tại.",
+      "existedClass":"Class này đã tồn tại trong Family.",
+      "existedBrick":"Brick này đã tồn tại trong Class.",
+      "existedAttribute":"Attribute này đã tồn tại trong Brick.",
+      "existedValue":"Value này đã tồn tại trong Attribute.",
+      "deleteDefault": "Không thể xoá danh mục mặc định của hệ thống",
+      "editDefault": "Không thể sửa danh mục mặc định của hệ thống",
+      "familyExists": "Family đã tồn tại. Vui lòng nhập lại",
+      "classExists": "Class đã tồn tại. Vui lòng nhập lại",
+      "brickExists": "Brick đã tồn tại. Vui lòng nhập lại",
+      "attributeExists": "Attribute đã tồn tại. Vui lòng nhập lại",
+      "hasChildren": "Danh mục sản phẩm đã được sử dụng nên không được xóa",
+      "valueExists": "Value đã tồn tại. Vui lòng nhập lại"
+    },
+    "product": {
+      "duplicateName": "Sản phẩm đã tồn tại trong danh sách sản phẩm của doanh nghiệp",
+      "nameExists":"Sản phẩm đã tồn tại.",
+      "duplicateGtin": "GTIN đã tồn tại",
+      "gtinHasBeenUsed": "Mã GTIN đã được dùng cho sản phẩm của doanh nghiệp khác. Vui lòng kiểm tra lại thông tin GTIN đã nhập",
+      "alreadyUsed": "Sản phẩm được gắn vào đợt sản xuất-chế biến, đơn đặt hàng hoặc giao dịch không được xóa",
+      "gtinFormatWrong": "GTIN sai định dạng",
+      "deleteFault":"Delete failed!",
+      "productInUse":"Delete failed, product is in use."
+    },
+    "uomType":{
+      "noPermission":"Bạn không có quyền thao tác trên bản ghi này",
+      "existsTypeName": "Loại đơn vị đã tồn tại trong hệ thống. Vui lòng nhập lại",
+      "existsName": "Loại đơn vị đã tồn tại trong hệ thống. Vui lòng nhập lại",
+      "alreadyUsed": "Loại đơn vị này đã được sử dụng, vui lòng thử lại",
+      "incorrectFile": "File tải lên sai định dạng",
+      "defaultUomType": "Không được sửa loại đơn vị mặc định hoặc đã sử dụng",
+      "duplicateUomType": "Loại đơn vị đã tồn tại, vui lòng thử lại",
+      "uomTypeAlreadyUsed": "Không được xóa Loại đơn vị của hệ thống hoặc Loại đơn vị đã được sử dụng"
+    },
+    "area":{
+      "noPermission":"Bạn không có quyền thao tác trên bản ghi này",
+      "areaNameExists": "Tên khu vực đã tồn tại, xin thử lại",
+      "areaCodeExists": "Mã khu vực đã tồn tại, xin thử lại",
+      "areaExistsInParent": "Khu vực này đã tồn tại trong {{parentAreaName}}, xin thử lại",
+      "areaAlreadyUsed": "Khu vực đã được sử dụng, xin thử lại",
+      "areaIsEmpty": "Khu vực không đươc để trống, xin thử lại",
+      "parentAreaIsNotFound": "Khu vực cha không hợp lệ, xin thử lại",
+      "nameIsEmpty": "Tên khu vực không được để trống, xin thử lại",
+      "nameIsDuplicate": "Trùng tên khu vực, xin thử lại",
+      "areaCodeIsEmpty": "Mã khu vực không được để trống, xin thử lại",
+      "parentAreaCodeIsEmpty": "Mã khu vực cha không được để trống, xin thử lại",
+      "areaCodeIsDuplicate": "Trùng mã khu vực, xin thử lại",
+      "areaCodeIsWrongFormat": "Mã khu vực không được chứa ký tự đặc biệt",
+      "parentAreaCodeIsWrongFormat": "Mã khu vực cha không được chứa ký tự đặc biệt",
+      "fileIsWrongFormat": "File tải lên không đúng dịnh dạng như file mẫu",
+      "areaCode": {
+        "maxLength50": "Trường mã khu vực không được vượt quá 50 ký tự"
+      },
+      "areaName": {
+        "maxLength50": "Trường tên khu vực không được vượt quá 50 ký tự"
+      },
+      "description": {
+        "maxLength255": "Trường mô tả không được vượt quá 255 ký tự"
+      }
+    },
+    "season": {
+      "nameExists": "Tên đợt đã tồn tại trong hệ thống, xin thử lại",
+      "cannotRenderCode": "Có lỗi xảy ra, không thể khởi tạo mã đợt",
+      "invalidAccount":"Tài khoản này không đủ điều kiện để tạo đợt",
+      "alreadyFinished": "Không được xóa đợt đã hoàn thành",
+      "alreadyUsed": "Đợt đã được sử dụng nên không được xóa",
+      "existMaterial":"Không được xóa Nhật Ký đã sử dụng vật tư",
+      "canNotBeFound": "Đợt không tồn tại, xin thử lại",
+      "alreadyUsedOrFinished": "Đợt đã hoàn thành hoặc đang được sử dụng nên không được xóa"
+    },
+    "material": {
+      "noPermission": "Bạn không có quyền thao tác trên bản ghi này",
+      "alreadyUsed": "Danh mục này đã được sử dụng, vui lòng thử lại",
+      "usedWithMaterial": "Ban không được xóa danh mục đã được gắn với sản phẩm",
+      "usedWithObject": "Vật tư đã được gắn vào đợt sản xuất-chế biến, đơn đặt hàng hoặc giao dịch không được xóa.",
+      "noPermissionOrRelateObject": "Vật tư đã được sử dụng không được phép xóa"
+    },
+    "categoryProduct": {
+      "hasChildren": "Danh mục này đã có danh mục con, không thể sửa danh mục!",
+      "nameExists": "Danh mục này đã tồn tại, xin thử lại!",
+      "notEditCategory":"Danh mục này không được phép sửa.",
+      "notDeleteCategory":"Danh mục này không được phép xóa.",
+      "usedCategory":"Danh mục sản phẩm đang được sử dụng, không đươc phép xóa.",
+      "notPermissionDelele":"Bạn không có quyền xóa danh mục sản phẩm này.",
+      "notPermissionEdit":"Bạn không có quyền sửa danh mục sản phẩm này.",
+      "notCreateProduct":"Không được phép tạo sản phẩm trên thư mục này",
+      "nameExistsInParent": "Tên danh mục này đã tồn tại trong danh mục cha "
+    },
+    "procedureLog": {
+      "alreadyFinished": "Không thể xoá vì đợt đã hoàn thành hoặc nhật ký đã được sử dụng",
+      "seasonFinished" : "Không được xóa Nhật ký sản xuất của Đợt đã hoàn thành",
+      "exists": "Tạo nhật ký trùng lặp",
+      "alreadyUsedOrFinished": "Không được xóa Nhật ký sản xuất của Đợt đã hoàn thành hoặc Nhật ký đã được sử dụng"
+    },
+    "order": {
+      "orderCantDelete": "Đơn đặt hàng đã được sử dụng không được phép xóa"
+    },
+    "messages": {
+      "errorMaximum": "Tệp tải lên có dung lượng lớn hơn 20 MB, vui lòng nhập lại",
+      "errorMaximumFirmware": "Tệp tải lên có dung lượng lớn hơn 1GB, vui lòng nhập lại",
+      "chooseFile": "Vui lòng chọn file để tiến hành import dữ liệu",
+      "uploadFail": "Tải lên lỗi",
+      "errorMaximum2MB": "Tệp tải lên có dung lượng lớn hơn 2MB, vui lòng nhập lại"
+    },
+    "gsin": {
+      "Generate_GSIN": "Đối tác không thể tạo mã GSIN"
+    },
+    "sscc": {
+      "Generate_SSCC": "Đối tác không thể tạo mã GSIN SSCC"
+    },
+    "trace": {
+      "notFound": "Không tìm thấy thông tin cần truy xuất"
+    },
+    "phase": {
+      "alreadyUsed": "Giai đoạn sản xuất đã được sử dụng",
+      "hasNotBeenCompleted": "Giai đoạn trước đó chưa được hoàn thành"
+    },
+    "device": {
+      "duplicateSerial": "Serial này đã tồn tại",
+      "registerFailed": "Đăng ký thiết bị không thành công",
+      "deleteFailed": "Xóa thiết bị không thành công",
+      "deviceInGroup": "Thiết bị đã được sử dụng không thể xoá",
+      "managerByGateway": "Không được xóa thiết bị quản lý bởi gateway",
+      "ModelCodeIsNotFound": "Không tìm thấy dòng thiết bị"
+    },
+    "groupDevice": {
+      "existsName": "Nhóm điều khiển này đã tồn tại, xin thử lại",
+      "stateError": "Chỉ nhóm các thiết bị có cùng trạng thái cơ học hoặc tự động"
+    },
+    "automaticControl": {
+      "existsName": "Tên khiền khiển này đã tồn tại, xin thử lại",
+      "existsTime": "Lịch điều khiển bị trùng thời gian với lịch {{exitsName}}",
+      "canNotDeleteActiveRecord": "Lịch điều khiển tự động đang ở trạng thái kích hoạt không được xóa",
+      "canNotActiveRecord": "Không thể kích hoạt nhóm thiết bị đang ở chế độ điều khiển khác chế độ Tự động"
+    },
+    "farm": {
+      "usedFarm": "Trang trai đã được sử dụng nên không được xóa"
+    },
+    "tenant": {
+      "tenantExists": "Trang trại này đã tồn tại, xin thử lại",
+      "tenantIdIsEmpty": "Bạn chưa chọn trang trại. Vui lòng thử lại"
+    },
+    "qrCode": {
+      "exceedPrintOfDay": "Đã vượt quá 9999 lần in trong 1 ngày"
+    },
+    "servicePackage":{
+      "cannotUpdate":"Không được phép sửa gói cước khác trạng thái Mới",
+      "nameExists":"Tên gói cước này đã tồn tại, vui lòng thử lại.",
+      "batchDeactiveFail":"Bạn chỉ có thể tạm dừng hoạt động gói cước đang có trạng thái Hoạt động",
+      "cannotDeactive":"Gói cước này không phải trạng thái hoạt động, Bạn không thể tạm dừng.",
+      "batchDeleteFail":"Không được xóa gói cước có trạng thái Đã hủy",
+      "cannotDelete": "Không thể xóa gói cước có trạng thái Hoạt động hoặc Đã hủy.",
+      "servicePackageInactive": "Gói cước không hoạt động"
+    },
+    "servicePayment": {
+      "servicePaymentInactive": "Gói cước này không hoạt động",
+      "usingThisServicePackage": "Gói cước này đang được sử dụng",
+      "servicePackageIdIsEmpty": "Không tìm thấy gói cước"
+    },
+    "logType": {
+      "duplicateType": "Log type này đã tồn tại"
+    },
+    "policy": {
+      "nameIsDuplicate": "Tên chính sách đã sử dụng, vui lòng thử lại",
+      "cannotEdit": "Không thể sửa chính sách có trạng thái kích hoạt hoặc tạm dừng",
+      "alreadyUsed": "Chính sách đang ở trạng thái hoạt động. Không thể xóa",
+      "areaIdsAreRequire": "Khu vực không được trống, vui lòng thử lại"
+    },
+    "home": {
+      "nameInvalid": "Tên nhà không được để trống",
+      "accessPermission": "Không được phép truy cập vào Home",
+      "roomInvalid": "Phòng không hợp lệ",
+      "roomIsNotFound": "Không tìm thấy ID phòng khi tạo nhà",
+      "deviceIdsAreNotFound": "Không tìm thấy ID device trong nhà"
+    },
+    "room": {
+      "nameInvalid": "Tên phòng không được để trống",
+      "accessPermission": "Không được phép truy cập vào Room",
+      "roomIsNotFound": "Không tìm thấy ID phòng khi tạo phòng",
+      "requiredHomeId": "HomeId không được để trống",
+      "deviceIdsAreNotFound": "Không tìm thấy ID device trong phòng",
+      "homeIsNotFound": "Không tồn tại HomeId"
+    },
+    "userAttempt": {
+      "exceededAttemptLogin": "Tài khoản đã thử quá số lần đăng nhập",
+      "exceededAttemptSendOtp": "Tài khoản thử quá số lần gửi OTP"
+    }
+  }
+}

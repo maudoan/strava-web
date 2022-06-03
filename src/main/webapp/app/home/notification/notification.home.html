@@ -1,0 +1,168 @@
+<div id="page_content">
+	<div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }" class="header-fixed">
+        <span class="route-header">
+            <a class="uk-text-primary" ui-sref="notifications" data-translate="admin.menu.notifications"></a>
+        </span>
+		</br>
+	</div>
+	<div id="page_content_inner" ng-keypress="keyPress($event)">
+		<jhi-alert></jhi-alert>
+		<modal-alert></modal-alert>
+
+		<div class="md-card">
+			<div class="md-card-content">
+				<div class="uk-grid">
+					<!--<span class="material-icons" style="font-weight: bold; font-size: 24px!important;">keyboard_arrow_down</span>-->
+
+					<div class="uk-width-small-1-2 uk-width-medium-1-3">
+						<label class="label-bold custom-label text-padding-top" data-translate="log.column.username"></label>
+						<input id="fullName" name="fullName"
+							   position="bottom"
+							   config="ComboBox['fullName'].config"
+							   options="ComboBox['fullName'].options"
+							   ng-model="notification.userId"
+							   table="ComboBox['fullName'].table"
+							   column="ComboBox['fullName'].column"
+							   scope-controller="ComboBox['fullName'].scope" selectize>
+					</div>
+
+					<div class="uk-width-small-1-2 uk-width-medium-1-3">
+						<label class="label-bold custom-label" data-translate="log.column.phone"></label>
+						<input id="phone" name="phone"
+							   position="bottom"
+							   config="ComboBox['phone'].config"
+							   options="ComboBox['fullName'].options"
+							   ng-model="notification.userId"
+							   table="ComboBox['phone'].table"
+							   column="ComboBox['phone'].column"
+							   scope-controller="ComboBox['fullName'].scope" selectize>
+					</div>
+
+					<div class="uk-width-small-1-2 uk-width-medium-1-3">
+						<label class="label-bold custom-label" data-translate="notification.column.content"></label>
+						<input name="note" id="note"
+							   class="md-input ng-isolate-scope md-input-processed"
+							   type="text" ng-model="notification.contents"/>
+					</div>
+
+				</div>
+
+				<div class="uk-grid">
+					<!--line 2; noi dung-->
+					<div class="uk-width-small-1-2 uk-width-medium-1-3">
+						<label class="label-bold custom-label" data-translate="notification.column.type"></label>
+						<input id="type" name="type"
+							   position="bottom"
+							   config="ComboBox['type'].config"
+							   options="ComboBox['type'].options"
+							   ng-model="notification.type"
+							   table="ComboBox['type'].table"
+							   column="ComboBox['type'].column"
+							   scope-controller="ComboBox['type'].scope" selectize>
+					</div>
+
+					<!-- date-->
+					<div class="uk-width-small-1-2 uk-width-medium-1-3">
+						<label class="label-bold custom-label" data-translate="log.column.created"></label>
+						<date-picker-search value="notification" column="'createdTmp'"></date-picker-search>
+					</div>
+
+					<!--device uid-->
+					<div class="uk-width-small-1-1 uk-width-medium-1-3 text-padding-top">
+						<a has-any-authority="ROLE_SYSTEM_ADMIN, ROLE_FARM_ADMIN" ng-click="onSearch()"
+						   class="md-btn md-btn-primary md-btn-small"><span class="uk-text-bold"
+																			data-translate="global.button.search"></span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="md-card">
+			<div class="md-card-content">
+				<div class="uk-overflow-container uk-margin-bottom table-height-fixed">
+					<table class="hoverTable uk-table uk-table-align-vertical uk-table-striped  tablesorter tablesorter-altair table-fixed"
+						   id="notifications">
+						<thead >
+						<tr class="uk-table-nowrap">
+							<th>
+								<label data-translate="log.column.username" class="boldHeader"></label>
+							</th>
+							<th>
+								<label data-translate="log.column.phone" class="boldHeader"></label>
+							</th>
+							<th>
+								<label data-translate="notification.column.type" class="boldHeader"></label>
+							</th>
+							<th>
+								<label data-translate="notification.column.sendTime" class="boldHeader"></label>
+							</th>
+							<th style="width: 40%">
+								<label data-translate="log.column.note" class="boldHeader"></label>
+							</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="notification in notifications" on-last-repeat
+							ng-class="{'hoverRow': !qrCode.unRemove, 'custom-un-remove': qrCode.unRemove}">
+							<td>{{notification.user.fullName}}</td>
+							<td>{{notification.user.phone}}</td>
+							<td>
+								<span ng-if="!notification.type" data-translate="notification.type.updateFirmware"></span>
+								<span ng-if="notification.type" data-translate="notification.type.motionDetect"></span>
+							</td>
+							<td>{{notification.created | date : 'dd-MM-yyyy HH:mm'}}</td>
+							<td>
+								<pre style="max-height: 80px">{{ notification.contents | json: 4 }}</pre>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="ts_pager" id="table_log_pager">
+					<ul class="uk-pagination ts_pager">
+						<li ng-click="selectPageClickHandle()" data-uk-tooltip title="{{selectPage}}">
+							<input ng-change="selectPageHandle('notifications')" id="log_selectize_page" type="text"
+								   config="TABLES['notifications'].selectize_page_config"
+								   options="TABLES['notifications'].selectize_page_options"
+								   ng-model="TABLES['notifications'].selectize_page" name="TABLES['notifications'].selectize_page"
+								   selectize>
+						</li>
+						<li><a href="javascript:void(0)" class="firstPage" ng-click="handleFirstPage('notifications')"><i
+							class="uk-icon-angle-double-left"></i></a></li>
+						<li><a href="javascript:void(0)" class="prevPage" ng-click="handlePreviousPage('notifications')"><i
+							class="uk-icon-angle-left"></i></a></li>
+						<li><span class="pageDisplay">1-20/50</span></li>
+						<li><a href="javascript:void(0)" class="nextPage" ng-click="handleNextPage('notifications')"><i
+							class="uk-icon-angle-right"></i></a></li>
+						<li><a href="javascript:void(0)" class="lastPage" ng-click="handleLastPage('notifications')"><i
+							class="uk-icon-angle-double-right"></i></a></li>
+						<li data-uk-tooltip title="{{pageSize}}">
+							<input ng-change="selectPageNumHandle('notifications')" id="log_selectize_pageNum" type="text"
+								   config="TABLES['notifications'].selectize_pageNum_config"
+								   options="TABLES['notifications'].page_size_option"
+								   ng-model="TABLES['notifications'].selectize_pageNum" name="TABLES['notifications'].selectize_pageNum"
+								   selectize>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--EXPORT Modal-->
+<div class="uk-modal" id="download_modal">
+	<div class="uk-modal-dialog uk-modal-dialog-small">
+		<div class="uk-modal-header" style="margin: 0 -24px 0px">
+			<span><span class="uk-modal-title">Xuất dữ liệu logs</span><a class="uk-modal-close" style="float: right;"><i class="material-icons">&#xE14C;</i></a></span>
+		</div>
+		<hr>
+		<a href={{downloadUrl}} >Bấm vào đây để tải xuống</a>
+
+		<div class="uk-modal-footer uk-text-right">
+			<button  class="uk-modal-close md-btn  md-btn-default md-btn-small"><span class="uk-text-bold" data-translate="global.button.cancel"></span></button>
+		</div>
+	</div>
+</div>
+<button  data-uk-modal="{target:'#download_modal'}" id="exportLog"   ng-show="false"></button>
+<!--END EXPORT-->

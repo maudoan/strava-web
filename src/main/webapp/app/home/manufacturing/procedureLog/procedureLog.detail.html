@@ -1,0 +1,153 @@
+<div id="page_content" class="pageDetail">
+
+    <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+        <span class="route-header">
+            <a class="uk-text-primary" ui-sref="manufacturing-manager" data-translate="admin.menu.manufacturing"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+            <a class="uk-text-primary" ui-sref="procedureLogs" data-translate="manufacturing.diary.name"></a>&nbsp;<i
+            class="uk-icon-arrow-circle-right"></i>
+            <span>{{procedureLog.product.name}}</span>
+        </span>
+
+        <br/>
+        <div class="uk-margin-small-top">
+            <button has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Procedure_Log_Update" ng-if="season.state != 2" ui-sref="procedureLogs-edit({procedureLogId: procedureLog.id})" type="button" class="md-btn md-btn-primary md-btn-small"><span
+                    class="uk-text-bold" data-translate="global.button.edit"></span></button>
+            <button has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Procedure_Log_Create" ui-sref="procedureLogs-create" type="button" class="md-btn md-btn-small"><span
+                    class="uk-text-bold" data-translate="global.button.create"></span></button>
+        </div>
+    </div>
+
+    <div id="page_content_inner">
+        <jhi-alert></jhi-alert>
+        <modal-alert></modal-alert>
+        <div class="md-card">
+            <div class="md-card-content">
+                <!--line 1-->
+                <div class="uk-grid">
+                    <div class=" text-padding-top uk-width-small-1-3 uk-width-medium-1-6">
+                        <label class="label-bold  ng-scope"
+                               data-translate="manufacturing.diary.column.season"></label>
+                        <span class="req"> *</span>
+                    </div>
+                    <div class="uk-width-small-2-3 uk-width-medium-2-6">
+                        <input readonly
+                               ng-model="procedureLog.season.name"
+                               class="md-input ng-isolate-scope md-input-processed" type="text"
+                               md-input/>
+
+                    </div>
+
+                    <div class="text-padding-top uk-width-small-1-3 uk-width-medium-1-6">
+                        <label class="label-bold  ng-scope"
+                               data-translate="manufacturing.diary.column.owner"></label>
+                        <span class="req">*</span>
+                    </div>
+                    <div class="uk-width-small-2-3 uk-width-medium-2-6">
+                        <input readonly
+                               ng-model="procedureLog.user.fullName"
+                               class="md-input ng-isolate-scope md-input-processed" type="text"
+                               md-input/>
+                    </div>
+                </div>
+
+                <!--line 2-->
+                <div class="uk-grid">
+                    <div class="text-padding-top uk-width-small-1-3 uk-width-medium-1-6 ">
+                        <label class="label-bold  ng-scope"
+                               data-translate="manufacturing.diary.column.code"></label>
+                    </div>
+                    <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+                        <input readonly
+                               ng-model="procedureLog.seasonCode"
+                               class="md-input ng-isolate-scope md-input-processed" type="text"
+                               md-input/>
+                    </div>
+
+                    <div class="text-padding-top uk-width-small-1-3 uk-width-medium-1-6 ">
+                        <label class="label-bold  ng-scope"
+                               data-translate="manufacturing.diary.column.period"></label>
+                        <span class="req"> *</span>
+                    </div>
+                    <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+                        <input readonly
+                               ng-model="procedureLog.phase.name"
+                               class="md-input ng-isolate-scope md-input-processed" type="text"
+                               md-input/>
+                    </div>
+
+                </div>
+                <div class="uk-grid">
+                    <div class="text-padding-top uk-width-small-1-3 uk-width-medium-1-6 ">
+                        <label class="label-bold  ng-scope"
+                               data-translate="manufacturing.diary.column.product"></label>
+                    </div>
+                    <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+                        <input readonly
+                               ng-model="procedureLog.product.name"
+                               class="md-input ng-isolate-scope md-input-processed" type="text"
+                               md-input/>
+                    </div>
+
+                    <div class="text-padding-top uk-width-small-1-3 uk-width-medium-1-6 ">
+                        <label class="label-bold  ng-scope"
+                               data-translate="manufacturing.diary.column.date"></label>
+                        <span class="req"> *</span>
+                    </div>
+                    <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+                        <input readonly
+                               ng-value="procedureLog.executeDate | date : 'yyyy-MM-dd'"
+                               ng-model="procedureLog.executeDate"
+                               class="md-input ng-isolate-scope md-input-processed" type="text"
+                               md-input/>
+                    </div>
+                </div>
+
+                <div class="uk-grid">
+                    <div class="text-padding-top uk-width-small-1-3 uk-width-medium-1-6">
+                        <label class="label-bold  ng-scope"
+                               data-translate="manufacturing.diary.column.area"></label>
+                        <span class="req">*</span>
+                    </div>
+                    <div class="uk-width-small-2-3 uk-width-medium-2-6">
+                        <input readonly
+                               ng-model="procedureLog.area.name"
+                               class="md-input ng-isolate-scope md-input-processed" type="text"
+                               md-input/>
+                    </div>
+                </div>
+
+                <div class="uk-grid">
+                    <div class="text-padding-top uk-width-small-1-3 uk-width-medium-1-6">
+                        <label class="label-bold  ng-scope"
+                               data-translate="manufacturing.diary.column.description"></label>
+                        <span class="req"> *</span>
+                    </div>
+                    <div class="uk-width-small-2-3 uk-width-medium-5-6 parsley-row">
+                            <textarea
+                                    style="border: 1px solid #ddd"
+                                    readonly
+                                    ng-model="procedureLog.description"
+                                    class="md-input ng-isolate-scope md-input-processed" type="text"
+                                    md-input
+                            ></textarea>
+                    </div>
+                </div>
+                <div class="uk-grid">
+                    <div class="text-padding-top uk-width-small-1-3 uk-width-medium-1-6 ">
+                        <label class="label-bold  ng-scope"
+                               data-translate="manufacturing.diary.column.link"></label>
+                    </div>
+                    <div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+                        <p ng-repeat="attachment in procedureLog.attachments">
+                            <a href="/api/file/download?filePath=/attachment/uploads/{{attachment.name}}">{{attachment.name}}</a>
+                        </p>
+                        <!--<input readonly
+                               ng-model="procedureLog.attachment"
+                               class="md-input ng-isolate-scope md-input-processed" type="text"
+                               md-input/>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

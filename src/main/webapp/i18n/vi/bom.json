@@ -1,0 +1,28 @@
+{
+  "bom": {
+    "field":{
+      "Product":"Sản phẩm",
+      "ProductVersion":"Phiên bản sản phẩm",
+      "Quantity":"Số lượng",
+      "Reference":"Tham chiếu",
+      "BomRdVersion":"Phiên bản R&D BoM",
+      "BomType":"Loại BOM",
+      "No":"No.",
+      "UoM":"UoM",
+      "ManName":"Nhà sản xuất",
+      "ManPN":"Man P/N",
+      "ManBomName":"Tên Man BOM",
+      "Routing":"Chu trình",
+      "RoutingOperation":"Công đoạn",
+      "MaterialType":"Loại linh kiện",
+      "OldPN":"Mã cũ",
+      "Note":"Ghi chú",
+      "Status":"Trạng thái",
+      "ManBom":"Man Bom",
+      "ManBomVersion":"Phiên bản Man Bom"
+    },
+    "common":{
+      "R&DBOM":"R&D BOM"
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+	"package":{
+		"field":{
+			"name":"Tên gói",
+			"type":"Loại",
+			"price":"Giá gói (VND)",
+			"period":"Chu kỳ",
+			"numberDevice":"Số lượng thiết bị",
+			"storageTime":"Thời gian lưu trữ",
+			"storageCapacity":"Dung lượng lưu trữ",
+			"autoExtend":"Tự động gia hạn",
+			"description":"Mô tả",
+			"state":"Trạng thái"
+		},
+		"state":{
+			"new":"Mới",
+			"active":"Hoạt động",
+			"deactive":"Tạm ngừng hoạt động",
+			"cacelled":"Đã hủy"
+		},
+		"autoExtend":{
+			"yes":"Có",
+			"no":"Không"
+		},
+		"type":{
+			"1":"Single",
+			"2":"Bundle"
+		},
+		"kindOfTime":{
+			"day":"Ngày",
+			"month":"Tháng",
+			"year":"Năm"
+		},
+		"message":{
+			"activate":"Bạn muốn kích hoạt gói cước này?",
+			"reactivate":"Bạn có muốn kích hoạt lại gói này?",
+			"deactivate":"Bạn muốn tạm dừng gói cước này?",
+			"batchDeactivate":"Bạn chắc chắn muốn tạm dừng gói cước?"
+		}
+	},
+	"serviceCustomer": {
+		"field": {
+			"name": "Tên gói cước",
+			"startTime": "Ngày đăng ký",
+			"autoExtend":"Tự động gia hạn",
+			"endTime": "Thời gian hết hạn",
+			"state":"Trạng thái"
+		}
+	},
+	"serviceDevice": {
+		"field": {
+			"list": "Danh sách thiết bị",
+			"code": "Mã thiết bị",
+			"name": "Tên thiết bị",
+			"modelName": "Dòng thiết bị",
+			"modelCode": "Model",
+			"uid": "UID"
+		}
+	},
+	"serviceBill": {
+		"field": {
+			"list": "Danh sách giao dịch",
+			"billNumber": "Số hoá đơn",
+			"datePayment": "Ngày thanh toán",
+			"price": "Số tiền",
+			"paymentMethod": "Phương thức thanh toán",
+			"status": "Trạng thái",
+			"action": "Hành động"
+		},
+		"1": "Đăng ký",
+		"0": "Hủy gói"
+	}
+}

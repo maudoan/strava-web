@@ -1,0 +1,56 @@
+<div id="page_content">
+    <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }" class="header-fixed">
+        <span class="route-header">
+            <a class="uk-text-primary" ui-sref="category" data-translate="admin.menu.master"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+            <span data-translate="admin.uom.list"></span>
+        </span>
+        </br>
+    </div>
+    <div id="page_content_inner">
+        <jhi-alert></jhi-alert><modal-alert></modal-alert>
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-overflow-container uk-margin-bottom table-height-fixed">
+                    <table class="hoverTable uk-table uk-table-align-vertical uk-table-striped uk-table-nowrap tablesorter tablesorter-altair table-fixed" id="uoms">
+                        <thead>
+                        <tr>
+                            <th><th-content table="TABLES['uoms']" label="'admin.uom.column.name'"  column="'name'"></th-content></th>
+                            <th><th-content table="TABLES['uoms']" label="'admin.currency.code'"   column="'code'"></th-content></th>
+                        </tr>
+                        <tr>
+                            <td><default-filter table="TABLES['uoms']" column="'name'"></td>
+                            <td><default-filter table="TABLES['uoms']" column="'code'"></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="uom in uoms" on-last-repeat class="hoverRow">
+                            <td>{{uom.name}}</td>
+                            <td>{{ uom.code }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ts_pager" id="table_uom_pager">
+                    <ul class="uk-pagination ts_pager">
+                        <li ng-click="selectPageClickHandle()" data-uk-tooltip title="{{selectPage}}">
+                            <input ng-change="selectPageHandle('uoms')" id="uom_selectize_page" type="text"
+                                   config="TABLES['uoms'].selectize_page_config" options="TABLES['uoms'].selectize_page_options"
+                                   ng-model="TABLES['uoms'].selectize_page" name="TABLES['uoms'].selectize_page" selectize>
+                        </li>
+                        <li><a href="javascript:void(0)" class="firstPage" ng-click="handleFirstPage('uoms')"><i class="uk-icon-angle-double-left"></i></a></li>
+                        <li><a href="javascript:void(0)" class="prevPage" ng-click="handlePreviousPage('uoms')"><i class="uk-icon-angle-left"></i></a></li>
+                        <li><span class="pageDisplay">1-20/50</span></li>
+                        <li><a href="javascript:void(0)" class="nextPage" ng-click="handleNextPage('uoms')"><i class="uk-icon-angle-right"></i></a></li>
+                        <li><a href="javascript:void(0)" class="lastPage" ng-click="handleLastPage('uoms')"><i class="uk-icon-angle-double-right"></i></a></li>
+                        <li data-uk-tooltip title="{{pageSize}}">
+                            <input ng-change="selectPageNumHandle('uoms')" id="uom_selectize_pageNum" type="text"
+                                   config="TABLES['uoms'].selectize_pageNum_config" options="TABLES['uoms'].page_size_option"
+                                   ng-model="TABLES['uoms'].selectize_pageNum" name="TABLES['uoms'].selectize_pageNum" selectize>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

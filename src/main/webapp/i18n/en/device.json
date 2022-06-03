@@ -1,0 +1,161 @@
+{
+  "device": {
+    "menu": "Control",
+    "name": "Device",
+    "field" :{
+      "name": "Device name",
+      "serial": "Serial Number",
+      "code": "Device code",
+      "type": "Device type",
+      "farm": "Farm",
+      "area": "Manufacturing areas",
+      "belongGW": "Gateway",
+      "state": "State",
+      "action": "Action",
+      "group": "Group device",
+      "shortName": "Short name",
+      "category": "Category",
+      "timer": "Time to send message",
+      "minute": "minute",
+      "other": "Other",
+      "connectionState": "Trạng thái kết nối",
+      "uid": "UID",
+      "owner": "Owner",
+      "parent": "Parent's device",
+      "firmware": "Firmware version",
+      "status": {
+        "0": "Disconnected",
+        "1": "Connected"
+      },
+      "location": "Location"
+    },
+    "placeholder": {
+      "selectArea": "Select area",
+      "selectFarm":  "Select farm",
+      "selectGateway": "Select gateway",
+      "selectOwner": "Chủ sở hữu",
+      "selectParent": "Thiết bị cha",
+      "type": "Device type",
+      "provider": "Provider",
+      "deviceModel": "Device model"
+    },
+    "deviceType": {
+      "name": "Device type",
+      "field": {
+        "name": "Device type name",
+        "description": "Description"
+      }
+    },
+    "deviceModel": {
+      "name": "Device model",
+      "field": {
+        "name": "Device model name",
+        "code": "Device model Code",
+        "type": "Device type",
+        "provider": "Provider",
+        "firmware": "Firmware version",
+        "description": "Description"
+      }
+    },
+    "firmware": {
+      "field": {
+        "version": "Version",
+        "status": "Status",
+        "modelCode": "Model code",
+        "deviceModel": "Device model",
+        "deviceType": "Device type",
+        "provider": "Provider",
+        "createdDate": "Created date",
+        "size": "Size",
+        "action": "Action",
+        "filePath": "File path",
+        "uploadedFile": "Uploaded File",
+        "fileFirmware": "File firmware",
+        "choose": "choose 1 or 2 ways below",
+        "username": "Username",
+        "password": "Password",
+        "chooseFile": "Choose File"
+      },
+      "active": {
+        "0": "Unfinished",
+        "1": "Published",
+        "2": "Locked"
+      }
+    },
+    "policy": {
+      "policyHistories": {
+        "name": "Policy name",
+        "modelCode": "Model code",
+        "deviceModel": "Device model",
+        "deviceType": "Device type",
+        "provider": "Provider",
+        "createdDate": "Created date",
+        "fromVersion": "From version",
+        "toVersion": "To version",
+        "exceptVersion": "Except version",
+        "action": "Action",
+        "chooseFirmwareVersion": "Choose upgrade software version",
+        "upgradeLatestVersion": "Upgrade to the Latest Version",
+        "firmwareVersionName": "Firmware version name",
+        "upgradeConditions": "Firmware upgrade conditions (optional)",
+        "upgradeFromVersion": "Upgrading from version",
+        "upgradeToVersion": "Upgrade to optional version",
+        "upgradeVersioning": "Upgrade to version",
+        "exceptVersions": "Except for versions",
+        "noteUpgradeFromVersion": "//Only make notifications to the devices that have the above version",
+        "noteExceptVersions": "//Send notifications to all devices except those with above version",
+        "notFirmwareVersion":"No firmware version",
+        "history":"Policy history",
+        "totalUpgradedDevice":"The total number of upgraded device",
+		"numberDevicesUpgradedSuccess":"Number of devices upgraded successfully",
+		"numberDevicesUpgradedFail":"Number of devices upgrade failed",
+		"numberDevicesNotUpgraded":"Number of devices not upgraded",
+		"userId":"User ID",
+		"updated":"Updated Date",
+		"updatedFrom":"Updated Date From",
+		"updatedTo":"To",
+		"status":"Status",
+		"search":"Search"
+      },
+      "action": {
+        "start": "Start",
+        "stop": "Stop"
+      },
+      "state": {
+      	"new": "New",
+        "execute": "Execute",
+        "stop": "Stop"
+      },
+	  "stateUpgradeFW":{
+	  	"all":"All",
+      	"success":"Success",
+      	"fail":"Fail",
+      	"notUpgrade":"Not upgrade"
+      },
+      "message":{
+      	"execute": "Do you want to execute this policy?",
+        "stop": "Do you want to stop this policy?",
+        "executeSuccess": "Execute the policy successfully",
+        "stopSuccess": "Stop the policy successfully"
+      }
+    },
+    "manualControl": {
+      "name": "Manual Control",
+      "field": {
+        "group": "Group device name",
+        "type": "Device type",
+        "belongGateway": "Gateway",
+        "device": "Select the device to control"
+      }
+    },
+    "autoControl": {
+      "name": "Auto Control",
+      "field": {
+        "product": "Product",
+        "type": "Device type",
+        "phase": "Phase",
+        "state": "State"
+      }
+    }
+  }
+}

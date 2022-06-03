@@ -1,0 +1,101 @@
+
+<div id="page_content">
+    <jhi-alert></jhi-alert><modal-alert></modal-alert>
+    <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }" class="header-fixed">
+        <span class="route-header">
+            <a class="uk-text-primary" ui-sref="device-manager" data-translate="admin.menu.dataPackageManagement"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+            <span data-translate="admin.menu.dataPackageTitle"></span>
+            <span></span>
+        </span>
+        </br>
+        <div class="uk-margin-small-top">
+            <a has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_HOME_ADMIN, Data_Package_Create" ui-sref="packages-create" class="md-btn md-btn-primary md-btn-small"><span class="uk-text-bold" data-translate="global.button.create"></span></a>
+            <button has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_HOME_ADMIN, Data_Package_Change_Status" id="deactivateBtn" class="md-btn md-btn-warning md-btn-small hideElement" ng-click="defaultDeactivate()"><span class="uk-text-bold" data-translate="global.button.deactivatePackage"></span></button>
+            <button has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_HOME_ADMIN, Data_Package_Delete" id="deleteBtn" class="md-btn md-btn-small hideElement" ng-click="defaultDelete()"><span class="uk-text-bold" data-translate="global.button.deletePackage"></span></button>
+        </div>
+    </div>
+    <div id="page_content_inner">
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-overflow-container uk-margin-bottom table-height-fixed">
+                    <table class="hoverTable uk-table uk-table-align-vertical uk-table-striped  tablesorter tablesorter-altair table-fixed" id="dataPackages">
+                        <thead >
+                        <tr class="uk-table-nowrap">
+                            <th data-name="Select"><input type="checkbox" class="ts_checkbox_all"></th>
+                            <th class="center"><th-content table="TABLES['dataPackages']" label="'package.field.name'"  column="'name'"></th-content></th>
+                            <th class="center"><th-content table="TABLES['dataPackages']" label="'package.field.price'"  column="'price'"></th-content></th>
+                            <th class="center"><th-content table="TABLES['dataPackages']" label="'package.field.period'"  column="'period'"></th-content></th>
+                            <th class="center"><th-content table="TABLES['dataPackages']" label="'package.field.numberDevice'"  column="'numberDevice'"></th-content></th>
+                            <th class="center"><th-content table="TABLES['dataPackages']" label="'Chế độ phân giải'"  column="'resolution'"></th-content></th>
+                            <th class="center"><th-content table="TABLES['dataPackages']" label="'package.field.storageTime'"  column="'storageTime'"></th-content></th>
+                            <th class="center"><th-content table="TABLES['dataPackages']" label="'package.field.autoExtend'"  column="'autoExtend'"></th-content></th>
+                            <th class="center custom-cl-header-tiny"><strong data-translate="package.field.state"></strong></th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><default-filter table="TABLES['dataPackages']" column="'name'"></td>
+                            <td><default-filter table="TABLES['dataPackages']" column="'price'"></td>
+                            <td><default-filter table="TABLES['dataPackages']" column="'period'"></td>
+                            <td><default-filter table="TABLES['dataPackages']" column="'numberOfDevice'"></td>
+                            <td><default-filter table="TABLES['dataPackages']" column="'resolution'"></td>
+                            <td><default-filter table="TABLES['dataPackages']" column="'storageTime'"></td>
+                            <td><common-search label="'global.placeholder.search' | translate" table="TABLES['dataPackages']" values="autoExtendFields" field="'autoExtend'"></common-search></td>
+                            <td><common-search label="'global.placeholder.search' | translate" table="TABLES['dataPackages']" values="stateFields" field="'active'"></common-search></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in dataPackages" on-last-repeat ng-class="{'hoverRow': !obj.unRemove, 'custom-un-remove': obj.unRemove}" title="{{obj.unRemove}}">
+                            <td><input id="{{obj.id}}" type="checkbox" class="ts_checkbox" data-md-icheck icheck ng-model="row_select"></td>
+                            <td><a ui-sref="packages-detail({packageId: obj.id })">{{obj.name}}</a></td>
+                            <td>{{obj.price | moneyCommas}}</td>
+                            <td>{{obj.period}}
+                            	<span ng-if="obj.periodType == 0" data-translate="package.kindOfTime.day"></span>
+                                <span ng-if="obj.periodType == 1" data-translate="package.kindOfTime.month"></span>
+                                <span ng-if="obj.periodType == 2" data-translate="package.kindOfTime.year"></span>
+                            </td>
+                            <td>{{obj.numberOfDevice}}</td>
+                            <td>{{obj.resolution}}</td>
+                            <td>{{obj.storageTime}}
+                            	<span ng-if="obj.storageTimeType == 0" data-translate="package.kindOfTime.day"></span>
+                                <span ng-if="obj.storageTimeType == 1" data-translate="package.kindOfTime.month"></span>
+                                <span ng-if="obj.storageTimeType == 2" data-translate="package.kindOfTime.year"></span>
+                            </td>
+                            <td>
+                            	<span ng-if="obj.autoExtend == 1" data-translate="package.autoExtend.yes"></span>
+                                <span ng-if="obj.autoExtend == 0" data-translate="package.autoExtend.no"></span>
+                            </td>
+                            <td>
+                            	<span ng-if="obj.active == 0" class="uk-badge uk-badge-info" data-translate="package.state.new"></span>
+                                <span ng-if="obj.active == 1" class="uk-badge uk-badge-success" data-translate="package.state.active"></span>
+                                <span ng-if="obj.active == 2" class="uk-badge uk-badge-warning" data-translate="package.state.deactive"></span>
+                                <span ng-if="obj.active == 3" class="uk-badge uk-badge-danger" data-translate="package.state.cacelled"></span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ts_pager" id="table_data-package_pager">
+	             <ul class="uk-pagination ts_pager">
+                        <li ng-click="selectPageClickHandle()" data-uk-tooltip title="{{selectPage}}">
+                            <input ng-change="selectPageHandle('dataPackages')" id="data-package_selectize_page" type="text"
+                                   config="TABLES['dataPackages'].selectize_page_config" options="TABLES['dataPackages'].selectize_page_options"
+                                   ng-model="TABLES['dataPackages'].selectize_page" name="TABLES['dataPackages'].selectize_page" selectize>
+                        </li>
+                        <li><a href="javascript:void(0)" class="firstPage" ng-click="handleFirstPage('dataPackages')"><i class="uk-icon-angle-double-left"></i></a></li>
+                        <li><a href="javascript:void(0)" class="prevPage" ng-click="handlePreviousPage('dataPackages')"><i class="uk-icon-angle-left"></i></a></li>
+                        <li><span class="pageDisplay"></span></li>
+                        <li><a href="javascript:void(0)" class="nextPage" ng-click="handleNextPage('dataPackages')"><i class="uk-icon-angle-right"></i></a></li>
+                        <li><a href="javascript:void(0)" class="lastPage" ng-click="handleLastPage('dataPackages')"><i class="uk-icon-angle-double-right"></i></a></li>
+                        <li data-uk-tooltip title="{{pageSize}}">
+                            <input ng-change="selectPageNumHandle('dataPackages')" id="data-package_selectize_pageNum" type="text"
+                                   config="TABLES['dataPackages'].selectize_pageNum_config" options="TABLES['dataPackages'].page_size_option"
+                                   ng-model="TABLES['dataPackages'].selectize_pageNum" name="TABLES['dataPackages'].selectize_pageNum" selectize>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

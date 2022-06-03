@@ -1,0 +1,261 @@
+<div id="page_content">
+	<form name="firmware_form" id="firmware_form" class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+		<div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <span class="route-header">
+                <a class="uk-text-primary" ui-sref="firmwares" data-translate="admin.menu.firmwareManagement"></a>&nbsp;<i
+				class="uk-icon-arrow-circle-right"></i>
+                <span data-translate="global.button.create"></span>
+            </span>
+			<br/>
+			<div class="uk-margin-small-top">
+				<button has-any-authority ="ROLE_SYSTEM_ADMIN, ROLE_HOME_ADMIN, Firmware_Create" ng-click="submit(false)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+					class="uk-text-bold" data-translate="global.button.save"></span></button>
+				<button has-any-authority ="ROLE_SYSTEM_ADMIN, ROLE_HOME_ADMIN, Firmware_Create" ng-click="submit(true)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+					class="uk-text-bold" data-translate="global.button.saveAndClose"></span></button>
+				<a has-any-authority ="ROLE_SYSTEM_ADMIN, ROLE_HOME_ADMIN, Firmware_View" ui-sref="firmwares" class="md-btn md-btn-small"><span class="uk-text-bold"
+																																					  data-translate="global.button.cancel"></span></a>
+			</div>
+		</div>
+		<div id="page_content_inner">
+			<jhi-alert></jhi-alert>
+			<modal-alert></modal-alert>
+			<div class="md-card">
+				<div class="md-card-content">
+					<div class="uk-grid">
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.firmware.field.version"></label> <span class="req"> *</span>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input
+								ng-required="true"
+								data-parsley-required-message="{{'global.messages.required' | translate}}"
+								data-parsley-maxlength="255"
+								data-parsley-maxlength-message="{{'global.messages.maxLength255' | translate}}"
+								data-parsley-whitespace="trim"
+								ng-model="firmware.firmwareVersion"
+								class="md-input ng-isolate-scope md-input-processed" md-input="">
+						</div>
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.firmware.field.deviceType"></label> <span class="req"> *</span>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input id="deviceTypeCbb" name="deviceTypeCbb"
+								   ng-required="true"
+								   data-parsley-required-message="{{'admin.messages.required' | translate}}"
+								   data-parsley-trigger="focusin focusout"
+								   position="bottom"
+								   config="ComboBox['deviceTypeCbb'].config"
+								   options="ComboBox['deviceTypeCbb'].options"
+								   ng-model="firmware.deviceTypeId"
+								   table="ComboBox['deviceTypeCbb'].table"
+								   column="ComboBox['deviceTypeCbb'].column"
+								   ng-model-object="selectedCbb.deviceType"
+								   ng-change="updateDeviceModelCbb()"
+								   scope-controller="ComboBox['deviceTypeCbb'].scope" selectize>
+						</div>
+					</div>
+					
+					<!-- <div class="uk-grid">
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.firmware.field.deviceType"></label> <span class="req"> *</span>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input id="deviceTypeCbb" name="deviceTypeCbb"
+								   ng-required="true"
+								   data-parsley-required-message="{{'admin.messages.required' | translate}}"
+								   data-parsley-trigger="focusin focusout"
+								   position="bottom"
+								   config="ComboBox['deviceTypeCbb'].config"
+								   options="ComboBox['deviceTypeCbb'].options"
+								   ng-model="firmware.deviceTypeId"
+								   table="ComboBox['deviceTypeCbb'].table"
+								   column="ComboBox['deviceTypeCbb'].column"
+								   ng-model-object="selectedCbb.deviceType"
+								   ng-change="updateDeviceModelCbb()"
+								   scope-controller="ComboBox['deviceTypeCbb'].scope" selectize>
+						</div>
+						
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold" data-translate="device.firmware.field.provider"></label><span class="req"> *</span>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input id="providerCbb" name="providerCbb"
+									ng-required="true"
+									data-parsley-required-message="{{'admin.messages.required' | translate}}"
+									data-parsley-trigger="focusin focusout"
+									position="bottom"
+									config="ComboBox['providerCbb'].config"
+									options="ComboBox['providerCbb'].options"
+									ng-model="firmware.providerId"
+									table="ComboBox['providerCbb'].table"
+									column="ComboBox['providerCbb'].column"
+									ng-model-object="selectedCbb.provider"
+									ng-change="updateDeviceModelCbb()"
+									scope-controller="ComboBox['providerCbb'].scope" selectize>
+						</div>
+					</div> -->
+					
+					<div class="uk-grid">
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.firmware.field.deviceModel"></label> <span class="req"> *</span>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input id="deviceModelCbb" name="deviceModelCbb"
+									ng-disabled="firmware.deviceTypeId == null || firmware.providerId == null ? true : false"
+									ng-required="true"
+									data-parsley-required-message="{{'admin.messages.required' | translate}}"
+									data-parsley-trigger="focusin focusout"
+									position="bottom"
+									config="ComboBox['deviceModelCbb'].config"
+									options="ComboBox['deviceModelCbb'].options"
+									ng-model="firmware.deviceModelId"
+									table="ComboBox['deviceModelCbb'].table"
+									column="ComboBox['deviceModelCbb'].column"
+									ng-model-object="selectedCbb.deviceModel"
+									ng-change="changeDeviceModelCbb()"
+									scope-controller="ComboBox['deviceModelCbb'].scope" selectize>
+						</div>
+						
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold" data-translate="device.firmware.field.modelCode"></label>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input
+								readonly
+								ng-model="firmware.deviceModelCode"
+								class="md-input ng-isolate-scope md-input-processed" md-input="">
+						</div>
+					</div>
+					
+					<div class="uk-grid">
+						<div class="uk-width-small-1-3 uk-width-medium-2-6">
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.firmware.field.fileFirmware"></label>
+							</div>
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.firmware.field.choose"></label>
+							</div>
+							<br/>
+						</div>
+						<div class="uk-width-small-3-3 uk-width-medium-6-6 parsley-row"></div>
+						
+						<div class="uk-width-small-3-3 uk-width-medium-3-6">
+							<div class="uk-width-small-2-3 uk-width-medium-5-6 parsley-row">
+								<input
+									name="addFile"
+									type="radio"
+									checked="checked"
+									ng-click="chooseUrlFile()"
+									class="md-input ng-isolate-scope md-input-processed" md-input="">
+								<label class="label-bold ng-scope" translate="device.firmware.field.filePath">e</label>
+							</div>
+							
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.firmware.field.filePath"></label> <span class="req"> *</span>
+							</div>
+							<div class="uk-width-small-2-3 uk-width-medium-5-6 parsley-row">
+								<!-- <input ng-if="!firmware.filePath"
+									ng-disabled="true"
+									class="md-input ng-isolate-scope md-input-processed" md-input=""> -->
+								<input ng-disabled="!firmware.filePath"
+									ng-model="firmware.fileName"
+								    ng-required="firmware.filePath"
+									data-parsley-required-message="{{'global.messages.required' | translate}}"
+									data-parsley-maxlength="255"
+									data-parsley-maxlength-message="{{'global.messages.maxLength255' | translate}}"
+									data-parsley-whitespace="trim"
+									class="md-input ng-isolate-scope md-input-processed" md-input="">
+							</div>
+							
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.firmware.field.size"></label><span> (Mb)</span> <span class="req"> *</span>
+							</div>
+							<div class="uk-width-small-2-3 uk-width-medium-5-6 parsley-row">
+								<!-- <input ng-if="!firmware.filePath"
+									ng-disabled="true"
+									class="md-input ng-isolate-scope md-input-processed" md-input=""> -->
+								<input ng-disabled="!firmware.filePath" type="text"
+									ng-model="firmware.sizeMb"
+								    ng-required="firmware.filePath"
+									data-parsley-required-message="{{'global.messages.required' | translate}}"
+									data-parsley-pattern="^[1-9]\d*$"
+									data-parsley-pattern-message="{{'global.messages.sizeFirmware' | translate}}"
+									data-parsley-max="1024"
+									data-parsley-max-message="{{'global.messages.maxLength1024' | translate}}"
+									data-parsley-whitespace="trim"
+									class="md-input ng-isolate-scope md-input-processed" md-input="">
+									<!-- data-parsley-pattern="^[0-9]*(\.[0-9]{0,3}){0,1}$" -->
+							</div>
+							
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.firmware.field.username"></label>
+							</div>
+							<div class="uk-width-small-2-3 uk-width-medium-5-6 parsley-row">
+								<!-- <input
+									ng-if="!firmware.filePath"
+									ng-disabled="true"
+									class="md-input ng-isolate-scope md-input-processed" md-input=""> -->
+								<input
+									ng-disabled="!firmware.filePath"
+									ng-model="firmware.username"
+									data-parsley-required-message="{{'global.messages.required' | translate}}"
+									data-parsley-maxlength="100"
+									data-parsley-maxlength-message="{{'global.messages.maxLength100' | translate}}"
+									data-parsley-whitespace="trim"
+									class="md-input ng-isolate-scope md-input-processed" md-input="">
+							</div>
+							
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.firmware.field.password"></label>
+							</div>
+							<div class="uk-width-small-2-3 uk-width-medium-5-6 parsley-row">
+								<!-- <input
+									ng-if="!firmware.filePath"
+									ng-disabled="true"
+									class="md-input ng-isolate-scope md-input-processed" md-input=""> -->
+								<input
+									ng-disabled="!firmware.filePath"
+									ng-model="firmware.password"
+									data-parsley-required-message="{{'global.messages.required' | translate}}"
+									data-parsley-maxlength="100"
+									data-parsley-maxlength-message="{{'global.messages.maxLength100' | translate}}"
+									data-parsley-whitespace="trim"
+									class="md-input ng-isolate-scope md-input-processed" md-input="">
+							</div>
+						</div>
+						<div class="verticalLine" style="border-left: 2px solid #A4A4A4;"></div>
+						<div class="uk-width-small-3-3 uk-width-medium-2-6">
+							<div class="uk-width-small-2-3 uk-width-medium-5-6 parsley-row">
+								<input
+									name="addFile"
+									type="radio"
+									ng-click="chooseFile()"
+									class="md-input ng-isolate-scope md-input-processed" md-input="">
+								<label class="label-bold ng-scope" translate="device.firmware.field.chooseFile"></label>
+								<br/><br/>
+								<input id="form-file" name="form-file" type="file" accept=".zip,.rar,.img,.gz" style="display:none;" ng-disabled="firmware.filePath">
+								<label id="btnImport" class="md-btn md-btn-small hideElement" for="form-file">
+									<span class="uk-text-bold" data-translate="device.firmware.field.chooseFile"></span>
+								</label>
+								<span id="fileName" class="overflowLongText text-inline" is-input="false"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		</div>
+	</form>
+</div>

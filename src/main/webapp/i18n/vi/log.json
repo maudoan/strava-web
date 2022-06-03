@@ -1,0 +1,60 @@
+{
+  "log": {
+    "list": "Danh sách",
+    "column": {
+      "uid": "Device ID/UID",
+      "expiredDate": "Thời gian gói cước",
+      "status": "Trạng thái",
+      "username": "Tên người dùng",
+      "phone": "Số điện thoại",
+      "type": "Thao tác",
+      "note": "Nội dung log",
+      "created": "Thời gian",
+      "active": "Trạng thái",
+      "errorKey": "Mã lỗi",
+      "code": "Mã khách hàng",
+      "email": "Email"
+    },
+    "type": {
+      "register": "Đăng ký cloud",
+      "cancel": "Huỷ cloud",
+      "delete": "Xoá cloud"
+    },
+    "status": {
+      "success": "Thành công",
+      "failed": "Thất bại"
+    },
+    "field": {
+      "area": "Khu vực sản xuất",
+      "season": "Đợt",
+      "product": "Sản phẩm",
+      "season_code": "Mã đợt",
+      "packaging_date": "Ngày đóng gói"
+    }
+  },
+  "logType": {
+    "column": {
+      "type": "Log Type",
+      "action": "Log Action",
+      "module": "Module",
+      "created": "Ngày tạo"
+    }
+  },
+  "config": {
+    "column": {
+      "key": "Key",
+      "value": "Value"
+    }
+  },
+  "notification": {
+    "column": {
+      "content": "Nội dung",
+      "type": "Loại thông báo",
+      "sendTime": "Thời gian gửi"
+    },
+    "type": {
+      "updateFirmware": "Cập nhật Firmware",
+      "motionDetect": "Cảnh báo chuyển động"
+    }
+  }
+}

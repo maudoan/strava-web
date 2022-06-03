@@ -1,0 +1,134 @@
+{
+  "infrastructure": {
+    "farm": {
+      "name": "Trang trại",
+      "column": {
+        "code": "Mã trang trại",
+        "owner": "Chủ trang trại",
+        "name": "Tên trang trại",
+        "acreage": "Diện tích",
+        "phone": "Số điện thoại",
+        "typeFarm": "Loại hình sản xuất",
+        "lat": "Kinh độ",
+        "lng": "Vĩ độ",
+        "location": "Địa điểm",
+        "note": "Ghi chú",
+        "action": "Thao tác"
+      },
+      "typeFarm": {
+        "grow": "Trồng trọt",
+        "feed": "Chăn nuôi",
+        "growAndFeed": "Hỗn hợp"
+      },
+      "createFarm": {
+        "farmCode": "Mã trang trại",
+        "farmName": "Tên trang trại",
+        "owner": "Chủ trang trại",
+        "email": "Email",
+        "area": "Diện tích",
+        "phoneNumber": "Số điện thoại",
+        "production": "Loại hình sản xuất",
+        "longitude": "Kinh độ",
+        "address": "Địa điểm",
+        "latitude": "Vĩ độ",
+        "note": "Ghi chú"
+      },
+      "deleteFarm": "Bạn chắc chắn muốn xoá trang trại này?"
+    },
+    "categoryProduct":{
+    	"name":"Danh mục sản phẩm",
+    	"noData":"Không có dữ liệu",
+    	"create":"Tạo mới danh mục",
+    	"createProduct":"Tạo mới sản phẩm",
+    	"edit":"Sửa danh mục",
+    	"delete":"Xóa danh mục",
+    	"messConfirmEdit":"Xác nhận việc cập nhật danh mục sản phẩm",
+    	"messConfirmDelete": "Xác nhận việc cập nhật danh mục sản phẩm"
+    },
+    "product": {
+      "name": "Sản phẩm",
+      "detail": "Chi tiết sản phẩm",
+      "general": "THÔNG TIN CHUNG",
+      "column": {
+        "code": "Mã sản phẩm",
+        "category": "Danh mục sản phẩm",
+        "productName": "Tên sản phẩm",
+        "unit": "Đơn vị tính",
+        "farm": "Trang trại",
+        "name": "Tên sản phẩm",
+        "typeProduct": "Danh mục sản phẩm",
+        "createdDate": "Ngày tạo",
+        "createdUser": "Người tạo",
+        "description": "Mô tả",
+        "package": "Đơn vị bao gói"
+      }
+    },
+    "area": {
+      "typeArea": {
+        "hydroponic": "Thủy canh",
+        "growingMedia": "Giá thể",
+        "husbandry": "Chăn nuôi",
+        "land":"Trồng đất",
+        "other": "Khác"
+      },
+      "createArea": {
+        "areaName": "Tên khu vực sản xuất",
+        "space": "Diện tích",
+        "parentArea": "Khu vực sản xuất cha",
+        "farm": "Trang trại",
+        "typeArea": "Loại hình sản xuất"
+      },
+      "name": "Khu vực sản xuất",
+      "column": {
+        "name": "Tên Khu vực sản xuất",
+        "parent": "Khu vực sản xuất cha",
+        "typeArea": "Loại hình sản xuất",
+        "farm": "Trang trại",
+        "code": "Mã sản phẩm",
+        "typeProduct": "Loại sản phẩm",
+        "createdDate": "Ngày tạo",
+        "createdUser": "Người tạo",
+        "description": "Mô tả",
+        "unitCalculate": "Đơn vị tính",
+        "product": "Tên sản phẩm",
+        "package": "Đơn vị bao gói",
+        "shortName": "Tên viết tắt"
+      },
+      "tab": {
+        "monitoring": "Thông số giám sát",
+        "device": "Trạng thái thiết bị",
+        "product": "Sản phẩm"
+      },
+      "monitoring": {
+        "title": "Thông số môi trường",
+        "temperature": "Nhiệt độ",
+        "co2": "CO2",
+        "humidity": "Độ ẩm",
+        "brightness": "Độ sáng",
+        "windSpeed": "Tốc độ gió"
+      },
+      "nourishment": "Thông số nuôi dưỡng",
+      "device": {
+        "name": "Thiết bị",
+        "status": "Trạng thái"
+      },
+      "product": {
+        "name": "Tên",
+        "method": "Phương thức canh tác",
+        "characteristic": "Đặc điểm",
+        "type": "Loại",
+        "phase": "Giai đoạn"
+      },
+      "deleteArea": "Bạn chắc chắn muốn xoá khu vực này?"
+    },
+    "uom": {
+      "deleteUom": "Bạn chắc chắn muốn xoá Đơn vị này?"
+    },
+    "uomType": {
+      "deleteUomType": "Bạn chắc chắn muốn xoá Loại đơn vị này?"
+    },
+    "qrCode": {
+      "deleteQRCode": "Bạn chắc chắn muốn xoá QRCode này?"
+    }
+  }
+}

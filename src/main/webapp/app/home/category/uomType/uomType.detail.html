@@ -1,0 +1,129 @@
+<div id="page_content">
+    <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+        <div class="heading_actions action-padding-top">
+        </div>
+        <span class="route-header">
+            <a class="uk-text-primary" ui-sref="category" data-translate="admin.menu.master"></a>&nbsp;<i
+                class="uk-icon-arrow-circle-right"></i>
+            <a class="uk-text-primary" ui-sref="uomTypes" data-translate="admin.uomType.list"></a>&nbsp;<i
+                class="uk-icon-arrow-circle-right"></i>
+            <span title="{{uomType.name}}">{{uomType.subNameTitle}}</span>
+        </span>
+        <br/>
+        <div class="uk-margin-small-top">
+            <a
+                    ng-if="uomType.editable"
+                    has-any-authority="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Uom_Type_Update"
+                    ui-sref="uomTypes-edit({uomTypeId: uomType.id })"
+                    class="md-btn md-btn-small md-btn-primary">
+                <span class="uk-text-bold" data-translate="global.button.edit"></span>
+            </a>
+            <a
+                    ng-if="!uomType.editable && !uomType.isDefault"
+                    has-any-authority="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Uom_Type_Update"
+                    ui-sref="uomTypes-edit({uomTypeId: uomType.id })"
+                    class="md-btn md-btn-small md-btn-primary">
+                <span class="uk-text-bold" data-translate="global.button.edit"></span>
+            </a>
+            <a has-any-authority="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Uom_Type_Create"
+               ui-sref="uomTypes-create" class="md-btn md-btn-small md-btn-primary">
+                <span class="uk-text-bold" data-translate="global.button.create"></span>
+            </a>
+        </div>
+    </div>
+    <div id="page_content_inner" class="pageDetail">
+        <jhi-alert></jhi-alert>
+        <modal-alert></modal-alert>
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-grid" data-uk-grid-margin="">
+                    <!--ten-->
+                    <div class="uk-width-medium-1-1 uk-row-first">
+                        <div class="parsley-row">
+                            <label class="label-bold" for="name" data-translate="admin.uomType.column.name"></label>
+                            <span class="req"> (*)</span>
+                            <input
+                                    ng-model="uomType.subName" title="{{uomType.name}}" type="text" name="name" id="name"
+                                    class="md-input ng-isolate-scope md-input-processed" md-input="" ng-disabled="true">
+                            <span class="md-input-bar "></span>
+                        </div>
+                    </div>
+
+                    <!--type-->
+                    <div class="uk-width-medium-1-1 uk-row-first">
+                        <div class="parsley-row">
+                            <label class="label-bold" for="description"
+                                   data-translate="admin.uomType.column.type"></label>
+                            <selectize id="uomType-type"
+                                       position="bottom"
+                                       config="ComboBox['uomType-type'].config"
+                                       options="ComboBox['uomType-type'].options"
+                                       ng-model="uomType.type"
+                                       table="ComboBox['uomType-type'].table"
+                                       column="ComboBox['uomType-type'].column"
+                                       scope-controller="ComboBox['uomType-type'].scope"
+                                       ng-disabled="true">
+                            </selectize>
+                        </div>
+                    </div>
+                    <!-- description -->
+                    <div class="uk-width-medium-1-1 uk-row-first">
+                        <div class="parsley-row">
+                            <label class="label-bold" for="description"
+                                   data-translate="admin.uomType.column.description"></label>
+                            <textarea
+                                    style="border-width: 1px 1px 1px;"
+                                    readonly=""
+                                    ng-model="uomType.description"
+                                    type="text" name="description"
+                                    id="description"
+                                    class="md-input ng-isolate-scope md-input-processed"
+                                    md-input=""></textarea>
+                        </div>
+                    </div>
+
+                    <!-- description -->
+                    <div class="uk-width-medium-1-1 uk-row-first">
+                        <div class="parsley-row">
+                            <label class="label-bold" data-translate="admin.organization.column.status"></label>
+                            <input
+                                    ng-disabled="true"
+                                    ng-if="uomType.isDefault"
+                                    value="Mặc định"
+                                    class="md-input ng-isolate-scope md-input-processed"
+                                    md-input="">
+
+                            <input
+                                    ng-disabled="true"
+                                    ng-if="!uomType.isDefault"
+                                    value="Bổ sung"
+                                    class="md-input ng-isolate-scope md-input-processed"
+                                    md-input="">
+                        </div>
+                    </div>
+                    <!--orgazanition-->
+                    <!--<div class="uk-width-medium-1-1 uk-row-first" id="select_organization">-->
+                    <!--<div class="parsley-row">-->
+                    <!--<label class="label-bold" for="description" data-translate="admin.uomType.column.organization"></label>-->
+                    <!--&lt;!&ndash;<selectize id="uomType-organizationId"&ndash;&gt;-->
+                    <!--&lt;!&ndash;position="bottom"&ndash;&gt;-->
+                    <!--&lt;!&ndash;config="ComboBox['uomType-organizationId'].config"&ndash;&gt;-->
+                    <!--&lt;!&ndash;options="ComboBox['uomType-organizationId'].options"&ndash;&gt;-->
+                    <!--&lt;!&ndash;ng-model="uomType.organizationId"&ndash;&gt;-->
+                    <!--&lt;!&ndash;table="ComboBox['uomType-organizationId'].table"&ndash;&gt;-->
+                    <!--&lt;!&ndash;column="ComboBox['uomType-organizationId'].column"&ndash;&gt;-->
+                    <!--&lt;!&ndash;scope-controller="ComboBox['uomType-organizationId'].scope"&ndash;&gt;-->
+                    <!--&lt;!&ndash;ng-disabled="true">&ndash;&gt;-->
+                    <!--&lt;!&ndash;</selectize>&ndash;&gt;-->
+                    <!--<div class="custom-info">-->
+                    <!--<a ui-sref="organizations-detail({organizationId: organization.id })">-->
+                    <!--{{organization.name}}-->
+                    <!--</a>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,173 @@
+<div id="page_content">
+	<form name="firmware_form" id="firmware_form" class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+		<div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <span class="route-header">
+                <a class="uk-text-primary" ui-sref="firmwares"> <span data-translate="admin.menu.firmwareManagement"></span> </a>&nbsp;<i
+				class="uk-icon-arrow-circle-right"></i>
+                <span class="overflowLongText" value="firmware.firmwareVersion" is-input="false"></span>
+            </span>
+			<div class="uk-margin-small-top">
+				<button  has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_HOME_ADMIN,Firmware_Update" ng-click="editFirmwares()" class="md-btn md-btn-primary md-btn-small">
+					<span class="uk-text-bold" data-translate="global.button.edit"></span>
+				</button>
+				<a  has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_HOME_ADMIN,Firmware_Create" ui-sref="firmwares-create" class="md-btn md-btn-primary md-btn-small">
+					<span class="uk-text-bold" data-translate="global.button.create"></span>
+				</a>
+			</div>
+		</div>
+		<div id="page_content_inner">
+			<jhi-alert></jhi-alert>
+			<modal-alert></modal-alert>
+			<div class="md-card">
+				<div class="md-card-content">
+					<div class="uk-grid">
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.firmware.field.version"></label> <span class="req"> *</span>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input
+								readonly
+								ng-model="firmware.firmwareVersion"
+								class="md-input ng-isolate-scope md-input-processed" md-input="">
+						</div>
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold" data-translate="device.firmware.field.deviceModel"></label><span class="req"> *</span>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input
+								readonly
+								ng-model="firmware.deviceModelName"
+								class="md-input ng-isolate-scope md-input-processed" md-input="">
+						</div>
+						
+					</div>
+					
+					<div class="uk-grid">
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold" data-translate="device.firmware.field.deviceType"></label><span class="req"> *</span>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input
+								readonly
+								ng-model="firmware.deviceType.name"
+								class="md-input ng-isolate-scope md-input-processed" md-input="">
+						</div>
+						<!-- <div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.firmware.field.provider"></label> <span class="req"> *</span>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input
+								readonly
+								ng-model="firmware.provider.name"
+								class="md-input ng-isolate-scope md-input-processed" md-input="">
+						</div> -->
+						
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.firmware.field.modelCode"></label> <span class="req"> *</span>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input
+								readonly
+								ng-model="firmware.deviceModelCode"
+								class="md-input ng-isolate-scope md-input-processed" md-input="">
+						</div>
+					</div>
+					
+					<div class="uk-grid">
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.firmware.field.size"></label><span> (Mb)</span>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6">
+							<div class="parsley-row">
+								<input
+									readonly
+									ng-model="firmware.size"
+									class="md-input ng-isolate-scope md-input-processed" md-input="">
+							</div>
+						</div>
+						
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold" data-translate="device.firmware.field.createdDate"></label>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+							<input
+								readonly
+								ng-model="createdString"
+								class="md-input ng-isolate-scope md-input-processed" md-input="">
+						</div>
+					</div>
+					
+					<div class="uk-grid">
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label" ng-if="firmware.filePath">
+								<label class="label-bold ng-scope" data-translate="device.firmware.field.filePath"></label> <span class="req"> *</span>
+							</div>
+							<div class="custom-label" ng-if="!firmware.filePath">
+								<label class="label-bold ng-scope" data-translate="device.firmware.field.uploadedFile"></label> <span class="req"> *</span>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-3-5">
+							<div has-any-authority ="ROLE_SYSTEM_ADMIN, ROLE_HOME_ADMIN, Firmware_Download" class="parsley-row" ng-if="firmware.filePath" style="margin-top: 15px;">
+								<a target="_blank" href="{{firmware.fileName}}">{{firmware.fileName}}</a>
+							</div>
+							<div do-not-have-authority="ROLE_SYSTEM_ADMIN, ROLE_HOME_ADMIN, Firmware_Download" class="parsley-row" ng-if="firmware.filePath" style="margin-top: 15px;">
+								{{firmware.fileName}}
+							</div>
+							<div class="parsley-row" ng-if="!firmware.filePath" style="margin-top: 15px;">
+								{{firmware.fileName}}&nbsp;&nbsp;
+								<!-- <a href="{{hostGW}}/api/files/download?fileName={{firmware.fileName}}&type=2" class="material-icons md-24">get_app</a> -->
+								<a has-any-authority ="ROLE_SYSTEM_ADMIN, ROLE_HOME_ADMIN, Firmware_Download" target="_blank" href="{{firmware.url}}" class="material-icons md-24">get_app</a>
+							</div>
+						</div>
+					</div>
+					
+					<div class="uk-grid" ng-if="firmware.filePath">
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.firmware.field.username"></label>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6">
+							<div class="parsley-row">
+								<input
+									readonly
+									ng-model="firmware.username"
+									class="md-input ng-isolate-scope md-input-processed" md-input="">
+							</div>
+						</div>
+					</div>
+					
+					<div class="uk-grid" ng-if="firmware.filePath">
+						<div class="uk-width-small-1-3 uk-width-medium-1-6">
+							<div class="custom-label">
+								<label class="label-bold ng-scope" data-translate="device.firmware.field.password"></label>
+							</div>
+						</div>
+						<div class="uk-width-small-2-3 uk-width-medium-2-6">
+							<div class="parsley-row">
+								<input
+									readonly
+									ng-model="firmware.password"
+									class="md-input ng-isolate-scope md-input-processed" md-input="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

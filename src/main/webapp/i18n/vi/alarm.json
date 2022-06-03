@@ -1,0 +1,27 @@
+{
+    "alarm": {
+        "name": "Cảnh báo",
+        "config": "Cấu hình",
+        "history": "Lịch sử",
+        "fieldHis": {
+            "name": "Tên cảnh báo",
+            "raised": "Ngày cảnh báo",
+            "content": "Nội dung cảnh báo",
+            "farm": "Trang trại",
+            "area": "Khu vực sản xuất",
+            "areaShortName": "Tên viết tắt",
+            "belongGW": "Thuộc Gateway",
+            "device": "Thiết bị",
+            "method": "Phương thức cảnh báo",
+            "value": "Gía trị cảnh báo",
+            "action": "Thao tác",
+            "activated": "Kích hoạt",
+            "deactivate": "Ngừng kích hoạt",
+            "status": "Trạng thái"
+        },
+        "operator": {
+            "null": "Không lấy được giá trị",
+            "OutOfRange" : "Nằm ngoài khoảng"
+        }
+    }
+}

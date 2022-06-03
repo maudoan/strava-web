@@ -1,0 +1,208 @@
+<div ng-if="page==1 || page==2" class="md-card-content">
+    <!--Line 1-->
+    <div class="uk-grid">
+        <div class="uk-width-medium-1-6">
+            <div class="custom-label" >Mã khách hàng*</div>
+        </div>
+        <div class="uk-width-medium-2-6">
+            <input ng-if="page==1" readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="user.code" input-long-text/>
+
+            <input ng-if="page==2"
+                   ng-required="true"
+                   data-parsley-required-message="{{'global.messages.required' | translate}}"
+                   data-parsley-maxlength="255"
+                   data-parsley-maxlength-message="{{'global.messages.maxLength255' | translate}}"
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="editUser.code" input-long-text/>
+        </div>
+
+        <div class="uk-width-medium-1-6">
+            <div class="parsley-row">
+                <div class="custom-label" >Khu vực*</div>
+            </div>
+        </div>
+
+        <div class="uk-width-medium-2-6">
+            <div class="parsley-row">
+                <input ng-if="page==1" ng-model="user.area" readonly  type="text"
+                       class="md-input ng-isolate-scope md-input-processed" input-long-text>
+
+                <input ng-if="page==2" id="areaId" name="area"
+                       ng-required="true"
+                       data-parsley-required-message="{{'global.messages.required' | translate}}"
+                       data-parsley-trigger="focusin focusout"
+                       position="bottom"
+                       config="ComboBox['area2'].config"
+                       options="ComboBox['area2'].options"
+                       ng-model="editUser.areaId"
+                       ng-model-object="selectedCbb.area"
+                       table="ComboBox['area2'].table"
+                       column="ComboBox['area2'].column"
+                       scope-controller="ComboBox['area2'].scope" selectize>
+            </div>
+        </div>
+    </div>
+    <!--Line 2-->
+    <div class="uk-grid">
+        <div class="uk-width-medium-1-6">
+            <div class="custom-label" >Tên khách hàng</div>
+        </div>
+        <div class="uk-width-medium-2-6">
+            <input readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="user.fullName" input-long-text/>
+        </div>
+
+        <div class="uk-width-medium-1-6">
+            <div class="parsley-row">
+                <div class="custom-label" >SĐT</div>
+            </div>
+        </div>
+
+        <div class="uk-width-medium-2-6">
+            <div class="parsley-row">
+                <input ng-model="user.username" readonly  type="text"
+                       class="md-input ng-isolate-scope md-input-processed" input-long-text>
+                <span class="md-input-bar "></span>
+            </div>
+        </div>
+    </div>
+    <!--Line 3-->
+    <div class="uk-grid">
+        <div class="uk-width-medium-1-6">
+            <div class="custom-label" >Email</div>
+        </div>
+        <div class="uk-width-medium-2-6">
+            <input readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="user.email" input-long-text/>
+        </div>
+
+        <div class="uk-width-medium-1-6">
+            <div class="custom-label" >Ngày đăng ký</div>
+        </div>
+        <div class="uk-width-medium-2-6">
+            <div class="custom-label custom-border-bottom" style="font-weight: normal !important;">
+                <span>{{user.created | date: 'dd-MM-yyyy HH:mm:ss'}}</span>
+            </div>
+        </div>
+<!--        <div class="uk-width-medium-1-6">-->
+<!--            <div class="parsley-row">-->
+<!--                <div class="custom-label" >Ngày sinh</div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="uk-width-medium-2-6">-->
+<!--            <div class="custom-label custom-border-bottom " style="font-weight: normal !important;">-->
+<!--                <span>{{user.birthday | date: 'dd-MM-yyyy'}}</span>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+    <div class="uk-grid">
+        <div class="uk-width-medium-1-6">
+            <div class="custom-label" >Địa chỉ chi tiết*</div>
+        </div>
+        <div class="uk-width-medium-3-6">
+            <input ng-if="page==1" readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="user.address" input-long-text/>
+
+            <input ng-if="page==2"
+                   ng-required="true"
+                   data-parsley-required-message="{{'global.messages.required' | translate}}"
+                   data-parsley-maxlength="255"
+                   data-parsley-maxlength-message="{{'global.messages.maxLength255' | translate}}"
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="editUser.address" input-long-text/>
+        </div>
+    </div>
+
+    <!--Line 4-->
+<!--    <div class="uk-grid">-->
+<!--        <div class="uk-width-medium-1-6">-->
+<!--            <div class="custom-label" >Ngày đăng ký</div>-->
+<!--        </div>-->
+<!--        <div class="uk-width-medium-2-6">-->
+<!--            <div class="custom-label custom-border-bottom" style="font-weight: normal !important;">-->
+<!--                <span>{{user.created | date: 'dd-MM-yyyy hh:mm:ss'}}</span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+    <br/>
+    <div ng-include src="'app/home/manager/customer/tabs-list.html'"></div>
+</div>
+
+<div ng-if="page==3" class="md-card-content">
+    <!--Line 1-->
+    <div class="uk-grid">
+        <div class="uk-width-medium-1-6">
+            <div class="custom-label" >Mã khách hàng*</div>
+        </div>
+        <div class="uk-width-medium-2-6">
+            <input readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="user.code" input-long-text/>
+        </div>
+
+        <div class="uk-width-medium-1-6">
+            <div class="parsley-row">
+                <div class="custom-label">Gói cước</div>
+            </div>
+        </div>
+        <div class="uk-width-medium-2-6">
+            <div class="parsley-row">
+                <input ng-model="serviceBill.servicePackageName" readonly  type="text"
+                       class="md-input ng-isolate-scope md-input-processed" input-long-text>
+            </div>
+        </div>
+    </div>
+    <!--Line 2-->
+    <div class="uk-grid">
+        <div class="uk-width-medium-1-6">
+            <div class="custom-label" >Số điện thoại</div>
+        </div>
+        <div class="uk-width-medium-2-6">
+            <input readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="user.username" input-long-text/>
+        </div>
+
+        <div class="uk-width-medium-1-6">
+            <div class="parsley-row">
+                <div class="custom-label">Hành động</div>
+            </div>
+        </div>
+
+        <div class="uk-width-medium-2-6">
+            <div class="parsley-row">
+                <input ng-model="serviceBillAction" readonly  type="text"
+                       class="md-input ng-isolate-scope md-input-processed" input-long-text>
+                <span class="md-input-bar "></span>
+            </div>
+        </div>
+    </div>
+    <!--Line 3-->
+    <div class="uk-grid">
+        <div class="uk-width-medium-1-6">
+            <div class="custom-label" >Tên khách hàng</div>
+        </div>
+        <div class="uk-width-medium-2-6">
+            <input readonly
+                   class="md-input ng-isolate-scope md-input-processed"
+                   type="text" ng-model="user.fullName" input-long-text/>
+        </div>
+
+        <div class="uk-width-medium-1-6">
+            <div class="custom-label" >Thời gian giao dịch</div>
+        </div>
+        <div class="uk-width-medium-2-6">
+            <div class="custom-label custom-border-bottom" style="font-weight: normal !important;">
+                <span>{{serviceBill.datePayment | date: 'dd-MM-yyyy hh:mm:ss'}}</span>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div ng-include src="'app/home/manager/customer/history-detail.html'"></div>
+</div>

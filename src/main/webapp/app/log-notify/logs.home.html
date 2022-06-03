@@ -1,0 +1,160 @@
+<div id="page_content">
+    <div id="page_content_inner">
+        <div class="custom-input-border">
+            <input id="searchInput" type="text" class="no-border ng-pristine ng-valid ng-empty ng-touched" style="width: 95%;height: 36px" placeholder="Tìm kiếm ..." ng-model="params"><button id="searchBtn" ng-click="search()" class="no-border " style="height: 36px !important;width: 5%" type="submit"><i class="md-icon material-icons">search</i></button>
+        </div>
+        <div class="uk-grid uk-grid-width-large-1-1 uk-grid-width-medium-1-1 uk-grid-medium uk-sortable sortable-handler hierarchical_show" data-uk-sortable data-uk-grid-margin hierarchical-show>
+            <div ng-repeat="total in totalLog">
+                <div ng-repeat="log in total">
+                    <div ng-if="log.objectType == 'Transfer'">
+                        <div ng-show="true" class="uk-grid" data-uk-grid-margin >
+                            <div class="uk-width-medium-1-1">
+                                <div class="md-card-content no-space-top">
+                                    <h2 data-translate="transfer.common.Transfer"></h2>
+                                    <div class="md-card ">
+                                        <div class="md-card-toolbar" style="background-color: #f5f5f5">
+                                            <div class="md-card-toolbar-actions" ng-if="(log.changes.length > 0 || log.relateLogs || log.noteId || log.actionType == 'create_transfer_return' || log.actionType == 'create_back_order') && (log.actionType !='create_transfer')">
+                                                <card-toggle></card-toggle>
+                                            </div>
+                                            <card-fullscreen-deactivate></card-fullscreen-deactivate>
+                                            <h3 class="md-card-toolbar-heading-text" >
+                                                <img ng-if="log.userAvatar"  class="custom-avatar-small" ng-src="data:image/*;base64,{{log.userAvatar}}"  alt="" add-image-prop="">
+                                                <img ng-if="!log.userAvatar" class="custom-avatar-small"  ng-src="assets/img/avatars/avatar.jpg" alt="user avatar" />
+                                                <span><b>{{log.actorUserName}}</b></span>
+                                                <span ng-if="log.actionType == 'update_transfer'" data-translate="transfer.messages.madeChange"></span>
+                                                <span ng-if="log.actionType == 'create_transfer'" data-translate="transfer.messages.createdTransfer"></span>
+                                                <span ng-if="log.actionType == 'add_note'" data-translate="transfer.messages.addNote"></span>
+                                                <span ng-if="log.actionType == 'check_availability'" data-translate="transfer.messages.checkAvailability"></span>
+                                                <span ng-if="log.actionType == 'un_reserved'" data-translate="transfer.messages.unReserved"></span>
+                                                <span ng-if="log.actionType == 'create_transfer_return'" data-translate="transfer.messages.createTransferReturn"></span>
+                                                <span ng-if="log.actionType == 'create_back_order'" data-translate="transfer.messages.createBackOrder"></span>
+                                                <span> - {{log.created | date: 'dd-MM-yyyy HH:mm:ss'}}</span>
+                                            </h3>
+                                        </div>
+                                        <div class="md-card-content custom-space" ng-if="(log.changes.length > 0 || log.relateLogs || log.noteId || log.actionType == 'create_transfer_return' || log.actionType == 'create_back_order') && (log.actionType !='create_transfer')">
+                                            <div ng-if="log.changes.length > 0">
+                                                <span ng-if="!log.noteId" class="label-bold" data-translate="inventory.messages.transfersChanges"></span>
+                                                <span ng-if="log.noteId" class="label-bold" data-translate="inventory.messages.comment"></span>
+                                            </div>
+                                            <div ng-bind-html = "log.content"></div>
+                                            <div ng-if="!transfer.manOrderTransfer" ng-include src="'app/inventory/transfer/log/item_log.html'"></div>
+                                            <div ng-if="transfer.manOrderTransfer" ng-include src="'app/inventory/transfer/log/mo_item_log.html'"></div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+
+                    <div ng-if="log.objectType == 'Inventory'">
+                        <div ng-show="true" class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-width-medium-1-1">
+                                <div class="md-card-content no-space-top">
+                                    <h2 data-translate="inventory.column.inventoryOf"></h2>
+                                    <div class="md-card ">
+                                        <div class="md-card-toolbar" style="background-color: #f5f5f5">
+                                            <div class="md-card-toolbar-actions" ng-if="(log.changes.length > 0 || log.relateLogs) && log.actionType !='create_inventory'">
+                                                <card-toggle></card-toggle>
+                                            </div>
+                                            <card-fullscreen-deactivate></card-fullscreen-deactivate>
+                                            <h3 class="md-card-toolbar-heading-text" >
+                                                <img ng-if="log.userAvatar" ng-src="data:image/*;base64,{{log.userAvatar}}" height="25" width="25" alt="" add-image-prop="">
+                                                <img ng-if="!log.userAvatar"  ng-src="assets/img/avatars/avatar.jpg" alt="user avatar" width="25" height="25"/>
+                                                <span><b>{{log.actorUserName}}</b></span>
+                                                <span ng-if="log.actionType == 'update_inventory'" data-translate="transfer.messages.madeChange"></span>
+                                                <span ng-if="log.actionType == 'create_inventory'" data-translate="transfer.messages.createdInventory"></span>
+                                                <span ng-if="log.actionType == 'add_note'" data-translate="transfer.messages.addNote"></span>
+                                                <span ng-if="log.actionType == 'set_zero_adjustment_detail'" data-translate="transfer.messages.zeroAdjustment"></span>
+                                                <span> - {{log.created | date: 'dd-MM-yyyy HH:mm:ss'}}</span>
+                                            </h3>
+                                        </div>
+                                        <div class="md-card-content custom-space" ng-if="(log.changes.length > 0 || log.relateLogs || log.noteId) && log.actionType !='create_inventory'">
+                                            <div ng-if="log.changes.length > 0">
+                                                <span ng-if="!log.noteId" class="label-bold" data-translate="inventory.messages.inventoryChanges"></span>
+                                                <span ng-if="log.noteId" class="label-bold" data-translate="inventory.messages.comment"></span>
+                                            </div>
+                                            <div ng-bind-html = "log.content"></div>
+                                            <div ng-if="log.relateLogs && log.actionType=='update_inventory'" >
+                                                <span class="label-bold" data-translate="inventory.messages.inventoryDetailChanges"></span>
+                                                <table class="uk-table uk-table-align-vertical">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>VNPT P/N</th>
+                                                        <th>VNPT ManPN</th>
+                                                        <th>Man P/N</th>
+                                                        <th>Location</th>
+                                                        <th>Package</th>
+                                                        <th>Unit ID/Serial Number</th>
+                                                        <th>Theoretical</th>
+                                                        <th>Real</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr ng-repeat-start="child in log.relateLogs">
+                                                        <td ng-if="child.actionType=='update_adjustment_detail'">{{child.parameters.id}}</td>
+                                                        <td ng-if="child.actionType=='create_adjustment_detail'"><span class="custom-text-new">{{child.parameters.id}}</span></td>
+                                                        <td ng-if="child.actionType=='delete_adjustment_detail'"><span class="custom-text-remove">{{child.parameters.id}}</span></td>
+
+                                                        <td ng-if="child.actionType=='update_adjustment_detail' && child.parameters.productNameOld"><span class="custom-text-remove">{{child.parameters.productNameOld}}</span>&nbsp;🡺&nbsp;<span class="custom-text-new">{{child.parameters.productName}}</span></td>
+                                                        <td ng-if="child.actionType=='update_adjustment_detail' && !child.parameters.productNameOld">{{child.parameters.productName}}</td>
+                                                        <td ng-if="child.actionType=='create_adjustment_detail'"><span class="custom-text-new">{{child.parameters.productName}}</span></td>
+                                                        <td ng-if="child.actionType=='delete_adjustment_detail'"><span class="custom-text-remove">{{child.parameters.productName}}</span></td>
+
+                                                        <td ng-if="child.actionType=='update_adjustment_detail' && child.parameters.internalReferenceOld"><span class="custom-text-remove">{{child.parameters.internalReferenceOld}}</span>&nbsp;🡺&nbsp;<span class="custom-text-new">{{child.parameters.internalReference}}</span></td>
+                                                        <td ng-if="child.actionType=='update_adjustment_detail' && !child.parameters.internalReferenceOld">{{child.parameters.internalReference}}</td>
+                                                        <td ng-if="child.actionType=='create_adjustment_detail'"><span class="custom-text-new">{{child.parameters.internalReference}}</span></td>
+                                                        <td ng-if="child.actionType=='delete_adjustment_detail'"><span class="custom-text-remove">{{child.parameters.internalReference}}</span></td>
+
+                                                        <td ng-if="child.actionType=='update_adjustment_detail' && child.parameters.manPnOld"><span class="custom-text-remove">{{child.parameters.manPnOld}}</span>&nbsp;🡺&nbsp;<span class="custom-text-new">{{child.parameters.manPn}}</span></td>
+                                                        <td ng-if="child.actionType=='update_adjustment_detail' && !child.parameters.manPnOld">{{child.parameters.manPn}}</td>
+                                                        <td ng-if="child.actionType=='create_adjustment_detail'"><span class="custom-text-new">{{child.parameters.manPn}}</span></td>
+                                                        <td ng-if="child.actionType=='delete_adjustment_detail'"><span class="custom-text-remove">{{child.parameters.manPn}}</span></td>
+
+                                                        <td ng-if="child.actionType=='update_adjustment_detail' && child.parameters.locationIdOld"><span class="custom-text-remove">{{child.parameters.locationIdOld}}</span>&nbsp;🡺&nbsp;<span class="custom-text-new">{{child.parameters.locationId}}</span></td>
+                                                        <td ng-if="child.actionType=='update_adjustment_detail' && !child.parameters.locationIdOld">{{child.parameters.locationId}}</td>
+                                                        <td ng-if="child.actionType=='create_adjustment_detail'"><span class="custom-text-new">{{child.parameters.locationId}}</span></td>
+                                                        <td ng-if="child.actionType=='delete_adjustment_detail'"><span class="custom-text-remove">{{child.parameters.locationId}}</span></td>
+
+                                                        <td ng-if="child.actionType=='update_adjustment_detail' && child.parameters.packageIdOld"><span class="custom-text-remove">{{child.parameters.packageIdOld}}</span>&nbsp;🡺&nbsp;<span class="custom-text-new">{{child.parameters.packageId}}</span></td>
+                                                        <td ng-if="child.actionType=='update_adjustment_detail' && !child.parameters.packageIdOld">{{child.parameters.packageId}}</td>
+                                                        <td ng-if="child.actionType=='create_adjustment_detail'"><span class="custom-text-new">{{child.parameters.packageId}}</span></td>
+                                                        <td ng-if="child.actionType=='delete_adjustment_detail'"><span class="custom-text-remove">{{child.parameters.packageId}}</span></td>
+
+                                                        <td ng-if="child.actionType=='update_adjustment_detail' && child.parameters.lotIdOld"><span class="custom-text-remove">{{child.parameters.lotIdOld}}</span>&nbsp;🡺&nbsp;<span class="custom-text-new">{{child.parameters.lotId}}</span></td>
+                                                        <td ng-if="child.actionType=='update_adjustment_detail' && !child.parameters.lotIdOld">{{child.parameters.lotId}}</td>
+                                                        <td ng-if="child.actionType=='create_adjustment_detail'"><span class="custom-text-new">{{child.parameters.lotId}}</span></td>
+                                                        <td ng-if="child.actionType=='delete_adjustment_detail'"><span class="custom-text-remove">{{child.parameters.lotId}}</span></td>
+
+                                                        <td ng-if="child.actionType=='update_adjustment_detail' && child.parameters.theoreticalQuantityOld"><span class="custom-text-remove">{{child.parameters.theoreticalQuantityOld}}</span>&nbsp;🡺&nbsp;<span class="custom-text-new">{{child.parameters.theoreticalQuantity}}</span></td>
+                                                        <td ng-if="child.actionType=='update_adjustment_detail' && !child.parameters.theoreticalQuantityOld">{{child.parameters.theoreticalQuantity}}</td>
+                                                        <td ng-if="child.actionType=='create_adjustment_detail'"><span class="custom-text-new">{{child.parameters.theoreticalQuantity}}</span></td>
+                                                        <td ng-if="child.actionType=='delete_adjustment_detail'"><span class="custom-text-remove">{{child.parameters.theoreticalQuantity}}</span></td>
+
+                                                        <td ng-if="child.actionType=='update_adjustment_detail' && child.parameters.realQuantityOld"><span class="custom-text-remove">{{child.parameters.realQuantityOld}}</span>&nbsp;🡺&nbsp;<span class="custom-text-new">{{child.parameters.realQuantity}}</span></td>
+                                                        <td ng-if="child.actionType=='update_adjustment_detail' && !child.parameters.realQuantityOld">{{child.parameters.realQuantity}}</td>
+                                                        <td ng-if="child.actionType=='create_adjustment_detail'"><span class="custom-text-new">{{child.parameters.realQuantity}}</span></td>
+                                                        <td ng-if="child.actionType=='delete_adjustment_detail'"><span class="custom-text-remove">{{child.parameters.realQuantity}}</span></td>
+                                                    </tr>
+                                                    <tr ng-repeat-end></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class="custom-fake-button" ng-click="showMore()" type="submit" data-translate="inventory.placeholder.showMore"></button>
+        </div>
+    </div>
+</div>

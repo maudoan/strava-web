@@ -1,0 +1,38 @@
+{
+  "lot": {
+    "button": {
+      "generate" : "Sinh mã"
+    },
+    "table": {
+      "product": "Sản phẩm",
+      "lotNumber":"Số Lô"
+    },
+    "detail" :{
+      "product": "Sản phẩm",
+      "location": "Vị trí",
+      "lot": "Số Lô",
+      "lotSerial": "Số Lô",
+      "package": "Thùng"
+    },
+    "label": {
+      "lot": "Lô",
+      "pageTitle": "Danh sách Lô",
+      "detailPage": "Chi tiết Lô",
+      "list": "Danh sách Lô",
+      "location": "Địa điểm",
+      "lotNumber": "Số Lô",
+      "gsin": "GSIN",
+      "gtin": "GTIN",
+      "product": "Sản phẩm",
+      "quantity": "Số lượng",
+      "reserved": "Số lượng giữ hàng",
+      "standardUnit": "Đơn vị chuẩn",
+      "packageUnit": "Đơn vị đóng gói",
+      "status": "Trạng thái",
+      "importDate": "Ngày nhập kho",
+      "expiredDate": "Ngày hết hạn",
+      "season": "Đợt",
+      "createdDate": "Ngày tạo"
+    }
+  }
+}

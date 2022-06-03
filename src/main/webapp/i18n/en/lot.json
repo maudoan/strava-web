@@ -1,0 +1,38 @@
+{
+  "lot": {
+    "button": {
+      "generate" : "Generate Lot"
+    },
+    "table": {
+      "product": "Product",
+      "lotNumber":"Lot Number"
+    },
+    "detail" :{
+      "product": "Product",
+      "location": "Location",
+      "lot": "Lot Number",
+      "lotSerial": "Lot Number",
+      "package": "Package"
+    },
+    "label": {
+      "lot": "Lot",
+      "pageTitle": "Lot Management",
+      "detailPage": "Lot Detail",
+      "list": "List Lot",
+      "location": "Location",
+      "lotNumber": "Lot Number",
+      "gsin": "GSIN",
+      "gtin": "GTIN",
+      "product": "Product",
+      "quantity": "Quantity",
+      "reserved": "Reserved",
+      "standardUnit": "Standard Unit",
+      "packageUnit": "Package Unit",
+      "status": "Status",
+      "importDate": "Import Date",
+      "expiredDate": "Expired Date",
+      "season": "Season",
+      "createdDate": "Created Date"
+    }
+  }
+}

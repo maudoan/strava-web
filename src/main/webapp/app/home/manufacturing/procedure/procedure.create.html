@@ -1,0 +1,197 @@
+<div id="page_content" class="pageDetail">
+    <form name="form_create_farm" id="form_create_farm"
+          class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+        <div>
+            <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <span class="route-header">
+                <a class="uk-text-success" ui-sref="administration" data-translate="admin.menu.infrastructure"></a>&nbsp;<i
+                    class="uk-icon-arrow-circle-right"></i>
+                <a class="uk-text-success" ui-sref="transfers" data-translate="infrastructure.farm.name"></a>&nbsp;<i
+                    class="uk-icon-arrow-circle-right"></i>
+                <span data-translate="global.button.create"></span>
+            </span>
+                <br/>
+                <div class="uk-margin-small-top">
+                    <button ng-click="submit(false)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+                            class="uk-text-bold" data-translate="global.button.save"></span></button>
+                    <button ng-click="submit(true)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+                            class="uk-text-bold" data-translate="global.button.saveAndClose"></span></button>
+                    <a ui-sref="transfers" class="md-btn md-btn-small"><span class="uk-text-bold"
+                                                                             data-translate="global.button.cancel"></span></a>
+                </div>
+            </div>
+
+            <div id="page_content_inner">
+                <jhi-alert></jhi-alert>
+                <modal-alert></modal-alert>
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <div class="uk-grid ">
+                            <div class="uk-width-medium-1-6 text-padding-top "
+                                 data-translate="infrastructure.farm.createFarm.farmCode">
+                            </div>
+                            <div class="uk-width-medium-2-6 parsley-row">
+                                <input ng-required="true"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-maxlength-message="{{messages.maxLength255}}"
+                                       data-parsley-maxlength="255"
+                                       ng-model="farm.code" id="farmCode" type="text"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                            <div class="uk-width-medium-1-6 text-padding-top "
+                                 data-translate="infrastructure.farm.createFarm.farmName">*
+                            </div>
+                            <div class="uk-width-medium-2-6 parsley-row">
+                                <input ng-required="true"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-maxlength-message="{{messages.maxLength255}}"
+                                       data-parsley-maxlength="255"
+                                       ng-model="farm.name" id="farmName" type="text"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+
+                        <div class="uk-grid ">
+
+                            <div class="uk-width-medium-1-6 text-padding-top "
+                                 data-translate="infrastructure.farm.createFarm.owner">*
+                            </div>
+                            <div class="uk-width-medium-2-6 parsley-row">
+                                <input ng-required="true"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-maxlength-message="{{messages.maxLength255}}"
+                                       data-parsley-maxlength="255"
+                                       ng-model="farm.owner" id="owner" type="text"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                            <div class="uk-width-medium-1-6 text-padding-top "
+                                 data-translate="infrastructure.farm.createFarm.email"></div>
+                            <div class="uk-width-medium-2-6 parsley-row">
+                                <input ng-required="true"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-maxlength-message="{{messages.maxLength255}}"
+                                       data-parsley-maxlength="255"
+                                       ng-model="farm.email" id="email" type="text"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+
+
+                        <div class="uk-grid ">
+
+                            <div class="uk-width-medium-1-6 text-padding-top "
+                                 data-translate="infrastructure.farm.createFarm.area">*
+                            </div>
+                            <div class="uk-width-medium-1-6 parsley-row">
+                                <input ng-required="true"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-maxlength-message="{{messages.maxLength255}}"
+                                       data-parsley-maxlength="255"
+                                       ng-model="farm.acreage" id="area" type="text"
+                                       class="uk-width-medium-4-6  md-input ng-isolate-scope md-input-processed"
+                                       md-input="">
+
+                            </div>
+                            <div class="uk-width-medium-1-6 parsley-row" style="margin-top: -11px;">
+
+                                <input id="typeUnitCbb" name="typeUnitCbb"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-trigger="focusin focusout"
+                                       position="bottom"
+                                       config="ComboBox['typeUnitCbb'].config"
+                                       options="ComboBox['typeUnitCbb'].options"
+                                       ng-model="farm.unitId"
+                                       table="ComboBox['typeUnitCbb'].table"
+                                       column="ComboBox['typeUnitCbb'].column"
+                                       scope-controller="ComboBox['typeUnitCbb'].scope" selectize>
+                            </div>
+                            <div class="uk-width-medium-1-6 text-padding-top "
+                                 data-translate="infrastructure.farm.createFarm.phoneNumber"></div>
+                            <div class="uk-width-medium-2-6 parsley-row">
+                                <input ng-required="true"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-maxlength-message="{{messages.maxLength255}}"
+                                       data-parsley-maxlength="255"
+                                       ng-model="farm.phone" id="phoneNumber" type="text"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+
+                            </div>
+                        </div>
+
+
+                        <div class="uk-grid ">
+
+                            <div class="uk-width-medium-1-6 text-padding-top "
+                                 data-translate="infrastructure.farm.createFarm.production">*
+                            </div>
+                            <div class=" uk-width-medium-2-6 parsley-row">
+                                <input id="typeFarmCbb" name="typeFarmCbb"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-trigger="focusin focusout"
+                                       position="bottom"
+                                       config="ComboBox['typeFarmCbb'].config"
+                                       options="ComboBox['typeFarmCbb'].options"
+                                       ng-model="farm.typeFarm"
+                                       table="ComboBox['typeFarmCbb'].table"
+                                       column="ComboBox['typeFarmCbb'].column"
+                                       scope-controller="ComboBox['typeFarmCbb'].scope" selectize>
+                            </div>
+                            <div class="uk-width-medium-1-6 text-padding-top "
+                                 data-translate="infrastructure.farm.createFarm.longitude"></div>
+                            <div class="uk-width-medium-2-6 parsley-row">
+                                <input ng-required="true"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-maxlength-message="{{messages.maxLength255}}"
+                                       data-parsley-maxlength="255"
+                                       ng-model="farm.lng" id="longitude" type="text"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+
+
+                        <div class="uk-grid ">
+
+                            <div class="uk-width-medium-1-6 text-padding-top "
+                                 data-translate="infrastructure.farm.createFarm.address">
+                            </div>
+                            <div class="uk-width-medium-2-6 parsley-row">
+                                <input ng-required="true"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-maxlength-message="{{messages.maxLength255}}"
+                                       data-parsley-maxlength="255"
+                                       ng-model="farm.location" id="address" type="text"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                            <div class="uk-width-medium-1-6 text-padding-top "
+                                 data-translate="infrastructure.farm.createFarm.latitude"></div>
+                            <div class="uk-width-medium-2-6 parsley-row">
+                                <input ng-required="true"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-maxlength-message="{{messages.maxLength255}}"
+                                       data-parsley-maxlength="255"
+                                       ng-model="farm.lat" id="latitude" type="text"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+
+
+                        <div class="uk-grid ">
+
+                            <div class="uk-width-medium-1-6 text-padding-top "
+                                 data-translate="infrastructure.farm.createFarm.note"></div>
+                            <div class="uk-width-medium-2-6 parsley-row">
+                                <input ng-required="true"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-maxlength-message="{{messages.maxLength255}}"
+                                       data-parsley-maxlength="255"
+                                       ng-model="farm.note" id="note" type="text"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

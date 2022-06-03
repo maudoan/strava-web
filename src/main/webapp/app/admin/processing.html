@@ -1,0 +1,79 @@
+<div id="page_content">
+    <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+        <span class="route-header">
+            <a ui-sref="users">{{titlePage.home | translate}}</a>
+            <span> / </span><a ui-sref="processing">{{titlePage.setting | translate}}</a>
+            <span> / Tiến trình</span>
+        </span>
+        </br>
+    </div>
+    <div id="page_content_inner">
+        <jhi-alert></jhi-alert><modal-alert></modal-alert>
+        <div class="md-card">
+            <div class="md-card-content">
+                <h4 class="label-bold">Các tiến trình xử lý</h4>
+                <div class="uk-overflow-container uk-margin-bottom">
+                    <table class=" hoverTable uk-table-striped uk-table uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair" id="table_processing">
+                        <thead>
+                        <tr>
+                            <th class="pointerMouse boldHeader custom-cl-header-xlarge" >Tham Chiếu</th>
+                            <th class="pointerMouse boldHeader custom-cl-header-xlarge" >Phần Trăm</th>
+                            <th class="pointerMouse boldHeader custom-cl-header-xlarge" >Chi tiết</th>
+                            <th class="pointerMouse boldHeader ">Kết thúc tiến trình</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="p in processing" on-last-repeat class="hoverRow">
+                            <td>{{p.reference}}</td>
+                            <td>{{p.processing}}</td>
+                            <td>{{p.log}}</td>
+                            <td><button ng-click="finishProcess(p.id,p.reference)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+                                    class="uk-text-bold">Kết thúc</span></button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ts_pager" id="table_processing_pager">
+                    <ul class="uk-pagination ts_pager">
+                        <li ng-click="selectPageClickHandle()" data-uk-tooltip title="{{selectPage}}">
+                            <input ng-change="selectPageHandle('table_processing')" id="processing_selectize_page" type="text"
+                                   config="TABLES['table_processing'].selectize_page_config" options="TABLES['table_processing'].selectize_page_options"
+                                   ng-model="TABLES['table_processing'].selectize_page" name="TABLES['table_processing'].selectize_page" selectize>
+                        </li>
+                        <li><a href="javascript:void(0)" class="firstPage" ng-click="handleFirstPage('table_processing')"><i class="uk-icon-angle-double-left"></i></a></li>
+                        <li><a href="javascript:void(0)" class="prevPage" ng-click="handlePreviousPage('table_processing')"><i class="uk-icon-angle-left"></i></a></li>
+                        <li><span class="pageDisplay">1-20/50</span></li>
+                        <li><a href="javascript:void(0)" class="nextPage" ng-click="handleNextPage('table_processing')"><i class="uk-icon-angle-right"></i></a></li>
+                        <li><a href="javascript:void(0)" class="lastPage" ng-click="handleLastPage('table_processing')"><i class="uk-icon-angle-double-right"></i></a></li>
+                        <li data-uk-tooltip title="{{pageSize}}">
+                            <input ng-change="selectPageNumHandle('table_processing')" id="processing_selectize_pageNum" type="text"
+                                   config="TABLES['table_processing'].selectize_pageNum_config" options="TABLES['table_processing'].selectize_pageNum_options"
+                                   ng-model="TABLES['table_processing'].selectize_pageNum" name="TABLES['table_processing'].selectize_pageNum" selectize>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="uk-modal" id="processing_modal">
+    <jhi-alert></jhi-alert><modal-alert></modal-alert>
+    <div class="uk-modal-dialog uk-modal-dialog-small" >
+        <div class="uk-modal-header">
+            <span><span class="uk-modal-title" >Kết thúc tiến trình</span><a class="uk-modal-close" style="float: right;"><i class="material-icons">&#xE14C;</i></a></span>
+            <hr>
+        </div>
+
+        <h4 class="label-bold">{{reference}}</h4>
+        <span class="uk-text-danger">Bạn có chắc chắn muốn kết thúc tiến trình này?</span>
+
+
+        <div class="uk-modal-footer uk-text-right">
+            <button ng-click="completeProcessing()" type="submit" class="md-btn md-btn-primary md-btn-small uk-modal-close"></i> <span
+                    class="uk-text-bold" >Kết thúc</span></button>
+            <button id="closeprocessingForm" class="md-btn md-btn-small uk-modal-close"><span class="uk-text-bold" data-translate="global.common.cancel"></span></button>
+        </div>
+    </div>
+</div>
+<button  data-uk-modal="{target:'#processing_modal'}"  id="openProcessingModal"   ng-show="false"></button>

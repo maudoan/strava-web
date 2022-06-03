@@ -1,0 +1,139 @@
+<div id="page_content">
+    <form name="data_package_form" id="data_package_form" class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+        <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <span class="route-header">
+                <a class="uk-text-primary" ui-sref="packages"> <span data-translate="admin.menu.dataPackageManagement"></span> </a>&nbsp;<i
+                    class="uk-icon-arrow-circle-right"></i>
+                <a class="uk-text-primary" ui-sref="packages"> <span data-translate="admin.menu.dataPackageTitle"></span> </a>&nbsp;<i
+                    class="uk-icon-arrow-circle-right"></i>
+                <span class="overflowLongText" value="dataPackage.name" is-input="false"></span>
+            </span>
+            <div class="uk-margin-small-top">
+				<a has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_HOME_ADMIN,Data_Package_Create" ui-sref="packages-create" class="md-btn md-btn-primary md-btn-small">
+					<span class="uk-text-bold" data-translate="global.button.create"></span>
+				</a>
+				<a ng-show="dataPackage.active == 0"  has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_HOME_ADMIN,Data_Package_Update" ui-sref="packages-edit({packageId:dataPackage.id})" class="md-btn md-btn-primary md-btn-small">
+                    <span class="uk-text-bold" data-translate="global.button.edit"></span>
+                </a>
+				<button ng-if="dataPackage.active != 3" has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_HOME_ADMIN, Data_Package_Delete" class="md-btn md-btn-small" ng-click="deleteOne(dataPackage.id)"><span class="uk-text-bold" data-translate="global.button.deletePackage"></span></button>
+            </div>
+        </div>
+        <div id="page_content_inner">
+            <jhi-alert></jhi-alert><modal-alert></modal-alert>
+            <div class="md-card">
+                <div class="md-card-content">
+                	<change-state-package has-any-authority="ROLE_SYSTEM_ADMIN,ROLE_HOME_ADMIN,Data_Package_Change_Status"
+						model="dataPackage"
+						activate-service="CbxActivate.activateService"
+						deactivate-service="CbxActivate.deactivateService">
+					</change-state-package>
+					<change-state-package class="disabled" do-not-have-authority="ROLE_SYSTEM_ADMIN,ROLE_HOME_ADMIN,Data_Package_Change_Status"
+										  model="dataPackage"
+										  activate-service="CbxActivate.activateService"
+										  deactivate-service="CbxActivate.deactivateService">
+					</change-state-package>
+                    <div class="uk-grid" data-uk-grid-margin="">
+	                    <div class="uk-width-medium-10-10">
+	                    	<!-- Line 1 -->
+	                    	<div class="uk-grid uk-grid-padding-top-16">
+		                        <div class="uk-width-small-1-3 uk-width-medium-2-10">
+		                                <label class="label-bold custom-label" data-translate="package.field.name"></label> *
+		                        </div>
+		                        <div class="uk-width-small-2-3 uk-width-medium-3-10 parsley-row">
+		                        	<span>{{dataPackage.name}}</span>
+		                        </div>
+
+								<div class="uk-width-small-1-3 uk-width-medium-2-10">
+									<label class="label-bold" data-translate="package.field.period"></label> *
+								</div>
+								<div class="uk-width-small-2-3 uk-width-medium-3-10 parsley-row">
+		                        	<span>{{dataPackage.period}}
+		                        		<span ng-if="dataPackage.periodType == 0" data-translate="package.kindOfTime.day"></span>
+                                		<span ng-if="dataPackage.periodType == 1" data-translate="package.kindOfTime.month"></span>
+                                		<span ng-if="dataPackage.periodType == 2" data-translate="package.kindOfTime.year"></span>
+                                	</span>
+								</div>
+		                    </div>
+		                    <!-- Line 2 -->
+		                    <div class="uk-grid uk-grid-padding-top-16">
+								<div class="uk-width-small-1-3 uk-width-medium-2-10">
+									<label class="label-bold" data-translate="package.field.price"></label>
+								</div>
+								<div class="uk-width-small-2-3 uk-width-medium-3-10 parsley-row">
+									<span>{{dataPackage.price | moneyCommas}}</span>
+								</div>
+
+								<div class="uk-width-small-1-3 uk-width-medium-2-10">
+									<label class="label-bold" data-translate="package.field.storageTime"></label> *
+								</div>
+								<div class="uk-width-small-2-3 uk-width-medium-3-10 parsley-row">
+		                        	<span>{{dataPackage.storageTime}}
+		                        		<span ng-if="dataPackage.storageTimeType == 0" data-translate="package.kindOfTime.day"></span>
+                                		<span ng-if="dataPackage.storageTimeType == 1" data-translate="package.kindOfTime.month"></span>
+                                		<span ng-if="dataPackage.storageTimeType == 2" data-translate="package.kindOfTime.year"></span>
+                                	</span>
+								</div>
+		                    </div>
+		                    <!-- Line 3 -->
+	                    	<div class="uk-grid uk-grid-padding-top-16">
+								<div class="uk-width-small-1-3 uk-width-medium-2-10">
+		                                <label class="label-bold" data-translate="package.field.numberDevice"></label> *
+		                        </div>
+		                        <div class="uk-width-small-2-3 uk-width-medium-3-10 parsley-row">
+		                        	<span >{{dataPackage.numberOfDevice}} </span>
+		                        </div>
+
+								<div class="uk-width-small-1-3 uk-width-medium-2-10">
+									<label class="label-bold" data-translate="package.field.storageCapacity"></label>
+								</div>
+								<div class="uk-width-small-2-3 uk-width-medium-3-10 parsley-row">
+		                        	<span >{{dataPackage.storageCapacity}}
+		                        		<span ng-if="dataPackage.storageCapacity != null" ng-repeat="unit in capacityUnits" ng-show="dataPackage.capacityUnit == unit.id">{{unit.name}}</span>
+		                        	</span>
+								</div>
+	                        </div>
+	                        <!-- Line 4 -->
+	                    	<div class="uk-grid uk-grid-padding-top-16">
+								<div class="uk-width-small-1-3 uk-width-medium-2-10">
+		                                <label class="label-bold" data-translate="package.field.autoExtend"></label>
+	                           	</div>
+	                           	<div class="uk-width-small-2-3 uk-width-medium-3-10 parsley-row">
+	                           		<div class="parsley-row">
+		                                <i ng-if="dataPackage.autoExtend == 1" class="uk-icon-toggle-on uk-icon-medium uk-text-primary custom-cursor-poiter"></i>
+		                                <i ng-if="dataPackage.autoExtend == 0" class="uk-icon-toggle-off uk-icon-medium uk-text-default custom-cursor-poiter"></i>
+		                            </div>
+		                        </div>
+								<div class="uk-width-small-1-3 uk-width-medium-2-10">
+									<label class="label-bold">Chế độ phân giải *</label>
+								</div>
+								<div class="uk-width-small-2-3 uk-width-medium-3-10 parsley-row">
+									<div class="uk-width-small-1-2 uk-width-medium-1-2 parsley-row">
+										<span>{{dataPackage.resolution}}</span>
+									</div>
+								</div>
+	                        </div>
+	                        <!-- Line 5 -->
+	                        <div class="uk-grid uk-grid-padding-top-16">
+	                        	<div class="uk-width-small-1-3 uk-width-medium-2-10">
+		                                <label class="label-bold" data-translate="package.field.description"></label>
+	                           	</div>
+	                        	<div class="uk-width-small-2-3 uk-width-medium-8-10">
+	                        		<div class="parsley-row">
+	                        			<textarea
+                                        style="border-width: 1px 1px 1px;"
+                                        ng-model="dataPackage.description"
+                                        type="text" name="description"
+                                        id="content"
+                                        class="md-input ng-isolate-scope md-input-processed"
+                                        md-input=""
+                                        readonly=""></textarea>
+	                        		</div>
+	                        	</div>
+	                        </div>
+	                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

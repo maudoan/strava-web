@@ -1,0 +1,65 @@
+{
+  "location": {
+
+    "titlePage":{
+      "Home":"Trang chủ",
+      "Configuration":"Cấu hình",
+      "WarehouseMan":"Quản lý kho",
+      "Warehouse":"Kho",
+      "Location":"Địa điểm"
+    },
+    "column": {
+      "Active":"Hoạt động",
+      "Created":"Ngày tạo",
+      "Created_by":"Người tạo",
+      "Updated":"Ngày cập nhật",
+      "Updated_by":"Người cập nhật",
+      "image": "Hình ảnh",
+      "gln": "GLN",
+      "name": "Tên",
+      "shortName": "Tên viết tắt",
+      "organizationName": "Doanh nghiệp",
+      "address": "Địa chỉ"
+    },
+    "label" : {
+      "info": "Thông tin địa điểm",
+      "organizationCode": "Mã Doanh nghiệp",
+      "acreage": "Diện tích",
+      "phoneNumber": "SĐT",
+      "email": "Email",
+      "exportInfo": "Thông tin xuất hàng",
+      "shareInfo": "Cài đặt chế độ chia sẻ thông tin",
+      "exportPolicy": "Chính sách xuất hàng",
+      "shareInfoForPartner": "Chia sẻ thông tin với đối tác",
+      "noShareInfo": "Không chia sẻ",
+      "fifo": "Xuất hàng theo FIFO (Nhập trước xuất trước)",
+      "fefo": "Xuất hàng theo FEFO (Hết hạn trước xuất trước)",
+      "viewProduct": "Xem sản phẩm",
+      "stock": "Tồn kho",
+      "production": "Sản xuất"
+    },
+    "common": {
+      "vendor":"Vị trí của nhà cung cấp",
+      "view":"Vị trí xem",
+      "internal":"Vị trí vật lý trong kho",
+      "customer":"Vị trí của khách hàng",
+      "inventory_loss":"Vị trí kiểm kê",
+      "production":"Vị trí sản xuất",
+      "transit":"Vị trí điều chuyển"
+    },
+    "headerPage":{
+      "Import":"Nhập",
+      "Export":"Xuất",
+      "Active":"Hoạt động",
+      "Inactive":"Lưu trữ",
+      "CurrentStock":"Tồn kho hiện tại",
+      "Product":"Sản phẩm"
+    },
+    "messages": {
+      "errorCreate":"Unable to create new Location. Please check your data and try again.",
+      "errorUpdate":"Unable to update Location. Please check your data and try again.",
+      "errorDelete":"Unable to remove.",
+      "wrongPatternRule":"Trường này không được chứa ký tự đặc biệt."
+    }
+  }
+}

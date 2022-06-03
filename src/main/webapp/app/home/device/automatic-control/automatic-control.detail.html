@@ -1,0 +1,151 @@
+<div id="page_content">
+    <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+        <span class="route-header">
+            <a class="uk-text-primary" ui-sref="device-manager" >Điều khiển</a>&nbsp;<i
+                class="uk-icon-arrow-circle-right"></i>
+            <a class="uk-text-primary" ui-sref="automatic-controls" data-translate="device.autoControl.name"></a>&nbsp;<i
+                class="uk-icon-arrow-circle-right"></i>
+            <span class="overflowLongText" value="autoControl.name" is-input="false"></span>
+        </span>
+        <br/>
+        <div class="uk-margin-small-top">
+            <a ng-if="!autoControl.state" has-any-authority="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN,Auto_Controller_Update" ui-sref="automatic-control-edit({automaticControlId:autoControl.id})" class="md-btn md-btn-small">
+                <span class="uk-text-bold" data-translate="global.button.edit"></span>
+            </a>
+            <a has-any-authority="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN,Auto_Controller_Create" ui-sref="automatic-control-create" class="md-btn md-btn-primary md-btn-small">
+                <span class="uk-text-bold" data-translate="global.button.create"></span>
+            </a>
+        </div>
+    </div>
+    <div id="page_content_inner">
+        <jhi-alert></jhi-alert>
+        <modal-alert></modal-alert>
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="md-card-content">
+                    <div class="uk-grid">
+
+                        <!-- kick hoat - active -->
+                        <a ng-if="!autoControl.state" has-any-authority="ROLE_SYSTEM_ADMIN, ROLE_FARM_ADMIN, Auto_Controller_ON_OFF"
+                           title="Kích hoạt" ng-click="activate(autoControl.id)"
+                           class="md-btn md-btn-small md-btn-wave-light md-btn-icon md-bg-grey-100 custom-btn-active btn-absolute-right" href="javascript:void(0)">
+                            <i class="uk-icon-toggle-off uk-icon-medium custom-cursor-pointer"></i>
+                            <span class="uk-text-danger uk-text-bold" id="activeBtn">Chưa kích hoạt</span>
+                        </a>
+                        <a ng-if="autoControl.state" has-any-authority="ROLE_SYSTEM_ADMIN, ROLE_FARM_ADMIN, Auto_Controller_ON_OFF"
+                           title="Chưa kích hoạt" ng-click="deactivate(autoControl.id)"
+                           class="md-btn md-btn-small md-btn-wave-light md-btn-icon md-bg-grey-100 custom-btn-active btn-absolute-right" href="javascript:void(0)">
+                            <i class="uk-icon-toggle-on uk-icon-medium custom-cursor-pointer uk-text-success"></i>
+                            <span class="uk-text-success uk-text-bold" id="deactiveBtn">Kích hoạt</span>
+                        </a>
+
+                        <!-- tene nhom-->
+                        <div class="uk-width-small-1-6">
+                            <div class="custom-label">
+                                <label class="label-bold custom-label ng-scope" data-translate="device.autoControl.field.group"></label>
+                                <span class="req"> *</span>
+                            </div>
+                        </div>
+                        <div class=" uk-width-small-2-6">
+                            <div class="parsley-row">
+
+                                <input ng-model="autoControl.name"
+                                       name="deviceName"
+                                       ng-readonly="true"
+                                       class="md-input ng-isolate-scope md-input-processed" input-long-text="">
+                                <span class="md-input-bar "></span>
+                            </div>
+                        </div>
+
+                        <div class="uk-width-small-1-6">
+                            <div class="custom-label">
+                                <label class="label-bold custom-label ng-scope" data-translate="admin.menu.season"></label>
+                                <span class="req"> *</span>
+                            </div>
+                        </div>
+                        <div class="uk-width-small-2-6">
+                            <div class="parsley-row">
+                                <input ng-model="autoControl.seasonName"
+                                       name="seasonName"
+                                       ng-readonly="true"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-grid">
+                        <div class="uk-width-small-1-6">
+                            <div class="custom-label">
+                                <label class="label-bold custom-label ng-scope" data-translate="admin.menu.area"></label>
+                                <span class="req"> *</span>
+                            </div>
+                        </div>
+                        <div class="uk-width-small-2-6">
+                            <div class="parsley-row">
+                                <input ng-model="autoControl.areaName"
+                                       name="areaName"
+                                       ng-readonly="true"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+
+                        <div class="uk-width-small-1-6">
+                            <div class="custom-label">
+                                <label class="label-bold custom-label ng-scope" data-translate="device.autoControl.field.product"></label>
+                                <span class="req"> *</span>
+                            </div>
+                        </div>
+                        <div class="uk-width-small-2-6">
+                            <div class="parsley-row">
+                                <input ng-model="autoControl.productName"
+                                       name="productName"
+                                       ng-readonly="true"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-grid">
+                        <div class="uk-width-small-1-6">
+                            <div class="custom-label">
+                                <label class="label-bold custom-label ng-scope" data-translate="device.autoControl.field.type"></label>
+                                <span class="req"> *</span>
+                            </div>
+                        </div>
+                        <div class="uk-width-small-2-6">
+                            <div class="parsley-row">
+                                <input ng-model="autoControl.type"
+                                       ng-value="getType(autoControl.type)"
+                                       name="type"
+                                       ng-readonly="true"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+
+                        <div class="uk-width-small-1-6">
+                            <div class="custom-label">
+                                <label class="label-bold custom-label ng-scope" data-translate="device.autoControl.field.phase"></label>
+                                <span class="req"> *</span>
+                            </div>
+                        </div>
+                        <div class="uk-width-small-2-6">
+                            <div class="parsley-row">
+                                <input ng-model="autoControl.phase.name"
+                                       name="phase"
+                                       ng-readonly="true"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ngay bat dau-->
+                    <div class="uk-grid" ng-show="autoControl.type && autoControl.type > 0">
+                        <div class="uk-width-medium-1-1">
+                            <div ng-include="'app/home/device/automatic-control/common/automatic-nutrition-detail.html'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

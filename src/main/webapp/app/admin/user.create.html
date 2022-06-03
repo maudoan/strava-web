@@ -1,0 +1,145 @@
+<div id="page_content">
+    <form name="form_createuser" id="form_createuser" class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+        <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <span class="route-header">
+                <!--<a class="uk-text-success" ui-sref="administration" data-translate="admin.menu.administration"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>-->
+                <a class="uk-text-primary" data-translate="admin.menu.administration"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+                <a class="uk-text-primary" ui-sref="users" data-translate="admin.menu.admin"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+                <span data-translate="global.button.create"></span>
+            </span>
+            <br/>
+            <div class="uk-margin-small-top">
+                <button ng-click="submit()" type="submit" class="md-btn md-btn-primary md-btn-small"><span class="uk-text-bold" data-translate="global.button.save"></span></button>
+                <button ng-click="submit(true)" type="submit" class="md-btn md-btn-succesuser.emails md-btn-small"><span class="uk-text-bold" data-translate="global.button.saveAndClose"></span></button>
+                <a ui-sref="users" class="md-btn md-btn-small"><span class="uk-text-bold" data-translate="global.button.cancel"></span></a>
+            </div>
+        </div>
+        <div id="page_content_inner">
+            <div class="uk-grid">
+                <div class="uk-width-medium-1-1">
+                    <jhi-alert></jhi-alert><modal-alert></modal-alert>
+                    <div class="md-card">
+                        <div class="md-card-content">
+                            <div class="uk-grid" data-uk-grid-margin="">
+                            	<div class="uk-width-medium-2-10">
+                                    <div class="user_heading_avatar"
+                                         ng-mouseenter="user.mouseEnter = true"
+                                         ng-mouseleave="user.mouseEnter = false">
+
+                                        <img ng-if="user.userAvatar || user.userAvatarBase64" class="uk-border-circle" ng-src="{{user.userAvatarBase64 ? user.userAvatarBase64 : '/attachment/images/' + user.userAvatar}}" alt="user avatar" width="200" height="200"/>
+                                        <img ng-if="!user.userAvatar && !user.userAvatarBase64" class="uk-border-circle" ng-src="assets/img/avatars/avatar.jpg" alt="user avatar" width="200" height="200"/>
+
+                                        <div class="user_avatar_controls">
+                                            <span class="btn-file uk-form-file" title="Maximum size: 64K">
+                                                <span class="fileinput-new"><i class="material-icons">&#xE2C6;</i></span>
+                                                <input-upload create="true"></input-upload>
+                                            </span>
+                                            <a ng-show="user.mouseEnter && (user.userAvatar || user.userAvatarBase64)" ng-click="deleteUserAvatar()" class="btn-file fileinput-exists js-uk-prevent" title="Delete"><i class="material-icons">&#xE5CD;</i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="uk-width-medium-8-10">
+                                	<div class="uk-grid" data-uk-grid-margin="">
+                                        <div class="uk-width-medium-1-2">
+                                        	<div class="parsley-row">
+                                                <label class="label-bold" for="email" data-translate="admin.user.column.email"></label>*
+                                                <input
+                                                        ng-model="user.email"
+                                                        data-parsley-maxlength="255"
+                                                        data-parsley-maxlength-message="{{'global.messages.maxLength255' | translate}}"
+                                                        data-parsley-whitespace="trim"
+                                                        data-parsley-type-message="{{'admin.messages.invalidEmail' | translate}}"
+                                                        data-parsley-required-message="{{'global.messages.required' | translate}}"
+                                                        data-parsley-trigger="change"
+                                                        data-parsley-type="email"
+                                                        id="email"
+                                                        name="email"
+                                                        required=""
+                                                        class="md-input ng-isolate-scope md-input-processed" md-input="">
+                                                <span class="md-input-bar "></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="uk-width-medium-1-2">
+                                            <div class="parsley-row">
+                                                <label class="label-bold" for="phone" data-translate="admin.user.column.phone"></label>
+                                                <input id="phone"
+                                                       data-parsley-maxlength="20"
+                                                       data-parsley-maxlength-message="{{'global.messages.phoneMaxLength' | translate}}"
+                                                       data-parsley-type="digits"
+                                                       data-parsley-type-message="{{'global.messages.phone' | translate}}"
+                                                       ng-model="user.phone"
+                                                       data-parsley-whitespace="trim"
+                                                       type="text" name="phone"
+                                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                                                <span class="md-input-bar "></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="uk-grid" data-uk-grid-margin="">
+                                        <div class="uk-width-medium-1-2">
+                                            <div class="parsley-row">
+                                                <label class="label-bold" for="fullName" data-translate="admin.user.column.fullName"></label>*
+                                                <input ng-model="user.fullName"
+                                                       data-parsley-maxlength="255"
+                                                       data-parsley-maxlength-message="{{'global.messages.maxLength255' | translate}}"
+                                                       data-parsley-whitespace="trim"
+                                                       id="fullName" type="text"
+                                                       name="fullName"
+                                                       data-parsley-required-message="{{'global.messages.required' | translate}}"
+                                                       required=""
+                                                       data-parsley-trigger="change"  class="md-input ng-isolate-scope md-input-processed" md-input="">
+                                                <span class="md-input-bar "></span>
+                                            </div>
+                                        </div>
+                                        <div class="uk-width-medium-1-2">
+                                            <div class="parsley-row">
+                                                <label class="label-bold" >Khu vực</label>*
+                                                <input id="area"
+                                                       ng-required="true"
+                                                       data-parsley-required-message="{{'global.messages.required' | translate}}"
+                                                       position="bottom"
+                                                       config="ComboBox['area'].config"
+                                                       options="ComboBox['area'].options"
+                                                       ng-model="user.areaIds"
+                                                       ng-model-object="selectedCbb.area"
+                                                       table="ComboBox['area'].table"
+                                                       column="ComboBox['area'].column"
+                                                       scope-controller="ComboBox['area'].scope" selectize="">
+                                                <span class="md-input-bar "></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="uk-grid">
+                                        <div class="uk-width-medium-1-2">
+                                            <div class="parsley-row">
+                                                <label class="uk-form-label label-bold">
+                                                    <span data-translate="admin.user.column.roles"></span>
+                                                    <span class="req">*</span>
+                                                </label>
+                                                <input id="roleId"
+                                                       ng-required="true"
+                                                       data-parsley-required-message="{{'global.messages.required' | translate}}"
+                                                       position="bottom"
+                                                       config="ComboBox['roleId'].config"
+                                                       options="ComboBox['roleId'].options"
+                                                       ng-model="forms_advanced.selectize_roles"
+                                                       ng-model-object="selectedCbb.role"
+                                                       table="ComboBox['roleId'].table"
+                                                       column="ComboBox['roleId'].column"
+                                                       scope-controller="ComboBox['roleId'].scope" selectize="">
+                                                <span class="md-input-bar "></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

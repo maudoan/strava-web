@@ -1,0 +1,70 @@
+<div id="page_content">
+    <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }" class="header-fixed">
+        <span class="route-header">
+            <!--<a class="uk-text-success" ui-sref="administration" data-translate="admin.menu.administration"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>-->
+            <a class="uk-text-primary" data-translate="admin.menu.administration"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+            <span data-translate="admin.privilege.list"></span>
+        </span>
+    </div>
+    <div id="page_content_inner">
+        <jhi-alert></jhi-alert><modal-alert></modal-alert>
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-overflow-container uk-margin-bottom table-height-fixed">
+                    <table class="hoverTable uk-table uk-table-align-vertical uk-table-striped uk-table-nowrap tablesorter tablesorter-altair table-fixed" id="privileges">
+                        <thead>
+                        <tr>
+                            <th><th-content table="TABLES['privileges']" label="'admin.role.column.Name'"     column="'displayName'"></th-content></th>
+                            <th><th-content table="TABLES['privileges']" label="'admin.role.column.Description'" column="'description'"></th-content></th>
+                            <th><th-content table="TABLES['privileges']" label="'admin.user.column.created'"   column="'created'"></th-content></th>
+                            <th><th-content table="TABLES['privileges']" label="'admin.user.column.createdBy'" column="'createdBy'"></th-content></th>
+                            <!--<th><th-content table="TABLES['privileges']" label="'admin.user.column.updated'"   column="'updated'"></th-content></th>-->
+                            <!--<th><th-content table="TABLES['privileges']" label="'admin.user.column.updatedBy'" column="'updatedBy'"></th-content></th>-->
+                        </tr>
+                        <tr>
+                            <td><default-filter table="TABLES['privileges']" column="'displayName'"></td>
+                            <td><default-filter table="TABLES['privileges']" column="'description'"></td>
+                            <td><date-picker-filter table="TABLES['privileges']" column="'created'"></date-picker-filter></td>
+                            <td><default-filter table="TABLES['privileges']" column="'createdBy'"></td>
+                            <!--<td><date-picker-filter table="TABLES['privileges']" column="'updated'"></date-picker-filter></td>-->
+                            <!--<td><default-filter table="TABLES['privileges']" column="'updatedBy'"></td>-->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="privilege in privileges" on-last-repeat class="hoverRow">
+                            <td>
+                                <a has-any-authority="ROLE_SYSTEM_ADMIN, ROLE_SYSTEM_USER, Privilege_View_Detail" ui-sref="privileges-detail({privilegeName: privilege.id})">{{privilege.displayName}}</a>
+                                <span do-not-have-authority="ROLE_SYSTEM_ADMIN, ROLE_SYSTEM_USER, Privilege_View_Detail">{{privilege.displayName}}</span>
+                            </td>
+                            <td>{{privilege.description}}</td>
+                            <td>{{privilege.created | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+                            <td>{{privilege.createdBy}}</td>
+                            <!--<td>{{privilege.updated | date: 'dd-MM-yyyy HH:mm:ss'}}</td>-->
+                            <!--<td>{{privilege.updatedBy}}</td>-->
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ts_pager" id="privileges_pager">
+                    <ul class="uk-pagination ts_pager">
+                        <li ng-click="selectPageClickHandle()" data-uk-tooltip title="{{selectPage}}">
+                            <input ng-change="selectPageHandle('privileges')" id="privilege_selectize_page" type="text"
+                                   config="TABLES['privileges'].selectize_page_config" options="TABLES['privileges'].selectize_page_options"
+                                   ng-model="TABLES['privileges'].selectize_page" name="TABLES['privileges'].selectize_page" selectize>
+                        </li>
+                        <li><a href="javascript:void(0)" class="firstPage" ng-click="handleFirstPage('privileges')"><i class="uk-icon-angle-double-left"></i></a></li>
+                        <li><a href="javascript:void(0)" class="prevPage" ng-click="handlePreviousPage('privileges')"><i class="uk-icon-angle-left"></i></a></li>
+                        <li><span class="pageDisplay">1-20/50</span></li>
+                        <li><a href="javascript:void(0)" class="nextPage" ng-click="handleNextPage('privileges')"><i class="uk-icon-angle-right"></i></a></li>
+                        <li><a href="javascript:void(0)" class="lastPage" ng-click="handleLastPage('privileges')"><i class="uk-icon-angle-double-right"></i></a></li>
+                        <li data-uk-tooltip title="{{pageSize}}">
+                            <input ng-change="selectPageNumHandle('privileges')" id="privilege_selectize_pageNum" type="text"
+                                   config="TABLES['privileges'].selectize_pageNum_config" options="TABLES['privileges'].page_size_option"
+                                   ng-model="TABLES['privileges'].selectize_pageNum" name="TABLES['privileges'].selectize_pageNum" selectize>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

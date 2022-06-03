@@ -1,0 +1,151 @@
+<div id="page_content">
+    <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }" class="header-fixed">
+        <span class="route-header">
+            <a class="uk-text-success" ui-sref="administration" data-translate="admin.menu.administration"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+            <span data-translate="admin.menu.node"></span>
+        </span>
+        </br>
+        <div class="uk-margin-small-top">
+            <a has-any-authority ="ROLE_SYSTEM_ADMIN" data-uk-modal="{target:'#create_modal'}" class="md-btn md-btn-primary md-btn-small"><span class="uk-text-bold" data-translate="global.button.create"></span></a>
+            <button has-any-authority ="ROLE_SYSTEM_ADMIN" id="deleteBtn" class="md-btn md-btn-small hideElement" ng-click="defaultDelete()"><span class="uk-text-bold" data-translate="global.button.delete"></span></button>
+        </div>
+    </div>
+    <div id="page_content_inner">
+        <jhi-alert></jhi-alert><modal-alert></modal-alert>
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-overflow-container uk-margin-bottom table-height-fixed">
+                    <table class="hoverTable uk-table uk-table-align-vertical uk-table-striped uk-table-nowrap tablesorter tablesorter-altair table-fixed" id="node">
+                        <thead>
+                        <tr>
+                            <th data-name="Select"><input type="checkbox" class="ts_checkbox_all"></th>
+                            <th><th-content table="TABLES['node']" label="'Tên'"    column="'name'"></th-content></th>
+                            <th><th-content table="TABLES['node']" label="'IP'"     column="'ip'"></th-content></th>
+                            <th><th-content table="TABLES['node']" label="'Port'"   column="'port'"></th-content></th>
+                            <th><th-content table="TABLES['node']" label="'Domain'" column="'domain'"></th-content></th>
+                            <th><th-content table="TABLES['node']" label="'admin.user.column.status'"    column="'active'"></th-content></th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><default-filter table="TABLES['node']" column="'name'"></td>
+                            <td><default-filter table="TABLES['node']" column="'ip'"></td>
+                            <td><date-picker-filter table="TABLES['node']" column="'port'"></date-picker-filter></td>
+                            <td><default-filter table="TABLES['node']" column="'domain'"></td>
+                            <td><active-search-filter label="'global.placeholder.search' | translate" table="TABLES['node']"></active-search-filter></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="o in nodes" on-last-repeat ng-class="{'hoverRow': !o.unRemove, 'custom-un-remove': o.unRemove}" title="{{o.unRemove}}">
+                            <td><input id="{{user.id}}" type="checkbox" class="ts_checkbox" data-md-icheck icheck ng-model="row_select"></td>
+                            <td>{{o.name}}</td>
+                            <td>{{o.ip}}</td>
+                            <td>{{o.port}}</td>
+                            <td>{{o.domain}}</td>
+                            <td ng-if="o.active == 1" style="text-align: center"><i  class="uk-icon-toggle-on uk-icon-medium uk-text-success custom-cursor-pointer"></i></td>
+                            <td ng-if="o.active == 0" style="text-align: center"><i  class="uk-icon-toggle-off uk-icon-medium uk-text-danger custom-cursor-pointer"></i></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ts_pager" id="table_user_pager">
+                    <ul class="uk-pagination ts_pager">
+                        <li ng-click="selectPageClickHandle()" data-uk-tooltip title="{{selectPage}}">
+                            <input ng-change="selectPageHandle('node')" id="user_selectize_page" type="text"
+                                   config="TABLES['node'].selectize_page_config" options="TABLES['node'].selectize_page_options"
+                                   ng-model="TABLES['node'].selectize_page" name="TABLES['node'].selectize_page" selectize>
+                        </li>
+                        <li><a href="javascript:void(0)" class="firstPage" ng-click="handleFirstPage('node')"><i class="uk-icon-angle-double-left"></i></a></li>
+                        <li><a href="javascript:void(0)" class="prevPage" ng-click="handlePreviousPage('node')"><i class="uk-icon-angle-left"></i></a></li>
+                        <li><span class="pageDisplay">1-20/50</span></li>
+                        <li><a href="javascript:void(0)" class="nextPage" ng-click="handleNextPage('node')"><i class="uk-icon-angle-right"></i></a></li>
+                        <li><a href="javascript:void(0)" class="lastPage" ng-click="handleLastPage('node')"><i class="uk-icon-angle-double-right"></i></a></li>
+                        <li data-uk-tooltip title="{{pageSize}}">
+                            <input ng-change="selectPageNumHandle('node')" id="user_selectize_pageNum" type="text"
+                                   config="TABLES['node'].selectize_pageNum_config" options="TABLES['node'].page_size_option"
+                                   ng-model="TABLES['node'].selectize_pageNum" name="TABLES['node'].selectize_pageNum" selectize>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal active -->
+<form name="form_createuser" id="form_createuser" class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+<div class="uk-modal" id="create_modal">
+    <div class="uk-modal-dialog uk-modal-dialog-small">
+        <div class="uk-modal-header" style="margin: 0 -24px 0px">
+            <span><span class="uk-modal-title">Thêm mới máy chủ</span><a class="uk-modal-close" style="float: right;"><i class="material-icons">&#xE14C;</i></a></span>
+        </div>
+        <hr>
+        <div class="uk-grid" data-uk-grid-margin="">
+            <div class="uk-width-medium-1-1">
+                <div class="parsley-row">
+                    <label class="label-bold" for="name">Tên máy chủ</label>*
+                    <input data-parsley-whitespace="trim"
+                            data-parsley-required-message={{required_msg}}
+                            ng-model="node.name" id="name" type="text" name="name"
+                            data-parsley-maxlength="255"
+                            data-parsley-maxlength-message="{{maxLength255}}"
+                            data-parsley-trigger="change" required=""
+                            class="md-input ng-isolate-scope md-input-processed" md-input="">
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+        </div>
+        <div class="uk-grid" data-uk-grid-margin="">
+            <div class="uk-width-medium-1-2">
+                <div class="parsley-row">
+                    <label class="label-bold" for="ip">Địa chỉ IP</label>*
+                    <input ng-model="node.ip"
+                           data-parsley-maxlength="255"
+                           data-parsley-maxlength-message="{{maxLength255}}"
+                           data-parsley-whitespace="trim"
+                           id="ip" type="text"
+                           name="ip"
+                           data-parsley-required-message={{required_msg}}
+                           required=""
+                           data-parsley-trigger="change"  class="md-input ng-isolate-scope md-input-processed" md-input="">
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+
+            <div class="uk-width-medium-1-2">
+                <div class="parsley-row">
+                    <label class="label-bold" for="port" >Port*</label>
+                    <input id="port"
+                           ng-model="node.port"
+                           data-parsley-whitespace="trim"
+                           type="text" name="port"
+                           data-parsley-required-message={{required_msg}}
+                           required=""
+                           class="md-input ng-isolate-scope md-input-processed" md-input="">
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+        </div>
+        <div class="uk-grid" data-uk-grid-margin="">
+            <div class="uk-width-medium-1-1">
+                <div class="parsley-row">
+                    <label class="label-bold" for="domain">Domain</label>*
+                    <input data-parsley-whitespace="trim"
+                           data-parsley-required-message={{required_msg}}
+                           ng-model="node.domain" id="domain" type="text" name="domain"
+                           data-parsley-maxlength="255"
+                           data-parsley-maxlength-message="{{maxLength255}}"
+                           data-parsley-trigger="change" required=""
+                           class="md-input ng-isolate-scope md-input-processed" md-input="">
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="uk-modal-footer uk-text-right">
+            <button  class=" md-btn  md-btn-primary md-btn-small" type="submit" ng-click="createNode()"><span class="uk-text-bold" data-translate="global.button.create"></span></button>
+            <button  class="uk-modal-close md-btn  md-btn-default md-btn-small" id="closeModal"><span class="uk-text-bold" data-translate="global.button.cancel"></span></button>
+        </div>
+    </div>
+</div>
+<button id="activeBtn" ng-show="false" data-uk-modal="{target:'#create_modal'}">active</button>
+</form>

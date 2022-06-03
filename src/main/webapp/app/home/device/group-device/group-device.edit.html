@@ -1,0 +1,234 @@
+<div id="page_content">
+    <form name="group_device_form" id="group_device_form" class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+        <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <span class="route-header">
+                <a class="uk-text-primary" ui-sref="device-manager" >Điều khiển</a>&nbsp;<i
+                    class="uk-icon-arrow-circle-right"></i>
+                <a class="uk-text-primary" ui-sref="group-devices" data-translate="device.manualControl.name">Thiết bị</a>&nbsp;<i
+                    class="uk-icon-arrow-circle-right"></i>
+                <a class="uk-text-primary" ui-sref="group-devices">
+                    <span class="overflowLongText" value="groupDevice.name" is-input="false"></span>
+                </a>&nbsp;
+                <i class="uk-icon-arrow-circle-right"></i>
+                <span data-translate="global.button.edit"></span>
+            </span>
+            <br/>
+            <div class="uk-margin-small-top">
+                <button ng-if="!isExistsValue" ng-click="submit(false)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+                        class="uk-text-bold" data-translate="global.button.save"></span></button>
+                <button ng-if="!isExistsValue" ng-click="submit(true)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+                        class="uk-text-bold" data-translate="global.button.saveAndClose"></span></button>
+                <a ui-sref="group-devices" class="md-btn md-btn-small"><span class="uk-text-bold"
+                                                                                             data-translate="global.button.cancel"></span></a>
+            </div>
+        </div>
+        <div id="page_content_inner">
+            <jhi-alert></jhi-alert>
+            <modal-alert></modal-alert>
+            <div class="md-card">
+                <div class="md-card-content">
+                    <div class="uk-grid">
+                        <!-- trang traij -->
+                        <div class="uk-width-small-1-6">
+                            <div class="custom-label">
+                                <label class="label-bold ng-scope" data-translate="admin.menu.farm"></label>
+                                <span class="req">*</span>
+                            </div>
+                        </div>
+                        <div class="uk-width-small-2-6">
+                            <div class="parsley-row">
+                                <input
+                                        readonly
+                                        ng-model="groupDevice.tenant.name" id="farmCode" type="text"
+                                        class="md-input ng-isolate-scope md-input-processed" md-input="">
+                            </div>
+                        </div>
+
+                        <div class="uk-width-small-1-6">
+                            <div class="custom-label">
+                                <label class="label-bold custom-label ng-scope" data-translate="admin.menu.area"></label>
+                                <span class="req"> *</span>
+                            </div>
+                        </div>
+                        <div class="uk-width-small-2-6">
+                            <div class="parsley-row" ng-show="groupDevice.type != 0">
+                                <input id="areaCbb" name="areaCbb"
+                                       ng-required="true"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-trigger="input"
+                                       position="bottom"
+                                       config="ComboBox['areaCbb'].config"
+                                       options="ComboBox['areaCbb'].options"
+                                       ng-model="groupDevice.areaId"
+                                       table="ComboBox['areaCbb'].table"
+                                       column="ComboBox['areaCbb'].column"
+                                       ng-change="areaChange()"
+                                       ng-model-object="selectedCbb.area"
+                                       scope-controller="ComboBox['areaCbb'].scope" selectize>
+                            </div>
+                            <input
+                                    ng-show="groupDevice.type == 0"
+                                    readonly
+                                    ng-model="groupDevice.area.name" id="areaName" type="text"
+                                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+                        </div>
+                    </div>
+
+                    <div class="uk-grid">
+                        <!-- tene nhom-->
+                        <div class="uk-width-small-1-6">
+                            <div class="custom-label">
+                                <label class="label-bold custom-label ng-scope" data-translate="device.manualControl.field.group"></label>
+                                <span class="req"> *</span>
+                            </div>
+                        </div>
+                        <div class=" uk-width-small-2-6">
+                            <div class="parsley-row">
+                                <input ng-model="groupDevice.name"
+                                       ng-readonly="groupDevice.type == 0"
+                                       data-parsley-maxlength="255"
+                                       data-parsley-maxlength-message="{{messages.maxLength255}}"
+                                       data-parsley-whitespace="trim"
+                                       id="deviceName" type="text"
+                                       name="deviceName"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       required=""
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                                <span class="md-input-bar "></span>
+                            </div>
+                        </div>
+
+                        <!--ten viet tat-->
+                        <div class="uk-width-small-1-6">
+                            <div class="custom-label">
+                                <label class="label-bold custom-label ng-scope" data-translate="device.field.shortName"></label>
+                                <span class="req"> *</span>
+                            </div>
+                        </div>
+                        <div class=" uk-width-small-2-6">
+                            <div class="parsley-row">
+                                <input ng-model="groupDevice.name.shortName"
+                                       ng-value="selectedCbb.area && selectedCbb.area[0] ? selectedCbb.area[0].shortName : ''"
+                                       ng-readonly="true"
+                                       id="shortName" type="text"
+                                       name="shortName"
+                                       class="md-input ng-isolate-scope md-input-processed" md-input="">
+                                <span class="md-input-bar "></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-grid">
+                        <div class="uk-width-small-1-6">
+                            <div class="custom-label">
+                                <label class="label-bold custom-label ng-scope" data-translate="device.manualControl.field.belongGateway"></label>
+                                <span class="req"> *</span>
+                            </div>
+                        </div>
+                        <div class="uk-width-small-2-6">
+                            <div class="parsley-row" ng-show="groupDevice.type != 0">
+                                <input id="gatewayCbb" name="gatewayCbb"
+                                       ng-required="true"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       data-parsley-trigger="input"
+                                       position="bottom"
+                                       config="ComboBox['gatewayCbb'].config"
+                                       options="ComboBox['gatewayCbb'].options"
+                                       ng-model="groupDevice.gatewayId"
+                                       table="ComboBox['gatewayCbb'].table"
+                                       column="ComboBox['gatewayCbb'].column"
+                                       ng-change="gatewayChange()"
+                                       scope-controller="ComboBox['gatewayCbb'].scope" selectize>
+                            </div>
+                            <input
+                                    ng-show="groupDevice.type == 0"
+                                    readonly
+                                    ng-model="groupDevice.gateway.name" id="gatewayName" type="text"
+                                    class="md-input ng-isolate-scope md-input-processed" md-input="">
+                        </div>
+
+                        <div class="uk-width-small-1-6">
+                            <div class="custom-label">
+                                <label class="label-bold custom-label ng-scope" data-translate="device.manualControl.field.type"></label>
+                                <span class="req"> *</span>
+                            </div>
+                        </div>
+                        <div class="uk-width-small-2-6">
+                            <div class="parsley-row">
+                                <input id="typeCbb" name="typeCbb"
+                                       ng-required="true"
+                                       data-parsley-trigger="input"
+                                       data-parsley-required-message="{{messages.required}}"
+                                       position="bottom"
+                                       config="ComboBox['typeCbb'].config"
+                                       options="ComboBox['typeCbb'].options"
+                                       ng-model="groupDevice.type"
+                                       table="ComboBox['typeCbb'].table"
+                                       column="ComboBox['typeCbb'].column"
+                                       scope-controller="ComboBox['typeCbb'].scope" selectize>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-grid">
+                        <div class="uk-width-small-1-1">
+                            <div class="uk-overflow-container uk-margin-bottom table-height-fixed">
+                                <table class="hoverTable uk-table uk-table-align-vertical uk-table-striped  tablesorter tablesorter-altair table-fixed" id="devices">
+                                    <thead >
+                                    <tr class="uk-table-nowrap">
+                                        <th data-name="Select" ng-show="groupDevice.type != 0"><input type="checkbox" class="ts_checkbox_all" id="ts_checkbox_all" name="ts_checkbox_all" ng-model="ts_checkbox_all"></th>
+                                        <th class="center"><th-content table="TABLES['devices']" label="'device.field.name'"  column="'name'"></th-content></th>
+                                        <th class="center"><th-content table="TABLES['devices']" label="'device.field.serial'"  column="'serial'"></th-content></th>
+                                        <th class="center"><th-content table="TABLES['devices']" label="'device.field.code'"  column="'code'">Serial</th-content></th>
+                                        <th class="center"><b>Cơ học/Tự động</b></th>
+                                    </tr>
+                                    <tr>
+                                        <td ng-show="groupDevice.type != 0"></td>
+                                        <td><default-filter table="TABLES['devices']" column="'name'"></td>
+                                        <td><default-filter table="TABLES['devices']" column="'serial'"></td>
+                                        <td><default-filter table="TABLES['devices']" column="'code'"></td>
+                                        <td></td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="device in devices" on-last-repeat ng-class="{'hoverRow': !obj.unRemove, 'custom-un-remove': obj.unRemove}" title="{{obj.unRemove}}">
+                                        <td ng-show="groupDevice.type != 0"><input id="{{device.id}}" name="checkbox{{device.id}}" type="checkbox" class="ts_checkbox" data-md-icheck icheck ng-model="row_select"></td>
+                                        <td>{{device.name}}</td>
+                                        <td>{{device.serial}}</td>
+                                        <td>{{device.code}}</td>
+                                        <td class="center">
+                                            <span ng-if="device.autoManualLocal==0" class="uk-badge uk-badge-danger">Cơ học</span>
+                                            <span ng-if="device.autoManualLocal==1" class="uk-badge uk-badge-success">Tự động</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="ts_pager" id="table_device_pager">
+                                <ul class="uk-pagination ts_pager">
+                                    <li ng-click="selectPageClickHandle()" data-uk-tooltip title="{{selectPage}}">
+                                        <input ng-change="selectPageHandle('devices')" id="device_selectize_page" type="text"
+                                               config="TABLES['devices'].selectize_page_config" options="TABLES['devices'].selectize_page_options"
+                                               ng-model="TABLES['devices'].selectize_page" name="TABLES['devices'].selectize_page" selectize>
+                                    </li>
+                                    <li><a href="javascript:void(0)" class="firstPage" ng-click="handleFirstPage('devices')"><i class="uk-icon-angle-double-left"></i></a></li>
+                                    <li><a href="javascript:void(0)" class="prevPage" ng-click="handlePreviousPage('devices')"><i class="uk-icon-angle-left"></i></a></li>
+                                    <li><span class="pageDisplay"></span></li>
+                                    <li><a href="javascript:void(0)" class="nextPage" ng-click="handleNextPage('devices')"><i class="uk-icon-angle-right"></i></a></li>
+                                    <li><a href="javascript:void(0)" class="lastPage" ng-click="handleLastPage('devices')"><i class="uk-icon-angle-double-right"></i></a></li>
+                                    <li data-uk-tooltip title="{{pageSize}}">
+                                        <input ng-change="selectPageNumHandle('devices')" id="device_selectize_pageNum" type="text"
+                                               config="TABLES['devices'].selectize_pageNum_config" options="TABLES['devices'].page_size_option"
+                                               ng-model="TABLES['devices'].selectize_pageNum" name="TABLES['devices'].selectize_pageNum" selectize>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+</div>

@@ -1,0 +1,197 @@
+<div id="page_content" class="pageDetail">
+    <form name="form_create_farm" id="form_create_farm"
+          class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+        <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <a class="uk-text-success" ui-sref="administration" data-translate="global.common.homePage"></a>&nbsp;<i
+                class="uk-icon-arrow-circle-right"></i>
+            <a class="uk-text-success" ui-sref="farms" data-translate="infrastructure.farm.name"></a>&nbsp;<i
+                class="uk-icon-arrow-circle-right"></i>
+            <span>{{farm.code}}</span>
+
+            <br/>
+            <div class="uk-margin-small-top">
+                <button ui-sref="farms-edit({farmId: 3})" type="button" class="md-btn md-btn-primary md-btn-small"><span
+                        class="uk-text-bold" data-translate="global.button.edit"></span></button>
+                <button ui-sref="farms-create" type="button" class="md-btn md-btn-primary md-btn-small"><span
+                        class="uk-text-bold" data-translate="global.button.create"></span></button>
+                <a ui-sref="farms" class="md-btn md-btn-small"><span class="uk-text-bold" data-translate="global.button.cancel"></span></a>
+            </div>
+        </div>
+
+        <div id="page_content_inner">
+            <jhi-alert></jhi-alert><modal-alert></modal-alert>
+            <div class="md-card">
+                <div class="md-card-content">
+                    <div class="uk-grid">
+                        <div class="uk-width-1-1">
+                            <b>THÔNG TIN CHUNG</b>
+                        </div>
+                    </div>
+
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-4-5">
+                            <div class="uk-grid">
+                                <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                                    <label class="label-bold title-organization ng-scope" data-translate="infrastructure.farm.column.code"></label>
+                                </div>
+                                <div class="uk-width-small-2-3 uk-width-medium-2-6">
+                                    <input  readonly
+                                            ng-model="farm.code"
+                                            class="md-input ng-isolate-scope md-input-processed" type="text"
+                                            md-input />
+                                </div>
+                                <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                                    <label class="label-bold title-organization ng-scope" data-translate="infrastructure.farm.column.name"></label>
+                                    <span class="req">*</span>
+                                </div>
+                                <div class="uk-width-small-2-3 uk-width-medium-2-6">
+                                    <input  readonly
+                                            ng-model="farm.name"
+                                            class="md-input ng-isolate-scope md-input-processed" type="text"
+                                            md-input />
+                                </div>
+                            </div>
+
+                            <div class="uk-grid">
+                                <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                                    <label class="label-bold title-organization ng-scope" data-translate="infrastructure.farm.column.owner"></label>
+                                </div>
+                                <div class="uk-width-small-2-3 uk-width-medium-2-6">
+                                    <input  readonly
+                                            ng-model="farm.owner"
+                                            class="md-input ng-isolate-scope md-input-processed" type="text"
+                                            md-input />
+                                </div>
+                                <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                                    <label class="label-bold title-organization ng-scope">Email</label>
+                                </div>
+                                <div class="uk-width-small-2-3 uk-width-medium-2-6">
+                                    <input  readonly
+                                            ng-model="farm.email"
+                                            class="md-input ng-isolate-scope md-input-processed" type="text"
+                                            md-input />
+                                </div>
+                            </div>
+
+                            <div class="uk-grid">
+                                <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                                    <label class="label-bold title-organization ng-scope" data-translate="infrastructure.farm.column.acreage"></label>
+                                    <span class="req"> *</span>
+                                </div>
+                                <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                                    <input  readonly
+                                            value="6000"
+                                            class="md-input ng-isolate-scope md-input-processed" type="text"
+                                            md-input />
+                                </div>
+                                <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                                    <div class="parsley-row" style="margin-top: -11px;">
+                                        <input id="typeUnitCbb" name="typeUnitCbb"
+                                               data-parsley-required-message="{{messages.required}}"
+                                               data-parsley-trigger="focusin focusout"
+                                               position="bottom"
+                                               config="ComboBox['typeUnitCbb'].config"
+                                               options="ComboBox['typeUnitCbb'].options"
+                                               ng-model="farm.unitId"
+                                               table="ComboBox['typeUnitCbb'].table"
+                                               column="ComboBox['typeUnitCbb'].column"
+                                               scope-controller="ComboBox['typeUnitCbb'].scope" selectize>
+                                    </div>
+                                </div>
+
+                                <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                                    <label class="label-bold title-organization ng-scope" data-translate="infrastructure.farm.column.phone"></label>
+                                </div>
+                                <div class="uk-width-small-2-3 uk-width-medium-2-6">
+                                    <input  readonly
+                                            ng-model="farm.phone"
+                                            class="md-input ng-isolate-scope md-input-processed" type="text"
+                                            md-input />
+                                </div>
+                            </div>
+
+                            <div class="uk-grid">
+                                <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                                    <label class="label-bold title-organization ng-scope" data-translate="infrastructure.farm.column.typeFarm"></label>
+                                    <span class="req"> *</span>
+                                </div>
+                                <div class="uk-width-small-2-3 uk-width-medium-2-6">
+                                    <div class="parsley-row" style="margin-top: -11px;">
+                                        <input id="typeFarmCbb" name="typeFarmCbb"
+                                               data-parsley-required-message="{{messages.required}}"
+                                               data-parsley-trigger="focusin focusout"
+                                               position="bottom"
+                                               config="ComboBox['typeFarmCbb'].config"
+                                               options="ComboBox['typeFarmCbb'].options"
+                                               ng-model="farm.typeFarm"
+                                               table="ComboBox['typeFarmCbb'].table"
+                                               column="ComboBox['typeFarmCbb'].column"
+                                               scope-controller="ComboBox['typeFarmCbb'].scope" selectize>
+                                    </div>
+                                </div>
+                                <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                                    <label class="label-bold title-organization ng-scope" data-translate="infrastructure.farm.column.lat"></label>
+                                </div>
+                                <div class="uk-width-small-2-3 uk-width-medium-2-6">
+                                    <input  readonly
+                                            ng-model="farm.lat"
+                                            class="md-input ng-isolate-scope md-input-processed" type="text"
+                                            md-input />
+                                </div>
+                            </div>
+
+                            <div class="uk-grid">
+                                <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                                    <label class="label-bold title-organization ng-scope" data-translate="infrastructure.farm.column.location"></label>
+                                </div>
+                                <div class="uk-width-small-2-3 uk-width-medium-2-6">
+                                    <input  readonly
+                                            ng-model="farm.location"
+                                            class="md-input ng-isolate-scope md-input-processed" type="text"
+                                            md-input />
+                                </div>
+                                <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                                    <label class="label-bold title-organization ng-scope" data-translate="infrastructure.farm.column.lng"></label>
+                                </div>
+                                <div class="uk-width-small-2-3 uk-width-medium-2-6">
+                                    <input  readonly
+                                            ng-model="farm.long"
+                                            class="md-input ng-isolate-scope md-input-processed" type="text"
+                                            md-input />
+                                </div>
+                            </div>
+
+                            <div class="uk-grid">
+                                <div class="uk-width-small-1-3 uk-width-medium-1-6">
+                                    <label class="label-bold title-organization ng-scope" data-translate="infrastructure.farm.column.note"></label>
+                                </div>
+                                <div class="uk-width-small-2-3 uk-width-medium-2-6">
+                                    <input  readonly
+                                            ng-model="farm.note"
+                                            class="md-input ng-isolate-scope md-input-processed" type="text"
+                                            md-input />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uk-width-medium-1-5">
+                            <div class="user_heading_avatar custom-avatar-center" data-provides="fileinput"
+                                 ng-mouseenter="product.mouseEnter = true"
+                                 ng-mouseleave="product.mouseEnter = false" >
+                                <img ng-if="farm.avatar" class="uk-border-circle"
+                                     ng-src="/attachment/images/{{farm.avatar}}" alt="product avatar" width="200"
+                                     height="200"/>
+                                <img ng-if="!farm.avatar" class="uk-border-circle"
+                                     ng-src="assets/img/avatars/avatar.jpg" alt="product avatar" width="200"
+                                     height="200"/>
+                            </div>
+                        </div>
+
+                        <div class="uk-width-1-1">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

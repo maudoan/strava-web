@@ -1,0 +1,41 @@
+<script src="/assets/custom/rtp/vxgplayer-1.8.40.min.js"></script>
+<link href="/assets/custom/rtp/vxgplayer-1.8.40.min.css" rel="stylesheet" />
+<div id="page_content">
+	<div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }" class="header-fixed">
+        <span class="route-header">
+            <a class="uk-text-primary" ui-sref="monitoring-manager" data-translate="admin.menu.monitoring"></a>
+			<i class="uk-icon-arrow-circle-right"></i>
+            <span data-translate="admin.menu.camera"></span>
+        </span>
+		</br>
+		<div class="uk-margin-small-top">
+			<a has-any-authority="ROLE_SYSTEM_ADMIN, ROLE_FARM_ADMIN" ui-sref="devices-create"
+			   class="md-btn md-btn-primary md-btn-small"><span class="uk-text-bold"
+																data-translate="global.button.create"></span></a>
+		</div>
+	</div>
+
+	<div id="page_content_inner">
+		<jhi-alert></jhi-alert>
+		<modal-alert></modal-alert>
+		<div class="md-card">
+			<div class="md-card-content">
+				<div class="uk-grid uk-text-center camera-min-height">
+					<div class="uk-width-medium-1-4 camera-padding-left" ng-repeat="i in [].constructor(cameraLength) track by $index">
+						<div id="vxg_media_player_{{$index}}" width="280" height="240" class="vxgplayer" auto-reconnect autostart controls />
+						<div class="checkbox-padding-left">
+							<a ui-sref="cameras"><span class="uk-text-bold uk-text-center"><u id="camera_name_{{$index}}"></u></span></a><br><br>
+							<span class="uk-text-bold">
+								<i class="material-icons md-20">date_range</i> 07/05/2020<br>
+							</span>
+						</div>
+					</div>
+					<div class="uk-width-medium-1-1 uk-text-center" ng-if="cameraLength==0">
+						<br/><br/>
+						<h3 data-translate="monitoring.cameraEmpty">}</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

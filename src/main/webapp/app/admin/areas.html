@@ -1,0 +1,144 @@
+<div id="page_content">
+    <jhi-alert></jhi-alert><modal-alert></modal-alert>
+    <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }" class="header-fixed">
+        <span class="route-header">
+            <a class="uk-text-primary" ui-sref="areas" >Quản lý tài khoản quản trị và phân quyền</a>&nbsp;<i class="uk-icon-arrow-circle-right"></i> Khu vực
+        </span>
+        </br>
+        <div class="uk-margin-small-top">
+            <button has-any-authority ="ROLE_SYSTEM_ADMIN, Area_Create" ui-sref="areas-create" class="md-btn md-btn-primary md-btn-small">
+                <span class="uk-text-bold" data-translate="global.button.create"></span>
+            </button>
+            <a has-any-authority="ROLE_SYSTEM_ADMIN, Area_Import" id="btnImportExcel" data-uk-modal="{target:'#modal_overflow'}"
+               class="md-btn md-btn-small md-btn-primary">
+                <span class="uk-text-bold">Import file</span>
+            </a>
+            <button has-any-authority ="ROLE_SYSTEM_ADMIN, Area_Delete" id="deleteBtn" ng-class="idsForDelete.length > 0 ? '' : 'hideElement'" class="md-btn md-btn-small" ng-click="defaultDelete()"><span class="uk-text-bold" data-translate="global.button.delete"></span></button>
+        </div>
+    </div>
+    <div id="page_content_inner">
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-grid" data-uk-grid-margin="">
+                    <div class="uk-width-small-1-3">
+                        <b>Tên</b>
+                        <div style="margin-bottom: 10px!important;">
+                            <input class="md-input ng-isolate-scope md-input-processed" type="search" placeholder="Tên khu vực" ng-model="searchInfo.name">
+                        </div>
+                    </div>
+                    <div class="uk-width-small-1-3">
+                        <b>Mã khu vực</b>
+                        <div style="margin-bottom: 10px!important;">
+                            <input class="md-input ng-isolate-scope md-input-processed" type="search" placeholder="Mã khu vực" ng-model="searchInfo.code">
+                        </div>
+                    </div>
+                    <div class="uk-width-small-1-3 uk-text-center">
+                        <br/><button id="searchBtn" class="md-btn md-btn-small md-btn-primary" ng-click="processGetTree()">Tìm kiếm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-overflow-container uk-margin-bottom table-height-fixed">
+                    <div ng-hide="isEmptyData">
+                        <table class="hoverTable uk-table uk-table-align-vertical uk-table-striped tablesorter tablesorter-altair table-fixed" id="tree">
+                            <thead>
+                            <tr class="uk-table-nowrap">
+                                <th class="boldHeader">Tên khu vực</th>
+                                <th class="boldHeader">Mã khu vực</th>
+                                <th class="boldHeader">Mô tả</th>
+                                <th class="boldHeader uk-text-center">Hành động</th>
+                            </tr>
+                            </thead>
+                            <tbody class="treeBody">
+                            <tr class="hoverRow: true; test">
+                                <td></td>
+                                <td></td>
+                                <td class="description"></td>
+                                <td class="uk-text-center"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-hide="!isEmptyData" style="background: white!important;color: black;" class="uk-alert uk-text-center uk-alert-info" data-uk-alert="">
+                        <span translate="global.messages.noResult"></span>
+                    </div>
+                 </div>
+            </div>
+        </div>
+        <div class="uk-modal" id="area_modal">
+            <form id="form_create_material" name="form_create_material" class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+                <div class="uk-modal-dialog uk-modal-dialog-small" style="top: -1.5px;">
+                    <a class="uk-modal-close" style="position: absolute; right: 20px;">
+                        <i class="material-icons"></i></a>
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-1-1">
+                            <label class="label-bold">Khu vực cha</label> (*)
+                            <div class="parsley-row">
+                                <input id="areaId" name="area"
+                                       ng-required="true"
+                                       data-parsley-required-message="{{'global.messages.required' | translate}}"
+                                       data-parsley-trigger="focusin focusout"
+                                       position="bottom"
+                                       config="ComboBox['area'].config"
+                                       options="ComboBox['area'].options"
+                                       ng-model="area.parentId"
+                                       table="ComboBox['area'].table"
+                                       column="ComboBox['area'].column"
+                                       scope-controller="ComboBox['area'].scope" selectize>
+                                <span class="md-input-bar "></span>
+                            </div>
+                        </div>
+                        <div class="uk-width-medium-1-1" style="margin-top: 20px">
+                            <label class="label-bold ng-scope">Tên khu vực</label> (*)
+                            <input id="areaName" ng-required="true"
+                                   data-parsley-required-message="{{'global.messages.required' | translate}}"
+                                   data-parsley-maxlength-message="{{'global.messages.maxLength50' | translate}}"
+                                   data-parsley-maxlength="50" class="md-input ng-isolate-scope md-input-processed ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"
+                                   type="text" ng-model="area.name" md-input="" required="required">
+                        </div>
+                        <div class="uk-width-medium-1-1" style="margin-top: 20px">
+                            <label class="label-bold ng-scope" data-translate="admin.area.column.description">Description</label>
+                            <input id="areaDescription"
+                                   data-parsley-required-message="This field is required"
+                                   data-parsley-maxlength-message="{{'global.messages.maxLength255' | translate}}"
+                                   data-parsley-maxlength="255" class="md-input ng-isolate-scope md-input-processed ng-pristine ng-untouched ng-valid ng-empty"
+                                   type="text" ng-model="area.description" md-input="">
+                        </div>
+                    </div>
+                    <div class="uk-modal-footer uk-text-right">
+                       <button ng-if="addArea" class="md-btn md-btn-primary md-btn-small" ng-click="submitForm()" type="submit">
+                        <span ng-if="area.id != null" class="uk-text-bold ng-scope" data-translate="global.button.update"></span>
+                        <span ng-if="area.id == null" class="uk-text-bold ng-scope" data-translate="global.button.create"></span>
+                    </button>
+                        <button id="closeAreaBtn" class="uk-modal-close md-btn md-btn-default md-btn-small"><span class="uk-text-bold ng-scope" data-translate="global.button.cancel">Cancel</span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </div>
+        <button id="areaBtn" ng-show="false" data-uk-modal="{target:'#area_modal'}">active</button>
+    </div>
+<!-- Modal import-->
+<div id="modal_overflow" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <button type="button" class="uk-modal-close uk-close uk-close-alt"></button>
+        <h3 class="uk-text-center">
+            <label class="label-bold" translate="admin.area.importArea"><br></label>
+        </h3>
+        <div class="uk-grid">
+            <div class="uk-width-small-1-1">
+                <input id="form-file" type="file" accept=".xlsx,.xls">
+            </div>
+            <br>
+            <div class="uk-width-small-1-1">
+                {{"admin.area.exampleData" | translate}} <a href="{{hostGW}}/api/files/download?fileName=areas_example.xlsx" translate="admin.user.downloadFile"></a>
+            </div>
+        </div>
+        <div class="uk-modal-footer uk-text-center">
+            <button type="button" class="md-btn md-btn-primary" ng-click=importExcel() translate="admin.area.import"></button>
+            <button type="button" class="md-btn uk-modal-close" translate="admin.area.cancel"></button>
+        </div>
+    </div>
+</div>

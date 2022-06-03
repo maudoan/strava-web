@@ -1,0 +1,206 @@
+<div id="page_content">
+    <div id="page_heading" >
+        <span class="route-header">
+            <a class="uk-text-primary" data-translate="admin.menu.administration"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+            <a class="uk-text-primary" ui-sref="users" data-translate="admin.menu.admin"></a>&nbsp;<i class="uk-icon-arrow-circle-right"></i>
+            <span class="overflowLongText" value="user.fullName" is-input="false"></span>
+        </span>
+        <br/>
+        <div class="uk-margin-small-top">
+            <a has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_SYSTEM_USER,User_Update" ui-sref="users-edit({userId: user.id })" class="md-btn md-btn-small md-btn-primary"><span class="uk-text-bold" data-translate="global.button.edit"> </span></a>
+            <a has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_SYSTEM_USER,User_Create" ui-sref="users-create" class="md-btn md-btn-primary md-btn-small"><span class="uk-text-bold" data-translate="global.button.create"></span></a>
+        </div>
+    </div>
+
+    <div id="page_content_inner">
+        <jhi-alert></jhi-alert><modal-alert></modal-alert>
+        <div class="uk-grid data-uk-grid-margin">
+            <div class="uk-width-medium-1-1">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <activate has-any-authority="ROLE_SYSTEM_ADMIN,ROLE_SYSTEM_USER,ROLE_HOME_ADMIN, User_Active" ng-hide="currentUser.id == user.id"
+                                  model="user"
+                                  is-current-user="isCurrentUser"
+                                  activate-service="CbxActivate.activateService"
+                                  deactivate-service="CbxActivate.deactivateService">
+                        </activate>
+                        <status-user-view do-not-have-authority="ROLE_SYSTEM_ADMIN,ROLE_SYSTEM_USER,ROLE_HOME_ADMIN, User_Active" ng-hide="currentUser.id == user.id"
+                                  model="user"
+                                  is-current-user="isCurrentUser"
+                                  activate-service="CbxActivate.activateService"
+                                  deactivate-service="CbxActivate.deactivateService">
+                        </status-user-view>
+                        <status-user-view ng-show="currentUser.id == user.id"
+                                  model="user"
+                                  is-current-user="isCurrentUser"
+                                  activate-service="CbxActivate.activateService"
+                                  deactivate-service="CbxActivate.deactivateService">
+                        </status-user-view>
+                        <div class="uk-grid" data-uk-grid-margin="">
+                            <div class="uk-width-medium-2-10">
+                                <div class="user_heading_avatar" data-provides="fileinput"
+                                     ng-mouseenter="user.mouseEnter = true"
+                                     ng-mouseleave="user.mouseEnter = false" >
+
+                                    <img ng-if="user.userAvatar" class="uk-border-circle" ng-src="{{hostGW + user.userAvatar}}" alt="user avatar" width="200" height="200"/>
+                                    <img ng-if="!user.userAvatar" class="uk-border-circle" ng-src="assets/img/avatars/avatar.jpg" alt="user avatar" width="200" height="200"/>
+                                </div>
+                            </div>
+                            <div class="uk-width-medium-8-10">
+                                <!--Line 1-->
+                                <div class="uk-grid">
+									<div class="uk-width-medium-1-2">
+                                        <label class="label-bold" data-translate="admin.user.column.email"></label>
+                                        <input ng-if="user.email" readonly
+                                               ng-model="user.email" id="email"
+                                               type="email" name="email"
+                                               input-long-text
+                                               class="md-input ng-isolate-scope md-input-processed">
+                                    </div>
+                                    <div class="uk-width-medium-1-2">
+                                        <div class="parsley-row">
+                                            <label class="label-bold" for="phone" data-translate="admin.user.column.phone"></label>
+                                            <input id="phone" ng-model="user.phone" readonly name="phone" type="text"
+                                                   class="md-input ng-isolate-scope md-input-processed" input-long-text>
+                                            <span class="md-input-bar "></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Line 2-->
+								<div class="uk-grid">
+									<div class="uk-width-medium-1-2">
+                                        <label class="label-bold" data-translate="admin.user.column.fullName"></label>
+                                        <input readonly
+                                               class="md-input ng-isolate-scope md-input-processed"
+                                               type="text" ng-model="user.fullName" input-long-text/>
+                                    </div>
+
+
+                                </div>
+                                <div class="uk-grid">
+                                    <div class="uk-width-medium-1-2">
+                                        <label class="label-bold" >Khu vực</label>
+                                        <div class="custom-box" ng-if="user.areas && user.areas.length >0">
+                                                <span ng-repeat="o in user.areas">
+                                                    <a  class="md-btn md-btn-small custom-item" >{{o.name}}</a>
+                                                </span>
+                                        </div>
+                                        <input readonly ng-if="!user.areas || user.areas.length==0"
+                                               class="md-input ng-isolate-scope md-input-processed"
+                                               type="text" ng-model="user.area" input-long-text/>
+                                    </div>
+                                    <div class="uk-width-medium-1-2">
+                                        <div>
+                                            <label class="uk-form-label label-bold" data-translate="admin.user.column.roles"></label>
+                                            <div class="custom-box">
+                                                <span ng-repeat="o in user.roles">
+                                                    <a ui-sref="roles-detail({roleId: o.id })" class="md-btn md-btn-small custom-item" >{{o.name}}</a>
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+	                        </div>
+                        </div>
+                        <br>
+                        <!-- <ul class="uk-tab" data-uk-tab="{connect:'#contract_tabs'}">
+                            <li ><a href="#"><h4 class="heading_a" data-translate="admin.user.otherSetting"></h4></a></li>
+                        </ul>
+                        <ul id="contract_tabs" class="uk-switcher uk-margin" >
+                            <li>
+                                <div class="uk-grid" data-uk-grid-margin="">
+                                    <div class="uk-width-medium-1-6 ">
+                                        <label class="uk-form-label label-bold" data-translate="admin.user.column.password"></label>:
+                                    </div>
+                                    <div class="uk-width-medium-2-6 ">
+                                        <a class="uk-form-label " data-uk-modal="{target:'#password_modal'}" data-translate="admin.user.column.changePassword"></a>
+                                    </div>
+
+                                </div>
+                            </li>
+                        </ul> -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal change password -->
+<!-- <div class="uk-modal" id="password_modal">
+    <jhi-alert></jhi-alert><modal-alert></modal-alert>
+    <form name="changePassForm" id="changePassForm" class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+        <div class="uk-modal-dialog uk-modal-dialog-small">
+            <div class="uk-modal-header" style="margin: 0 -24px 0px">
+                <span><span class="uk-modal-title" data-translate="admin.user.column.changePassword"></span><a class="uk-modal-close" style="float: right;"><i class="material-icons">&#xE14C;</i></a></span>
+            </div>
+            <hr>
+            <div class="uk-grid" ng-show="!isAdmin">
+                <div class="uk-width-medium-1-1">
+                    <label class="label-bold" data-translate="admin.user.column.currentPassword"></label>*
+                    <div class="parsley-row">
+                        <input data-parsley-trigger="change"
+                        	   data-parsley-required-message="{{'admin.messages.required' | translate}}"
+                               data-parsley-length="[8,32]"
+                               data-parsley-length-message="{{'admin.messages.passwordLength' | translate}}"
+                               data-parsley-pattern="/^(?=.*[a-zA-Z])(?=.*[0-9])(?=\S+$).{8,32}$/g"
+                               data-parsley-pattern-message="{{'global.messages.password' | translate}}"
+                               ng-model="currentPassword"
+                               type="password"
+                               name="currentPassword"
+                               id="currentPassword"
+                               ng-required="!isAdmin"
+                               ng-change="onChangeCurrentPass()"
+                               class="md-input ng-isolate-scope md-input-processed" md-input="">
+                        <span class="md-input-bar" style="color: #e53935" ng-show="errorCurrentPass" data-translate="error.userAndPermission.currentPasswordInvalid"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="uk-grid">
+                <div class="uk-width-medium-1-1">
+                    <label class="label-bold" data-translate="admin.user.column.newPassword"></label>*
+                    <div class="parsley-row">
+                        <input data-parsley-trigger="change"
+                        	   data-parsley-required-message="{{'admin.messages.required' | translate}}"
+                               data-parsley-length="[8,32]"
+                               data-parsley-length-message="{{'admin.messages.passwordLength' | translate}}"
+                               data-parsley-pattern="/^(?=.*[a-zA-Z])(?=.*[0-9])(?=\S+$).{8,32}$/g"
+                               data-parsley-pattern-message="{{'global.messages.password' | translate}}"
+                               ng-model="newPassword"
+                               type="password" name="newPassword" id="newPassword"
+                               required="" class="md-input ng-isolate-scope md-input-processed" md-input="">
+                        <span class="md-input-bar "></span>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-medium-1-1">
+                    <label class="label-bold" data-translate="admin.user.column.confirmPassword"></label>*
+                    <div class="parsley-row">
+                        <input data-parsley-trigger="change"
+                        	   data-parsley-required-message="{{'admin.messages.required' | translate}}"
+                        	   data-parsley-equalto="#newPassword"
+                               data-parsley-equalto-message="{{'admin.messages.confirmPassword' | translate}}"
+                               data-parsley-length="[8,32]"
+                               data-parsley-length-message="{{'admin.messages.passwordLength' | translate}}"
+                               data-parsley-pattern="/^(?=.*[a-zA-Z])(?=.*[0-9])(?=\S+$).{8,32}$/g"
+                               data-parsley-pattern-message="{{'global.messages.password' | translate}}"
+                               ng-model="confirmPassword" type="password"
+                               name="confirmPassword" id="confirmPassword"
+                               required="" class="md-input ng-isolate-scope md-input-processed" md-input="">
+                        <span class="md-input-bar"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="uk-modal-footer uk-text-right">
+                <button  class=" md-btn  md-btn-primary md-btn-small" ng-click="changePass()" type="submit"><span class="uk-text-bold" data-translate="admin.user.column.changePassword"></span></button>
+                <button  class="uk-modal-close md-btn  md-btn-default md-btn-small" ng-click="resetPasswordForm()"><span class="uk-text-bold" data-translate="global.button.cancel" id="btnCancel"></span></button>
+            </div>
+        </div>
+    </form>
+</div> -->

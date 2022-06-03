@@ -1,0 +1,78 @@
+
+<style type="text/css">
+    .uk-text-primary{
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 50px;
+        font-weight: bolder;
+    }
+    table, th, td {
+        border: 1px solid #ffffff;
+        border-collapse: collapse;
+    }
+    body {
+        background-color: #faf7f7;
+        background-size:cover;
+        opacity: 100%;
+    }
+    .hoverTable {
+        width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .hoverTable tbody tr:first-child td{
+        background-color: #9df5b2;
+    }
+    .hoverTable tbody tr:nth-child(2) td{
+        background-color: #b7f6c6;
+    }
+    .hoverTable tbody tr:nth-child(3) td{
+        background-color: #d6f3dd;
+    }
+    .hoverTable tbody td:first-child{
+        background-color: #f5eeef;
+    }
+
+    .img-circle{
+        border-radius: 50%;
+    }
+</style>
+<body style="padding-top: 8px !important;">
+    <span>
+        <center><img src="/assets/img/stcrunning.png"></img><a class="uk-text-primary ">STC RUNNING</a></center>
+    </span>
+    <div class="center" >
+        <input  id="activeStartDatePicker" placeholder=" từ..." style="width: 30%;"/>
+        <input id="activeEndDatePicker" placeholder="đến..." style="width: 30%;"/>
+        <button id="searchBtn" ng-click="loadData()" class="md-btn md-btn-small md-btn-primary">Tìm kiếm</button>
+    </div>
+    <div>
+        <table class="hoverTable" style="width:100%;height:300px">
+            <thead>
+            <tr>
+                <th id="rank" style="background-color:#00b6ff;width: 10%" class="center">Rank</th>
+                <th style="background-color:#00b6ff;width: 30%" >Họ và tên</th>
+                <th ng-click="sortData('runs')" style="background-color:#00b6ff;width: 15%">Runs<div ng-class="getSortClass('runs')"></div></th>
+                <th ng-click="sortData('distance')" style="background-color:#00b6ff;width: 15%">Đã chạy (Km)<div ng-class="getSortClass('distance')"></div></th>
+                <th ng-click="sortData('avgPace')" style="background-color:#00b6ff;width: 15%">Pace TB<div ng-class="getSortClass('pace')"></div></th>
+                <th ng-click="sortData('totalPoint')" style="background-color:#00b6ff;width: 15%">Total Point</th><div ng-class="getSortClass('totalPoint')"></div></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="run in running |orderBy:['runs','distance','avgPace']:true">
+                <td><center>{{$index+1}}</center></td>
+                <td>
+                    <img ng-src="{{run.user.image}}" class="img-circle" alt="Cinque Terre" width="40" height="40" />
+                    {{run.user.name}}
+                </td>
+                <td><center>{{run.runs}}</center></td>
+                <td><center>{{run.distance/1000 | number : 2}}</center></td>
+                <td><center>{{run.avgPace}}</center></td>
+                <td><center>{{run.totalPoint}}</center></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+

@@ -1,0 +1,131 @@
+<div id="page_content">
+    <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }" class="header-fixed">
+        <span class="route-header">
+            <a class="uk-text-primary" ui-sref="alarm-history" data-translate="admin.menu.alarm.name"></a>&nbsp;<i
+                class="uk-icon-arrow-circle-right"></i>
+            <span data-translate="alarm.history"></span>
+        </span>
+    </div>
+    <div id="page_content_inner">
+        <jhi-alert></jhi-alert>
+        <modal-alert></modal-alert>
+
+        <div class="md-card">
+<!--            <div class="md-card-content">
+                <div class="uk-grid ">
+                    <div class="uk-width-small-2-3 uk-width-medium-1-6 ">
+                    </div>
+                    <div class="uk-width-small-2-3 uk-width-medium-1-6 ">
+                        <div class="custom-label">
+                            <label data-translate="alarm.fieldHis.farm" style="font-weight: normal"></label>
+                        </div>
+                    </div>
+                    <div class=" uk-width-small-2-3 uk-width-medium-2-6 parsley-row">
+                        <div class="parsley-row">
+                            <selectize id="farmCbb"
+                                       position="bottom"
+                                       config="ComboBox['farmCbb'].config"
+                                       options="ComboBox['farmCbb'].options"
+                                       ng-model="tenantId"
+                                       table="ComboBox['farmCbb'].table"
+                                       column="ComboBox['farmCbb'].column"
+                                       ng-change="farmChange()"
+                                       scope-controller="ComboBox['farmCbb'].scope">
+                            </selectize>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <div class="md-card-content">
+                <div class="uk-overflow-container uk-margin-bottom table-height-fixed">
+                    <table class="hoverTable uk-table uk-table-align-vertical uk-table-striped  tablesorter tablesorter-altair table-fixed"
+                           id="alarms">
+                        <thead >
+                        <tr class="uk-table-nowrap">
+                            <!--<th data-name="Select"><input type="checkbox" class="ts_checkbox_all"></th>-->
+                            <th class="center">
+                                <th-content table="TABLES['alarms']" label="'alarm.fieldHis.raised'"
+                                            column="'created'"></th-content>
+                            </th>
+                            <th class="center">
+                                <th-content table="TABLES['alarms']" label="'alarm.fieldHis.name'"
+                                            column="'alarmName'"></th-content>
+                            </th>
+                            <th class="center">
+                                <th-content table="TABLES['alarms']" label="'alarm.fieldHis.area'"
+                                            column="'areaName'"></th-content>
+                            </th>
+                            <th class="center">
+                                <th-content table="TABLES['alarms']" label="'alarm.fieldHis.content'"
+                                            column="'content'"></th-content>
+                            </th>
+                            <th>
+                                <th-content table="TABLES['alarms']" label="'alarm.fieldHis.value'"
+                                            column="'currentValue'"></th-content>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <date-picker-filter table="TABLES['alarms']" column="'created'"></date-picker-filter>                               
+                            </td>
+                            <td>
+                                <default-filter table="TABLES['alarms']" column="'alarmName'">
+                            </td>
+                            <td>
+                                <default-filter table="TABLES['alarms']" column="'areaName'">
+                            </td>
+                            <td>
+                                <default-filter table="TABLES['alarms']" column="'content'">
+                            </td>
+                            <td>
+                                <default-filter table="TABLES['alarms']" column="'currentValue'">
+                            </td>
+                           
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="alarm in alarms" on-last-repeat
+                            ng-class="{'hoverRow': !alarm.unRemove, 'custom-un-remove': alarm.unRemove}"
+                            title="{{alarm.unRemove}}">
+<!--                            <td><input id="{{alarm.id}}" type="checkbox" class="ts_checkbox" data-md-icheck icheck
+                                       ng-model="row_select"></td>-->
+                            <td><a ui-sref="alarm-history-detail({ alarmId: alarm.id })">{{alarm.created | date: 'dd-MM-yyyy HH:mm:ss'}}</a></td>
+                            <td>{{alarm.alarmName}}</td>
+                            <td>{{alarm.areaName}}</td>
+                            <td>{{alarm.content}}</td>
+                            <td>{{alarm.currentValue}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ts_pager" id="alarms_pager_id">
+                    <ul class="uk-pagination ts_pager">
+                        <li ng-click="selectPageClickHandle()" data-uk-tooltip title="{{selectPage}}">
+                            <input ng-change="selectPageHandle('alarms')" id="alarms_selectize_page" type="text"
+                                   config="TABLES['alarms'].selectize_page_config"
+                                   options="TABLES['alarms'].selectize_page_options"
+                                   ng-model="TABLES['alarms'].selectize_page" name="TABLES['alarms'].selectize_page"
+                                   selectize>
+                        </li>
+                        <li><a href="javascript:void(0)" class="firstPage" ng-click="handleFirstPage('alarms')"><i
+                                class="uk-icon-angle-double-left"></i></a></li>
+                        <li><a href="javascript:void(0)" class="prevPage" ng-click="handlePreviousPage('alarms')"><i
+                                class="uk-icon-angle-left"></i></a></li>
+                        <li><span class="pageDisplay">1-20/50</span></li>
+                        <li><a href="javascript:void(0)" class="nextPage" ng-click="handleNextPage('alarms')"><i
+                                class="uk-icon-angle-right"></i></a></li>
+                        <li><a href="javascript:void(0)" class="lastPage" ng-click="handleLastPage('alarms')"><i
+                                class="uk-icon-angle-double-right"></i></a></li>
+                        <li data-uk-tooltip title="{{pageSize}}">
+                            <input ng-change="selectPageNumHandle('alarms')" id="alarms_selectize_pageNum" type="text"
+                                   config="TABLES['alarms'].selectize_pageNum_config"
+                                   options="TABLES['alarms'].page_size_option"
+                                   ng-model="TABLES['alarms'].selectize_pageNum" name="TABLES['alarms'].selectize_pageNum"
+                                   selectize>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

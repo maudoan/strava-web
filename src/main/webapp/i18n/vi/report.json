@@ -1,0 +1,18 @@
+{
+  "report": {
+    "device": {
+      "field": {
+        "stt": "STT",
+        "area": "Khu vực",
+        "numberOfCustomer": "Số lượng khách hàng",
+        "deviceType": "Loại thiết bị",
+        "provider": "Hãng sản xuất",
+        "deviceModel": "Dòng thiết bị",
+        "numberOfDevice": "Số lượng thiết bị"
+      }
+    },
+    "error": {
+      "exportEmptyData": "Không có dữ liệu để xuất"
+    }
+  }
+}

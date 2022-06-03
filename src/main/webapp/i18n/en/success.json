@@ -1,0 +1,21 @@
+{
+  "success": {
+    "msg": {
+      "delete": "Delete success",
+      "active": "Activate success",
+      "inactive": "Deactivate success",
+      "create":"Create success",
+      "update":"Update success",
+      "validate":"Confirm success",
+      "import":"Import success",
+      "restore":"Restore success",
+      "print_stamp": "Print stamp success",
+      "upload": "Upload success",
+      "change": "Change success",
+      "deactivate": "Deactivate success"
+    },
+    "servicePackageMsg":{
+    	"batchDeactive":"Pause activity of package successfully."
+    }
+  }
+}

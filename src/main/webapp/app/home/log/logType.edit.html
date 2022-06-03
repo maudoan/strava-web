@@ -1,0 +1,86 @@
+<div id="page_content">
+    <form name="logType_form" id="logType_form" class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+        <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <span class="route-header">
+                <a class="uk-text-primary" ui-sref="logTypes" data-translate="admin.menu.logs"></a>&nbsp;<i
+                    class="uk-icon-arrow-circle-right"></i>
+                <a class="uk-text-primary" ui-sref="logTypes" data-translate="admin.menu.logTypes"></a>&nbsp;<i
+                    class="uk-icon-arrow-circle-right"></i>
+                <span>{{logType.action}}</span>
+            </span>
+            <br/>
+            <div class="uk-margin-small-top">
+                <button has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_HOME_ADMIN,Data_Package_Create" ng-click="submit(false)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+                        class="uk-text-bold" data-translate="global.button.save"></span></button>
+                <button has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_HOME_ADMIN,Data_Package_Create" ng-click="submit(true)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+                        class="uk-text-bold" data-translate="global.button.saveAndClose"></span></button>
+                <a has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_HOME_ADMIN,Data_Package_Delete" ui-sref="logTypes" class="md-btn md-btn-small"><span class="uk-text-bold"
+                                                                                                                                                   data-translate="global.button.cancel"></span></a>
+            </div>
+        </div>
+        <div id="page_content_inner">
+            <jhi-alert></jhi-alert>
+            <modal-alert></modal-alert>
+            <div class="md-card">
+                <div class="md-card-content">
+                    <div class="uk-grid" data-uk-grid-margin="">
+                        <div class="uk-width-medium-1-1">
+                            <!-- Line 1 -->
+                            <div class="uk-grid">
+                                <div class="uk-width-small-2-3 uk-width-medium-1-4 parsley-row">
+                                    <label class="label-bold custom-label" for="type" data-translate="logType.column.type"></label> *
+                                    <input name="type" id="type"
+                                           class="md-input ng-isolate-scope md-input-processed"
+                                           type="number" ng-model="logType.type"
+                                           ng-required="true"
+                                           data-parsley-required-message="{{messages.required}}"
+                                           min="0"
+                                           max="100"
+                                           data-parsley-range="[0,100]"
+                                           data-parsley-range-message="Giá trị từ 0 tới 100"
+                                           />
+                                </div>
+
+                                <div class="uk-width-small-2-3 uk-width-medium-1-4 parsley-row">
+                                    <label class="label-bold" for="action" data-translate="logType.column.action"></label> *
+                                    <input name="action" id="action"
+                                           class="md-input ng-isolate-scope md-input-processed"
+                                           type="text" ng-model="logType.action"
+                                           ng-required="true"
+                                           data-parsley-required-message="{{messages.required}}"
+                                           data-parsley-maxlength="255"
+                                           data-parsley-maxlength-message="{{messages.maxLength255}}"/>
+                                </div>
+
+                                <div class="uk-width-small-2-3 uk-width-medium-1-4 parsley-row">
+                                    <label class="label-bold" for="action" data-translate="logType.column.action"></label> *
+                                    <input name="action2" id="action2"
+                                           class="md-input ng-isolate-scope md-input-processed"
+                                           type="text" ng-model="logType.actionEn"
+                                           ng-required="true"
+                                           data-parsley-required-message="{{messages.required}}"
+                                           data-parsley-maxlength="255"
+                                           data-parsley-maxlength-message="{{messages.maxLength255}}"/>
+                                </div>
+
+                                <div class="uk-width-small-2-3 uk-width-medium-1-4 parsley-row">
+                                    <label class="label-bold custom-label" for="module" data-translate="logType.column.module"></label> *
+                                    <input name="module" id="module"
+                                           class="md-input ng-isolate-scope md-input-processed"
+                                           type="text" ng-model="logType.module"
+                                           ng-required="true"
+                                           data-parsley-required-message="{{messages.required}}"
+                                           data-parsley-maxlength="255"
+                                           data-parsley-maxlength-message="{{messages.maxLength255}}"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+</div>

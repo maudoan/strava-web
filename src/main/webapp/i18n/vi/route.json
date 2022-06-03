@@ -1,0 +1,93 @@
+{
+  "route": {
+
+    "titlePage":{
+      "home":"Trang chủ",
+      "configuration":"Cấu hình",
+      "warehouseMan":"Quản lý kho",
+      "warehouse":"Kho",
+      "route":"Quy trình"
+    },
+    "column": {
+      "routeName": "Route Name",
+      "warehouse": "Warehouse",
+      "active": "Active"
+    },
+    "detail": {
+      "routeName": "Tên quy trình",
+      "Created": "Ngày tạo",
+      "CreatedBy": "Tạo bởi",
+      "Updated": "Ngày cập nhật",
+      "UpdatedBy": "Cập nhật bởi",
+      "Active": "Hoạt động",
+      "applicationOn": "Áp dụng với",
+      "applicationOnPlaceHolder": "Select the place where the route can be selected",
+      "applicationOnProductCategories": "Product Categories",
+      "applicationOnProducts": "Products",
+      "applicationOnSuppliers": "Suppliers",
+      "applicationOnWarehouses": "Kho",
+      "applicationOnCustomers": "Customers",
+      "pushRules": "Nguyên tắc đẩy hàng",
+      "pushRulesSourceLocation": "Vị trí nguồn",
+      "pushRulesDestinationLocation": "Vị trí đích",
+      "pushRulesOperationType": "Kiểu điều khiển",
+      "pushRulesOperationName": "Tên điều khiển",
+      "procurementRules": "Quy tắc mua sắm",
+      "procurementRulesName": "Tên",
+      "procurementRulesAction": "Hành động",
+      "procurementRulesOperationType": "Kiểu điều khiển",
+      "addAnItem": "Thêm mục",
+      "action": "Hành động"
+    },
+    "pushRule":{
+      "pushRule": "Nguyên tắc đẩy hàng",
+      "createPushRule": "Tạo mới nguyên tắc đẩy hàng",
+      "updatePushRule": "Cập nhật nguyên tắc đẩy hàng",
+      "active": "Hoạt động",
+      "inactive": "Lưu trữ",
+      "operationName": "Tên điều khiển",
+      "locations": "VỊ TRÍ",
+      "details": "CHI TIẾT",
+      "sourceLocation": "Vị trí nguồn",
+      "destinationLocation": "Vị trí đích",
+      "automaticMove": "Di chuyển tự động",
+      "operationType": "Kiểu điều khiển",
+      "delay": "Delay",
+      "days": "ngày",
+      "saveAndClose": "lưu và đóng",
+      "saveAndNew": "Lưu và tạo mới",
+      "cancel": "Hủy bỏ"
+    },
+    "procurementRule":{
+      "procurementRule": "Quy tắc mua sắm",
+      "createProcurementRule": "Tạo mới quy tắc mua sắm",
+      "updateProcurementRule": "Cập nhật quy tắc mua sắm",
+      "active": "Hoạt động",
+      "inactive": "Lưu trữ",
+      "name": "Tên",
+      "action": "Hành động",
+      "create": "TẠO MỚI",
+      "applicationOn": "ÁP DỤNG VỚI",
+      "procurementLocation": "Vị trí mua hàng",
+      "operationType": "Kiểu điều khiển",
+      "sourceLocation": "Vị trí nguồn",
+      "moveSupplyMethod": "Move Supply Method",
+      "saveAndClose": "lưu và đóng",
+      "saveAndNew": "lưu và tạo mới",
+      "cancel": "hủy bỏ"
+    },
+    "headerPage":{
+      "import":"Import",
+      "export":"Export",
+      "active":"Hoạt động",
+      "inactive":"Lưu trữ",
+      "delete": "Xóa",
+      "restore":"Khôi phục"
+    },
+    "messages": {
+      "errorCreate":"Unable to create new Route. Please check your data and try again.",
+      "errorUpdate":"Unable to update Route. Please check your data and try again.",
+      "errorDelete":"Unable to remove."
+    }
+  }
+}

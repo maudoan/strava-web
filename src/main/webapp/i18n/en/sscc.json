@@ -1,0 +1,24 @@
+{
+  "sscc": {
+    "button": {
+      "generate" : "Generate"
+    },
+    "table": {
+      "product": "Product",
+      "ssccNumber":"Sscc Number"
+    },
+    "label": {
+      "sscc": "SSCC",
+      "pageTitle": "List SSCC",
+      "detailTitle": "SSCC Detail",
+      "createPage": "Create",
+      "list": "List SSCC",
+      "ssccNumber": "Sscc Number",
+      "gsin": "GSIN",
+      "gtin": "GTIN",
+      "gln": "GLN",
+      "status": "Status",
+      "quantity": "Quantity Per Package"
+    }
+  }
+}

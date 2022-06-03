@@ -1,0 +1,233 @@
+<div id="page_content">
+    <form name="data_package_form" id="data_package_form" class="uk-form-stacked ng-pristine ng-invalid ng-invalid-required" novalidate="">
+        <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+            <span class="route-header">
+                <a class="uk-text-primary" ui-sref="packages" data-translate="admin.menu.dataPackageManagement"></a>&nbsp;<i
+                    class="uk-icon-arrow-circle-right"></i>
+                <a class="uk-text-primary" ui-sref="packages" data-translate="admin.menu.dataPackageTitle"></a>&nbsp;<i
+                    class="uk-icon-arrow-circle-right"></i>
+                <span data-translate="global.button.edit"></span>
+            </span>
+            <br/>
+            <div class="uk-margin-small-top">
+                <button has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_HOME_ADMIN,Data_Package_Update" ng-click="submit(false)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+                        class="uk-text-bold" data-translate="global.button.save"></span></button>
+                <button has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_HOME_ADMIN,Data_Package_Update" ng-click="submit(true)" type="submit" class="md-btn md-btn-primary md-btn-small"><span
+                        class="uk-text-bold" data-translate="global.button.saveAndClose"></span></button>
+                <a has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_HOME_ADMIN,Data_Package_View" ui-sref="packages-detail({ packageId: dataPackage.id })" class="md-btn md-btn-small"><span class="uk-text-bold"
+                                                                                             data-translate="global.button.cancel"></span></a>
+            </div>
+        </div>
+        <div id="page_content_inner">
+            <jhi-alert></jhi-alert>
+            <modal-alert></modal-alert>
+            <div class="md-card">
+                <div class="md-card-content">
+                    <div class="uk-grid" data-uk-grid-margin="">
+	                    <div class="uk-width-medium-10-10">
+							<!-- Line 1 -->
+							<div class="uk-grid">
+								<div class="uk-width-small-1-3 uk-width-medium-2-10">
+									<div class="custom-label">
+										<label class="label-bold custom-label" data-translate="package.field.name"></label> *
+									</div>
+								</div>
+								<div class="uk-width-small-2-3 uk-width-medium-3-10 parsley-row">
+									<input name="name" id="name"
+										   class="md-input ng-isolate-scope md-input-processed"
+										   type="text" ng-model="dataPackage.name"
+										   ng-required="true"
+										   data-parsley-required-message="{{'global.messages.required' | translate}}"
+										   data-parsley-maxlength="255"
+										   data-parsley-maxlength-message="{{'global.messages.maxLength255' | translate}}"
+										   input-long-text/>
+								</div>
+
+								<div class="uk-width-small-1-3 uk-width-medium-2-10">
+									<div class="custom-label">
+										<label class="label-bold " data-translate="package.field.period"></label> *
+									</div>
+								</div>
+								<div class="uk-width-small-2-3 uk-width-medium-3-10 parsley-row">
+									<div class="uk-grid">
+										<div class="uk-width-small-1-2 uk-width-medium-1-2">
+											<input name="period" id="period"
+												   class="md-input ng-isolate-scope md-input-processed"
+												   type="number" ng-model="dataPackage.period"
+												   ng-required="true"
+												   data-parsley-required-message="{{'global.messages.required' | translate}}"
+												   data-parsley-pattern="^[1-9]\d{0,4}$"
+												   data-parsley-pattern-message="{{'global.messages.positiveInteger_max_5_digits' | translate}}"
+												   input-long-text/>
+										</div>
+										<div class="uk-width-small-1-2 uk-width-medium-1-2">
+											<input id="periodTypeCbb" name="periodTypeCbb"
+												   data-parsley-trigger="keyup focusout change"
+												   position="bottom"
+												   config="ComboBox['kindOfTimeCbb'].config"
+												   options="ComboBox['kindOfTimeCbb'].options"
+												   ng-model="dataPackage.periodType"
+												   table="ComboBox['kindOfTimeCbb'].table"
+												   column="ComboBox['kindOfTimeCbb'].column"
+												   scope-controller="ComboBox['kindOfTimeCbb'].scope" selectize>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Line 2 -->
+							<div class="uk-grid">
+								<div class="uk-width-small-1-3 uk-width-medium-2-10">
+									<div class="custom-label">
+										<label class="label-bold" data-translate="package.field.price"></label>
+									</div>
+								</div>
+								<div class="uk-width-small-2-3 uk-width-medium-3-10 parsley-row">
+									<input name="price" id="price"
+										   class="md-input ng-isolate-scope md-input-processed"
+										   type="number" ng-model="dataPackage.price"
+										   data-parsley-pattern="^[0-9]\d{0,11}$"
+										   data-parsley-pattern-message="{{'global.messages.positiveInteger_max_12_digits' | translate}}"
+										   input-long-text/>
+								</div>
+
+								<div class="uk-width-small-1-3 uk-width-medium-2-10">
+									<div class="custom-label">
+										<label class="label-bold" data-translate="package.field.storageTime"></label> *
+									</div>
+								</div>
+								<div class="uk-width-small-2-3 uk-width-medium-3-10 parsley-row">
+									<div class="uk-grid">
+										<div class="uk-width-small-1-2 uk-width-medium-1-2">
+											<input name="storageTime" id="storageTime"
+												   class="md-input ng-isolate-scope md-input-processed"
+												   type="number" ng-model="dataPackage.storageTime"
+												   ng-required="true"
+												   data-parsley-required-message="{{'global.messages.required' | translate}}"
+												   data-parsley-pattern="^[1-9]\d{0,4}$"
+												   data-parsley-pattern-message="{{'global.messages.positiveInteger_max_5_digits' | translate}}"
+												   input-long-text/>
+										</div>
+										<div class="uk-width-small-1-2 uk-width-medium-1-2">
+											<input id="storageTimeTypeCbb" name="storageTimeTypeCbb"
+												   data-parsley-trigger="keyup focusout change"
+												   position="bottom"
+												   config="ComboBox['kindOfTimeCbb'].config"
+												   options="ComboBox['kindOfTimeCbb'].options"
+												   ng-model="dataPackage.storageTimeType"
+												   table="ComboBox['kindOfTimeCbb'].table"
+												   column="ComboBox['kindOfTimeCbb'].column"
+												   scope-controller="ComboBox['kindOfTimeCbb'].scope" selectize>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Line 3 -->
+							<div class="uk-grid">
+								<div class="uk-width-small-1-3 uk-width-medium-2-10">
+									<div class="custom-label">
+										<label class="label-bold" data-translate="package.field.numberDevice"></label> *
+									</div>
+								</div>
+								<div class="uk-width-small-2-3 uk-width-medium-3-10 parsley-row">
+									<input name="numberOfDevice" id="numberOfDevice"
+										   class="md-input ng-isolate-scope md-input-processed"
+										   type="number" ng-model="dataPackage.numberOfDevice"
+										   ng-required="true"
+										   data-parsley-required-message="{{'global.messages.required' | translate}}"
+										   data-parsley-pattern="^[1-9]\d{0,4}$"
+										   data-parsley-pattern-message="{{'global.messages.positiveInteger_max_6_digits' | translate}}"
+										   ng-disabled="dataPackage.type == 0"
+										   input-long-text/>
+								</div>
+
+								<div class="uk-width-small-1-3 uk-width-medium-2-10">
+									<div class="custom-label">
+										<label class="label-bold" data-translate="package.field.storageCapacity"></label>
+									</div>
+								</div>
+								<div class="uk-width-small-2-3 uk-width-medium-3-10 parsley-row">
+									<div class="uk-grid">
+										<div class="uk-width-small-1-2 uk-width-medium-1-2">
+											<input name="storageCapacity" id="storageCapacity"
+												   class="md-input ng-isolate-scope md-input-processed"
+												   type="number" ng-model="dataPackage.storageCapacity"
+												   data-parsley-pattern="^[1-9]\d{0,11}$"
+												   data-parsley-pattern-message="{{'global.messages.positiveInteger_max_12_digits' | translate}}"
+												   input-long-text/>
+										</div>
+										<div class="uk-width-small-1-2 uk-width-medium-1-2">
+											<input id="capacityUnitCbb" name="capacityUnitCbb"
+												   data-parsley-trigger="keyup focusout change"
+												   position="bottom"
+												   config="ComboBox['capacityUnitCbb'].config"
+												   options="ComboBox['capacityUnitCbb'].options"
+												   ng-model="dataPackage.capacityUnit"
+												   table="ComboBox['capacityUnitCbb'].table"
+												   column="ComboBox['capacityUnitCbb'].column"
+												   scope-controller="ComboBox['capacityUnitCbb'].scope" selectize>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Line 4 -->
+							<div class="uk-grid">
+								<div class="uk-width-small-1-3 uk-width-medium-2-10">
+									<div class="custom-label">
+										<label class="label-bold" data-translate="package.field.autoExtend"></label>
+									</div>
+								</div>
+								<div class="uk-width-small-2-3 uk-width-medium-3-10 parsley-row">
+									<div class="custom-label">
+										<i ng-if="dataPackage.autoExtend == 1" ng-click="changeAutoExtend(0)" class="uk-icon-toggle-on uk-icon-medium uk-text-primary custom-cursor-pointer"></i>
+										<i ng-if="dataPackage.autoExtend == 0" ng-click="changeAutoExtend(1)" class="uk-icon-toggle-off uk-icon-medium uk-text-default custom-cursor-pointer"></i>
+									</div>
+								</div>
+								<div class="uk-width-small-1-3 uk-width-medium-2-10">
+									<div class="custom-label">
+										<label class="label-bold">Chế độ phân giải *</label>
+									</div>
+								</div>
+								<div class="uk-width-small-2-3 uk-width-medium-3-10 parsley-row">
+									<div class="uk-grid">
+										<div class="uk-width-small-1-2 uk-width-medium-1-2">
+											<input id="resolution" name="resolutionUnitCbb"
+												   ng-required="true"
+												   data-parsley-required-message="{{'admin.messages.required' | translate}}"
+												   data-parsley-trigger="focusin focusout"
+												   position="bottom"
+												   config="ComboBox['resolutionUnitCbb'].config"
+												   options="ComboBox['resolutionUnitCbb'].options"
+												   ng-model="dataPackage.resolution"
+												   table="ComboBox['resolutionUnitCbb'].table"
+												   column="ComboBox['resolutionUnitCbb'].column"
+												   scope-controller="ComboBox['resolutionUnitCbb'].scope" selectize>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Line 5 -->
+							<div class="uk-grid">
+								<div class="uk-width-small-1-3 uk-width-medium-2-10">
+									<label class="label-bold" data-translate="package.field.description"></label>
+								</div>
+								<div class="uk-width-small-2-3 uk-width-medium-8-10">
+									<div class="parsley-row">
+	                        			<textarea
+												style="border-width: 1px 1px 1px;"
+												ng-model="dataPackage.description"
+												type="text" name="description"
+												id="description"
+												class="md-input ng-isolate-scope md-input-processed"
+												data-parsley-maxlength="1000"
+												data-parsley-maxlength-message="{{'global.messages.maxLength1000' | translate}}"
+												md-input=""></textarea>
+									</div>
+								</div>
+							</div>
+	                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

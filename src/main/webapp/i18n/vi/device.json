@@ -1,0 +1,163 @@
+{
+  "device": {
+    "menu": "Điều khiển",
+    "name": "Thiết bị",
+    "field" :{
+      "name": "Tên thiết bị",
+      "serial": "Serial Number",
+      "code": "Mã thiết bị",
+      "type": "Loại thiết bị",
+      "area": "Khu vực sản xuất",
+      "belongGW": "Thuộc Gateway",
+      "state": "Trạng thái",
+      "action": "Thao tác",
+      "group": "Nhóm điều khiển",
+      "shortName": "Tên viết tắt kvsx",
+      "category": "Dòng thiết bị",
+      "timer": "Thời gian gửi tin (phút)",
+      "minute": "Phút",
+      "other": "Khác",
+      "farm": "Trang trại",
+      "connectionState": "Trạng thái kết nối",
+      "uid": "UID",
+      "owner": "Chủ sở hữu",
+      "parent": "Thiết bị cha",
+      "firmware": "Phiên bản firmware",
+      "status": {
+        "0": "Không kết nối",
+        "1": "Kết nối"
+      },
+      "location": "Vị trí lắp đặt"
+    },
+    "placeholder": {
+      "selectArea": "Chọn khu vực",
+      "selectGateway": "Chọn gateway",
+      "selectFarm":  "Chọn trang trại",
+      "selectOwner": "Chủ sở hữu",
+      "selectParent": "Thiết bị cha",
+      "type": "Loại thiết bị",
+      "provider": "Nhà cung cấp",
+      "deviceModel": "Dòng thiết bị"
+    },
+    "deviceType": {
+      "name": "Loại thiết bị",
+      "field": {
+        "name": "Tên loại thiết bị",
+        "description": "Mô tả",
+        "code": "Mã loại thiết bị"
+      }
+    },
+    "deviceModel": {
+      "name": "Device model",
+      "field": {
+        "name": "Tên dòng thiết bị",
+        "code": "Mã dòng thiết bị",
+        "type": "Loại thiết bị",
+        "provider": "Nhà cung cấp",
+        "firmware": "Phiên bản firmware",
+        "description": "Mô tả"
+      }
+    },
+    "firmware": {
+      "field": {
+        "version": "Phiên bản",
+        "status": "Trạng thái",
+        "modelCode": "Mã model",
+        "deviceModel": "Dòng thiết bị",
+        "deviceType": "Loại thiết bị",
+        "provider": "Nhà sản xuất",
+        "createdDate": "Ngày tạo",
+        "size": "Kích thước",
+        "action": "Thao tác",
+        "filePath": "Đường dẫn file",
+        "uploadedFile": "Uploaded File",
+        "fileFirmware": "File firmware",
+        "choose": "Chọn 1 trong 2 cách dưới",
+        "username": "Tên đăng nhập",
+        "password": "Mật khẩu",
+        "chooseFile": "Chọn File"
+      },
+      "active": {
+        "0": "Chưa hoàn thành",
+        "1": "Đã phát hành",
+        "2": "Khóa"
+      }
+    },
+    "policy": {
+      "field": {
+        "name": "Tên chính sách",
+        "modelCode": "Mã model",
+        "deviceModel": "Dòng thiết bị",
+        "deviceType": "Loại thiết bị",
+        "provider": "Nhà sản xuất",
+        "createdDate": "Ngày tạo",
+        "fromVersion": "Từ phiên bản",
+        "toVersion": "Lên phiên bản",
+        "exceptVersion": "Ngoại trừ phiên bản",
+        "action": "Hành động",
+        "chooseFirmwareVersion":"Chọn phiên bản phần mềm nâng cấp",
+        "upgradeLatestVersion":"Nâng cấp lên phiên bản mới nhất",
+        "firmwareVersionName":"Tên phiên bản phần mềm",
+        "upgradeConditions":"Điều kiện nâng cấp phần mềm (tùy chọn)",
+        "upgradeFromVersion":"Nâng cấp từ phiên bản",
+        "upgradeToVersion":"Nâng cấp lên phiên bản tùy chọn",
+        "upgradeVersioning": "Nâng cấp lên phiên bản",
+        "exceptVersions":"Ngoại trừ các phiên bản",
+        "noteUpgradeFromVersion":"//Chỉ thực hiện thông báo đến các thiết bị có phiển bản trên",
+        "noteExceptVersions":"//Gửi thông báo đến tất cả các thiết bị ngoại trừ các thiết bị có phiên bản trên",
+        "notFirmwareVersion":"Không có phiên bản firmware nào",
+        "history":"Lịch sử chính sách",
+        "totalUpgradedDevice":"Tổng số lượng thiết bị cần nâng cấp",
+		"numberDevicesUpgradedSuccess":"Số lượng thiết bị nâng cấp thành công",
+		"numberDevicesUpgradedFail":"Số lượng thiết bị nâng cấp thất bại",
+		"numberDevicesNotUpgraded":"Số lượng thiết bị chưa nâng cấp",
+        "userId":"Mã khách hàng",
+		"updated":"Ngày cập nhật",
+		"updatedFrom":"Ngày cập nhật từ",
+		"updatedTo":"Đến",
+		"status":"Trạng thái",
+		"search":"Tìm kiếm"
+      },
+      "action": {
+        "start": "Kích hoạt",
+        "stop": "Tạm dừng"
+      },
+      "state": {
+      	"new": "Mới",
+        "execute": "Kích hoạt",
+        "stop": "Tạm dừng"
+      },
+      "stateUpgradeFW":{
+      	"all":"Tất cả",
+      	"success":"Thành công",
+      	"fail":"Thất bại",
+      	"notUpgrade":"Chưa cập nhật"
+      },
+      "message":{
+      	"execute": "Bạn có muốn kích hoạt chính sách này không?",
+        "stop": "Bạn có muốn tạm dừng chính sách này không?",
+        "executeSuccess": "Kích hoạt chính sách thành công",
+        "stopSuccess": "Tạm dừng chính sách thành công?"
+      }
+    },
+    "manualControl": {
+      "name": "Điều khiển thủ công",
+      "field": {
+        "group": "Tên nhóm điều khiển",
+        "type": "Chế độ điều khiển",
+        "belongGateway": "Thuộc Gateway",
+        "device": "Chọn thiết bị cần điều khiển"
+      }
+    },
+    "autoControl": {
+      "name": "Điều khiển tự động",
+      "field": {
+        "product": "Sản phẩm",
+        "type": "Loại điều khiển",
+        "phase": "Giai đoạn",
+        "state": "Trạng thái",
+        "group": "Tên điều khiển"
+      }
+    }
+  }
+}

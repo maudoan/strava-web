@@ -1,0 +1,31 @@
+{
+  "manufacturing": {
+    "name": "Manufacturing",
+    "season": {
+      "status": {
+        "new": "New",
+        "inProgress": "In Progress",
+        "finish": "Finish"
+      },
+      "column": {
+        "procedure": "Procedure"
+      }
+    },
+    "diary": {
+      "name": "Diary of production",
+      "column": {
+        "farm": "Farm",
+        "area": " Production Area",
+        "season": "Production Season",
+        "owner": "Owner of diary",
+        "code": "Season code",
+        "date": "Date",
+        "product": "Product",
+        "period": "Period",
+        "description": "Description",
+        "link": "Link file",
+        "action": "Action"
+      }
+    }
+  }
+}

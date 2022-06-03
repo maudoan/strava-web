@@ -1,0 +1,125 @@
+<style>
+   body{
+      background-image: url('/assets/img/bg_2.jpg');
+      background-size: cover;
+   }
+</style>
+<div id="page_content">
+
+   <div id="page_content_inner">
+      <h1  class="uk-text-primary" data-translate="admin.menu.master">Danh Mục</h1>
+      <div class="uk-grid">
+         <!--Gpc-->
+         <div has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, GPC_View" class="uk-width-medium-1-3 custom-box-padding-top">
+            <div class="md-card custom-cursor-pointer custom-panel" ng-click="goToGpc()">
+               <div class="md-card-content " >
+                  <div class="uk-grid">
+                     <div class="uk-width-medium-1-6 ">
+                        <i class="material-icons md-48 uk-text-primary">format_align_left</i>
+                     </div>
+                     <div class="uk-width-medium-5-6 "  style="padding-left: 0px">
+                        <div class="custom-panel-label-2">
+                           <span ><b data-translate="admin.menu.gpc" class="custom-panel-label-2"></b></span><br>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+
+         <!--Product-->
+         <div has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Product_View" class="uk-width-medium-1-3 custom-box-padding-top">
+            <div class="md-card custom-cursor-pointer custom-panel" ng-click="goToProduct()">
+               <div class="md-card-content " >
+                  <div class="uk-grid">
+                     <div class="uk-width-medium-1-6 ">
+                        <i class="material-icons md-48 uk-text-primary">unarchive</i>
+                     </div>
+                     <div class="uk-width-medium-5-6 "  style="padding-left: 0px">
+                        <div class="custom-panel-label-2">
+                           <span ><b data-translate="admin.menu.product" class="custom-panel-label-2"></b></span><br>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+
+         <!--Location-->
+         <div has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Organization_View" class="uk-width-medium-1-3 custom-box-padding-top">
+            <div class="md-card custom-cursor-pointer custom-panel" ng-click="goToLocation()">
+               <div class="md-card-content " >
+                  <div class="uk-grid">
+                     <div class="uk-width-medium-1-6 ">
+                        <i class="material-icons md-48 uk-text-primary">place</i>
+                     </div>
+                     <div class="uk-width-medium-5-6 "  style="padding-left: 0px">
+                        <div class="custom-panel-label-2">
+                           <span ><b data-translate="admin.menu.location" class="custom-panel-label-2"></b></span><br>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+
+         <!--currency-->
+         <div has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Currency_View" class="uk-width-medium-1-3 custom-box-padding-top">
+            <div class="md-card custom-cursor-pointer custom-panel" ng-click="goToCurrency()">
+               <div class="md-card-content " >
+                  <div class="uk-grid">
+                     <div class="uk-width-medium-1-6 ">
+                        <i class="material-icons md-48 uk-text-primary">attach_money</i>
+                     </div>
+                     <div class="uk-width-medium-5-6 "  style="padding-left: 0px">
+                        <div class="custom-panel-label-2">
+                           <span ><b data-translate="admin.menu.currency" class="custom-panel-label-2"></b></span><br>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+         <!--uom type -->
+         <div has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Uom_Type_View" class="uk-width-medium-1-3 custom-box-padding-top">
+            <div class="md-card custom-cursor-pointer custom-panel" ng-click="goToUomType()">
+               <div class="md-card-content " >
+                  <div class="uk-grid">
+                     <div class="uk-width-medium-1-6 ">
+                        <i class="material-icons md-48 uk-text-primary">title</i>
+                     </div>
+                     <div class="uk-width-medium-5-6 "  style="padding-left: 0px">
+                        <div class="custom-panel-label-2" >
+                           <span ><b data-translate="admin.menu.uomType" ></b></span><br>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+         <!--uom-->
+         <div has-any-authority ="ROLE_SYSTEM_ADMIN,ROLE_FARM_ADMIN, Uom_View" class="uk-width-medium-1-3 custom-box-padding-top">
+            <div class="md-card custom-cursor-pointer custom-panel" ng-click="goToUom()">
+               <div class="md-card-content " >
+                  <div class="uk-grid">
+                     <div class="uk-width-medium-1-6 ">
+                        <i class="material-icons md-48 uk-text-primary">text_fields</i>
+                     </div>
+                     <div class="uk-width-medium-5-6 "  style="padding-left: 0px">
+                        <div class="custom-panel-label-2">
+                           <span ><b  data-translate="admin.menu.uom" class="custom-panel-label-2">Log</b></span><br>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
